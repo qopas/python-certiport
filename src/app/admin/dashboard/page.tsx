@@ -67,14 +67,64 @@ export default function AdminDashboard() {
     }
   };
 
- const exportResults = () => {
+  const exportResults = () => {
+    if (submissions.length === 0) {
       alert('No results to export');
       return;
+    }
+
+    const csvContent = [
+      ['Name', 'Email', 'Score', 'Total', 'Percentage', 'Time', 'Date'].join(','),
+      ...submissions.map(s => [
+        `"${s.userName}"`,
+        `"${s.userEmail || ''}"`,
+        s.score,
+        s.questionDetails.length,
+        s.percentage,
+        s.timeSpent,
+        `"${new Date(s.timestamp).toLocaleString()}"`
+      ].join(','))
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `quiz-results-${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   const exportDetailedResults = () => {
+    if (submissions.length === 0) {
       alert('No results to export');
       return;
+    }
+
+    const csvContent = [
+      ['Name', 'Email', 'Question ID', 'Domain', 'Question', 'User Answer', 'Correct Answer', 'Is Correct', 'Explanation'].join(','),
+      ...submissions.flatMap(s => 
+        s.questionDetails.map(q => [
+          `"${s.userName}"`,
+          `"${s.userEmail || ''}"`,
+          q.questionId,
+          `"${q.domain}"`,
+          `"${q.question.replace(/"/g, '&quot;')}"`,
+          `"${Array.isArray(q.userAnswer) ? q.userAnswer.join(', ') : q.userAnswer || 'Not answered'}"`,
+          `"${Array.isArray(q.correctAnswer) ? q.correctAnswer.join(', ') : q.correctAnswer}"`,
+          q.isCorrect,
+          `"${q.explanation.replace(/"/g, '&quot;')}"`
+        ].join(','))
+      )
+    ].join('\n');
+
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `detailed-quiz-results-${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    URL.revokeObjectURL(url);
   };
 
   const getQuestionAnalytics = (): QuestionStat[] => {
@@ -82,7 +132,7 @@ export default function AdminDashboard() {
     
     submissions.forEach(submission => {
       submission.questionDetails.forEach(detail => {
-        const key = detail.questionId + '-' + detail.question.replace(/['"]/g, '');
+        const key = `${detail.questionId}-${detail.question}`;
         if (!questionStats.has(key)) {
           questionStats.set(key, {
             questionId: detail.questionId,
@@ -448,7 +498,7 @@ export default function AdminDashboard() {
                   </div>
                 ) : (
                   <div className="text-center py-8">
-                    <p className="text-gray-500">Select a student from the "All Submissions" tab to view detailed results.</p>
+                    <p className="text-gray-500">Select a student from the All Submissions tab to view detailed results.</p>
                   </div>
                 )}
               </CardContent>
