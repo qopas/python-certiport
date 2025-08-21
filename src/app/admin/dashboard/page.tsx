@@ -109,11 +109,11 @@ export default function AdminDashboard() {
           `"${s.userEmail || ''}"`,
           q.questionId,
           `"${q.domain}"`,
-          `"${q.question.replace(/"/g, '&quot;')}"`,
+          `"${q.question.replace(/"/g, '\\"')}"`,
           `"${Array.isArray(q.userAnswer) ? q.userAnswer.join(', ') : q.userAnswer || 'Not answered'}"`,
           `"${Array.isArray(q.correctAnswer) ? q.correctAnswer.join(', ') : q.correctAnswer}"`,
           q.isCorrect,
-          `"${q.explanation.replace(/"/g, '&quot;')}"`
+          `"${q.explanation.replace(/"/g, '\\"')}"`
         ].join(','))
       )
     ].join('\n');
