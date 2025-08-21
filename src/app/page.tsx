@@ -25,10 +25,11 @@ export default function QuizPage() {
   const [timeLeft, setTimeLeft] = useState(QUIZ_TIME_LIMIT);
   const [startTime, setStartTime] = useState<Date | null>(null);
   const [results, setResults] = useState<QuizSubmission | null>(null);
+
   const selectRandomQuestions = () => {
     const shuffled = [...quizQuestions].sort(() => 0.5 - Math.random());
-      return shuffled.slice(0, QUESTIONS_PER_QUIZ);
-    };
+    return shuffled.slice(0, QUESTIONS_PER_QUIZ);
+  };
 
   // Timer effect
   useEffect(() => {
@@ -134,17 +135,18 @@ export default function QuizPage() {
     }
   };
 
- const restartQuiz = () => {
-  setStage('start');
-  setCurrentQuestion(0);
-  setAnswers([]);
-  setSelectedQuestions([]); 
-  setTimeLeft(QUIZ_TIME_LIMIT);
-  setStartTime(null);
-  setResults(null);
-  setUserName('');
-  setUserEmail('');
-};
+  const restartQuiz = () => {
+    setStage('start');
+    setCurrentQuestion(0);
+    setAnswers([]);
+    setSelectedQuestions([]);
+    setTimeLeft(QUIZ_TIME_LIMIT);
+    setStartTime(null);
+    setResults(null);
+    setUserName('');
+    setUserEmail('');
+  };
+
   if (stage === 'start') {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
@@ -180,9 +182,9 @@ export default function QuizPage() {
               <h3 className="font-semibold text-blue-900 mb-2">Quiz Details:</h3>
               <ul className="text-sm text-blue-800 space-y-1">
                 <li>• {QUESTIONS_PER_QUIZ} questions (randomly selected)</li>
-<li>• From a pool of {quizQuestions.length} total questions</li>
+                <li>• From a pool of {quizQuestions.length} total questions</li>
                 <li>• 50 minutes time limit</li>
-                <li>• Multiple choice questions</li>
+                <li>• Multiple choice and fill-in-blank questions</li>
                 <li>• Results shown immediately</li>
               </ul>
             </div>
@@ -231,7 +233,10 @@ export default function QuizPage() {
           <Card>
             <CardHeader>
               <CardTitle className="text-lg leading-relaxed">
-                {question.question}
+                <div 
+                  className="whitespace-pre-wrap font-mono text-base"
+                  dangerouslySetInnerHTML={{ __html: question.question }}
+                />
               </CardTitle>
               {question.type === 'multiple_select' && (
                 <p className="text-sm text-blue-600">Select all that apply</p>
@@ -243,14 +248,14 @@ export default function QuizPage() {
                   value={answers[currentQuestion] as string || ''}
                   onChange={(e) => handleAnswer(e.target.value)}
                   placeholder="Enter your answer"
-                  className="text-lg p-4"
+                  className="text-lg p-4 font-mono bg-gray-50"
                 />
               ) : (
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {question.options?.map((option, index) => (
                     <label
                       key={index}
-                      className="flex items-start space-x-3 p-3 rounded-lg border cursor-pointer hover:bg-gray-50 transition-colors"
+                      className="flex items-start space-x-3 p-4 rounded-lg border cursor-pointer hover:bg-blue-50 transition-colors"
                     >
                       <input
                         type={question.type === 'multiple_select' ? 'checkbox' : 'radio'}
@@ -277,9 +282,12 @@ export default function QuizPage() {
                             handleAnswer(option.charAt(0));
                           }
                         }}
-                        className="mt-1"
+                        className="mt-1 scale-125"
                       />
-                      <span className="text-sm leading-relaxed">{option}</span>
+                      <div 
+                        className="flex-1 text-sm leading-relaxed font-mono"
+                        dangerouslySetInnerHTML={{ __html: option }}
+                      />
                     </label>
                   ))}
                 </div>
@@ -365,21 +373,31 @@ export default function QuizPage() {
                           <span className="font-semibold">Q{index + 1}</span>
                           <Badge variant="outline" className="text-xs">{result.domain}</Badge>
                         </div>
-                        <p className="text-sm mb-2">{result.question}</p>
-                        <div className="text-xs space-y-1">
-                          <p>
+                        <div 
+                          className="text-sm mb-3 font-mono whitespace-pre-wrap"
+                          dangerouslySetInnerHTML={{ __html: result.question }}
+                        />
+                        <div className="text-xs space-y-2">
+                          <div className="bg-gray-100 p-2 rounded">
                             <span className="font-medium">Your answer:</span>{' '}
-                            {Array.isArray(result.userAnswer) 
-                              ? result.userAnswer.join(', ') || 'Not answered'
-                              : result.userAnswer || 'Not answered'}
-                          </p>
-                          <p>
+                            <span className="font-mono">
+                              {Array.isArray(result.userAnswer) 
+                                ? result.userAnswer.join(', ') || 'Not answered'
+                                : result.userAnswer || 'Not answered'}
+                            </span>
+                          </div>
+                          <div className="bg-green-100 p-2 rounded">
                             <span className="font-medium">Correct answer:</span>{' '}
-                            {Array.isArray(result.correctAnswer)
-                              ? result.correctAnswer.join(', ')
-                              : result.correctAnswer}
-                          </p>
-                          <p className="text-gray-600">{result.explanation}</p>
+                            <span className="font-mono">
+                              {Array.isArray(result.correctAnswer)
+                                ? result.correctAnswer.join(', ')
+                                : result.correctAnswer}
+                            </span>
+                          </div>
+                          <div className="text-gray-700 mt-2 p-2 bg-blue-50 rounded">
+                            <span className="font-medium">Explanation:</span>{' '}
+                            {result.explanation}
+                          </div>
                         </div>
                       </div>
                     </div>

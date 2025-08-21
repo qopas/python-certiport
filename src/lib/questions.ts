@@ -1,1680 +1,1071 @@
 import { Question } from './types';
 
 export const quizQuestions: Question[] = [
+  // Section 1: Data Types and Operators
   {
-    "id": 1,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "What is the result type of the expression 5 / 2 in Python?",
-    "options": [
-      "A. int",
-      "B. float",
-      "C. Decimal",
-      "D. Fraction"
+    id: 1,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "What data type will Python assign to the variable <code class='bg-gray-100 px-2 py-1 rounded font-mono'>x</code> in this code?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 5 / 2</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>int</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>float</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>str</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>bool</code>"
     ],
-    "answer": "B",
-    "explanation": "In Python, / returns float."
+    answer: "B",
+    explanation: "Division with / always returns a float in Python 3, even when dividing integers."
   },
   {
-    "id": 2,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "What is the output of print(7 // -3)?",
-    "options": [
-      "A. -2",
-      "B. -3",
-      "C. 2",
-      "D. -1"
-    ],
-    "answer": "B",
-    "explanation": "7 / -3 ≈ -2.333; floor division floors to -3."
-  },
-  {
-    "id": 3,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "Which expression evaluates to True?",
-    "options": [
-      "A. (3 < 2) and (10/2 == 4)",
-      "B. (5 != 5) or (2**3 == 8)",
-      "C. not (3 <= 3)",
-      "D. (10 % 3 == 1) and False"
-    ],
-    "answer": "B",
-    "explanation": "Only B is True."
-  },
-  {
-    "id": 4,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "What does print(type({})) display?",
-    "options": [
-      "A. <class 'dict'>",
-      "B. <class 'set'>",
-      "C. <class 'tuple'>",
-      "D. <class 'list'>"
-    ],
-    "answer": "A",
-    "explanation": "{} creates dict; empty set is set()."
-  },
-  {
-    "id": 5,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "What is the value of x after: x = 3; x **= 2; x //= 3?",
-    "options": [
-      "A. 1",
-      "B. 3",
-      "C. 9",
-      "D. 6"
-    ],
-    "answer": "B",
-    "explanation": "x=3 -> x**=2 → 9 → 9//=3 → 3."
-  },
-  {
-    "id": 6,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "What is printed by: print( True == 1, False == 0 )",
-    "options": [
-      "A. True False",
-      "B. False True",
-      "C. True True",
-      "D. False False"
-    ],
-    "answer": "C",
-    "explanation": "bool is subclass of int; True==1 and False==0."
-  },
-  {
-    "id": 7,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "What is the result of print('5' * 3 + '2')?",
-    "options": [
-      "A. 152",
-      "B. 5552",
-      "C. 17",
-      "D. 532"
-    ],
-    "answer": "B",
-    "explanation": "'5'*3 → '555'; + '2' → '5552'."
-  },
-  {
-    "id": 8,
-    "domain": "Data types & operators",
-    "type": "multiple_select",
-    "question": "Select the expression(s) that evaluate to 10.",
-    "options": [
-      "A. 5 + 5",
-      "B. 2 * 5",
-      "C. 20 // 2",
-      "D. 3 * 3 + 1"
-    ],
-    "answer": [
-      "A",
-      "B",
-      "C",
-      "D"
-    ],
-    "explanation": "All equal 10."
-  },
-  {
-    "id": 9,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "What is the value of a after: a = 10; a = a % 4; a += 6",
-    "options": [
-      "A. 0",
-      "B. 2",
-      "C. 6",
-      "D. 8"
-    ],
-    "answer": "D",
-    "explanation": "10%4=2; 2+6=8."
-  },
-  {
-    "id": 10,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "What is printed by: print(2 ** 3 ** 2)",
-    "options": [
-      "A. 64",
-      "B. 512",
-      "C. 256",
-      "D. 9"
-    ],
-    "answer": "B",
-    "explanation": "Right-associative: 2**(3**2)=2**9=512."
-  },
-  {
-    "id": 11,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "Evaluate: print( (not 0) and (not []) )",
-    "options": [
-      "A. True",
-      "B. False",
-      "C. []",
-      "D. 0"
-    ],
-    "answer": "A",
-    "explanation": "not 0 and not [] are both True."
-  },
-  {
-    "id": 12,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "What is the result of: print(3 * 2 // 4)",
-    "options": [
-      "A. 1",
-      "B. 1.5",
-      "C. 0",
-      "D. 2"
-    ],
-    "answer": "A",
-    "explanation": "3*2=6; 6//4=1."
-  },
-  {
-    "id": 13,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "Which of the following is NOT a valid numeric literal in Python?",
-    "options": [
-      "A. 1_000_000",
-      "B. 0b1010",
-      "C. 09",
-      "D. 0xFF"
-    ],
-    "answer": "C",
-    "explanation": "Leading zeros invalid (except 0)."
-  },
-  {
-    "id": 14,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "What does print( (1 < 2) < 3 ) output?",
-    "options": [
-      "A. True",
-      "B. False",
-      "C. 1",
-      "D. Error"
-    ],
-    "answer": "A",
-    "explanation": "Chained comparison: (1<2) and (2<3) → True."
-  },
-  {
-    "id": 15,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "What is the result of print(-7 % 3)?",
-    "options": [
-      "A. 2",
-      "B. -1",
-      "C. 1",
-      "D. -2"
-    ],
-    "answer": "A",
-    "explanation": "a%b has sign of b; -7%3==2."
-  },
-  {
-    "id": 16,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "What does print( True + True * False ) output?",
-    "options": [
-      "A. 0",
-      "B. 1",
-      "C. 2",
-      "D. True"
-    ],
-    "answer": "B",
-    "explanation": "True==1, False==0: 1 + 1*0 = 1."
-  },
-  {
-    "id": 17,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "Which converts string s to int safely, yielding 0 if invalid?",
-    "options": [
-      "A. int(s) if s.isdigit() else 0",
-      "B. int(s) or 0",
-      "C. 0 if int(s) raises else int(s)",
-      "D. s and int(s) or 0"
-    ],
-    "answer": "A",
-    "explanation": "isdigit guards against ValueError for non-negative ints."
-  },
-  {
-    "id": 18,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "What is printed by: x=1; x+=x==1; print(x)",
-    "options": [
-      "A. 1",
-      "B. 2",
-      "C. True",
-      "D. 0"
-    ],
-    "answer": "B",
-    "explanation": "x==1 is True→1; x+=1 → 2."
-  },
-  {
-    "id": 19,
-    "domain": "Data types & operators",
-    "type": "multiple_choice",
-    "question": "Which expression yields a float 3.0?",
-    "options": [
-      "A. 9 // 3",
-      "B. 3 * 1.0",
-      "C. int(3.0)",
-      "D. 3 and 3.0 and 3"
-    ],
-    "answer": "B",
-    "explanation": "Only multiplication with float returns float."
-  },
-  {
-    "id": 20,
-    "domain": "Data types & operators",
-    "type": "fill_in_blank",
-    "question": "Fill the operator for floor division: 10 _____ 3",
-    "answer": "//",
-    "explanation": "Floor division uses // in Python."
-  },
-  {
-    "id": 21,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "x = 0\nfor i in range(3):\n    x += i\nprint(x)",
-    "options": [
-      "A. 0",
-      "B. 1",
-      "C. 3",
-      "D. 6"
-    ],
-    "answer": "C",
-    "explanation": "Sum of 0,1,2 is 3."
-  },
-  {
-    "id": 22,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "for i in range(1,5,2):\n    print(i, end=' ')",
-    "options": [
-      "A. 1 3 5 ",
-      "B. 1 2 3 4 ",
-      "C. 1 3 ",
-      "D. 1 3 5 7 "
-    ],
-    "answer": "C",
-    "explanation": "range(1,5,2) → 1 3 ."
-  },
-  {
-    "id": 23,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "s = 0\nfor i in range(3):\n    if i == 1:\n        break\n    s += i\nelse:\n    s += 10\nprint(s)",
-    "options": [
-      "A. 11",
-      "B. 10",
-      "C. 0",
-      "D. 2"
-    ],
-    "answer": "C",
-    "explanation": "Break prevents else; s remains 0 after adding 0."
-  },
-  {
-    "id": 24,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "i = 0\nwhile i < 3:\n    i += 1\n    if i == 2:\n        continue\n    print(i, end=' ')",
-    "options": [
-      "A. 1 2 3 ",
-      "B. 1 3 ",
-      "C. 2 3 ",
-      "D. 3 "
-    ],
-    "answer": "B",
-    "explanation": "Skips print at i==2."
-  },
-  {
-    "id": 25,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "Which condition checks that n is between 1 and 10 inclusive?",
-    "options": [
-      "A. 1 <= n <= 10",
-      "B. n >= 1 and <= 10",
-      "C. n in range(1,10)",
-      "D. 1 < n < 10"
-    ],
-    "answer": "A",
-    "explanation": "Chained comparisons are idiomatic."
-  },
-  {
-    "id": 26,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "x = 2\nif x % 2:\n    print('odd')\nelif x:\n    print('nonzero')\nelse:\n    print('zero')",
-    "options": [
-      "A. odd",
-      "B. nonzero",
-      "C. zero",
-      "D. Error"
-    ],
-    "answer": "B",
-    "explanation": "x%2==0; elif x True prints 'nonzero'."
-  },
-  {
-    "id": 27,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "total = 0\nfor i in range(3):\n    for j in range(2):\n        total += i*j\nprint(total)",
-    "options": [
-      "A. 0",
-      "B. 1",
-      "C. 3",
-      "D. 4"
-    ],
-    "answer": "C",
-    "explanation": "Products: 0,0,0,1,0,2 → sum=3."
-  },
-  {
-    "id": 28,
-    "domain": "Flow control",
-    "type": "multiple_select",
-    "question": "Choose all that break out of ONLY the innermost loop:",
-    "options": [
-      "A. break",
-      "B. continue",
-      "C. return",
-      "D. raise"
-    ],
-    "answer": [
-      "A"
-    ],
-    "explanation": "Only break exits the innermost loop. continue skips; return exits fn; raise throws."
-  },
-  {
-    "id": 29,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "for x in [0,1,2]:\n    if x:\n        print('T', end='')\n    else:\n        print('F', end='')",
-    "options": [
-      "A. FTT",
-      "B. TFT",
-      "C. FFT",
-      "D. TTF"
-    ],
-    "answer": "A",
-    "explanation": "0 is falsy; 1 and 2 truthy."
-  },
-  {
-    "id": 30,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "count = 0\nfor ch in 'abba':\n    if ch == 'b':\n        continue\n    count += 1\nprint(count)",
-    "options": [
-      "A. 0",
-      "B. 2",
-      "C. 3",
-      "D. 4"
-    ],
-    "answer": "C",
-    "explanation": "Skips 'b', counts 3 letters."
-  },
-  {
-    "id": 31,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "x = 1\nwhile x < 5:\n    x += 2\nprint(x)",
-    "options": [
+    id: 2,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "What is the output of this code?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numbers = [3, 1, 4, 1, 5]<br>numbers.append(9)<br>print(len(numbers))</div>",
+    options: [
       "A. 5",
-      "B. 3",
+      "B. 6",
       "C. 7",
+      "D. Error"
+    ],
+    answer: "B",
+    explanation: "The list starts with 5 elements, append() adds one more element, so the length becomes 6."
+  },
+  {
+    id: 3,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "Which operator has the highest precedence in Python?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>result = 2 + 3 * 4 ** 2</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>+</code> (addition)",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>*</code> (multiplication)",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>**</code> (exponentiation)",
+      "D. They have equal precedence"
+    ],
+    answer: "C",
+    explanation: "Exponentiation (**) has the highest precedence, followed by multiplication (*), then addition (+)."
+  },
+  {
+    id: 4,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "What is the result of this string slicing operation?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>text = 'Python'<br>print(text[1:4])</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Pyt</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>yth</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>ytho</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>tho</code>"
+    ],
+    answer: "B",
+    explanation: "Slicing [1:4] takes characters from index 1 to 3 (4 is excluded): 'y', 't', 'h'."
+  },
+  {
+    id: 5,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "Which assignment operator should be used to multiply a variable by 3?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>score = 10<br># Multiply score by 3</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>score =* 3</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>score *= 3</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>score =+ 3</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>score *+ 3</code>"
+    ],
+    answer: "B",
+    explanation: "The *= operator multiplies the variable by the value on the right side."
+  },
+
+  // Section 2: Flow Control
+  {
+    id: 6,
+    domain: "Flow control",
+    type: "multiple_choice",
+    question: "What will this code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>age = 16<br>if age >= 18:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Adult')<br>elif age >= 13:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Teen')<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Child')</div>",
+    options: [
+      "A. Adult",
+      "B. Teen",
+      "C. Child",
+      "D. Error"
+    ],
+    answer: "B",
+    explanation: "Since age (16) is not >= 18 but is >= 13, the elif condition is true and 'Teen' is printed."
+  },
+  {
+    id: 7,
+    domain: "Flow control",
+    type: "multiple_choice",
+    question: "How many times will this loop execute?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>for i in range(3, 8):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</div>",
+    options: [
+      "A. 3 times",
+      "B. 4 times",
+      "C. 5 times",
+      "D. 8 times"
+    ],
+    answer: "C",
+    explanation: "range(3, 8) generates numbers 3, 4, 5, 6, 7 - that's 5 numbers total."
+  },
+  {
+    id: 8,
+    domain: "Flow control",
+    type: "multiple_choice",
+    question: "What happens when <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>break</code> is encountered in a loop?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>for i in range(5):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i == 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</div>",
+    options: [
+      "A. Skips the current iteration only",
+      "B. Exits the loop completely",
+      "C. Restarts the loop from the beginning",
+      "D. Causes an error"
+    ],
+    answer: "B",
+    explanation: "The break statement exits the loop completely when i equals 3, so only 0, 1, 2 are printed."
+  },
+  {
+    id: 9,
+    domain: "Flow control",
+    type: "multiple_choice",
+    question: "What is the output of this nested loop?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>for i in range(2):<br>&nbsp;&nbsp;&nbsp;&nbsp;for j in range(2):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(i, j)</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>0 0<br>1 1</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>0 1<br>1 0</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>0 0<br>0 1<br>1 0<br>1 1</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>1 1<br>2 2</code>"
+    ],
+    answer: "C",
+    explanation: "The outer loop runs twice (i=0,1) and for each outer iteration, the inner loop runs twice (j=0,1)."
+  },
+
+  // Section 3: Input/Output Operations
+  {
+    id: 10,
+    domain: "Input/Output & files",
+    type: "multiple_choice",
+    question: "Which file mode should be used to add content to the end of an existing file?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>with open('data.txt', '___') as file:<br>&nbsp;&nbsp;&nbsp;&nbsp;file.write('New data')</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>'r'</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>'w'</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>'a'</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>'x'</code>"
+    ],
+    answer: "C",
+    explanation: "The 'a' mode opens a file for appending, adding new content to the end without overwriting existing content."
+  },
+  {
+    id: 11,
+    domain: "Input/Output & files",
+    type: "multiple_choice",
+    question: "What is the correct way to format this string using f-strings?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>name = 'Alice'<br>age = 25<br># Print: Hello Alice, you are 25 years old</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>print('Hello {name}, you are {age} years old')</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>print(f'Hello {name}, you are {age} years old')</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>print('Hello' + name + 'you are' + age + 'years old')</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>print('Hello %s, you are %d years old', name, age)</code>"
+    ],
+    answer: "B",
+    explanation: "F-strings use the f prefix and curly braces {} to embed variable values directly in the string."
+  },
+  {
+    id: 12,
+    domain: "Input/Output & files",
+    type: "multiple_choice",
+    question: "What does the <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>with</code> statement ensure when working with files?",
+    options: [
+      "A. The file is created if it doesn't exist",
+      "B. The file is automatically closed after use",
+      "C. The file is read faster",
+      "D. The file content is cached in memory"
+    ],
+    answer: "B",
+    explanation: "The with statement ensures that the file is automatically closed when the block is exited, even if an error occurs."
+  },
+
+  // Section 4: Functions and Code Structure
+  {
+    id: 13,
+    domain: "Functions & scope",
+    type: "multiple_choice",
+    question: "What will this function return?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def calculate(x, y=5):<br>&nbsp;&nbsp;&nbsp;&nbsp;return x + y<br><br>result = calculate(3)</div>",
+    options: [
+      "A. 3",
+      "B. 5",
+      "C. 8",
+      "D. Error"
+    ],
+    answer: "C",
+    explanation: "The function is called with x=3, and y uses its default value of 5, so the result is 3 + 5 = 8."
+  },
+  {
+    id: 14,
+    domain: "Functions & scope",
+    type: "multiple_choice",
+    question: "What is the purpose of a docstring in a function?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def add_numbers(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;\"\"\"Add two numbers and return the result\"\"\"<br>&nbsp;&nbsp;&nbsp;&nbsp;return a + b</div>",
+    options: [
+      "A. It executes code when the function is called",
+      "B. It provides documentation about what the function does",
+      "C. It defines the function parameters",
+      "D. It specifies the return type"
+    ],
+    answer: "B",
+    explanation: "A docstring (triple quotes) provides documentation that explains what the function does and how to use it."
+  },
+  {
+    id: 15,
+    domain: "Functions & scope",
+    type: "fill_in_blank",
+    question: "Complete the function definition:<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>_____ greet(name):<br>&nbsp;&nbsp;&nbsp;&nbsp;return f'Hello, {name}!'</div>",
+    answer: "def",
+    explanation: "The 'def' keyword is used to define a function in Python."
+  },
+
+  // Section 5: Error Handling
+  {
+    id: 16,
+    domain: "Exceptions & debugging",
+    type: "multiple_choice",
+    question: "What type of error is this?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>print('Hello World'<br># Missing closing parenthesis</div>",
+    options: [
+      "A. Runtime error",
+      "B. Logic error",
+      "C. Syntax error",
+      "D. Name error"
+    ],
+    answer: "C",
+    explanation: "A syntax error occurs when the code doesn't follow Python's grammar rules, like missing parentheses."
+  },
+  {
+    id: 17,
+    domain: "Exceptions & debugging",
+    type: "multiple_choice",
+    question: "What will happen when this code runs?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;result = 10 / 0<br>except ZeroDivisionError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Cannot divide by zero')<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Done')</div>",
+    options: [
+      "A. Only 'Cannot divide by zero' is printed",
+      "B. Only 'Done' is printed",
+      "C. Both messages are printed",
+      "D. An error occurs"
+    ],
+    answer: "C",
+    explanation: "The except block catches the error and prints the first message, then finally always executes and prints 'Done'."
+  },
+  {
+    id: 18,
+    domain: "Exceptions & debugging",
+    type: "multiple_choice",
+    question: "Which assert method checks if two values are equal in unit testing?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import unittest<br><br>class TestMath(unittest.TestCase):<br>&nbsp;&nbsp;&nbsp;&nbsp;def test_addition(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self._____(2 + 2, 4)</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>assertTrue</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>assertEqual</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>assertIs</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>assertIn</code>"
+    ],
+    answer: "B",
+    explanation: "assertEqual() checks if two values are equal and is commonly used to test if a function returns the expected result."
+  },
+
+  // Section 6: Modules and Tools
+  {
+    id: 19,
+    domain: "Modules & standard library",
+    type: "multiple_choice",
+    question: "Which module should be imported to work with file paths in a cross-platform way?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import _____<br>file_path = _____.path.join('folder', 'file.txt')</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>sys</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>os</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>io</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>math</code>"
+    ],
+    answer: "B",
+    explanation: "The os module provides os.path.join() for creating file paths that work on different operating systems."
+  },
+  {
+    id: 20,
+    domain: "Modules & standard library",
+    type: "multiple_choice",
+    question: "What does this math function do?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import math<br>result = math.ceil(4.2)<br>print(result)</div>",
+    options: [
+      "A. Rounds down to 4",
+      "B. Rounds to nearest integer (4)",
+      "C. Rounds up to 5",
+      "D. Returns the decimal part (0.2)"
+    ],
+    answer: "C",
+    explanation: "math.ceil() always rounds up to the next integer, so 4.2 becomes 5."
+  },
+  {
+    id: 21,
+    domain: "Modules & standard library",
+    type: "multiple_choice",
+    question: "How do you generate a random integer between 1 and 10 (inclusive)?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import random</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>random.random(1, 10)</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>random.randint(1, 10)</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>random.choice(1, 10)</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>random.range(1, 10)</code>"
+    ],
+    answer: "B",
+    explanation: "random.randint(a, b) returns a random integer between a and b, including both endpoints."
+  },
+
+  // Additional Data Types Questions
+  {
+    id: 22,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "What is the correct way to create an empty list?",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>list = {}</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>list = []</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>list = ()</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>list = \"\"</code>"
+    ],
+    answer: "B",
+    explanation: "Square brackets [] create an empty list. {} creates a dictionary, () creates a tuple, and \"\" creates a string."
+  },
+  {
+    id: 23,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "What will this code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>fruits = ['apple', 'banana', 'orange']<br>fruits.insert(1, 'grape')<br>print(fruits)</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>['apple', 'grape', 'banana', 'orange']</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>['grape', 'apple', 'banana', 'orange']</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>['apple', 'banana', 'grape', 'orange']</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>['apple', 'banana', 'orange', 'grape']</code>"
+    ],
+    answer: "A",
+    explanation: "insert(1, 'grape') adds 'grape' at index 1, shifting other elements to the right."
+  },
+  {
+    id: 24,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "Which comparison will return <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>True</code>?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 5<br>y = 10</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>x > y</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>x == y</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>x < y</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>x >= y</code>"
+    ],
+    answer: "C",
+    explanation: "Since 5 is less than 10, the expression x < y evaluates to True."
+  },
+
+  // More Flow Control Questions
+  {
+    id: 25,
+    domain: "Flow control",
+    type: "multiple_choice",
+    question: "What does the <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>continue</code> statement do in a loop?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>for i in range(5):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i == 2:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</div>",
+    options: [
+      "A. Exits the loop completely",
+      "B. Skips the rest of the current iteration",
+      "C. Restarts the loop from the beginning",
+      "D. Causes an error"
+    ],
+    answer: "B",
+    explanation: "continue skips the remaining code in the current iteration and moves to the next iteration."
+  },
+  {
+    id: 26,
+    domain: "Flow control",
+    type: "multiple_choice",
+    question: "What is the output of this while loop?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>count = 0<br>while count < 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(count)<br>&nbsp;&nbsp;&nbsp;&nbsp;count += 1</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>0 1 2 3</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>1 2 3</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>0 1 2</code>",
       "D. Infinite loop"
     ],
-    "answer": "C",
-    "explanation": "1→3→5→7 then stop."
+    answer: "C",
+    explanation: "The loop runs while count < 3, printing 0, 1, 2, then stops when count becomes 3."
   },
-  {
-    "id": 32,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "for i in range(3):\n    pass\nprint(i)",
-    "options": [
-      "A. 0",
-      "B. 2",
-      "C. NameError",
-      "D. 3"
-    ],
-    "answer": "B",
-    "explanation": "i retains last value 2 after loop."
-  },
-  {
-    "id": 33,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "for i in range(3):\n    print(i)\n    if i == 1:\n        break\nelse:\n    print('done')",
-    "options": [
-      "A. 0 1 done",
-      "B. 0 1",
-      "C. 0 1 2 done",
-      "D. 0 1 2"
-    ],
-    "answer": "B",
-    "explanation": "for-else's else runs only if not broken."
-  },
-  {
-    "id": 34,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "Which is equivalent to: if not (a or b)?",
-    "options": [
-      "A. if not a or not b",
-      "B. if not a and not b",
-      "C. if a and b",
-      "D. if not a and b"
-    ],
-    "answer": "B",
-    "explanation": "De Morgan."
-  },
-  {
-    "id": 35,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "x = 0\nfor _ in range(2):\n    x = x + 1 if x % 2 == 0 else x + 2\nprint(x)",
-    "options": [
-      "A. 2",
-      "B. 3",
-      "C. 4",
-      "D. 5"
-    ],
-    "answer": "B",
-    "explanation": "0→1→3."
-  },
-  {
-    "id": 36,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "nums = [1,2,3,4]\nfor i in nums[:]:\n    if i % 2 == 0:\n        nums.remove(i)\nprint(nums)",
-    "options": [
-      "A. [1, 3]",
-      "B. [1,2,3,4]",
-      "C. [2,4]",
-      "D. [1,2,3]"
-    ],
-    "answer": "A",
-    "explanation": "Iterating copy avoids skipping; removes evens."
-  },
-  {
-    "id": 37,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "Which range generates 5,4,3,2?",
-    "options": [
-      "A. range(5,1)",
-      "B. range(5,1,-1)",
-      "C. range(5,2,-1)",
-      "D. range(5,1,-2)"
-    ],
-    "answer": "B",
-    "explanation": "Inclusive 2, exclusive 1 → step -1."
-  },
-  {
-    "id": 38,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "a = [0,1,2]\nfor i, v in enumerate(a, start=1):\n    a[i-1] = v + i\nprint(a)",
-    "options": [
-      "A. [0,2,4]",
-      "B. [1,3,5]",
-      "C. [1,2,3]",
-      "D. [2,3,4]"
-    ],
-    "answer": "B",
-    "explanation": "Updates to [1,3,5]."
-  },
-  {
-    "id": 39,
-    "domain": "Flow control",
-    "type": "multiple_select",
-    "question": "Choose valid Python loop targets:",
-    "options": [
-      "A. for (i,j) in [(1,2)]: ...",
-      "B. for i,j in [(1,2)]: ...",
-      "C. for i = 0 to 10: ...",
-      "D. for *a, b in [(1,2,3)]: ..."
-    ],
-    "answer": [
-      "A",
-      "B",
-      "D"
-    ],
-    "explanation": "Tuple unpacking and starred targets are valid."
-  },
-  {
-    "id": 40,
-    "domain": "Flow control",
-    "type": "multiple_choice",
-    "question": "for i in range(3):\n    if i == 2:\n        print('x')\n        continue\n    else:\n        print(i)",
-    "options": [
-      "A. 0 1 x",
-      "B. 0 1 2",
-      "C. x 0 1",
-      "D. 1 2 x"
-    ],
-    "answer": "A",
-    "explanation": "Prints 0,1, then x."
-  },
-  {
-    "id": 41,
-    "domain": "Functions & scope",
-    "type": "multiple_choice",
-    "question": "def f(a, b=2, c=3):\n    print(a, b, c)\nf(1, c=5)",
-    "options": [
-      "A. 1 2 3",
-      "B. 1 5 3",
-      "C. 1 2 5",
-      "D. 1 5 5"
-    ],
-    "answer": "C",
-    "explanation": "Keyword overrides c only."
-  },
-  {
-    "id": 42,
-    "domain": "Functions & scope",
-    "type": "multiple_choice",
-    "question": "def f(x=[]):\n    x.append(1)\n    return x\na = f(); b = f()\nprint(a is b, a)",
-    "options": [
-      "A. True [1]",
-      "B. False [1]",
-      "C. True [1, 1]",
-      "D. False [1, 1]"
-    ],
-    "answer": "C",
-    "explanation": "Mutable default shared across calls."
-  },
-  {
-    "id": 43,
-    "domain": "Functions & scope",
-    "type": "multiple_choice",
-    "question": "def g(x, y, *args, **kwargs):\n    return len(args), len(kwargs)\nprint(g(1,2,3,4,a=5,b=6))",
-    "options": [
-      "A. (2, 2)",
-      "B. (2, 0)",
-      "C. (0, 2)",
-      "D. (4, 2)"
-    ],
-    "answer": "A",
-    "explanation": "*args captures 3,4; **kwargs has 2 items."
-  },
-  {
-    "id": 44,
-    "domain": "Functions & scope",
-    "type": "multiple_choice",
-    "question": "x = 1\ndef f():\n    x = 2\n    def h():\n        nonlocal x\n        x += 3\n        return x\n    return h()\nprint(f(), x)",
-    "options": [
-      "A. 5 1",
-      "B. 5 2",
-      "C. 4 1",
-      "D. Error"
-    ],
-    "answer": "A",
-    "explanation": "nonlocal binds to f's x; global x unchanged."
-  },
-  {
-    "id": 45,
-    "domain": "Functions & scope",
-    "type": "multiple_choice",
-    "question": "def f(x, y=0):\n    return x - y\nprint(f(y=2, x=5))",
-    "options": [
-      "A. 3",
-      "B. -3",
-      "C. 7",
-      "D. Error"
-    ],
-    "answer": "A",
-    "explanation": "5-2=3."
-  },
-  {
-    "id": 46,
-    "domain": "Functions & scope",
-    "type": "multiple_choice",
-    "question": "def f(n):\n    if n == 0: return 1\n    return n * f(n-1)\nprint(f(3))",
-    "options": [
-      "A. 6",
-      "B. 3",
-      "C. 9",
-      "D. 0"
-    ],
-    "answer": "A",
-    "explanation": "3! = 6."
-  },
-  {
-    "id": 47,
-    "domain": "Functions & scope",
-    "type": "multiple_choice",
-    "question": "def f(a, b, /, c, *, d=4):\n    print(a, b, c, d)\nf(1, 2, 3, d=5)",
-    "options": [
-      "A. 1 2 3 5",
-      "B. 1 2 3 4",
-      "C. TypeError",
-      "D. 1 2 4 5"
-    ],
-    "answer": "A",
-    "explanation": "Positional-only then keyword-only."
-  },
-  {
-    "id": 48,
-    "domain": "Functions & scope",
-    "type": "fill_in_blank",
-    "question": "Fill the blank to declare a global binding inside a function: _____ x; x = 5",
-    "answer": "global",
-    "explanation": "Use 'global x' to assign to the module-level name."
-  },
-  {
-    "id": 49,
-    "domain": "Functions & scope",
-    "type": "multiple_choice",
-    "question": "def f(x):\n    x += [3]\n    return x\ny = [1,2]\nz = f(y)\nprint(y, z)",
-    "options": [
-      "A. [1, 2] [1, 2, 3]",
-      "B. [1, 2, 3] [1, 2, 3]",
-      "C. [1, 2] [3]",
-      "D. Error"
-    ],
-    "answer": "B",
-    "explanation": "In-place list addition mutates input list."
-  },
-  {
-    "id": 50,
-    "domain": "Functions & scope",
-    "type": "multiple_choice",
-    "question": "def add(a:int, b:int)->int:\n    return a + b\nprint(add.__annotations__['return'])",
-    "options": [
-      "A. 'int'",
-      "B. <class 'int'>",
-      "C. None",
-      "D. TypeError"
-    ],
-    "answer": "B",
-    "explanation": "Annotations store actual class object."
-  },
-  {
-    "id": 51,
-    "domain": "Functions & scope",
-    "type": "multiple_choice",
-    "question": "x = 0\ndef f():\n    x = 1\n    def g():\n        return x\n    return g()\nprint(f())",
-    "options": [
-      "A. 0",
-      "B. 1",
-      "C. None",
-      "D. UnboundLocalError"
-    ],
-    "answer": "B",
-    "explanation": "Closure captures x=1 from enclosing scope."
-  },
-  {
-    "id": 52,
-    "domain": "Functions & scope",
-    "type": "multiple_choice",
-    "question": "def f(a, b, *c):\n    return a + b + sum(c)\nprint(f(1,2,3,4))",
-    "options": [
-      "A. 3",
-      "B. 7",
-      "C. 10",
-      "D. TypeError"
-    ],
-    "answer": "C",
-    "explanation": "Sums all positional arguments."
-  },
-  {
-    "id": 53,
-    "domain": "Functions & scope",
-    "type": "fill_in_blank",
-    "question": "Fill the blank: A function that yields values lazily uses the keyword ____.",
-    "answer": "yield",
-    "explanation": "Generators use 'yield'."
-  },
-  {
-    "id": 54,
-    "domain": "Functions & scope",
-    "type": "multiple_choice",
-    "question": "def f(seq):\n    return [x for x in seq if x%2==0]\nprint(f(range(5)))",
-    "options": [
-      "A. [0, 2, 4]",
-      "B. [1, 3]",
-      "C. [0, 1, 2, 3, 4]",
-      "D. (0, 2, 4)"
-    ],
-    "answer": "A",
-    "explanation": "Filters evens."
-  },
-  {
-    "id": 55,
-    "domain": "Functions & scope",
-    "type": "multiple_choice",
-    "question": "def f(a, b=1, *, c=2):\n    return a + b + c\nprint(f(3, c=4))",
-    "options": [
-      "A. 6",
-      "B. 8",
-      "C. 7",
-      "D. TypeError"
-    ],
-    "answer": "B",
-    "explanation": "a=3, default b=1, c=4 → 8."
-  },
-  {
-    "id": 56,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "print('abcdef'[::2])",
-    "options": [
-      "A. ace",
-      "B. bdf",
-      "C. abcdef",
-      "D. abcd"
-    ],
-    "answer": "A",
-    "explanation": "Stride 2 picks indices 0,2,4 → ace."
-  },
-  {
-    "id": 57,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "a = [1,2]*3\na[1] = 99\nprint(a)",
-    "options": [
-      "A. [1, 99, 1, 2, 1, 2]",
-      "B. [1, 99, 1, 99, 1, 99]",
-      "C. [1, 2, 1, 2, 1, 2]",
-      "D. [99, 2, 99, 2, 99, 2]"
-    ],
-    "answer": "A",
-    "explanation": "Repetition copies ints by value."
-  },
-  {
-    "id": 58,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "s = 'mississippi'\nprint(s.count('ss'))",
-    "options": [
-      "A. 1",
-      "B. 2",
-      "C. 3",
-      "D. 4"
-    ],
-    "answer": "B",
-    "explanation": "Substring 'ss' appears twice."
-  },
-  {
-    "id": 59,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "a = [1,2,3]\nb = a\na = a + [4]\nprint(a, b)",
-    "options": [
-      "A. [1,2,3,4] [1,2,3,4]",
-      "B. [1,2,3,4] [1,2,3]",
-      "C. [1,2,3] [1,2,3,4]",
-      "D. Error"
-    ],
-    "answer": "B",
-    "explanation": "a + [4] creates a new list."
-  },
-  {
-    "id": 60,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "a = [1,2,3]\na += [4]\nprint(a)",
-    "options": [
-      "A. [1,2,3]",
-      "B. [1,2,3,4]",
-      "C. [4,1,2,3]",
-      "D. Error"
-    ],
-    "answer": "B",
-    "explanation": "In-place extend modifies list."
-  },
-  {
-    "id": 61,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "Which removes and returns the last element of L?",
-    "options": [
-      "A. L.shift()",
-      "B. L.pop()",
-      "C. L.remove()",
-      "D. del L[-1]"
-    ],
-    "answer": "B",
-    "explanation": "pop returns element; remove deletes by value."
-  },
-  {
-    "id": 62,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "d = {'a':1, 'b':2}\nprint(d.get('c', 5), d.setdefault('c', 7), d['c'])",
-    "options": [
-      "A. 5 7 7",
-      "B. None 7 7",
-      "C. 5 None None",
-      "D. 5 5 5"
-    ],
-    "answer": "A",
-    "explanation": "get doesn't insert; setdefault inserts default."
-  },
-  {
-    "id": 63,
-    "domain": "Data structures",
-    "type": "multiple_select",
-    "question": "Choose all true about sets:",
-    "options": [
-      "A. Sets are ordered collections",
-      "B. Sets disallow duplicates",
-      "C. {} creates an empty set",
-      "D. set([1,2,2]) == {1,2}"
-    ],
-    "answer": [
-      "B",
-      "D"
-    ],
-    "explanation": "Sets are unordered; {} is dict."
-  },
-  {
-    "id": 64,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "print({1,2,3} & {2,3,4})",
-    "options": [
-      "A. {1,4}",
-      "B. {2,3}",
-      "C. {1,2,3,4}",
-      "D. {1,2}"
-    ],
-    "answer": "B",
-    "explanation": "Intersection."
-  },
-  {
-    "id": 65,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "t = (1,2,3)\na,b,*c = t\nprint(a,b,c)",
-    "options": [
-      "A. 1 2 [3]",
-      "B. 1 2 3",
-      "C. (1,2) [3]",
-      "D. 1 [2,3]"
-    ],
-    "answer": "A",
-    "explanation": "Star captures remainder in list."
-  },
-  {
-    "id": 66,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "L = [ [0]*2 ] * 3\nL[0][0] = 9\nprint(L)",
-    "options": [
-      "A. [[9, 0],[0, 0],[0, 0]]",
-      "B. [[9, 0],[9, 0],[9, 0]]",
-      "C. [[9, 0],[0, 0],[9, 0]]",
-      "D. [[0, 0],[0, 0],[0, 0]]"
-    ],
-    "answer": "B",
-    "explanation": "Inner lists aliased via repetition."
-  },
-  {
-    "id": 67,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "s = 'abcde'; print(s[1:-1])",
-    "options": [
-      "A. 'abcd'",
-      "B. 'bcde'",
-      "C. 'bcd'",
-      "D. 'abcde'"
-    ],
-    "answer": "C",
-    "explanation": "Slice excludes last element."
-  },
-  {
-    "id": 68,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "d = {'x':1, 'y':2}\nd.update({'y':3, 'z':4})\nprint(sorted(d.items()))",
-    "options": [
-      "A. [('x',1),('y',2),('z',4)]",
-      "B. [('x',1),('y',3),('z',4)]",
-      "C. [('y',3),('z',4)]",
-      "D. Error"
-    ],
-    "answer": "B",
-    "explanation": "update replaces and adds."
-  },
-  {
-    "id": 69,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "nums = [3,1,2]\nprint(sorted(nums), nums.sort(), nums)",
-    "options": [
-      "A. [1,2,3] None [1,2,3]",
-      "B. [3,2,1] None [1,2,3]",
-      "C. None [1,2,3] [1,2,3]",
-      "D. [1,2,3] [1,2,3] [1,2,3]"
-    ],
-    "answer": "A",
-    "explanation": "sorted returns new; sort returns None."
-  },
-  {
-    "id": 70,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "Which expression returns True?",
-    "options": [
-      "A. 'Py' in 'python'",
-      "B. 'th' in 'python'",
-      "C. 'on' not in 'python'",
-      "D. 'py' == 'Py'"
-    ],
-    "answer": "B",
-    "explanation": "Membership is case-sensitive."
-  },
-  {
-    "id": 71,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "d = {'a':1, 'b':2}\nprint(list(d.keys()) == ['a','b'])",
-    "options": [
-      "A. True",
-      "B. False",
-      "C. Depends on Python version",
-      "D. Error"
-    ],
-    "answer": "A",
-    "explanation": "Dicts preserve insertion order in 3.7+."
-  },
-  {
-    "id": 72,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "from collections import Counter\nc = Counter('banana')\nprint(c.most_common(1)[0])",
-    "options": [
-      "A. ('a', 3)",
-      "B. ('n', 2)",
-      "C. ('b', 1)",
-      "D. ('a', 2)"
-    ],
-    "answer": "A",
-    "explanation": "Counts characters."
-  },
-  {
-    "id": 73,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "s = {1,2}\ns.add(2); s.update([3,3])\nprint(len(s))",
-    "options": [
-      "A. 2",
-      "B. 3",
-      "C. 4",
-      "D. 5"
-    ],
-    "answer": "B",
-    "explanation": "{1,2,3} length 3."
-  },
-  {
-    "id": 74,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "s = 'a,b,,c'; print(s.split(','))",
-    "options": [
-      "A. ['a','b','c']",
-      "B. ['a','b','','c']",
-      "C. ['a','b',',','c']",
-      "D. ['a','b','',',','c']"
-    ],
-    "answer": "B",
-    "explanation": "Consecutive separators yield empty field."
-  },
-  {
-    "id": 75,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "import itertools as it\nprint(list(it.zip_longest('ab','xyz', fillvalue='-')))",
-    "options": [
-      "A. [('a','x'),('b','y')]",
-      "B. [('a','x'),('b','y'),('-', 'z')]",
-      "C. [('a','x'),('b','y'),('-', '-')]",
-      "D. [('a','x'),('b','y'),('-', 'z')]"
-    ],
-    "answer": "D",
-    "explanation": "zip_longest fills missing with '-'."
-  },
-  {
-    "id": 76,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "s = '  spam  '\nprint(s.strip(), s)",
-    "options": [
-      "A. 'spam' '  spam  '",
-      "B. ' spam ' ' spam '",
-      "C. '  spam  ' 'spam'",
-      "D. Error"
-    ],
-    "answer": "A",
-    "explanation": "strip is non-mutating."
-  },
-  {
-    "id": 77,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "a = [1,2,3,4]\nprint(a[:: -2])",
-    "options": [
-      "A. [4,2]",
-      "B. [1,3]",
-      "C. [2,4]",
-      "D. [3,1]"
-    ],
-    "answer": "A",
-    "explanation": "Reverse step 2: indices 3,1."
-  },
-  {
-    "id": 78,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "d = {'a':1}\nprint(d.pop('b', 99))",
-    "options": [
-      "A. KeyError",
-      "B. None",
-      "C. 99",
-      "D. False"
-    ],
-    "answer": "C",
-    "explanation": "pop returns default if missing."
-  },
-  {
-    "id": 79,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "x = {'a':1, 'b':2}\ny = x.copy()\nx['a'] = 9\nprint(y['a'])",
-    "options": [
-      "A. 1",
-      "B. 9",
-      "C. None",
-      "D. KeyError"
-    ],
-    "answer": "A",
-    "explanation": "Shallow copy keeps original value."
-  },
-  {
-    "id": 80,
-    "domain": "Data structures",
-    "type": "multiple_choice",
-    "question": "L = [1,2,3]\nprint([i*i for i in L if i%2==1])",
-    "options": [
-      "A. [1, 9]",
-      "B. [1, 4, 9]",
-      "C. [2, 6]",
-      "D. (1, 9)"
-    ],
-    "answer": "A",
-    "explanation": "Squares of odd elements."
-  },
-  {
-    "id": 81,
-    "domain": "Input/Output & files",
-    "type": "multiple_choice",
-    "question": "Which mode opens for reading and writing, creating if needed?",
-    "options": [
-      "A. 'r+'",
-      "B. 'w+'",
-      "C. 'a+'",
-      "D. 'x'"
-    ],
-    "answer": "B",
-    "explanation": "'w+' creates/truncates; 'r+' requires existing; 'a+' appends."
-  },
-  {
-    "id": 82,
-    "domain": "Input/Output & files",
-    "type": "fill_in_blank",
-    "question": "with open('data.txt', 'r') as f:\n    lines = f._____()  # read all lines",
-    "answer": "readlines",
-    "explanation": "readlines() returns a list of lines."
-  },
-  {
-    "id": 83,
-    "domain": "Input/Output & files",
-    "type": "multiple_choice",
-    "question": "Which is TRUE about print()?",
-    "options": [
-      "A. print >> f, 'text' is valid",
-      "B. print('a','b', sep='-') prints a-b",
-      "C. print requires one argument",
-      "D. print writes to files automatically"
-    ],
-    "answer": "B",
-    "explanation": "print is a function; sep customizes separators."
-  },
-  {
-    "id": 84,
-    "domain": "Input/Output & files",
-    "type": "multiple_choice",
-    "question": "print('x', 'y', end='')\nprint('z')",
-    "options": [
-      "A. x y z",
-      "B. xyz",
-      "C. x y\\nz",
-      "D. x\\ny\\nz"
-    ],
-    "answer": "B",
-    "explanation": "end='' prevents newline."
-  },
-  {
-    "id": 85,
-    "domain": "Input/Output & files",
-    "type": "multiple_choice",
-    "question": "Which reads the entire file as a string?",
-    "options": [
-      "A. open('f').read()",
-      "B. open('f').readlines()",
-      "C. list(open('f'))",
-      "D. open('f').read(10)"
-    ],
-    "answer": "A",
-    "explanation": "read() with no size reads all."
-  },
-  {
-    "id": 86,
-    "domain": "Input/Output & files",
-    "type": "multiple_choice",
-    "question": "Which encoding is safest for UTF-8 text?",
-    "options": [
-      "A. ascii",
-      "B. latin-1",
-      "C. utf-8",
-      "D. utf-16"
-    ],
-    "answer": "C",
-    "explanation": "UTF-8 is standard."
-  },
-  {
-    "id": 87,
-    "domain": "Input/Output & files",
-    "type": "multiple_choice",
-    "question": "lines = ['a\\n', 'b\\n']\nwith open('out.txt','w', encoding='utf-8') as f:\n    f._____ (lines)",
-    "options": [
-      "A. write",
-      "B. writelines",
-      "C. print",
-      "D. close"
-    ],
-    "answer": "B",
-    "explanation": "writelines writes a list of strings as-is."
-  },
-  {
-    "id": 88,
-    "domain": "Input/Output & files",
-    "type": "multiple_choice",
-    "question": "open('file.txt','x') when file exists will…",
-    "options": [
-      "A. Append",
-      "B. Overwrite",
-      "C. Raise FileExistsError",
-      "D. Return None"
-    ],
-    "answer": "C",
-    "explanation": "'x' means exclusive creation."
-  },
-  {
-    "id": 89,
-    "domain": "Input/Output & files",
-    "type": "multiple_choice",
-    "question": "import sys\nprint(len(sys.argv) >= 1)",
-    "options": [
-      "A. True",
-      "B. False",
-      "C. Error",
-      "D. Depends on OS"
-    ],
-    "answer": "A",
-    "explanation": "argv always has program name."
-  },
-  {
-    "id": 90,
-    "domain": "Input/Output & files",
-    "type": "multiple_choice",
-    "question": "How to ensure file is closed even on exception?",
-    "options": [
-      "A. try/except only",
-      "B. finally or with-statement",
-      "C. call close() twice",
-      "D. print(f.closed)"
-    ],
-    "answer": "B",
-    "explanation": "Use finally or with."
-  },
-  {
-    "id": 91,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_choice",
-    "question": "try:\n    1/0\nexcept ZeroDivisionError:\n    print('Z')\nexcept Exception:\n    print('E')",
-    "options": [
-      "A. Z",
-      "B. E",
-      "C. Z E",
-      "D. Error"
-    ],
-    "answer": "A",
-    "explanation": "First matching except runs."
-  },
-  {
-    "id": 92,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_choice",
-    "question": "try:\n    x = int('12a')\nexcept ValueError as e:\n    print(type(e).__name__)",
-    "options": [
-      "A. Exception",
-      "B. ValueError",
-      "C. TypeError",
-      "D. NameError"
-    ],
-    "answer": "B",
-    "explanation": "Invalid int literal raises ValueError."
-  },
-  {
-    "id": 93,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_choice",
-    "question": "try:\n    print('A')\nfinally:\n    print('B')",
-    "options": [
-      "A. A",
-      "B. B",
-      "C. A B",
-      "D. Error"
-    ],
-    "answer": "C",
-    "explanation": "finally always executes."
-  },
-  {
-    "id": 94,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_choice",
-    "question": "try:\n    print('A')\nexcept:\n    print('B')\nelse:\n    print('C')",
-    "options": [
-      "A. A",
-      "B. A C",
-      "C. B",
-      "D. C"
-    ],
-    "answer": "B",
-    "explanation": "No exception → else runs."
-  },
-  {
-    "id": 95,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_choice",
-    "question": "def f():\n    try:\n        return 1\n    finally:\n        return 2\nprint(f())",
-    "options": [
-      "A. 1",
-      "B. 2",
-      "C. None",
-      "D. Error"
-    ],
-    "answer": "B",
-    "explanation": "finally overrides return."
-  },
-  {
-    "id": 96,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_choice",
-    "question": "Which except order is correct? (Exception, ValueError, ArithmeticError)",
-    "options": [
-      "A. ValueError, ArithmeticError, Exception",
-      "B. Exception, ArithmeticError, ValueError",
-      "C. ArithmeticError, ValueError, Exception",
-      "D. Any order works"
-    ],
-    "answer": "A",
-    "explanation": "Catch specific exceptions first."
-  },
-  {
-    "id": 97,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_choice",
-    "question": "try:\n    raise RuntimeError('x')\nexcept Exception as e:\n    print(isinstance(e, RuntimeError))",
-    "options": [
-      "A. True",
-      "B. False",
-      "C. None",
-      "D. Error"
-    ],
-    "answer": "A",
-    "explanation": "RuntimeError is an Exception subclass."
-  },
-  {
-    "id": 98,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_choice",
-    "question": "try:\n    x = {'a':1}['b']\nexcept KeyError:\n    print('K')\nelse:\n    print('E')\nfinally:\n    print('F')",
-    "options": [
-      "A. K F",
-      "B. E F",
-      "C. F",
-      "D. K"
-    ],
-    "answer": "A",
-    "explanation": "KeyError matched; finally runs."
-  },
-  {
-    "id": 99,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_choice",
-    "question": "Which statement raises an exception intentionally?",
-    "options": [
-      "A. assert False, 'msg'",
-      "B. except 'msg'",
-      "C. try 'msg'",
-      "D. throw 'msg'"
-    ],
-    "answer": "A",
-    "explanation": "assert triggers AssertionError."
-  },
-  {
-    "id": 100,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_choice",
-    "question": "def f():\n    try:\n        1/0\n    except ZeroDivisionError:\n        return 'e'\n    finally:\n        print('clean')\nprint(f())",
-    "options": [
-      "A. clean e",
-      "B. e clean",
-      "C. clean",
-      "D. e"
-    ],
-    "answer": "A",
-    "explanation": "finally prints before function returns."
-  },
-  {
-    "id": 101,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_select",
-    "question": "Choose all true about 'assert':",
-    "options": [
-      "A. It can be disabled with -O flag",
-      "B. It always raises SyntaxError on failure",
-      "C. It raises AssertionError on failure",
-      "D. It's intended for production validation"
-    ],
-    "answer": [
-      "A",
-      "C"
-    ],
-    "explanation": "Assertions raise AssertionError; can be disabled with -O."
-  },
-  {
-    "id": 102,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_choice",
-    "question": "try:\n    int(None)\nexcept TypeError as e:\n    print(e.__class__.__name__)",
-    "options": [
-      "A. TypeError",
-      "B. ValueError",
-      "C. Exception",
-      "D. NameError"
-    ],
-    "answer": "A",
-    "explanation": "int(None) raises TypeError."
-  },
-  {
-    "id": 103,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_choice",
-    "question": "try:\n    x = [1,2][5]\nexcept IndexError:\n    print('I')",
-    "options": [
-      "A. I",
-      "B. KeyError",
-      "C. None",
-      "D. Error"
-    ],
-    "answer": "A",
-    "explanation": "Out-of-range index → IndexError."
-  },
-  {
-    "id": 104,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_choice",
-    "question": "try:\n    raise KeyboardInterrupt\nexcept Exception:\n    print('E')\nexcept BaseException:\n    print('B')",
-    "options": [
-      "A. E",
-      "B. B",
-      "C. E B",
-      "D. Error"
-    ],
-    "answer": "B",
-    "explanation": "KeyboardInterrupt inherits from BaseException, not Exception."
-  },
-  {
-    "id": 105,
-    "domain": "Exceptions & debugging",
-    "type": "multiple_choice",
-    "question": "try:\n    pass\nexcept:\n    print('x')\nelse:\n    print('y')\nfinally:\n    print('z')",
-    "options": [
-      "A. x z",
-      "B. y z",
-      "C. z",
-      "D. y"
-    ],
-    "answer": "B",
-    "explanation": "No exception → else then finally."
-  },
-  {
-    "id": 106,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "import math\nprint(math.ceil(-1.2), math.floor(-1.2))",
-    "options": [
-      "A. -1 -2",
-      "B. -2 -1",
-      "C. -1 -1",
-      "D. -2 -2"
-    ],
-    "answer": "A",
-    "explanation": "ceil toward +∞ ; floor toward −∞."
-  },
-  {
-    "id": 107,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "from datetime import datetime, timedelta\nd = datetime(2020,1,1) + timedelta(days=31)\nprint(d.strftime('%Y-%m-%d'))",
-    "options": [
-      "A. 2020-01-31",
-      "B. 2020-02-01",
-      "C. 2020-02-02",
-      "D. 2020-01-30"
-    ],
-    "answer": "B",
-    "explanation": "31 days later → Feb 1, 2020."
-  },
-  {
-    "id": 108,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "import random\nrandom.seed(0)\nprint(random.randint(1,3), random.randint(1,3))",
-    "options": [
-      "A. 2 2",
-      "B. 1 3",
-      "C. 2 1",
-      "D. 3 1"
-    ],
-    "answer": "C",
-    "explanation": "Seed yields deterministic sequence."
-  },
-  {
-    "id": 109,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "import json\ns = json.dumps({'b':1,'a':2}, sort_keys=True)\nprint(s)",
-    "options": [
-      "A. {'a': 2, 'b': 1}",
-      "B. {\"b\": 1, \"a\": 2}",
-      "C. {\"a\": 2, \"b\": 1}",
-      "D. {'b':1,'a':2}"
-    ],
-    "answer": "C",
-    "explanation": "JSON uses double quotes; keys sorted."
-  },
-  {
-    "id": 110,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "from collections import defaultdict\nd = defaultdict(int)\nd['x'] += 1\nprint(d['x'], d['y'])",
-    "options": [
-      "A. 1 0",
-      "B. 1 KeyError",
-      "C. 1 None",
-      "D. 0 0"
-    ],
-    "answer": "A",
-    "explanation": "Missing keys default to 0."
-  },
-  {
-    "id": 111,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "import itertools as it\nprint(list(it.accumulate([1,2,3])))",
-    "options": [
-      "A. [1,2,3]",
-      "B. [1,3,6]",
-      "C. [6]",
-      "D. [1,3,5]"
-    ],
-    "answer": "B",
-    "explanation": "Running totals."
-  },
-  {
-    "id": 112,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "from pathlib import Path\np = Path('a') / 'b' / 'c.txt'\nprint(str(p))",
-    "options": [
-      "A. a/b/c.txt",
-      "B. a\\b\\c.txt",
-      "C. Depends on OS",
-      "D. Error"
-    ],
-    "answer": "C",
-    "explanation": "OS-specific separator."
-  },
-  {
-    "id": 113,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "import os\nprint(os.path.splitext('file.tar.gz')[1])",
-    "options": [
-      "A. '.gz'",
-      "B. '.tar.gz'",
-      "C. 'gz'",
-      "D. '.tar'"
-    ],
-    "answer": "A",
-    "explanation": "splitext splits at last dot."
-  },
-  {
-    "id": 114,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "import sys\nprint(sys.version_info.major >= 3)",
-    "options": [
-      "A. True",
-      "B. False",
-      "C. 3",
-      "D. Error"
-    ],
-    "answer": "A",
-    "explanation": "Typically True on Python 3+."
-  },
-  {
-    "id": 115,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "import statistics as st\nprint(st.mean([1,2,3]))",
-    "options": [
-      "A. 2",
-      "B. 2.0",
-      "C. 1.5",
-      "D. 3.0"
-    ],
-    "answer": "B",
-    "explanation": "Mean is float."
-  },
-  {
-    "id": 116,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "from itertools import groupby\ndata = 'aaabbc'\ngroups = [(k, len(list(g))) for k, g in groupby(data)]\nprint(groups)",
-    "options": [
-      "A. [('a',3),('b',2),('c',1)]",
-      "B. [('a',2),('a',1),('b',2),('c',1)]",
-      "C. ['aaa','bb','c']",
-      "D. [('a',3),('b',2),('c',2)]"
-    ],
-    "answer": "A",
-    "explanation": "Consecutive grouping."
-  },
-  {
-    "id": 117,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "import re\nm = re.findall(r'\\b\\w{3}\\b', 'to bee or not to bee')\nprint(m)",
-    "options": [
-      "A. ['bee','not','bee']",
-      "B. ['to','bee','or','not','to','bee']",
-      "C. ['bee','not']",
-      "D. ['bee','bee']"
-    ],
-    "answer": "A",
-    "explanation": "Three-letter words only."
-  },
-  {
-    "id": 118,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "import csv, io\ndata = 'a,b\\n1,2\\n'\nr = csv.reader(io.StringIO(data))\nrows = list(r)\nprint(rows[1])",
-    "options": [
-      "A. ['1','2']",
-      "B. ['a','b']",
-      "C. '1,2'",
-      "D. ('1','2')"
-    ],
-    "answer": "A",
-    "explanation": "CSV reader returns list of strings per row."
-  },
-  {
-    "id": 119,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "import functools as ft\nprint(ft.reduce(lambda a,b:a+b, [1,2,3], 10))",
-    "options": [
-      "A. 6",
-      "B. 16",
-      "C. 10",
-      "D. 0"
-    ],
-    "answer": "B",
-    "explanation": "Initial 10 plus sum is 16."
-  },
-  {
-    "id": 120,
-    "domain": "Modules & standard library",
-    "type": "multiple_choice",
-    "question": "from pprint import pformat\nprint(pformat({'b':1,'a':2}, sort_dicts=True))",
-    "options": [
-      "A. {'a': 2, 'b': 1}",
-      "B. {\"a\": 2, \"b\": 1}",
-      "C. [('a',2),('b',1)]",
-      "D. {'b': 1, 'a': 2}"
-    ],
-    "answer": "A",
-    "explanation": "pformat returns pretty string with single quotes, sorted keys."
-  }
-];
 
-// TODO: Replace this array with your full 120 Python questions
-// Copy the entire JSON array from your file and paste it here
+  // Additional Input/Output Questions
+  {
+    id: 27,
+    domain: "Input/Output & files",
+    type: "multiple_choice",
+    question: "What will this code do?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>user_input = input('Enter a number: ')<br>number = int(user_input)<br>print(type(number))</div>",
+    options: [
+      "A. Print <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>&lt;class 'str'&gt;</code>",
+      "B. Print <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>&lt;class 'int'&gt;</code>",
+      "C. Print <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>&lt;class 'float'&gt;</code>",
+      "D. Cause an error"
+    ],
+    answer: "B",
+    explanation: "input() returns a string, but int() converts it to an integer, so type(number) shows <class 'int'>."
+  },
+  {
+    id: 28,
+    domain: "Input/Output & files",
+    type: "multiple_choice",
+    question: "Which method reads all lines from a file into a list?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>with open('data.txt', 'r') as file:<br>&nbsp;&nbsp;&nbsp;&nbsp;content = file._____()</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>read()</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>readline()</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>readlines()</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>readall()</code>"
+    ],
+    answer: "C",
+    explanation: "readlines() returns a list where each element is a line from the file."
+  },
+
+  // More Module Questions
+  {
+    id: 29,
+    domain: "Modules & standard library",
+    type: "multiple_choice",
+    question: "What does <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>sys.argv</code> contain?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import sys<br>print(sys.argv)</div>",
+    options: [
+      "A. Environment variables",
+      "B. Command-line arguments",
+      "C. System information",
+      "D. Current directory path"
+    ],
+    answer: "B",
+    explanation: "sys.argv is a list containing the command-line arguments passed to the Python script."
+  },
+  {
+    id: 30,
+    domain: "Modules & standard library",
+    type: "multiple_choice",
+    question: "What will this datetime code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from datetime import datetime<br>now = datetime.now()<br>print(now.weekday())</div>",
+    options: [
+      "A. The current date",
+      "B. The current time",
+      "C. A number representing the day of the week",
+      "D. The month name"
+    ],
+    answer: "C",
+    explanation: "weekday() returns an integer representing the day of the week (0=Monday, 6=Sunday)."
+  },
+
+  // Additional Error Handling
+  {
+    id: 31,
+    domain: "Exceptions & debugging",
+    type: "multiple_choice",
+    question: "When should you use the <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>else</code> clause in a try-except block?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;# some code<br>except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;# handle error<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;# this block</div>",
+    options: [
+      "A. When an exception occurs",
+      "B. When no exception occurs",
+      "C. Always, regardless of exceptions",
+      "D. Only for syntax errors"
+    ],
+    answer: "B",
+    explanation: "The else block in try-except runs only when no exception occurs in the try block."
+  },
+  {
+    id: 32,
+    domain: "Exceptions & debugging",
+    type: "multiple_choice",
+    question: "What type of error occurs when trying to access a list index that doesn't exist?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>my_list = [1, 2, 3]<br>print(my_list[5])</div>",
+   options: [
+     "A. IndexError",
+     "B. ValueError",
+     "C. KeyError",
+     "D. TypeError"
+   ],
+   answer: "A",
+   explanation: "IndexError occurs when trying to access a list index that is out of range."
+ },
+
+ // Boolean and Logic Questions
+ {
+   id: 33,
+   domain: "Data types & operators",
+   type: "multiple_choice",
+   question: "What is the result of this logical operation?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = True<br>y = False<br>result = x and y<br>print(result)</div>",
+   options: [
+     "A. True",
+     "B. False",
+     "C. Error",
+     "D. None"
+   ],
+   answer: "B",
+   explanation: "The 'and' operator returns True only if both operands are True. Since y is False, the result is False."
+ },
+ {
+   id: 34,
+   domain: "Data types & operators",
+   type: "multiple_choice",
+   question: "Which operator checks if a value is in a list?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>fruits = ['apple', 'banana', 'orange']<br>result = 'apple' ___ fruits</div>",
+   options: [
+     "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>is</code>",
+     "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>in</code>",
+     "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>==</code>",
+     "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>has</code>"
+   ],
+   answer: "B",
+   explanation: "The 'in' operator checks if a value exists in a sequence (list, tuple, string, etc.)."
+ },
+
+ // String Operations
+ {
+   id: 35,
+   domain: "Data types & operators",
+   type: "multiple_choice",
+   question: "What will this string method return?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>text = 'Hello World'<br>result = text.lower()<br>print(result)</div>",
+   options: [
+     "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>HELLO WORLD</code>",
+     "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>hello world</code>",
+     "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Hello world</code>",
+     "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Hello World</code>"
+   ],
+   answer: "B",
+   explanation: "The lower() method converts all characters in the string to lowercase."
+ },
+
+ // Dictionary Operations
+ {
+   id: 36,
+   domain: "Data types & operators",
+   type: "multiple_choice",
+   question: "How do you add a new key-value pair to a dictionary?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>student = {'name': 'Alice', 'age': 20}<br># Add grade: 'A'</div>",
+   options: [
+     "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>student.add('grade', 'A')</code>",
+     "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>student['grade'] = 'A'</code>",
+     "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>student.append('grade': 'A')</code>",
+     "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>student.insert('grade', 'A')</code>"
+   ],
+   answer: "B",
+   explanation: "You can add or update dictionary values using square bracket notation: dict[key] = value."
+ },
+
+ // Function Parameters
+ {
+   id: 37,
+   domain: "Functions & scope",
+   type: "multiple_choice",
+   question: "What will this function call print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def greet(name, greeting='Hello'):<br>&nbsp;&nbsp;&nbsp;&nbsp;return f'{greeting}, {name}!'<br><br>print(greet('Bob', 'Hi'))</div>",
+   options: [
+     "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Hello, Bob!</code>",
+     "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Hi, Bob!</code>",
+     "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Bob, Hi!</code>",
+     "D. Error"
+   ],
+   answer: "B",
+   explanation: "The function is called with 'Bob' for name and 'Hi' for greeting, overriding the default value."
+ },
+
+ // File Operations
+ {
+   id: 38,
+   domain: "Input/Output & files",
+   type: "multiple_choice",
+   question: "What happens if you try to open a file that doesn't exist with 'r' mode?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>with open('nonexistent.txt', 'r') as file:<br>&nbsp;&nbsp;&nbsp;&nbsp;content = file.read()</div>",
+   options: [
+     "A. An empty file is created",
+     "B. A FileNotFoundError is raised",
+     "C. The program continues normally",
+     "D. A new file is created with default content"
+   ],
+   answer: "B",
+   explanation: "Opening a non-existent file in read mode ('r') raises a FileNotFoundError."
+ },
+
+ // List Methods
+ {
+   id: 39,
+   domain: "Data types & operators",
+   type: "multiple_choice",
+   question: "What does the <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>remove()</code> method do?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numbers = [1, 2, 3, 2, 4]<br>numbers.remove(2)<br>print(numbers)</div>",
+   options: [
+     "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 3, 4]</code>",
+     "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 3, 2, 4]</code>",
+     "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 2, 3, 4]</code>",
+     "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[2, 3, 2, 4]</code>"
+   ],
+   answer: "B",
+   explanation: "remove() deletes the first occurrence of the specified value (the first 2 in this case)."
+ },
+
+ // Math Operations
+ {
+   id: 40,
+   domain: "Modules & standard library",
+   type: "multiple_choice",
+   question: "What does <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>math.floor()</code> do?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import math<br>result = math.floor(4.8)<br>print(result)</div>",
+   options: [
+     "A. Rounds to the nearest integer (5)",
+     "B. Rounds up to the next integer (5)",
+     "C. Rounds down to the previous integer (4)",
+     "D. Returns the decimal part (0.8)"
+   ],
+   answer: "C",
+   explanation: "math.floor() always rounds down to the largest integer less than or equal to the input."
+ },
+
+ {
+   id: 41,
+   domain: "Data types & operators",
+   type: "multiple_select",
+   question: "Which of these are valid Python data types?",
+   options: [
+     "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>int</code>",
+     "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>str</code>",
+     "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>bool</code>",
+     "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>char</code>"
+   ],
+   answer: ["A", "B", "C"],
+   explanation: "int, str, and bool are built-in Python data types. Python doesn't have a 'char' type."
+ },
+
+ {
+   id: 42,
+   domain: "Flow control",
+   type: "multiple_select",
+   question: "Which statements can be used inside loops?",
+   options: [
+     "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>break</code>",
+     "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>continue</code>",
+     "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>pass</code>",
+     "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>return</code>"
+   ],
+   answer: ["A", "B", "C"],
+   explanation: "break, continue, and pass can all be used in loops. return is used in functions, not specifically loops."
+ },
+// Continue from question 43...
+  
+  // More Data Types and Operators
+  {
+    id: 43,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "What is the result of this operation?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 15<br>y = 4<br>result = x % y<br>print(result)</div>",
+    options: [
+      "A. 3",
+      "B. 3.75",
+      "C. 4",
+      "D. 15"
+    ],
+    answer: "A",
+    explanation: "The modulo operator % returns the remainder of division. 15 ÷ 4 = 3 remainder 3."
+  },
+  {
+    id: 44,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "Which method converts a string to uppercase?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>name = 'python'<br>result = name._____()</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>uppercase()</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>upper()</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>toUpper()</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>capitalize()</code>"
+    ],
+    answer: "B",
+    explanation: "The upper() method converts all characters in a string to uppercase."
+  },
+  {
+    id: 45,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "What will this list comprehension create?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>squares = [x**2 for x in range(5)]<br>print(squares)</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[0, 1, 4, 9, 16]</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 4, 9, 16, 25]</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[0, 1, 2, 3, 4]</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[2, 4, 6, 8, 10]</code>"
+    ],
+    answer: "A",
+    explanation: "The comprehension squares each number from 0 to 4: 0², 1², 2², 3², 4²."
+  },
+  {
+    id: 46,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "How do you get the length of a string?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>message = 'Hello'<br>length = _____(message)</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>size</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>length</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>len</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>count</code>"
+    ],
+    answer: "C",
+    explanation: "len() is the built-in function to get the length of any sequence including strings."
+  },
+  {
+    id: 47,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "What does this tuple unpacking do?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>coordinates = (3, 5)<br>x, y = coordinates<br>print(x, y)</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>3 5</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>(3, 5)</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>5 3</code>",
+      "D. Error"
+    ],
+    answer: "A",
+    explanation: "Tuple unpacking assigns the first element (3) to x and the second element (5) to y."
+  },
+  {
+    id: 48,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "Which operation creates a new list?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>list1 = [1, 2]<br>list2 = [3, 4]<br>result = list1 + list2</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 2, 3, 4]</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[4, 6]</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[[1, 2], [3, 4]]</code>",
+      "D. Error"
+    ],
+    answer: "A",
+    explanation: "The + operator concatenates lists, creating a new list with all elements."
+  },
+  {
+    id: 49,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "What is the result of this string formatting?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>name = 'Alice'<br>age = 25<br>message = '{} is {} years old'.format(name, age)<br>print(message)</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>{} is {} years old</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Alice is 25 years old</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>name is age years old</code>",
+      "D. Error"
+    ],
+    answer: "B",
+    explanation: "The format() method replaces {} placeholders with the provided arguments in order."
+  },
+  {
+    id: 50,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "What does the <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>split()</code> method return?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>sentence = 'Hello world Python'<br>words = sentence.split()<br>print(words)</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>'Hello world Python'</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>['Hello', 'world', 'Python']</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>('Hello', 'world', 'Python')</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Hello world Python</code>"
+    ],
+    answer: "B",
+    explanation: "split() returns a list of words separated by whitespace by default."
+  },
+
+  // More Flow Control Questions
+  {
+    id: 51,
+    domain: "Flow control",
+    type: "multiple_choice",
+    question: "What will this nested if statement print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 10<br>if x > 5:<br>&nbsp;&nbsp;&nbsp;&nbsp;if x < 15:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Medium')<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Large')<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Small')</div>",
+    options: [
+      "A. Small",
+      "B. Medium",
+      "C. Large",
+      "D. Nothing"
+    ],
+    answer: "B",
+    explanation: "x (10) is greater than 5 and less than 15, so 'Medium' is printed."
+  },
+  {
+    id: 52,
+    domain: "Flow control",
+    type: "multiple_choice",
+    question: "How many times will this loop run?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>for i in range(2, 10, 3):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</div>",
+    options: [
+      "A. 2 times",
+      "B. 3 times",
+      "C. 4 times",
+      "D. 8 times"
+    ],
+    answer: "B",
+    explanation: "range(2, 10, 3) generates 2, 5, 8 - three numbers total."
+  },
+  {
+    id: 53,
+    domain: "Flow control",
+    type: "multiple_choice",
+    question: "What does <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>pass</code> do in Python?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>if True:<br>&nbsp;&nbsp;&nbsp;&nbsp;pass<br>print('Done')</div>",
+    options: [
+      "A. Skips the if statement",
+      "B. Exits the program",
+      "C. Does nothing (placeholder)",
+      "D. Causes an error"
+    ],
+    answer: "C",
+    explanation: "pass is a null operation - it does nothing and serves as a placeholder for future code."
+  },
+  {
+    id: 54,
+    domain: "Flow control",
+    type: "multiple_choice",
+    question: "What is the output of this loop with else?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>for i in range(3):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Finished')</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>0 1 2</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>0 1 2 Finished</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Finished</code>",
+      "D. Error"
+    ],
+    answer: "B",
+    explanation: "The else clause in a for loop executes after the loop completes normally (without break)."
+  },
+  {
+    id: 55,
+    domain: "Flow control",
+    type: "multiple_choice",
+    question: "What will this conditional expression return?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 7<br>result = 'Even' if x % 2 == 0 else 'Odd'<br>print(result)</div>",
+    options: [
+      "A. Even",
+      "B. Odd",
+      "C. 7",
+      "D. True"
+    ],
+    answer: "B",
+    explanation: "7 % 2 equals 1 (not 0), so the condition is False and 'Odd' is returned."
+  },
+
+  // More Functions Questions
+  {
+    id: 56,
+    domain: "Functions & scope",
+    type: "multiple_choice",
+    question: "What does this function return?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def multiply(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;\"\"\"Multiply two numbers\"\"\"<br>&nbsp;&nbsp;&nbsp;&nbsp;return a * b<br><br>result = multiply(4, 5)</div>",
+    options: [
+      "A. 9",
+      "B. 20",
+      "C. 45",
+      "D. None"
+    ],
+    answer: "B",
+    explanation: "The function multiplies 4 * 5 = 20."
+  },
+  {
+    id: 57,
+    domain: "Functions & scope",
+    type: "multiple_choice",
+    question: "What happens if a function doesn't have a return statement?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def greet(name):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f'Hello {name}')<br><br>result = greet('Bob')</div>",
+    options: [
+      "A. Returns an empty string",
+      "B. Returns 0",
+      "C. Returns None",
+      "D. Causes an error"
+    ],
+    answer: "C",
+    explanation: "Functions without an explicit return statement automatically return None."
+  },
+  {
+    id: 58,
+    domain: "Functions & scope",
+    type: "multiple_choice",
+    question: "What is variable scope in this example?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 10<br>def test():<br>&nbsp;&nbsp;&nbsp;&nbsp;x = 20<br>&nbsp;&nbsp;&nbsp;&nbsp;print(x)<br><br>test()<br>print(x)</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>20 20</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>20 10</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>10 10</code>",
+      "D. Error"
+    ],
+    answer: "B",
+    explanation: "The x inside the function is local scope (20), the x outside is global scope (10)."
+  },
+  {
+    id: 59,
+    domain: "Functions & scope",
+    type: "multiple_choice",
+    question: "How do you call a function with keyword arguments?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def create_profile(name, age, city):<br>&nbsp;&nbsp;&nbsp;&nbsp;return f'{name}, {age}, {city}'</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>create_profile('Alice', 25, 'NYC')</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>create_profile(age=25, name='Alice', city='NYC')</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>create_profile(name='Alice', 25, city='NYC')</code>",
+      "D. Both A and B"
+    ],
+    answer: "D",
+    explanation: "You can call functions with positional arguments, keyword arguments, or a mix (keywords must come last)."
+  },
+
+  // More Input/Output Questions
+  {
+    id: 60,
+    domain: "Input/Output & files",
+    type: "multiple_choice",
+    question: "How do you check if a file exists before opening it?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import os<br>if os.path._____(filename):<br>&nbsp;&nbsp;&nbsp;&nbsp;# file exists</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>exists</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>isfile</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>exists</code> or <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>isfile</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>check</code>"
+    ],
+    answer: "C",
+    explanation: "Both os.path.exists() and os.path.isfile() can check if a file exists."
+  },
+  {
+    id: 61,
+    domain: "Input/Output & files",
+    type: "multiple_choice",
+    question: "What does this code do?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>with open('output.txt', 'w') as file:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Hello World', file=file)</div>",
+    options: [
+      "A. Prints to console",
+      "B. Writes 'Hello World' to output.txt",
+      "C. Reads from output.txt",
+      "D. Causes an error"
+    ],
+    answer: "B",
+    explanation: "The file parameter in print() redirects output to the specified file instead of console."
+  },
+  {
+    id: 62,
+    domain: "Input/Output & files",
+    type: "multiple_choice",
+    question: "How do you read a file line by line?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>with open('data.txt', 'r') as file:<br>&nbsp;&nbsp;&nbsp;&nbsp;for line in _____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(line.strip())</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>file.lines()</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>file</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>file.readlines()</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>file.readline()</code>"
+    ],
+    answer: "B",
+    explanation: "You can iterate directly over a file object to read it line by line."
+  },
+  {
+    id: 63,
+    domain: "Input/Output & files",
+    type: "multiple_choice",
+    question: "What does the <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>strip()</code> method do when reading files?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>line = 'Hello World\\n'<br>clean_line = line.strip()</div>",
+    options: [
+      "A. Converts to lowercase",
+      "B. Removes leading/trailing whitespace and newlines",
+      "C. Splits the line into words",
+      "D. Counts characters"
+    ],
+    answer: "B",
+    explanation: "strip() removes whitespace characters (spaces, tabs, newlines) from both ends of a string."
+  },
+
+  // More Error Handling Questions
+  {
+    id: 64,
+    domain: "Exceptions & debugging",
+    type: "multiple_choice",
+    question: "What type of error is this?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>result = 10 / 0</div>",
+    options: [
+      "A. SyntaxError",
+      "B. NameError",
+      "C. ZeroDivisionError",
+      "D. TypeError"
+    ],
+    answer: "C",
+    explanation: "Dividing by zero raises a ZeroDivisionError at runtime."
+  },
+  {
+    id: 65,
+    domain: "Exceptions & debugging",
+    type: "multiple_choice",
+    question: "What will this exception handling code do?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;age = int(input('Enter age: '))<br>except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Invalid input')<br>except KeyboardInterrupt:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Interrupted')</div>",
+    options: [
+      "A. Handle only ValueError",
+      "B. Handle only KeyboardInterrupt",
+      "C. Handle both ValueError and KeyboardInterrupt",
+      "D. Handle all exceptions"
+    ],
+    answer: "C",
+    explanation: "Multiple except blocks can handle different types of exceptions."
+  },
+  {
+    id: 66,
+    domain: "Exceptions & debugging",
+    type: "multiple_choice",
+    question: "What does the <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>raise</code> statement do?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def check_age(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;if age < 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError('Age cannot be negative')</div>",
+    options: [
+      "A. Handles an exception",
+      "B. Manually raises an exception",
+      "C. Prints an error message",
+      "D. Exits the program"
+    ],
+    answer: "B",
+    explanation: "The raise statement manually triggers an exception with a custom message."
+  },
+  {
+    id: 67,
+    domain: "Exceptions & debugging",
+    type: "multiple_choice",
+    question: "Which assert method checks if a value is True?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import unittest<br><br>class TestLogic(unittest.TestCase):<br>&nbsp;&nbsp;&nbsp;&nbsp;def test_condition(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self._____(5 > 3)</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>assertEqual</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>assertTrue</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>assertIs</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>assertIn</code>"
+    ],
+    answer: "B",
+    explanation: "assertTrue() checks if the given expression evaluates to True."
+  },
+
+  {
+    id: 68,
+    domain: "Modules & standard library",
+    type: "multiple_choice",
+    question: "How do you get the current working directory?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import os<br>current_dir = os._____()</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>getdir()</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>getcwd()</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>currentdir()</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>pwd()</code>"
+    ],
+    answer: "B",
+    explanation: "os.getcwd() returns the current working directory as a string."
+  },
+  {
+    id: 69,
+    domain: "Modules & standard library",
+    type: "multiple_choice",
+    question: "What does this random function do?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import random<br>colors = ['red', 'blue', 'green']<br>selected = random.choice(colors)</div>",
+    options: [
+      "A. Returns all colors",
+      "B. Returns a random color from the list",
+      "C. Returns the first color",
+      "D. Shuffles the list"
+    ],
+    answer: "B",
+    explanation: "random.choice() returns a randomly selected element from a non-empty sequence."
+  },
+  {
+    id: 70,
+    domain: "Modules & standard library",
+    type: "multiple_choice",
+    question: "How do you format a date as a string?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from datetime import datetime<br>now = datetime.now()<br>formatted = now._____()</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>format()</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>strftime('%Y-%m-%d')</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>toString()</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>string()</code>"
+    ],
+    answer: "B",
+    explanation: "strftime() formats datetime objects as strings using format codes."
+  },
+
+  // Continue with more questions...
+  {
+    id: 71,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "What is the output of this set operation?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>set1 = {1, 2, 3}<br>set2 = {3, 4, 5}<br>result = set1.intersection(set2)<br>print(result)</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>{1, 2, 3, 4, 5}</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>{3}</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>{1, 2, 4, 5}</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>set()</code>"
+    ],
+    answer: "B",
+    explanation: "intersection() returns elements that are common to both sets, which is only {3}."
+  },
+  {
+    id: 72,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "How do you access a dictionary value safely?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>student = {'name': 'Alice', 'age': 20}<br>grade = student._____(&#x27;grade&#x27;, &#x27;Not found&#x27;)</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>find</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>get</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>access</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>retrieve</code>"
+    ],
+    answer: "B",
+    explanation: "The get() method returns the value for a key, or a default value if the key doesn't exist."
+  },
+  {
+    id: 73,
+    domain: "Data types & operators",
+    type: "multiple_choice",
+    question: "What does this list method do?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numbers = [3, 1, 4, 1, 5]<br>numbers.sort()<br>print(numbers)</div>",
+    options: [
+      "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[3, 1, 4, 1, 5]</code>",
+      "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[5, 4, 3, 1, 1]</code>",
+      "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 1, 3, 4, 5]</code>",
+      "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 3, 4, 5]</code>"
+    ],
+    answer: "C",
+    explanation: "sort() modifies the list in-place, arranging elements in ascending order."
+  }
+]
