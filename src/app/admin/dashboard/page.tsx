@@ -67,7 +67,7 @@ export default function AdminDashboard() {
     }
   };
 
-  const exportResults = () => {
+ const exportResults = () => {
     if (submissions.length === 0) {
       alert('No results to export');
       return;
@@ -76,13 +76,13 @@ export default function AdminDashboard() {
     const csvContent = [
       ['Name', 'Email', 'Score', 'Total', 'Percentage', 'Time', 'Date'].join(','),
       ...submissions.map(s => [
-        `"${s.userName}"`,
-        `"${s.userEmail || ''}"`,
+        s.userName.replace(/,/g, ' '),
+        s.userEmail || '',
         s.score,
         s.questionDetails.length,
         s.percentage,
         s.timeSpent,
-        `"${new Date(s.timestamp).toLocaleString()}"`
+        new Date(s.timestamp).toLocaleString().replace(/,/g, ' ')
       ].join(','))
     ].join('\n');
 
