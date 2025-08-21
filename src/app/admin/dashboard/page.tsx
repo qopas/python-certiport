@@ -96,35 +96,8 @@ export default function AdminDashboard() {
   };
 
   const exportDetailedResults = () => {
-    if (submissions.length === 0) {
       alert('No results to export');
       return;
-    }
-
-    const csvContent = [
-      ['Name', 'Email', 'Question ID', 'Domain', 'Question', 'User Answer', 'Correct Answer', 'Is Correct', 'Explanation'].join(','),
-      ...submissions.flatMap(s => 
-        s.questionDetails.map(q => [
-          `"${s.userName}"`,
-          `"${s.userEmail || ''}"`,
-          q.questionId,
-          `"${q.domain}"`,
-          `"${q.question}"`,
-          `"${Array.isArray(q.userAnswer) ? q.userAnswer.join(', ') : q.userAnswer || 'Not answered'}"`,
-          `"${Array.isArray(q.correctAnswer) ? q.correctAnswer.join(', ') : q.correctAnswer}"`,
-          q.isCorrect,
-          `"${q.explanation}"`
-        ].join(','))
-      )
-    ].join('\n');
-
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `detailed-quiz-results-${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
   };
 
   const getQuestionAnalytics = (): QuestionStat[] => {
