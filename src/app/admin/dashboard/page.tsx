@@ -68,31 +68,8 @@ export default function AdminDashboard() {
   };
 
  const exportResults = () => {
-    if (submissions.length === 0) {
       alert('No results to export');
       return;
-    }
-
-    const csvContent = [
-      ['Name', 'Email', 'Score', 'Total', 'Percentage', 'Time', 'Date'].join(','),
-      ...submissions.map(s => [
-        s.userName.replace(/,/g, ' '),
-        s.userEmail || '',
-        s.score,
-        s.questionDetails.length,
-        s.percentage,
-        s.timeSpent,
-        new Date(s.timestamp).toLocaleString().replace(/,/g, ' ')
-      ].join(','))
-    ].join('\n');
-
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `quiz-results-${new Date().toISOString().split('T')[0]}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
   };
 
   const exportDetailedResults = () => {
