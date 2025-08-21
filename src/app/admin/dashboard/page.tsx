@@ -82,7 +82,7 @@ export default function AdminDashboard() {
     
     submissions.forEach(submission => {
       submission.questionDetails.forEach(detail => {
-        const key = `${detail.questionId}-${detail.question}`;
+        const key = detail.questionId + '-' + detail.question.replace(/['"]/g, '');
         if (!questionStats.has(key)) {
           questionStats.set(key, {
             questionId: detail.questionId,
