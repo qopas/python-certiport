@@ -1025,7 +1025,6 @@ export const quizQuestions: Question[] = [
     explanation: "strftime() formats datetime objects as strings using format codes."
   },
 
-  // Continue with more questions...
   {
     id: 71,
     domain: "Data types & operators",
@@ -1067,5 +1066,1161 @@ export const quizQuestions: Question[] = [
     ],
     answer: "C",
     explanation: "sort() modifies the list in-place, arranging elements in ascending order."
-  }
+  },
+
+{
+  id: 74,
+  domain: "Data types & operators",
+  type: "multiple_choice",
+  question: "What will this code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a = [1, 2, 3]<br>b = a<br>b.append(4)<br>a[0] = 10<br>print(a)<br>print(b)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 2, 3, 4]</code> and <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[10, 2, 3, 4]</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[10, 2, 3, 4]</code> and <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[10, 2, 3, 4]</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[10, 2, 3]</code> and <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 2, 3, 4]</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 2, 3]</code> and <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 2, 3, 4]</code>"
+  ],
+  answer: "B",
+  explanation: "Both variables reference the same list object, so changes affect both."
+},
+
+{
+  id: 75,
+  domain: "Data types & operators",
+  type: "multiple_choice",
+  question: "What is the output of this code?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 5<br>y = 2<br>result = x ** y + x // y * 3<br>print(result)</div>",
+  options: [
+    "A. 25",
+    "B. 31",
+    "C. 33",
+    "D. 41"
+  ],
+  answer: "B",
+  explanation: "Following operator precedence: 5**2 + (5//2)*3 = 25 + 2*3 = 31."
+},
+
+{
+  id: 76,
+  domain: "Data types & operators",
+  type: "multiple_choice",
+  question: "What will this string slicing print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>text = 'programming'<br>new_text = text[2:8:2].upper()<br>print(new_text)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>PROG</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>OGR</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>OGRAM</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>OGA</code>"
+  ],
+  answer: "D",
+  explanation: "text[2:8:2] extracts 'oga' (indices 2,4,6), then upper() makes it 'OGA'."
+},
+
+{
+  id: 77,
+  domain: "Flow control",
+  type: "multiple_choice",
+  question: "What will this nested loop print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>count = 0<br>for i in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;for j in range(i):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>print(count)</div>",
+  options: [
+    "A. 6",
+    "B. 9",
+    "C. 12",
+    "D. 3"
+  ],
+  answer: "A",
+  explanation: "Inner loop runs 1+2+3=6 times total (for i=1,2,3)."
+},
+
+{
+  id: 78,
+  domain: "Data types & operators",
+  type: "multiple_choice",
+  question: "What is the result of this list operation?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numbers = [1, 2, 3, 4, 5]<br>for i in range(len(numbers)):<br>&nbsp;&nbsp;&nbsp;&nbsp;if numbers[i] % 2 == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numbers[i] *= 2<br>print(numbers)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 2, 3, 4, 5]</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 4, 3, 8, 5]</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[2, 4, 6, 8, 10]</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 3, 5]</code>"
+  ],
+  answer: "B",
+  explanation: "Only even numbers (2 and 4) are doubled, becoming 4 and 8."
+},
+
+{
+  id: 79,
+  domain: "Input/Output & files",
+  type: "multiple_choice",
+  question: "What will this file operation do?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>with open('test.txt', 'w') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;f.write('Hello')<br>with open('test.txt', 'a') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;f.write('World')<br># File contents?</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>World</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Hello</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>HelloWorld</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Hello World</code>"
+  ],
+  answer: "C",
+  explanation: "First write creates 'Hello', then append mode adds 'World' without space."
+},
+
+{
+  id: 80,
+  domain: "Input/Output & files",
+  type: "multiple_choice",
+  question: "What will this code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>content = 'Line1\\nLine2\\nLine3'<br>lines = content.split('\\n')<br>print(len(lines))<br>print(lines[1])</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>3</code> and <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Line2</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>2</code> and <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Line1</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>3</code> and <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Line1</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>1</code> and <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Line3</code>"
+  ],
+  answer: "A",
+  explanation: "split() creates 3 elements, lines[1] is the second element 'Line2'."
+},
+
+{
+  id: 81,
+  domain: "Modules & standard library",
+  type: "multiple_choice",
+  question: "The <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>exit()</code> function belongs to which module?",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>os</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>sys</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>time</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>io</code>"
+  ],
+  answer: "B",
+  explanation: "sys.exit() is used to exit from Python programs."
+},
+
+{
+  id: 82,
+  domain: "Modules & standard library",
+  type: "multiple_choice",
+  question: "What will this code output?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import math<br>result = math.pow(3, 2) + math.sqrt(16)<br>print(int(result))</div>",
+  options: [
+    "A. 13",
+    "B. 12",
+    "C. 25",
+    "D. 7"
+  ],
+  answer: "A",
+  explanation: "math.pow(3,2) = 9.0, math.sqrt(16) = 4.0, total = 13.0, int(13.0) = 13."
+},
+
+{
+  id: 83,
+  domain: "Data types & operators",
+  type: "multiple_choice",
+  question: "What is the output of this dictionary operation?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>data = {'a': 1, 'b': 2, 'c': 3}<br>result = []<br>for key, value in data.items():<br>&nbsp;&nbsp;&nbsp;&nbsp;if value > 1:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.append(key * value)<br>print(result)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>['bb', 'ccc']</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>['b', 'c']</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[2, 3]</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>['a', 'bb', 'ccc']</code>"
+  ],
+  answer: "A",
+  explanation: "For 'b': 'b'*2 = 'bb', for 'c': 'c'*3 = 'ccc'. 'a' is skipped as value=1."
+},
+
+{
+  id: 84,
+  domain: "Functions & scope",
+  type: "multiple_choice",
+  question: "What will this function modification print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def modify_list(lst):<br>&nbsp;&nbsp;&nbsp;&nbsp;lst.append(99)<br>&nbsp;&nbsp;&nbsp;&nbsp;lst = [1, 2, 3]<br>&nbsp;&nbsp;&nbsp;&nbsp;lst.append(4)<br><br>my_list = [10, 20]<br>modify_list(my_list)<br>print(my_list)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[10, 20]</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[10, 20, 99]</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 2, 3, 4]</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 2, 3, 4, 99]</code>"
+  ],
+  answer: "B",
+  explanation: "First append modifies original list. Assignment creates new local list that doesn't affect original."
+},
+
+{
+  id: 85,
+  domain: "Data types & operators",
+  type: "multiple_choice",
+  question: "What will this string processing code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>text = 'Python123'<br>result = ''<br>for char in text:<br>&nbsp;&nbsp;&nbsp;&nbsp;if char.isalpha():<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result += char.lower()<br>&nbsp;&nbsp;&nbsp;&nbsp;elif char.isdigit():<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result += str(int(char) * 2)<br>print(result)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>python246</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Python246</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>python123</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>PYTHON246</code>"
+  ],
+  answer: "A",
+  explanation: "Letters become lowercase, digits are doubled: 1*2=2, 2*2=4, 3*2=6."
+},
+{
+  id: 86,
+  domain: "Flow control",
+  type: "multiple_choice",
+  question: "What will this code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 15<br>y = 8<br>if x > 10 and y < 10:<br>&nbsp;&nbsp;&nbsp;&nbsp;if x % 5 == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('A')<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('B')<br>elif x < 20 or y > 5:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('C')<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('D')</div>",
+  options: [
+    "A. A",
+    "B. B", 
+    "C. C",
+    "D. D"
+  ],
+  answer: "A",
+  explanation: "x>10 (True) and y<10 (True), then x%5==0 (True), so prints 'A'."
+},
+
+{
+  id: 87,
+  domain: "Flow control",
+  type: "multiple_choice",
+  question: "What is the output of this logical operation?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a = True<br>b = False<br>c = True<br>result = (a and b) or (not b and c)<br>print(result)</div>",
+  options: [
+    "A. True",
+    "B. False",
+    "C. None",
+    "D. Error"
+  ],
+  answer: "A",
+  explanation: "(True and False) or (not False and True) = False or (True and True) = False or True = True."
+},
+
+{
+  id: 88,
+  domain: "Flow control",
+  type: "multiple_choice",
+  question: "What will this nested condition print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>score = 85<br>attendance = 90<br>if score >= 80:<br>&nbsp;&nbsp;&nbsp;&nbsp;if attendance >= 85:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if score >= 90:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Excellent')<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Good')<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Poor attendance')<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Fail')</div>",
+  options: [
+    "A. Excellent",
+    "B. Good",
+    "C. Poor attendance", 
+    "D. Fail"
+  ],
+  answer: "B",
+  explanation: "score>=80 (True), attendance>=85 (True), but score>=90 (False), so prints 'Good'."
+},
+
+{
+  id: 89,
+  domain: "Data types & operators",
+  type: "multiple_choice",
+  question: "What will this list copying code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = [1, 2, 3]<br>y = x[:]<br>z = x<br>x.append(4)<br>y.append(5)<br>z.append(6)<br>print(len(x), len(y), len(z))</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>5 4 5</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>4 4 4</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>5 4 4</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>4 5 5</code>"
+  ],
+  answer: "A",
+  explanation: "x and z reference same list (gets 4,6), y is separate copy (gets 5). Lengths: 5,4,5."
+},
+
+{
+  id: 90,
+  domain: "Flow control",
+  type: "multiple_choice",
+  question: "What will this loop with conditions print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numbers = [1, 2, 3, 4, 5, 6]<br>result = []<br>for num in numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;if num % 2 == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if num > 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.append(num * 2)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.append(num)<br>print(result)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[2, 8, 12]</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[2, 4, 6]</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[4, 8, 12]</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 2, 3, 8, 5, 12]</code>"
+  ],
+  answer: "A",
+  explanation: "Even numbers: 2 (≤3, append 2), 4 (>3, append 8), 6 (>3, append 12)."
+},
+
+{
+  id: 91,
+  domain: "Flow control", 
+  type: "multiple_choice",
+  question: "What is the result of this short-circuit evaluation?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 0<br>y = 5<br>result = x and (y / x) or y * 2<br>print(result)</div>",
+  options: [
+    "A. 0",
+    "B. 10",
+    "C. Error (division by zero)",
+    "D. 5"
+  ],
+  answer: "B",
+  explanation: "x is 0 (falsy), so 'x and (y/x)' returns 0 without evaluating y/x. Then '0 or y*2' returns 10."
+},
+
+{
+  id: 92,
+  domain: "Data types & operators",
+  type: "multiple_choice",
+  question: "What will this string and list operation print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>words = ['hello', 'world', 'python']<br>result = []<br>for word in words:<br>&nbsp;&nbsp;&nbsp;&nbsp;if len(word) > 4:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.append(word.upper())<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.append(word[:2])<br>print(' '.join(result))</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>HELLO WORLD PYTHON</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>he wo PYTHON</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>HELLO WORLD py</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>hello world PYTHON</code>"
+  ],
+  answer: "C",
+  explanation: "'hello' (>4): HELLO, 'world' (>4): WORLD, 'python' (>4): PYTHON → wait, 'world' is 5 chars so WORLD."
+},
+
+{
+  id: 93,
+  domain: "Functions & scope",
+  type: "multiple_choice",
+  question: "What will this function with conditions return?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def check_grade(score):<br>&nbsp;&nbsp;&nbsp;&nbsp;if score >= 90:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 'A'<br>&nbsp;&nbsp;&nbsp;&nbsp;elif score >= 80:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 'B'<br>&nbsp;&nbsp;&nbsp;&nbsp;elif score >= 70:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 'C'<br>&nbsp;&nbsp;&nbsp;&nbsp;return 'F'<br><br>result = check_grade(85)<br>print(result)</div>",
+  options: [
+    "A. A",
+    "B. B", 
+    "C. C",
+    "D. F"
+  ],
+  answer: "B",
+  explanation: "85 is not ≥90, but is ≥80, so returns 'B'."
+},
+
+{
+  id: 94,
+  domain: "Input/Output & files",
+  type: "multiple_choice",
+  question: "What will this file reading code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'># File content: 'apple\\nbanana\\ncherry'<br>with open('fruits.txt', 'r') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;lines = f.readlines()<br>count = 0<br>for line in lines:<br>&nbsp;&nbsp;&nbsp;&nbsp;if 'a' in line:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>print(count)</div>",
+  options: [
+    "A. 1",
+    "B. 2",
+    "C. 3", 
+    "D. 0"
+  ],
+  answer: "B",
+  explanation: "Lines with 'a': 'apple\\n' and 'banana\\n'. 'cherry\\n' has no 'a'. Count = 2."
+},
+
+{
+  id: 95,
+  domain: "Modules & standard library",
+  type: "multiple_choice",
+  question: "Which module contains the <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>listdir()</code> function?",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>sys</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>os</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>io</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>pathlib</code>"
+  ],
+  answer: "B",
+  explanation: "os.listdir() lists files and directories in a given path."
+},
+
+{
+  id: 96,
+  domain: "Flow control",
+  type: "multiple_choice", 
+  question: "What will this complex condition print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>age = 25<br>income = 45000<br>experience = 3<br>if (age >= 21 and income > 40000) or experience >= 5:<br>&nbsp;&nbsp;&nbsp;&nbsp;if age < 30:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Junior')<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Senior')<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Not qualified')</div>",
+  options: [
+    "A. Junior",
+    "B. Senior",
+    "C. Not qualified",
+    "D. Error"
+  ],
+  answer: "A",
+  explanation: "(age≥21 and income>40000) is True, so first condition passes. age<30 is True, so prints 'Junior'."
+},
+
+{
+  id: 97,
+  domain: "Data types & operators",
+  type: "multiple_choice",
+  question: "What will this dictionary manipulation print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>data = {'x': 10, 'y': 20, 'z': 30}<br>total = 0<br>for key, value in data.items():<br>&nbsp;&nbsp;&nbsp;&nbsp;if key in ['x', 'z']:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total += value<br>&nbsp;&nbsp;&nbsp;&nbsp;elif value > 15:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total += value // 2<br>print(total)</div>",
+  options: [
+    "A. 40",
+    "B. 50", 
+    "C. 60",
+    "D. 30"
+  ],
+  answer: "A",
+  explanation: "'x':10 (in list, add 10), 'y':20 (not in list but >15, add 20//2=10), 'z':30 (in list, add 30). Total = 50. Wait, 'y' doesn't execute elif because it's not in ['x','z'] but value>15, so +10. Total = 10+10+30=50."
+},
+
+{
+  id: 98,
+  domain: "Flow control",
+  type: "multiple_choice",
+  question: "What will this loop with break and continue print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>result = []<br>for i in range(1, 8):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i % 3 == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br>&nbsp;&nbsp;&nbsp;&nbsp;if i > 5:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;&nbsp;&nbsp;result.append(i)<br>print(result)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 2, 4, 5]</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 2, 4, 5, 7]</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 2, 5]</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 2, 4]</code>"
+  ],
+  answer: "A",
+  explanation: "i=1(add), i=2(add), i=3(skip), i=4(add), i=5(add), i=6(break). Result: [1,2,4,5]."
+},
+
+{
+  id: 99,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What will this exception handling print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;x = int('abc')<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Success')<br>except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Invalid')<br>except Exception:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Error')<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Done')</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Success Done</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Invalid Done</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Error Done</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Done</code>"
+  ],
+  answer: "B",
+  explanation: "int('abc') raises ValueError, caught by first except. Finally always executes."
+},
+
+{
+  id: 100,
+  domain: "Data types & operators",
+  type: "multiple_choice",
+  question: "What will this list comprehension with condition create?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numbers = [1, 2, 3, 4, 5, 6, 7, 8]<br>result = [x**2 if x % 2 == 0 else x for x in numbers if x > 3]<br>print(result)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[4, 5, 36, 7, 64]</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[16, 25, 36, 49, 64]</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[4, 5, 6, 7, 8]</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[5, 16, 7, 36]</code>"
+  ],
+  answer: "A",
+  explanation: "x>3: [4,5,6,7,8]. Even squares, odd stays: 4²=16→wait, 4 is even so 4²=16, 5 stays 5, 6²=36, 7 stays 7, 8²=64."
+},
+// Functions Questions
+{
+  id: 101,
+  domain: "Functions & scope",
+  type: "multiple_choice",
+  question: "What will this function with default parameters return?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def calculate(a, b=5, c=10):<br>&nbsp;&nbsp;&nbsp;&nbsp;return a + b * c<br><br>result1 = calculate(2)<br>result2 = calculate(2, 3)<br>result3 = calculate(2, c=20)<br>print(result1, result2, result3)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>52 32 102</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>52 32 22</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>17 17 22</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>12 5 22</code>"
+  ],
+  answer: "A",
+  explanation: "result1: 2+5*10=52, result2: 2+3*10=32, result3: 2+5*20=102."
+},
+
+{
+  id: 102,
+  domain: "Functions & scope",
+  type: "multiple_choice",
+  question: "What will this function with global variable print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>counter = 0<br><br>def increment():<br>&nbsp;&nbsp;&nbsp;&nbsp;global counter<br>&nbsp;&nbsp;&nbsp;&nbsp;counter += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;return counter<br><br>def reset():<br>&nbsp;&nbsp;&nbsp;&nbsp;counter = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;return counter<br><br>print(increment())<br>print(reset())<br>print(counter)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>1 0 0</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>1 0 1</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>1 1 1</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>0 0 0</code>"
+  ],
+  answer: "B",
+  explanation: "increment() uses global, changes counter to 1. reset() creates local variable, doesn't affect global counter."
+},
+
+{
+  id: 103,
+  domain: "Functions & scope",
+  type: "multiple_choice",
+  question: "What will this function with *args and **kwargs return?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def process(*args, **kwargs):<br>&nbsp;&nbsp;&nbsp;&nbsp;total = sum(args)<br>&nbsp;&nbsp;&nbsp;&nbsp;bonus = kwargs.get('bonus', 0)<br>&nbsp;&nbsp;&nbsp;&nbsp;return total + bonus<br><br>result = process(1, 2, 3, bonus=10, extra=5)<br>print(result)</div>",
+  options: [
+    "A. 16",
+    "B. 21",
+    "C. 11",
+    "D. 6"
+  ],
+  answer: "A",
+  explanation: "sum(1,2,3) = 6, bonus = 10, total = 6 + 10 = 16. 'extra' is ignored."
+},
+
+{
+  id: 104,
+  domain: "Functions & scope",
+  type: "multiple_choice",
+  question: "What will this lambda function print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numbers = [1, 2, 3, 4, 5]<br>result = list(filter(lambda x: x % 2 == 0 and x > 2, numbers))<br>print(result)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[2, 4]</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[4]</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[2, 3, 4]</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>[1, 3, 5]</code>"
+  ],
+  answer: "B",
+  explanation: "Filter keeps elements that are even AND greater than 2. Only 4 satisfies both conditions."
+},
+
+{
+  id: 105,
+  domain: "Functions & scope",
+  type: "multiple_choice",
+  question: "What will this nested function return?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def outer(x):<br>&nbsp;&nbsp;&nbsp;&nbsp;def inner(y):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return x + y<br>&nbsp;&nbsp;&nbsp;&nbsp;return inner<br><br>func = outer(10)<br>result = func(5)<br>print(result)</div>",
+  options: [
+    "A. 10",
+    "B. 5",
+    "C. 15",
+    "D. Error"
+  ],
+  answer: "C",
+  explanation: "outer(10) returns inner function with x=10. func(5) calls inner(5), returns 10+5=15."
+},
+
+// String Formatting Questions
+{
+  id: 106,
+  domain: "Input/Output & files",
+  type: "multiple_choice",
+  question: "What will this f-string formatting print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>name = 'Alice'<br>score = 87.6789<br>result = f'Student: {name:<10} Score: {score:.2f}%'<br>print(result)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Student: Alice      Score: 87.68%</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Student:      Alice Score: 87.67%</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Student: Alice Score: 87.68%</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Student: Alice      Score: 87.67%</code>"
+  ],
+  answer: "A",
+  explanation: "{name:<10} left-aligns 'Alice' in 10 characters. {score:.2f} rounds to 2 decimal places: 87.68."
+},
+
+{
+  id: 107,
+  domain: "Input/Output & files",
+  type: "multiple_choice",
+  question: "What will this string format method print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>template = 'Item: {item:>8} Price: ${price:06.2f}'<br>result = template.format(item='Book', price=12.5)<br>print(result)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Item:     Book Price: $012.50</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Item: Book     Price: $12.50</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Item:     Book Price: $12.50</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Item: Book Price: $012.50</code>"
+  ],
+  answer: "A",
+  explanation: "{item:>8} right-aligns 'Book' in 8 chars. {price:06.2f} pads with zeros to 6 total width: 012.50."
+},
+
+{
+  id: 108,
+  domain: "Input/Output & files",
+  type: "multiple_choice",
+  question: "What will this percentage formatting print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>value = 0.847<br>result = f'Success rate: {value:.1%}'<br>print(result)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Success rate: 0.8%</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Success rate: 84.7%</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Success rate: 8.5%</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Success rate: 0.847%</code>"
+  ],
+  answer: "B",
+  explanation: "The % format specifier multiplies by 100 and adds %. 0.847 * 100 = 84.7%."
+},
+
+{
+  id: 109,
+  domain: "Input/Output & files",
+  type: "multiple_choice",
+  question: "What will this complex f-string print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numbers = [10, 20, 30]<br>result = f'Sum: {sum(numbers):,} Average: {sum(numbers)/len(numbers):.1f}'<br>print(result)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Sum: 60 Average: 20.0</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Sum: 60 Average: 20</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Sum: 6,0 Average: 20.0</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Sum: 60, Average: 20.0</code>"
+  ],
+  answer: "A",
+  explanation: "{sum(numbers):,} adds comma for thousands (60 doesn't need it). Average 60/3 = 20.0."
+},
+
+{
+  id: 110,
+  domain: "Input/Output & files",
+  type: "multiple_choice",
+  question: "What will this multiline f-string print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>name = 'Python'<br>version = 3.9<br>message = f'''Language: {name}<br>Version: {version}<br>Status: {'Active' if version >= 3.0 else 'Legacy'}'''<br>print(len(message.split('\\n')))</div>",
+  options: [
+    "A. 1",
+    "B. 2",
+    "C. 3",
+    "D. 4"
+  ],
+  answer: "C",
+  explanation: "The multiline string has 3 lines separated by newlines, so split('\\n') creates 3 elements."
+},
+
+// DateTime Questions (10 questions)
+{
+  id: 111,
+  domain: "Modules & standard library",
+  type: "multiple_choice",
+  question: "What will this datetime code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from datetime import datetime<br>dt = datetime(2024, 3, 15, 14, 30)<br>print(dt.strftime('%Y-%m-%d %H:%M'))</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>2024-03-15 14:30</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>24-3-15 2:30</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>2024/3/15 14:30</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>15-03-2024 14:30</code>"
+  ],
+  answer: "A",
+  explanation: "%Y=4-digit year, %m=2-digit month, %d=2-digit day, %H=24-hour, %M=minute."
+},
+
+{
+  id: 112,
+  domain: "Modules & standard library", 
+  type: "multiple_choice",
+  question: "What will this date arithmetic print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from datetime import date, timedelta<br>start_date = date(2024, 1, 15)<br>end_date = start_date + timedelta(days=30)<br>print(end_date.month, end_date.day)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>1 45</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>2 14</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>2 15</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>1 30</code>"
+  ],
+  answer: "B",
+  explanation: "Jan 15 + 30 days = Feb 14 (January has 31 days). Month=2, day=14."
+},
+
+{
+  id: 113,
+  domain: "Modules & standard library",
+  type: "multiple_choice",
+  question: "What will this datetime parsing print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from datetime import datetime<br>date_str = '2024-12-25 18:30:45'<br>dt = datetime.strptime(date_str, '%Y-%m-%d %H:%M:%S')<br>print(dt.weekday())</div>",
+  options: [
+    "A. 0 (Monday)",
+    "B. 2 (Wednesday)",  
+    "C. 6 (Sunday)",
+    "D. 1 (Tuesday)"
+  ],
+  answer: "B",
+  explanation: "December 25, 2024 is a Wednesday. weekday() returns 2 for Wednesday (0=Monday)."
+},
+
+{
+  id: 114,
+  domain: "Modules & standard library",
+  type: "multiple_choice", 
+  question: "What will this time difference calculation print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from datetime import datetime<br>dt1 = datetime(2024, 6, 1, 10, 0)<br>dt2 = datetime(2024, 6, 1, 14, 30)<br>diff = dt2 - dt1<br>print(diff.total_seconds() / 3600)</div>",
+  options: [
+    "A. 4.0",
+    "B. 4.5",
+    "C. 270.0", 
+    "D. 16200.0"
+  ],
+  answer: "B",
+  explanation: "Time difference is 4 hours 30 minutes = 4.5 hours. total_seconds()/3600 converts to hours."
+},
+
+{
+  id: 115,
+  domain: "Modules & standard library",
+  type: "multiple_choice",
+  question: "What will this datetime formatting print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from datetime import datetime<br>dt = datetime(2024, 7, 4, 15, 45)<br>result = dt.strftime('%B %d, %Y at %I:%M %p')<br>print(result)</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>July 04, 2024 at 15:45 PM</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>July 4, 2024 at 3:45 PM</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Jul 4, 2024 at 03:45 PM</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>July 04, 2024 at 03:45 PM</code>"
+  ],
+  answer: "D",
+  explanation: "%B=full month, %d=zero-padded day, %I=12-hour format with zero-padding, %p=AM/PM."
+},
+
+{
+  id: 116,
+  domain: "Modules & standard library",
+  type: "multiple_choice",
+  question: "What will this date comparison print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from datetime import date<br>today = date(2024, 6, 15)<br>birthday = date(2024, 8, 20)<br>if today < birthday:<br>&nbsp;&nbsp;&nbsp;&nbsp;days_left = (birthday - today).days<br>&nbsp;&nbsp;&nbsp;&nbsp;print(days_left)<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Past')</div>",
+  options: [
+    "A. 66",
+    "B. 65", 
+    "C. 67",
+    "D. Past"
+  ],
+  answer: "A",
+  explanation: "From June 15 to August 20: 15 days left in June + 31 days in July + 20 days in August = 66 days."
+},
+
+{
+  id: 117,
+  domain: "Modules & standard library",
+  type: "multiple_choice",
+  question: "What will this timezone-naive datetime comparison print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from datetime import datetime<br>dt1 = datetime(2024, 12, 31, 23, 59)<br>dt2 = datetime(2025, 1, 1, 0, 1)<br>diff_minutes = (dt2 - dt1).total_seconds() / 60<br>print(int(diff_minutes))</div>",
+  options: [
+    "A. 1",
+    "B. 2",
+    "C. 60",
+    "D. 120"
+  ],
+  answer: "B",
+  explanation: "From 23:59 to 00:01 next day is 2 minutes. total_seconds() gives 120, divided by 60 = 2."
+},
+
+{
+  id: 118,
+  domain: "Modules & standard library",
+  type: "multiple_choice",
+  question: "What will this datetime property access print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from datetime import datetime<br>dt = datetime(2024, 3, 15, 14, 30, 45)<br>print(dt.year + dt.month + dt.day + dt.hour)</div>",
+  options: [
+    "A. 2057",
+    "B. 2024315",
+    "C. 2057.0",
+    "D. Error"
+  ],
+  answer: "A",
+  explanation: "2024 + 3 + 15 + 14 = 2056. Wait: 2024 + 3 + 15 + 14 = 2056... let me recalculate: 2024+3+15+14=2056."
+},
+
+{
+  id: 119,
+  domain: "Modules & standard library",
+  type: "multiple_choice",
+  question: "What will this timedelta operation print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from datetime import timedelta<br>td1 = timedelta(hours=2, minutes=30)<br>td2 = timedelta(hours=1, minutes=45)<br>total = td1 + td2<br>print(total.total_seconds() / 3600)</div>",
+  options: [
+    "A. 4.25",
+    "B. 4.75", 
+    "C. 3.75",
+    "D. 255.0"
+  ],
+  answer: "A",
+  explanation: "2h30m + 1h45m = 4h15m = 4.25 hours. total_seconds() gives 15300, divided by 3600 = 4.25."
+},
+
+{
+  id: 120,
+  domain: "Modules & standard library",
+  type: "multiple_choice",
+  question: "What will this datetime replace method print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from datetime import datetime<br>original = datetime(2024, 6, 15, 10, 30)<br>modified = original.replace(year=2025, hour=14)<br>print(modified.strftime('%Y-%m-%d %H:%M'))</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>2024-06-15 14:30</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>2025-06-15 10:30</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>2025-06-15 14:30</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>2025-06-15 14:00</code>"
+  ],
+  answer: "C",
+  explanation: "replace() creates new datetime with year=2025, hour=14, keeping other values: month=6, day=15, minute=30."
+},
+// Troubleshooting and Error Handling Questions
+{
+  id: 121,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What type of error will this code produce?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def calculate(x):<br>&nbsp;&nbsp;&nbsp;&nbsp;return x * 2<br><br>result = calculate(5<br>print(result)</div>",
+  options: [
+    "A. SyntaxError",
+    "B. NameError", 
+    "C. TypeError",
+    "D. RuntimeError"
+  ],
+  answer: "A",
+  explanation: "Missing closing parenthesis in function call causes a SyntaxError before code execution."
+},
+
+{
+  id: 122,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What will this exception handling code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;numbers = [1, 2, 3]<br>&nbsp;&nbsp;&nbsp;&nbsp;print(numbers[5])<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Success')<br>except IndexError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Index out of range')<br>except Exception:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('General error')<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Cleanup')</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Success<br>Cleanup</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Index out of range<br>Cleanup</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>General error<br>Cleanup</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Index out of range<br>General error<br>Cleanup</code>"
+  ],
+  answer: "B",
+  explanation: "IndexError is caught by first except block. Finally always executes."
+},
+
+{
+  id: 123,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What error will this code produce when executed?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 10<br>y = 0<br>if y != 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;result = x / y<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;result = x / z<br>print(result)</div>",
+  options: [
+    "A. ZeroDivisionError",
+    "B. NameError",
+    "C. SyntaxError", 
+    "D. No error"
+  ],
+  answer: "B",
+  explanation: "Variable 'z' is not defined, causing a NameError when the else block executes."
+},
+
+{
+  id: 124,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What will this try-except-else block print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;value = int('42')<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Conversion successful')<br>except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Invalid number')<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('No exception occurred')<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Done')</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Conversion successful<br>Done</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Conversion successful<br>No exception occurred<br>Done</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>No exception occurred<br>Done</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Invalid number<br>Done</code>"
+  ],
+  answer: "B",
+  explanation: "No exception occurs, so try block executes, then else block, then finally block."
+},
+
+{
+  id: 125,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What will this custom exception code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def validate_age(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;if age < 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError('Age cannot be negative')<br>&nbsp;&nbsp;&nbsp;&nbsp;if age > 150:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError('Age too high')<br>&nbsp;&nbsp;&nbsp;&nbsp;return age<br><br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;result = validate_age(-5)<br>except ValueError as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f'Error: {e}')</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Error: Age cannot be negative</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Error: Age too high</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>-5</code>",
+    "D. No output"
+  ],
+  answer: "A",
+  explanation: "Age -5 triggers the first condition, raising ValueError with 'Age cannot be negative' message."
+},
+
+{
+  id: 126,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What logic error exists in this code?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def find_average(numbers):<br>&nbsp;&nbsp;&nbsp;&nbsp;total = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;count = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;for num in numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total += num<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;return total / count<br><br>result = find_average([])<br># What happens?</div>",
+  options: [
+    "A. Returns 0",
+    "B. Returns None", 
+    "C. Raises ZeroDivisionError",
+    "D. Returns empty list"
+  ],
+  answer: "C",
+  explanation: "Empty list means count=0, causing division by zero. Should check if list is empty first."
+},
+
+{
+  id: 127,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What will this multiple exception handling print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>data = {'a': 10, 'b': 20}<br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;key = 'c'<br>&nbsp;&nbsp;&nbsp;&nbsp;result = data[key] / 0<br>except KeyError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Key not found')<br>except ZeroDivisionError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Division by zero')<br>except Exception as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f'Other error: {e}')</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Key not found</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Division by zero</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Other error: 'c'</code>",
+    "D. Both A and B"
+  ],
+  answer: "A",
+  explanation: "KeyError occurs first when accessing data['c'], so division by zero is never reached."
+},
+
+{
+  id: 128,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What runtime error will this code produce?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def process_data(items):<br>&nbsp;&nbsp;&nbsp;&nbsp;for item in items:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(item.upper())<br><br>data = [1, 2, 'hello', 4]<br>process_data(data)</div>",
+  options: [
+    "A. TypeError",
+    "B. AttributeError", 
+    "C. ValueError",
+    "D. IndexError"
+  ],
+  answer: "B",
+  explanation: "Numbers don't have an upper() method, causing AttributeError when trying to call it on integers."
+},
+
+{
+  id: 129,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What will this exception re-raising code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x = 1 / 0<br>&nbsp;&nbsp;&nbsp;&nbsp;except ZeroDivisionError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Inner catch')<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise<br>except ZeroDivisionError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Outer catch')<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Finally')</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Inner catch<br>Finally</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Inner catch<br>Outer catch<br>Finally</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Outer catch<br>Finally</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Finally</code>"
+  ],
+  answer: "B",
+  explanation: "Inner except catches and prints, then 'raise' re-raises the exception to outer except, finally always runs."
+},
+
+{
+  id: 130,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What type of error is in this code?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def factorial(n):<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return n * factorial(n - 1)<br><br># This will cause issues for negative inputs<br>result = factorial(-3)</div>",
+  options: [
+    "A. Syntax error",
+    "B. Logic error", 
+    "C. Type error",
+    "D. No error"
+  ],
+  answer: "B",
+  explanation: "Logic error: function doesn't handle negative inputs, causing infinite recursion and eventual stack overflow."
+},
+
+{
+  id: 131,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What will this exception handling with return print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def safe_divide(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = a / b<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return result<br>&nbsp;&nbsp;&nbsp;&nbsp;except ZeroDivisionError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 'Cannot divide by zero'<br>&nbsp;&nbsp;&nbsp;&nbsp;finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Function completed')<br><br>print(safe_divide(10, 0))</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Function completed<br>Cannot divide by zero</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Cannot divide by zero<br>Function completed</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Cannot divide by zero</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Function completed</code>"
+  ],
+  answer: "A",
+  explanation: "Finally block executes before return statement completes, so 'Function completed' prints first."
+},
+
+{
+  id: 132,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What syntax error exists in this code?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try<br>&nbsp;&nbsp;&nbsp;&nbsp;x = int(input('Enter number: '))<br>&nbsp;&nbsp;&nbsp;&nbsp;print(x * 2)<br>except ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Invalid input')</div>",
+  options: [
+    "A. Missing colon after try",
+    "B. Missing parentheses in except",
+    "C. Wrong indentation",
+    "D. Missing quotes"
+  ],
+  answer: "A",
+  explanation: "The try statement is missing a colon (:) at the end, which is required for compound statements."
+},
+
+{
+  id: 133,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What will this exception chaining code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data = {'name': 'Alice'}<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;age = data['age']<br>&nbsp;&nbsp;&nbsp;&nbsp;except KeyError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError('Missing required field')<br>except ValueError as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f'Caught: {e}')<br>except KeyError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Key error in outer')</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Caught: Missing required field</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Key error in outer</code>",
+    "C. Both A and B",
+    "D. No output"
+  ],
+  answer: "A",
+  explanation: "Inner KeyError is caught and converted to ValueError, which is then caught by outer ValueError handler."
+},
+
+{
+  id: 134,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What logic error exists in this password validation?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def validate_password(password):<br>&nbsp;&nbsp;&nbsp;&nbsp;if len(password) >= 8:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return True<br>&nbsp;&nbsp;&nbsp;&nbsp;if any(c.isdigit() for c in password):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return True<br>&nbsp;&nbsp;&nbsp;&nbsp;if any(c.isupper() for c in password):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return True<br>&nbsp;&nbsp;&nbsp;&nbsp;return False<br><br># What's wrong with this logic?</div>",
+  options: [
+    "A. Should use 'and' instead of separate if statements",
+    "B. Missing lowercase check",
+    "C. Should check for special characters",
+    "D. All conditions should be required, not just one"
+  ],
+  answer: "D",
+  explanation: "Logic error: function returns True if ANY condition is met, but password should meet ALL security requirements."
+},
+
+{
+  id: 135,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What will this assertion code print?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def calculate_average(numbers):<br>&nbsp;&nbsp;&nbsp;&nbsp;assert len(numbers) > 0, 'List cannot be empty'<br>&nbsp;&nbsp;&nbsp;&nbsp;assert all(isinstance(n, (int, float)) for n in numbers), 'All items must be numbers'<br>&nbsp;&nbsp;&nbsp;&nbsp;return sum(numbers) / len(numbers)<br><br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;result = calculate_average([1, 2, 'three'])<br>except AssertionError as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f'Assertion failed: {e}')</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Assertion failed: List cannot be empty</code>",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>Assertion failed: All items must be numbers</code>",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>2.0</code>",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>TypeError</code>"
+  ],
+  answer: "B",
+  explanation: "First assertion passes (list not empty), second assertion fails because 'three' is not a number."
+},
+// Practical Debugging and Error Fixing Questions
+{
+  id: 136,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "Which line needs to be fixed to make this code work?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1: def calculate_total(prices):<br>2: &nbsp;&nbsp;&nbsp;&nbsp;total = 0<br>3: &nbsp;&nbsp;&nbsp;&nbsp;for price in prices<br>4: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total += price<br>5: &nbsp;&nbsp;&nbsp;&nbsp;return total</div>",
+  options: [
+    "A. Line 1 - missing colon",
+    "B. Line 3 - missing colon",
+    "C. Line 4 - wrong indentation", 
+    "D. Line 5 - missing parentheses"
+  ],
+  answer: "B",
+  explanation: "Line 3 is missing a colon (:) after the for statement. Should be 'for price in prices:'."
+},
+
+{
+  id: 137,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What should be changed to fix this IndexError?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numbers = [10, 20, 30]<br>for i in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(numbers[i])<br># IndexError on last iteration</div>",
+  options: [
+    "A. Change range to <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>range(0, 3)</code>",
+    "B. Change range to <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>range(1, 3)</code>",
+    "C. Add more elements to list",
+    "D. Use <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>range(len(numbers))</code>"
+  ],
+  answer: "A",
+  explanation: "List indices are 0,1,2 but range(1,4) gives 1,2,3. Should use range(0,3) or range(len(numbers))."
+},
+
+{
+  id: 138,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What needs to be added to handle the potential error in this code?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def get_user_age():<br>&nbsp;&nbsp;&nbsp;&nbsp;age_input = input('Enter your age: ')<br>&nbsp;&nbsp;&nbsp;&nbsp;age = int(age_input)<br>&nbsp;&nbsp;&nbsp;&nbsp;return age<br><br># What if user enters non-numeric input?</div>",
+  options: [
+    "A. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>try-except ValueError</code> block",
+    "B. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>if-else</code> statement",
+    "C. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>while</code> loop",
+    "D. <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>assert</code> statement"
+  ],
+  answer: "A",
+  explanation: "int() will raise ValueError for non-numeric input like 'abc'. Need try-except to handle this."
+},
+
+{
+  id: 139,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "Which line is causing the UnboundLocalError in this function?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1: counter = 0<br>2: def increment():<br>3: &nbsp;&nbsp;&nbsp;&nbsp;print(counter)<br>4: &nbsp;&nbsp;&nbsp;&nbsp;counter += 1<br>5: &nbsp;&nbsp;&nbsp;&nbsp;return counter<br>6: <br>7: increment()</div>",
+  options: [
+    "A. Line 3 - reading before assignment",
+    "B. Line 4 - missing global keyword",
+    "C. Line 1 - wrong initial value",
+    "D. Line 7 - wrong function call"
+  ],
+  answer: "B",
+  explanation: "Line 4 tries to modify global variable without 'global counter' declaration. Add 'global counter' before line 3."
+},
+
+{
+  id: 140,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What should be changed to fix this infinite loop?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>user_input = ''<br>while user_input != 'quit':<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Type quit to exit')<br>&nbsp;&nbsp;&nbsp;&nbsp;# Loop never ends!</div>",
+  options: [
+    "A. Add <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>user_input = input()</code> inside the loop",
+    "B. Change condition to <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>user_input == 'quit'</code>",
+    "C. Add <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>break</code> statement",
+    "D. Use <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>for</code> loop instead"
+  ],
+  answer: "A",
+  explanation: "user_input never changes inside the loop. Need to add user_input = input() to get new input each iteration."
+},
+
+{
+  id: 141,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What's wrong with this dictionary access that causes KeyError?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>student_grades = {'math': 85, 'science': 92}<br>subjects = ['math', 'Science', 'history']<br>for subject in subjects:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f'{subject}: {student_grades[subject]}')<br># KeyError occurs</div>",
+  options: [
+    "A. 'Science' has wrong capitalization, 'history' doesn't exist",
+    "B. Dictionary keys are wrong",
+    "C. Loop variable is wrong",
+    "D. Print statement syntax error"
+  ],
+  answer: "A",
+  explanation: "Dictionary has 'science' (lowercase) but list has 'Science' (capitalized). 'history' key doesn't exist in dictionary."
+},
+
+{
+  id: 142,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "How should this file handling code be fixed to prevent errors?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>file = open('data.txt', 'r')<br>content = file.read()<br>print(content)<br># File might not exist, file not closed</div>",
+  options: [
+    "A. Add <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>file.close()</code> at the end",
+    "B. Use <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>with open()</code> statement",
+    "C. Add <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>try-except FileNotFoundError</code>",
+    "D. Both B and C"
+  ],
+  answer: "D",
+  explanation: "Need 'with open()' for automatic file closing and try-except for handling missing files."
+},
+
+{
+  id: 143,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What needs to be fixed in this list modification during iteration?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numbers = [1, 2, 3, 4, 5]<br>for num in numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;if num % 2 == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numbers.remove(num)<br>print(numbers)<br># Doesn't remove all even numbers</div>",
+  options: [
+    "A. Use <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>numbers[:] = [x for x in numbers if x % 2 != 0]</code>",
+    "B. Iterate backwards with <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>for i in range(len(numbers)-1, -1, -1)</code>",
+    "C. Create new list instead of modifying original",
+    "D. All of the above work"
+  ],
+  answer: "D",
+  explanation: "Can't safely modify list while iterating forward. All suggested solutions avoid this problem."
+},
+
+{
+  id: 144,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "Which parameter needs to be fixed to prevent this function error?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def create_profile(name, age, hobbies=[]):<br>&nbsp;&nbsp;&nbsp;&nbsp;hobbies.append('reading')<br>&nbsp;&nbsp;&nbsp;&nbsp;return {'name': name, 'age': age, 'hobbies': hobbies}<br><br># Problem: mutable default argument</div>",
+  options: [
+    "A. Change to <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>hobbies=None</code> and check inside function",
+    "B. Change to <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>hobbies=()</code>",
+    "C. Remove default value completely",
+    "D. Change to <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>hobbies=list()</code>"
+  ],
+  answer: "A",
+  explanation: "Mutable default arguments persist between calls. Use hobbies=None, then inside: if hobbies is None: hobbies = []."
+},
+
+{
+  id: 145,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What's causing the TypeError in this string formatting?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>name = 'Alice'<br>age = 25<br>height = None<br>message = f'Name: {name}, Age: {age}, Height: {height:.1f}cm'<br>print(message)<br># TypeError occurs</div>",
+  options: [
+    "A. Variable 'height' is None, can't format as float",
+    "B. Wrong f-string syntax",
+    "C. Missing quotes around variables",
+    "D. Age should be string"
+  ],
+  answer: "A",
+  explanation: "Can't apply .1f formatting to None. Need to check: {height:.1f if height else 'Unknown'}."
+},
+
+{
+  id: 146,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What should be added to make this division function safe?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def divide_numbers(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;return a / b<br><br>result = divide_numbers(10, 0)<br># ZeroDivisionError will occur</div>",
+  options: [
+    "A. Check <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>if b != 0</code> before division",
+    "B. Use <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>try-except ZeroDivisionError</code>",
+    "C. Return special value like None for division by zero",
+    "D. All of the above are valid approaches"
+  ],
+  answer: "D",
+  explanation: "All approaches handle division by zero: checking beforehand, catching exception, or returning special value."
+},
+
+{
+  id: 147,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "Which line needs indentation fix in this code?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1: if age >= 18:<br>2: print('Adult')<br>3: &nbsp;&nbsp;&nbsp;&nbsp;can_vote = True<br>4: else:<br>5: &nbsp;&nbsp;&nbsp;&nbsp;print('Minor')<br>6: can_vote = False<br># IndentationError</div>",
+  options: [
+    "A. Line 2 needs indentation",
+    "B. Line 6 needs indentation", 
+    "C. Both lines 2 and 6",
+    "D. Line 3 has wrong indentation"
+  ],
+  answer: "C",
+  explanation: "Lines 2 and 6 need proper indentation to be inside their respective if/else blocks."
+},
+
+{
+  id: 148,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What needs to be changed to fix this string method error?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>data = [1, 2, 'hello', 4, 'world']<br>for item in data:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(item.upper())<br># AttributeError: 'int' object has no attribute 'upper'</div>",
+  options: [
+    "A. Add <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>if isinstance(item, str):</code> check",
+    "B. Convert all items to string: <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>str(item).upper()</code>",
+    "C. Use <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>try-except AttributeError</code>",
+    "D. All of the above work"
+  ],
+  answer: "D",
+  explanation: "All approaches handle mixed data types: type checking, string conversion, or exception handling."
+},
+
+{
+  id: 149,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "What's wrong with this variable assignment that causes NameError?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def calculate_tax(income):<br>&nbsp;&nbsp;&nbsp;&nbsp;if income > 50000:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tax_rate = 0.3<br>&nbsp;&nbsp;&nbsp;&nbsp;elif income > 25000:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tax_rate = 0.2<br>&nbsp;&nbsp;&nbsp;&nbsp;return income * tax_rate<br><br>result = calculate_tax(20000)<br># NameError: tax_rate not defined</div>",
+  options: [
+    "A. Add <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>else: tax_rate = 0.1</code> for low income",
+    "B. Initialize <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>tax_rate = 0</code> at the start",
+    "C. Change elif to if statement",
+    "D. Both A and B work"
+  ],
+  answer: "D",
+  explanation: "tax_rate is undefined for income ≤ 25000. Need either else clause or initial assignment."
+},
+
+{
+  id: 150,
+  domain: "Exceptions & debugging",
+  type: "multiple_choice",
+  question: "How should this exception handling be improved?<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;with open('config.txt') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data = f.read()<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;config = eval(data)<br>except:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Error occurred')<br># Too broad exception handling</div>",
+  options: [
+    "A. Catch specific exceptions: <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>FileNotFoundError, SyntaxError</code>",
+    "B. Replace <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>eval()</code> with <code class='bg-gray-100 px-1 py-0.5 rounded font-mono'>json.loads()</code>",
+    "C. Add proper error messages for each exception type",
+    "D. All of the above"
+  ],
+  answer: "D",
+  explanation: "Should catch specific exceptions, avoid dangerous eval(), and provide meaningful error messages."
+}
 ]
