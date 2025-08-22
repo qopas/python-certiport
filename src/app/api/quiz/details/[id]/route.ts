@@ -5,7 +5,7 @@ import { query } from '@/lib/db';
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   const user = requireAuth(request);
   
@@ -14,7 +14,6 @@ export async function GET(
   }
 
   try {
-    // Await params for Next.js 15+
     const resolvedParams = await params;
     const quizId = parseInt(resolvedParams.id);
     

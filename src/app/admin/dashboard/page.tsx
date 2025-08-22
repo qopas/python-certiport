@@ -18,12 +18,10 @@ import {
   Trophy, 
   ArrowLeft, 
   Eye, 
-  AlertCircle,
   Plus,
   Edit,
   UserPlus,
   Search,
-  MoreHorizontal,
   Key
 } from 'lucide-react';
 
