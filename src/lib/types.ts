@@ -17,6 +17,8 @@ export interface QuizSubmission {
   percentage: number;
   timeSpent: number;
   timestamp: string;
+  className: number;
+  classId: number;
   questionDetails: QuestionResult[];
 }
 

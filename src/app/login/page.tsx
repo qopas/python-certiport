@@ -6,11 +6,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Shield, ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
+import { Shield } from 'lucide-react';
 
-export default function AdminLoginPage() {
-  const [username, setUsername] = useState('');
+export default function LoginPage() {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -25,13 +24,17 @@ export default function AdminLoginPage() {
       const response = await fetch('/api/auth', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
-        router.push('/admin/dashboard');
+        // Redirect based on user role
+        router.push(data.redirect);
+        router.refresh();
       } else {
-        setError('Invalid credentials');
+        setError(data.error || 'Login failed');
       }
     } catch (error) {
       setError('Login failed. Please try again.');
@@ -47,18 +50,19 @@ export default function AdminLoginPage() {
           <div className="flex justify-center mb-4">
             <Shield className="w-12 h-12 text-blue-600" />
           </div>
-          <CardTitle className="text-2xl font-bold">Admin Login</CardTitle>
-          <p className="text-gray-600">Access the quiz dashboard</p>
+          <CardTitle className="text-2xl font-bold">Quiz System Login</CardTitle>
+          <p className="text-gray-600">Enter your credentials to continue</p>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin} className="space-y-4">
             <div className="space-y-2">
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="email">Email</Label>
               <Input
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Enter username"
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
                 required
               />
             </div>
@@ -69,7 +73,7 @@ export default function AdminLoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter password"
+                placeholder="Enter your password"
                 required
               />
             </div>
@@ -82,16 +86,8 @@ export default function AdminLoginPage() {
           </form>
           <div className="mt-4 p-3 bg-blue-50 rounded-lg">
             <p className="text-xs text-blue-800">
-              Default credentials: admin / quiz2024!
+              <strong>Default User Password:</strong> Impact123
             </p>
-          </div>
-          <div className="mt-4 text-center">
-            <Link href="/">
-              <Button variant="outline" size="sm">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Quiz
-              </Button>
-            </Link>
           </div>
         </CardContent>
       </Card>

@@ -1,33 +1,56 @@
+// app/api/auth/route.ts
 import { NextRequest, NextResponse } from 'next/server';
-
-const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'quiz2024!';
+import { loginUser } from '@/lib/auth';
 
 export async function POST(request: NextRequest) {
   try {
-    const { username, password } = await request.json();
+    const { email, password } = await request.json();
 
-    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-      const response = NextResponse.json({ success: true });
-      
-      response.cookies.set('admin-session', 'authenticated', {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        maxAge: 60 * 60 * 24
-      });
-      
-      return response;
-    } else {
+    if (!email || !password) {
       return NextResponse.json(
-        { error: 'Invalid credentials' },
+        { error: 'Email and password are required' },
+        { status: 400 }
+      );
+    }
+
+    const result = await loginUser(email, password);
+
+    if (!result.success) {
+      return NextResponse.json(
+        { error: result.message },
         { status: 401 }
       );
     }
+
+    console.log('Login successful for user:', result.user); // Debug log
+
+    const response = NextResponse.json({ 
+      success: true, 
+      user: result.user,
+      redirect: result.user?.role === 'admin' ? '/admin/dashboard' : '/dashboard'
+    });
+
+    // Set auth token as httpOnly cookie
+    response.cookies.set('auth-token', result.token!, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 60 * 60 * 24 // 24 hours
+    });
+
+    return response;
   } catch (error) {
+    console.error('Auth error:', error);
     return NextResponse.json(
       { error: 'Authentication failed' },
       { status: 500 }
     );
   }
+}
+
+// Logout endpoint
+export async function DELETE() {
+  const response = NextResponse.json({ success: true });
+  response.cookies.delete('auth-token');
+  return response;
 }
