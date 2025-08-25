@@ -7,6 +7,7 @@ interface QuizSession {
   questions: Question[];
   currentQuestionIndex: number;
   answers: (string | string[] | null)[];
+  flaggedQuestions?: number[]; // Add flagged questions support
   timeRemaining: number;
   startTime: string;
   lastUpdated: string;
@@ -130,6 +131,7 @@ export default class QuizStorage {
     startedAt?: string;
     currentQuestion?: number;
     totalQuestions?: number;
+    flaggedCount?: number; // Add flagged count to summary
   } {
     const session = this.loadSession(userId);
     
@@ -143,7 +145,8 @@ export default class QuizStorage {
       timeRemaining: session.timeRemaining,
       startedAt: session.startTime,
       currentQuestion: session.currentQuestionIndex + 1,
-      totalQuestions: session.questions.length
+      totalQuestions: session.questions.length,
+      flaggedCount: session.flaggedQuestions?.length || 0
     };
   }
 }

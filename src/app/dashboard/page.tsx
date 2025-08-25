@@ -5,7 +5,9 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { User, BookOpen, Clock, Trophy, Play, RotateCcw, LogOut } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { User, BookOpen, Clock, Trophy, Play, RotateCcw, LogOut, Edit, Lock, Save, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { XCircle } from "lucide-react";
 
@@ -41,6 +43,15 @@ export default function UserDashboard() {
   const [showNewQuizConfirm, setShowNewQuizConfirm] = useState(false);
   const [selectedQuizDetails, setSelectedQuizDetails] = useState<any>(null);
   const [showQuizDetailsModal, setShowQuizDetailsModal] = useState(false);
+  const [showEditProfileModal, setShowEditProfileModal] = useState(false);
+  const [editProfile, setEditProfile] = useState({
+    full_name: '',
+    email: '',
+    currentPassword: '',
+    newPassword: '',
+    confirmPassword: ''
+  });
+  const [isUpdatingProfile, setIsUpdatingProfile] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -126,6 +137,7 @@ export default function UserDashboard() {
           sessionId: data.sessionId,
           questions: data.questions,
           currentQuestionIndex: 0,
+          flaggedQuestions: [],
           answers: new Array(data.questions.length).fill(null),
           timeRemaining: data.timeLimit,
           startTime: new Date().toISOString(),
@@ -195,6 +207,79 @@ export default function UserDashboard() {
     if (percentage >= 80) return 'bg-green-600';
     if (percentage >= 60) return 'bg-yellow-600';
     return 'bg-red-600';
+  };
+
+  const handleEditProfile = () => {
+    setEditProfile({
+      full_name: userInfo?.full_name || '',
+      email: userInfo?.email || '',
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: ''
+    });
+    setShowEditProfileModal(true);
+  };
+
+  const handleUpdateProfile = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (editProfile.newPassword && editProfile.newPassword !== editProfile.confirmPassword) {
+      alert('New passwords do not match');
+      return;
+    }
+    
+    if (editProfile.newPassword && editProfile.newPassword.length < 6) {
+      alert('New password must be at least 6 characters long');
+      return;
+    }
+    
+    if (editProfile.newPassword && !editProfile.currentPassword) {
+      alert('Current password is required to change password');
+      return;
+    }
+
+    setIsUpdatingProfile(true);
+    
+    try {
+      const updateData: any = {
+        full_name: editProfile.full_name,
+        email: editProfile.email
+      };
+      
+      if (editProfile.newPassword) {
+        updateData.currentPassword = editProfile.currentPassword;
+        updateData.newPassword = editProfile.newPassword;
+      }
+      
+      const response = await fetch('/api/user/profile', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updateData)
+      });
+
+      if (response.ok) {
+        const updatedUser = await response.json();
+        setUserInfo(updatedUser);
+        setShowEditProfileModal(false);
+        alert('Profile updated successfully!');
+        
+        setEditProfile({
+          full_name: '',
+          email: '',
+          currentPassword: '',
+          newPassword: '',
+          confirmPassword: ''
+        });
+      } else {
+        const error = await response.json();
+        alert(`Error: ${error.error || 'Failed to update profile'}`);
+      }
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      alert('Failed to update profile. Please try again.');
+    } finally {
+      setIsUpdatingProfile(false);
+    }
   };
 
   if (isLoading) {
@@ -342,132 +427,18 @@ export default function UserDashboard() {
             </Card>
           )}
 
-        {/* Quiz Details Modal */}
-       {showQuizDetailsModal && selectedQuizDetails && (
-  <div className="fixed inset-0 backdrop-blur-md bg-black/20 flex items-center justify-center p-4 z-50">
-    <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden">
-      <div className="p-6 border-b">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-bold">Quiz Results Details</h2>
-            <p className="text-gray-600">
-              Taken on {new Date(selectedQuizDetails.completed_at).toLocaleString()}
-            </p>
-          </div>
-          <Button onClick={closeQuizDetailsModal} variant="outline" size="sm">
-            ✕
-          </Button>
-        </div>
-        
-        {/* Quiz Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
-          <div className="text-center p-3 bg-blue-50 rounded">
-            <p className="text-lg font-bold text-blue-800">{selectedQuizDetails.score}</p>
-            <p className="text-sm text-blue-600">Correct</p>
-          </div>
-          <div className="text-center p-3 bg-red-50 rounded">
-            <p className="text-lg font-bold text-red-800">
-              {selectedQuizDetails.total_questions - selectedQuizDetails.score}
-            </p>
-            <p className="text-sm text-red-600">Incorrect</p>
-          </div>
-          <div className="text-center p-3 bg-green-50 rounded">
-            <p className="text-lg font-bold text-green-800">{selectedQuizDetails.percentage}%</p>
-            <p className="text-sm text-green-600">Score</p>
-          </div>
-          <div className="text-center p-3 bg-purple-50 rounded">
-            <p className="text-lg font-bold text-purple-800">{formatTime(selectedQuizDetails.total_time)}</p>
-            <p className="text-sm text-purple-600">Time</p>
-          </div>
-        </div>
-      </div>
-      
-      {/* Questions List */}
-      <div className="p-6 overflow-y-auto max-h-[60vh]">
-        <h3 className="text-lg font-semibold mb-4">
-          Questions You Got Wrong ({selectedQuizDetails.questionDetails?.filter((q: any) => !q.isCorrect).length || 0})
-        </h3>
-        
-        {selectedQuizDetails.questionDetails?.filter((q: any) => !q.isCorrect).length === 0 ? (
-          <div className="text-center py-8">
-            <Trophy className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
-            <p className="text-lg font-semibold text-green-600">Perfect Score!</p>
-            <p className="text-gray-600">You got all questions correct!</p>
-          </div>
-        ) : (
-          <div className="space-y-6">
-            {selectedQuizDetails.questionDetails
-              ?.filter((q: any) => !q.isCorrect)
-              .map((question: any, index: number) => (
-                <Card key={index} className="border-l-4 border-l-red-500">
-                  <CardHeader className="pb-3">
-                    <div className="flex items-start justify-between">
-                      <Badge variant="outline" className="mb-2">{question.domain}</Badge>
-                      <XCircle className="w-5 h-5 text-red-500" />
-                    </div>
-                    <div 
-                      className="text-base font-medium"
-                      dangerouslySetInnerHTML={{ __html: question.question }}
-                    />
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <div className="space-y-3">
-                      <div className="p-3 bg-red-50 border border-red-200 rounded">
-                        <p className="text-sm font-medium text-red-800">Your Answer:</p>
-                        {question.userAnswer ? (
-                          Array.isArray(question.userAnswer) ? (
-                            <div className="text-red-700">
-                              {question.userAnswer.map((answer: string, idx: number) => (
-                                <div key={idx} dangerouslySetInnerHTML={{ __html: answer }} />
-                              ))}
-                            </div>
-                          ) : (
-                            <div 
-                              className="text-red-700"
-                              dangerouslySetInnerHTML={{ __html: question.userAnswer }}
-                            />
-                          )
-                        ) : (
-                          <p className="text-red-700">No answer selected</p>
-                        )}
-                      </div>
-                      <div className="p-3 bg-green-50 border border-green-200 rounded">
-                        <p className="text-sm font-medium text-green-800">Correct Answer:</p>
-                        {Array.isArray(question.correctAnswer) ? (
-                          <div className="text-green-700">
-                            {question.correctAnswer.map((answer: string, idx: number) => (
-                              <div key={idx} dangerouslySetInnerHTML={{ __html: answer }} />
-                            ))}
-                          </div>
-                        ) : (
-                          <div 
-                            className="text-green-700"
-                            dangerouslySetInnerHTML={{ __html: question.correctAnswer }}
-                          />
-                        )}
-                      </div>
-                      {question.explanation && (
-                        <div className="p-3 bg-blue-50 border border-blue-200 rounded">
-                          <p className="text-sm font-medium text-blue-800">Explanation:</p>
-                          <div 
-                            className="text-blue-700"
-                            dangerouslySetInnerHTML={{ __html: question.explanation }}
-                          />
-                        </div>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-          </div>
-        )}
-      </div>
-    </div>
-  </div>
-)}
           <Card>
-            <CardHeader>
+            <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle>Profile Information</CardTitle>
+              <Button 
+                onClick={handleEditProfile} 
+                variant="outline" 
+                size="sm"
+                className="h-8"
+              >
+                <Edit className="w-4 h-4 mr-1" />
+                Edit
+              </Button>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
@@ -526,6 +497,245 @@ export default function UserDashboard() {
                 </div>
               </CardContent>
             </Card>
+          </div>
+        )}
+
+        {/* Edit Profile Modal */}
+        {showEditProfileModal && (
+          <div className="fixed inset-0 backdrop-blur-md bg-black/20 flex items-center justify-center p-4 z-50">
+            <Card className="w-full max-w-md max-h-[90vh] overflow-y-auto">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle>Edit Profile</CardTitle>
+                  <Button
+                    onClick={() => setShowEditProfileModal(false)}
+                    variant="ghost"
+                    size="sm"
+                    className="h-6 w-6 p-0"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleUpdateProfile} className="space-y-4">
+                  <div>
+                    <Label htmlFor="full_name">Full Name</Label>
+                    <Input
+                      id="full_name"
+                      type="text"
+                      value={editProfile.full_name}
+                      onChange={(e) => setEditProfile({ ...editProfile, full_name: e.target.value })}
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={editProfile.email}
+                      onChange={(e) => setEditProfile({ ...editProfile, email: e.target.value })}
+                      required
+                    />
+                  </div>
+
+                  <div className="border-t pt-4">
+                    <h4 className="font-medium mb-3 flex items-center">
+                      <Lock className="w-4 h-4 mr-2" />
+                      Change Password (Optional)
+                    </h4>
+                    
+                    <div className="space-y-3">
+                      <div>
+                        <Label htmlFor="currentPassword">Current Password</Label>
+                        <Input
+                          id="currentPassword"
+                          type="password"
+                          value={editProfile.currentPassword}
+                          onChange={(e) => setEditProfile({ ...editProfile, currentPassword: e.target.value })}
+                          placeholder="Enter current password"
+                        />
+                      </div>
+
+                      <div>
+                        <Label htmlFor="newPassword">New Password</Label>
+                        <Input
+                          id="newPassword"
+                          type="password"
+                          value={editProfile.newPassword}
+                          onChange={(e) => setEditProfile({ ...editProfile, newPassword: e.target.value })}
+                          placeholder="Enter new password (min 6 characters)"
+                          minLength={6}
+                        />
+                      </div>
+
+                      <div>
+                        <Label htmlFor="confirmPassword">Confirm New Password</Label>
+                        <Input
+                          id="confirmPassword"
+                          type="password"
+                          value={editProfile.confirmPassword}
+                          onChange={(e) => setEditProfile({ ...editProfile, confirmPassword: e.target.value })}
+                          placeholder="Confirm new password"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-2 pt-4">
+                    <Button
+                      type="button"
+                      onClick={() => setShowEditProfileModal(false)}
+                      variant="outline"
+                      className="flex-1"
+                      disabled={isUpdatingProfile}
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      type="submit"
+                      className="flex-1"
+                      disabled={isUpdatingProfile}
+                    >
+                      {isUpdatingProfile ? (
+                        <>Updating...</>
+                      ) : (
+                        <>
+                          <Save className="w-4 h-4 mr-2" />
+                          Save Changes
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {/* Quiz Details Modal */}
+        {showQuizDetailsModal && selectedQuizDetails && (
+          <div className="fixed inset-0 backdrop-blur-md bg-black/20 flex items-center justify-center p-4 z-50">
+            <div className="bg-white rounded-lg max-w-4xl w-full max-h-[90vh] overflow-hidden">
+              <div className="p-6 border-b">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h2 className="text-2xl font-bold">Quiz Results Details</h2>
+                    <p className="text-gray-600">
+                      Taken on {new Date(selectedQuizDetails.completed_at).toLocaleString()}
+                    </p>
+                  </div>
+                  <Button onClick={closeQuizDetailsModal} variant="outline" size="sm">
+                    ✕
+                  </Button>
+                </div>
+                
+                {/* Quiz Stats */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+                  <div className="text-center p-3 bg-blue-50 rounded">
+                    <p className="text-lg font-bold text-blue-800">{selectedQuizDetails.score}</p>
+                    <p className="text-sm text-blue-600">Correct</p>
+                  </div>
+                  <div className="text-center p-3 bg-red-50 rounded">
+                    <p className="text-lg font-bold text-red-800">
+                      {selectedQuizDetails.total_questions - selectedQuizDetails.score}
+                    </p>
+                    <p className="text-sm text-red-600">Incorrect</p>
+                  </div>
+                  <div className="text-center p-3 bg-green-50 rounded">
+                    <p className="text-lg font-bold text-green-800">{selectedQuizDetails.percentage}%</p>
+                    <p className="text-sm text-green-600">Score</p>
+                  </div>
+                  <div className="text-center p-3 bg-purple-50 rounded">
+                    <p className="text-lg font-bold text-purple-800">{formatTime(selectedQuizDetails.total_time)}</p>
+                    <p className="text-sm text-purple-600">Time</p>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Questions List */}
+              <div className="p-6 overflow-y-auto max-h-[60vh]">
+                <h3 className="text-lg font-semibold mb-4">
+                  Questions You Got Wrong ({selectedQuizDetails.questionDetails?.filter((q: any) => !q.isCorrect).length || 0})
+                </h3>
+                
+                {selectedQuizDetails.questionDetails?.filter((q: any) => !q.isCorrect).length === 0 ? (
+                  <div className="text-center py-8">
+                    <Trophy className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
+                    <p className="text-lg font-semibold text-green-600">Perfect Score!</p>
+                    <p className="text-gray-600">You got all questions correct!</p>
+                  </div>
+                ) : (
+                  <div className="space-y-6">
+                    {selectedQuizDetails.questionDetails
+                      ?.filter((q: any) => !q.isCorrect)
+                      .map((question: any, index: number) => (
+                        <Card key={index} className="border-l-4 border-l-red-500">
+                          <CardHeader className="pb-3">
+                            <div className="flex items-start justify-between">
+                              <Badge variant="outline" className="mb-2">{question.domain}</Badge>
+                              <XCircle className="w-5 h-5 text-red-500" />
+                            </div>
+                            <div 
+                              className="text-base font-medium"
+                              dangerouslySetInnerHTML={{ __html: question.question }}
+                            />
+                          </CardHeader>
+                          <CardContent className="pt-0">
+                            <div className="space-y-3">
+                              <div className="p-3 bg-red-50 border border-red-200 rounded">
+                                <p className="text-sm font-medium text-red-800">Your Answer:</p>
+                                {question.userAnswer ? (
+                                  Array.isArray(question.userAnswer) ? (
+                                    <div className="text-red-700">
+                                      {question.userAnswer.map((answer: string, idx: number) => (
+                                        <div key={idx} dangerouslySetInnerHTML={{ __html: answer }} />
+                                      ))}
+                                    </div>
+                                  ) : (
+                                    <div 
+                                      className="text-red-700"
+                                      dangerouslySetInnerHTML={{ __html: question.userAnswer }}
+                                    />
+                                  )
+                                ) : (
+                                  <p className="text-red-700">No answer selected</p>
+                                )}
+                              </div>
+                              <div className="p-3 bg-green-50 border border-green-200 rounded">
+                                <p className="text-sm font-medium text-green-800">Correct Answer:</p>
+                                {Array.isArray(question.correctAnswer) ? (
+                                  <div className="text-green-700">
+                                    {question.correctAnswer.map((answer: string, idx: number) => (
+                                      <div key={idx} dangerouslySetInnerHTML={{ __html: answer }} />
+                                    ))}
+                                  </div>
+                                ) : (
+                                  <div 
+                                    className="text-green-700"
+                                    dangerouslySetInnerHTML={{ __html: question.correctAnswer }}
+                                  />
+                                )}
+                              </div>
+                              {question.explanation && (
+                                <div className="p-3 bg-blue-50 border border-blue-200 rounded">
+                                  <p className="text-sm font-medium text-blue-800">Explanation:</p>
+                                  <div 
+                                    className="text-blue-700"
+                                    dangerouslySetInnerHTML={{ __html: question.explanation }}
+                                  />
+                                </div>
+                              )}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
         )}
 

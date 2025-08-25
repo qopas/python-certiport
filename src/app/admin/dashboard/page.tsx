@@ -8,6 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import {quizQuestions} from '@/lib/questions'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { 
   Users, 
@@ -22,7 +23,8 @@ import {
   Edit,
   UserPlus,
   Search,
-  Key
+  Key,
+  Circle
 } from 'lucide-react';
 
 interface WrongAnswer {
@@ -638,18 +640,66 @@ export default function AdminDashboard() {
       .sort((a, b) => a.successRate - b.successRate);
   };
 
-  const stats = {
-    totalSubmissions: filteredSubmissions.length,
-    averageScore: filteredSubmissions.length > 0 
-      ? Math.round(filteredSubmissions.reduce((acc, s) => acc + s.percentage, 0) / filteredSubmissions.length)
-      : 0,
-    averageTime: filteredSubmissions.length > 0
-      ? Math.round(filteredSubmissions.reduce((acc, s) => acc + s.timeSpent, 0) / filteredSubmissions.length)
-      : 0,
-    highestScore: filteredSubmissions.length > 0 
-      ? Math.max(...filteredSubmissions.map(s => s.percentage))
-      : 0
-  };
+const stats = {
+  totalSubmissions: filteredSubmissions.length,
+  averageScore: (() => {
+    if (filteredSubmissions.length === 0) return 0;
+    
+    const validSubmissions = filteredSubmissions
+      .map(s => ({
+        ...s,
+        percentage: typeof s.percentage === 'string' ? parseFloat(s.percentage) : s.percentage
+      }))
+      .filter(s => 
+        typeof s.percentage === 'number' && 
+        !isNaN(s.percentage) && 
+        s.percentage !== null
+      );
+    
+    console.log('Valid submissions for average:', validSubmissions.length, 'out of', filteredSubmissions.length);
+    console.log('Valid percentages:', validSubmissions.map(s => s.percentage));
+    
+    return validSubmissions.length > 0
+      ? Math.round(validSubmissions.reduce((acc, s) => acc + s.percentage, 0) / validSubmissions.length)
+      : 0;
+  })(),
+  averageTime: (() => {
+    if (filteredSubmissions.length === 0) return 0;
+    
+    const validSubmissions = filteredSubmissions
+      .map(s => ({
+        ...s,
+        timeSpent: typeof s.timeSpent === 'string' ? parseFloat(s.timeSpent) : s.timeSpent
+      }))
+      .filter(s => 
+        typeof s.timeSpent === 'number' && 
+        !isNaN(s.timeSpent) && 
+        s.timeSpent !== null
+      );
+    
+    return validSubmissions.length > 0
+      ? Math.round(validSubmissions.reduce((acc, s) => acc + s.timeSpent, 0) / validSubmissions.length)
+      : 0;
+  })(),
+  highestScore: (() => {
+    if (filteredSubmissions.length === 0) return 0;
+    
+    const validSubmissions = filteredSubmissions
+      .map(s => ({
+        ...s,
+        percentage: typeof s.percentage === 'string' ? parseFloat(s.percentage) : s.percentage
+      }))
+      .filter(s => 
+        typeof s.percentage === 'number' && 
+        !isNaN(s.percentage) && 
+        s.percentage !== null
+      );
+    
+    return validSubmissions.length > 0
+      ? Math.max(...validSubmissions.map(s => s.percentage))
+      : 0;
+  })()
+};
 
   if (isLoading) {
     return (
@@ -1073,49 +1123,144 @@ export default function AdminDashboard() {
           </TabsContent>
 
           {/* Question Analytics Tab */}
-          <TabsContent value="question-analytics">
-            <Card>
-              <CardHeader>
-                <CardTitle>Question Performance Analytics</CardTitle>
-                <p className="text-sm text-gray-600">Questions sorted by difficulty (lowest success rate first)</p>
-              </CardHeader>
-              <CardContent>
-                {submissions.length === 0 ? (
-                  <div className="text-center py-8">
-                    <p className="text-gray-500">No data available for analytics.</p>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    {getQuestionAnalytics().slice(0, 10).map((stat) => (
-                      <div key={stat.questionId} className="p-4 border rounded-lg">
-                        <div className="flex items-start justify-between mb-2">
-                          <div className="flex-1">
-                            <div className="flex items-center space-x-2 mb-1">
-                              <span className="font-semibold">Q{stat.questionId}</span>
-                              <Badge variant="outline">{stat.domain}</Badge>
-                              <Badge 
-                                variant={stat.successRate >= 70 ? "default" : "destructive"}
-                                className={stat.successRate >= 70 ? "bg-green-600" : ""}
-                              >
-                                {stat.successRate}% success
-                              </Badge>
-                            </div>
-                            <p className="text-sm text-gray-600 mb-2">
-                              {stat.totalAttempts} attempts, {stat.correctAttempts} correct
-                            </p>
-                            <div 
-                              className="text-sm"
-                              dangerouslySetInnerHTML={{ __html: stat.question.substring(0, 200) + '...' }}
-                            />
-                          </div>
+    <TabsContent value="question-analytics">
+      <Card>
+        <CardHeader>
+          <CardTitle>Question Performance Analytics</CardTitle>
+          <p className="text-sm text-gray-600">Questions sorted by difficulty (lowest success rate first)</p>
+        </CardHeader>
+        <CardContent>
+          {submissions.length === 0 ? (
+            <div className="text-center py-8">
+              <p className="text-gray-500">No data available for analytics.</p>
+            </div>
+          ) : (
+            <div className="space-y-6">
+              {getQuestionAnalytics().slice(0, 10).map((stat) => {
+                // Find the original question to get all options
+                const originalQuestion = quizQuestions.find(q => q.id === stat.questionId);
+                
+                return (
+                  <Card key={stat.questionId} className="border">
+                    <CardHeader>
+                      <div className="flex items-center justify-between mb-4">
+                        <div className="flex items-center space-x-3">
+                          <span className="font-semibold">Q{stat.questionId}</span>
+                          <Badge variant="outline">{stat.domain}</Badge>
+                          <Badge 
+                            variant={stat.successRate >= 70 ? "default" : "destructive"}
+                          >
+                            {stat.successRate}% success
+                          </Badge>
+                        </div>
+                        <div className="text-sm text-gray-600">
+                          {stat.correctAttempts}/{stat.totalAttempts} attempts
                         </div>
                       </div>
-                    ))}
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </TabsContent>
+                      
+                      {/* Full Question */}
+                      <div 
+                        className="text-base mb-4" 
+                        dangerouslySetInnerHTML={{ __html: stat.question }}
+                      />
+                    </CardHeader>
+                    
+                    <CardContent className="space-y-4">
+                      {/* All Answer Options */}
+                      {originalQuestion?.options && (
+                        <div className="space-y-2">
+                          <h4 className="font-medium text-sm text-gray-700 mb-3">Answer Options:</h4>
+                          {originalQuestion.options.map((option, index) => {
+                            const isCorrect = Array.isArray(stat.correctAnswer) 
+                              ? stat.correctAnswer.includes(option)
+                              : stat.correctAnswer === option;
+                            
+                            return (
+                              <div 
+                                key={index} 
+                                className={`p-3 rounded border ${
+                                  isCorrect 
+                                    ? 'border-green-200 bg-green-50' 
+                                    : 'border-gray-200 bg-gray-50'
+                                }`}
+                              >
+                                <div className="flex items-start space-x-2">
+                                  <span className={`text-sm font-medium px-2 py-1 rounded ${
+                                    isCorrect 
+                                      ? 'bg-green-100 text-green-700' 
+                                      : 'bg-gray-100 text-gray-600'
+                                  }`}>
+                                    {String.fromCharCode(65 + index)}
+                                  </span>
+                                  <div 
+                                    className="flex-1"
+                                    dangerouslySetInnerHTML={{ __html: option }}
+                                  />
+                                  {isCorrect && (
+                                    <Circle className="w-4 h-4 text-green-500" />
+                                  )}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
+                      
+                      {/* Explanation */}
+                      {originalQuestion?.explanation && (
+                        <div className="border-t pt-4">
+                          <h5 className="font-medium text-sm text-gray-700 mb-2">Explanation:</h5>
+                          <p className="text-sm text-gray-600" dangerouslySetInnerHTML={{ __html: originalQuestion.explanation }} />
+                        </div>
+                      )}
+                      
+                      {/* Wrong Answers Analysis */}
+                      {stat.wrongAnswers.length > 0 && (
+                        <div className="border-t pt-4">
+                          <h5 className="font-medium text-sm text-gray-700 mb-3">
+                            Common Wrong Answers ({stat.wrongAnswers.length} students):
+                          </h5>
+                          <div className="space-y-2 max-h-40 overflow-y-auto">
+                            {stat.wrongAnswers.slice(0, 8).map((wrongAnswer, index) => (
+                              <div key={index} className="flex items-start space-x-2 text-sm bg-red-50 p-2 rounded border border-red-100">
+                                <span className="font-medium text-red-700 shrink-0">{wrongAnswer.userName}:</span>
+                                <div className="text-red-600 min-w-0">
+                                  {wrongAnswer.userAnswer ? (
+                                    <div dangerouslySetInnerHTML={{ 
+                                      __html: Array.isArray(wrongAnswer.userAnswer) ? 
+                                        wrongAnswer.userAnswer.join(', ') : 
+                                        wrongAnswer.userAnswer.toString()
+                                    }} />
+                                  ) : (
+                                    <span className="italic">No answer</span>
+                                  )}
+                                </div>
+                              </div>
+                            ))}
+                            {stat.wrongAnswers.length > 8 && (
+                              <p className="text-xs text-gray-500 italic">
+                                +{stat.wrongAnswers.length - 8} more
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                );
+              })}
+              
+              {getQuestionAnalytics().length === 0 && (
+                <div className="text-center py-8">
+                  <p className="text-gray-500">No question analytics available yet.</p>
+                </div>
+              )}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    </TabsContent>
+
         </Tabs>
 
         {/* Add User Modal */}
@@ -1459,3 +1604,6 @@ export default function AdminDashboard() {
     </div>
   );
 }
+const getOriginalQuestions = () => {
+  return quizQuestions;
+};
