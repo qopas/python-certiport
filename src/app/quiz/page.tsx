@@ -4,14 +4,15 @@ import { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Clock, CheckCircle, XCircle, Trophy, ArrowLeft, Flag, FlagOff } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Clock, CheckCircle, XCircle, Trophy, ArrowLeft, Flag, FlagOff, GripVertical } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { Question, QuestionResult } from '@/lib/types';
 
 export default function QuizPage() {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<(string | string[] | null)[]>([]);
+  const [answers, setAnswers] = useState<(string | string[] | { [key: string]: string } | null)[]>([]);
   const [flaggedQuestions, setFlaggedQuestions] = useState<Set<number>>(new Set());
   const [timeRemaining, setTimeRemaining] = useState(0);
   const [sessionToken, setSessionToken] = useState<string>('');
@@ -22,7 +23,6 @@ export default function QuizPage() {
   const [results, setResults] = useState<any>(null);
   const router = useRouter();
 
-  // Helper function to update localStorage - DEFINED EARLY with useCallback
   const updateLocalStorage = useCallback(async (updates: any) => {
     if (typeof window !== 'undefined') {
       try {
@@ -34,12 +34,10 @@ export default function QuizPage() {
     }
   }, []);
 
-  // Load quiz state on component mount
   useEffect(() => {
     loadQuizState();
   }, []);
 
-  // Timer effect
   useEffect(() => {
     if (stage === 'quiz' && timeRemaining > 0) {
       const timer = setInterval(() => {
@@ -57,7 +55,6 @@ export default function QuizPage() {
     }
   }, [stage, timeRemaining, updateLocalStorage]);
 
-  // Auto-save progress to localStorage every 5 seconds
   useEffect(() => {
     if (stage === 'quiz') {
       const autoSave = setInterval(() => {
@@ -97,7 +94,6 @@ export default function QuizPage() {
           setHasActiveSession(true);
           setStage('quiz');
           
-          // Load flagged questions from session
           if (session.flaggedQuestions) {
             setFlaggedQuestions(new Set(session.flaggedQuestions));
           }
@@ -114,7 +110,7 @@ export default function QuizPage() {
     }
   };
 
-  const handleAnswer = (answer: string | string[]) => {
+  const handleAnswer = (answer: string | string[] | { [key: string]: string }) => {
     const newAnswers = [...answers];
     newAnswers[currentQuestionIndex] = answer;
     setAnswers(newAnswers);
@@ -153,6 +149,30 @@ export default function QuizPage() {
     }
   };
 
+  // Enhanced answer comparison for all question types
+  const compareAnswers = (userAnswer: any, correctAnswer: any, questionType: string) => {
+    if (questionType === 'ordering') {
+      if (!Array.isArray(userAnswer) || !Array.isArray(correctAnswer)) return false;
+      return JSON.stringify(userAnswer) === JSON.stringify(correctAnswer);
+    }
+    
+    if (questionType === 'fill_in_blank') {
+      if (typeof userAnswer !== 'object' || typeof correctAnswer !== 'object') return false;
+      const userKeys = Object.keys(userAnswer || {});
+      const correctKeys = Object.keys(correctAnswer || {});
+      if (userKeys.length !== correctKeys.length) return false;
+      return userKeys.every(key => userAnswer[key] === correctAnswer[key]);
+    }
+    
+    if (questionType === 'multiple_response' || questionType === 'multiple_select') {
+      if (!Array.isArray(userAnswer) || !Array.isArray(correctAnswer)) return false;
+      return userAnswer.length === correctAnswer.length && 
+             userAnswer.every(ans => correctAnswer.includes(ans));
+    }
+    
+    return userAnswer === correctAnswer;
+  };
+
   const submitQuiz = async () => {
     if (!startTime) return;
 
@@ -162,26 +182,7 @@ export default function QuizPage() {
     let score = 0;
     const questionDetails: QuestionResult[] = questions.map((question, index) => {
       const userAnswer = answers[index];
-      
-      const getFullAnswer = (letterAnswer: string | string[]): string | string[] => {
-        if (Array.isArray(letterAnswer)) {
-          return letterAnswer.map(letter => {
-            const optionIndex = letter.charCodeAt(0) - 65;
-            return question.options?.[optionIndex] || letter;
-          });
-        } else {
-          const optionIndex = letterAnswer.charCodeAt(0) - 65;
-          return question.options?.[optionIndex] || letterAnswer;
-        }
-      };
-      
-      const correctFullAnswer = getFullAnswer(question.answer);
-      
-      const isCorrect = Array.isArray(correctFullAnswer) 
-        ? Array.isArray(userAnswer) && 
-          correctFullAnswer.length === userAnswer.length && 
-          correctFullAnswer.every(ans => userAnswer.includes(ans))
-        : userAnswer === correctFullAnswer;
+      const isCorrect = compareAnswers(userAnswer, question.answer, question.type);
       
       if (isCorrect) score++;
 
@@ -190,7 +191,7 @@ export default function QuizPage() {
         domain: question.domain,
         question: question.question,
         userAnswer,
-        correctAnswer: correctFullAnswer,
+        correctAnswer: question.answer,
         isCorrect,
         explanation: question.explanation
       };
@@ -252,7 +253,10 @@ export default function QuizPage() {
   };
 
   const getQuestionStatus = (index: number) => {
-    const isAnswered = answers[index] !== null && answers[index] !== undefined && answers[index] !== '';
+    const isAnswered = answers[index] !== null && answers[index] !== undefined && 
+                      (typeof answers[index] === 'string' ? answers[index] !== '' : 
+                       Array.isArray(answers[index]) ? (answers[index] as any[]).length > 0 :
+                       typeof answers[index] === 'object' ? Object.keys(answers[index] || {}).length > 0 : false);
     const isCurrent = index === currentQuestionIndex;
     const isFlagged = flaggedQuestions.has(index);
 
@@ -274,6 +278,304 @@ export default function QuizPage() {
         return 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200';
       default:
         return 'bg-gray-100 text-gray-700 border-gray-300';
+    }
+  };
+
+  const renderQuestionContent = (question: Question) => {
+    const currentAnswer = answers[currentQuestionIndex];
+
+    switch (question.type) {
+      case 'multiple_choice':
+      case 'true_false':
+        return (
+          <div className="space-y-3">
+            {Array.isArray(question.options) && question.options.map((option, index) => {
+              const isSelected = currentAnswer === option;
+              return (
+                <label
+                  key={index}
+                  className={`flex items-start p-3 sm:p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
+                    isSelected 
+                      ? 'border-indigo-400 bg-indigo-50 shadow-sm' 
+                      : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name={`question-${currentQuestionIndex}`}
+                    value={option}
+                    checked={isSelected}
+                    onChange={(e) => handleAnswer(e.target.value)}
+                    className="mr-3 mt-1 w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
+                  />
+                  <span 
+                    className="text-sm sm:text-base text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: option }} 
+                  />
+                </label>
+              );
+            })}
+          </div>
+        );
+
+      case 'multiple_select':
+      case 'multiple_response':
+        return (
+          <div className="space-y-3">
+            <p className="text-sm text-gray-600 mb-3">Select all that apply:</p>
+            {Array.isArray(question.options) && question.options.map((option, index) => {
+              const isSelected = Array.isArray(currentAnswer) && currentAnswer.includes(option);
+              return (
+                <label
+                  key={index}
+                  className={`flex items-start p-3 sm:p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
+                    isSelected 
+                      ? 'border-indigo-400 bg-indigo-50 shadow-sm' 
+                      : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    value={option}
+                    checked={isSelected}
+                    onChange={(e) => {
+                      const currentAnswers = (currentAnswer as string[]) || [];
+                      if (e.target.checked) {
+                        handleAnswer([...currentAnswers, option]);
+                      } else {
+                        handleAnswer(currentAnswers.filter(a => a !== option));
+                      }
+                    }}
+                    className="mr-3 mt-1 w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
+                  />
+                  <span 
+                    className="text-sm sm:text-base text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: option }} 
+                  />
+                </label>
+              );
+            })}
+          </div>
+        );
+
+      case 'fill_in_blank':
+        const optionsObj = question.options as { [key: string]: string[] };
+        const answerObj = (currentAnswer as { [key: string]: string }) || {};
+        
+        // Parse question text and replace [option_name] with selectors
+        const renderQuestionWithSelectors = (questionText: string) => {
+          // Find all [option_name] patterns in the question
+          const pattern = /\[([^\]]+)\]/g;
+          const parts = questionText.split(pattern);
+          
+          return parts.map((part, index) => {
+            // Every odd index is a captured group (option name)
+            if (index % 2 === 1) {
+              const optionKey = part;
+              if (optionsObj[optionKey] && Array.isArray(optionsObj[optionKey])) {
+                return (
+                  <Select 
+                    key={optionKey}
+                    value={answerObj[optionKey] || ''} 
+                    onValueChange={(value) => {
+                      const newAnswer = { ...answerObj, [optionKey]: value };
+                      handleAnswer(newAnswer);
+                    }}
+                  >
+                    <SelectTrigger className="inline-flex w-auto min-w-32 mx-1">
+                      <SelectValue placeholder="Choose..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {optionsObj[optionKey].map((option) => (
+                        <SelectItem key={option} value={option}>
+                          <span dangerouslySetInnerHTML={{ __html: option }} />
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                );
+              }
+              return <span key={index} className="text-red-500">[{part}]</span>;
+            }
+            // Even indices are regular text
+            return <span key={index} dangerouslySetInnerHTML={{ __html: part }} />;
+          });
+        };
+
+        return (
+          <div className="space-y-4">
+            <div className="text-base leading-relaxed">
+              {renderQuestionWithSelectors(question.question)}
+            </div>
+            
+            {/* Fallback: Show separate selectors if no inline patterns found */}
+            {!question.question.includes('[') && (
+              <>
+                <p className="text-sm text-gray-600 mb-4">Select the appropriate option for each dropdown:</p>
+                {Object.keys(optionsObj).map((key) => (
+                  <div key={key} className="flex flex-col space-y-2">
+                    <label className="text-sm font-medium text-gray-700 capitalize">
+                      {key.replace(/_/g, ' ')}:
+                    </label>
+                    <Select 
+                      value={answerObj[key] || ''} 
+                      onValueChange={(value) => {
+                        const newAnswer = { ...answerObj, [key]: value };
+                        handleAnswer(newAnswer);
+                      }}
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder={`Choose ${key.replace(/_/g, ' ')}...`} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {Array.isArray(optionsObj[key]) && optionsObj[key].map((option) => (
+                          <SelectItem key={option} value={option}>
+                            <span dangerouslySetInnerHTML={{ __html: option }} />
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
+        );
+
+      case 'ordering':
+        const sourcePool = question.options as string[];
+        const correctAnswer = question.answer as string[];
+        const userArrangement = (currentAnswer as string[]) || [];
+        
+        const handleDragStart = (e: React.DragEvent, item: string, fromPool: boolean) => {
+          e.dataTransfer.setData('text/plain', JSON.stringify({ item, fromPool }));
+        };
+
+        const handleDragOver = (e: React.DragEvent) => {
+          e.preventDefault();
+        };
+
+        const handleDropInArrangement = (e: React.DragEvent, index?: number) => {
+          e.preventDefault();
+          const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+          const { item, fromPool } = data;
+          
+          const newArrangement = [...userArrangement];
+          
+          if (fromPool) {
+            // Adding from pool - insert at specific index or at end
+            if (typeof index === 'number') {
+              newArrangement.splice(index, 0, item);
+            } else {
+              newArrangement.push(item);
+            }
+          } else {
+            // Reordering within arrangement
+            const currentIndex = newArrangement.indexOf(item);
+            if (currentIndex !== -1) {
+              newArrangement.splice(currentIndex, 1);
+              if (typeof index === 'number') {
+                newArrangement.splice(index, 0, item);
+              } else {
+                newArrangement.push(item);
+              }
+            }
+          }
+          
+          handleAnswer(newArrangement);
+        };
+
+        const handleDropInPool = (e: React.DragEvent) => {
+          e.preventDefault();
+          const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+          const { item, fromPool } = data;
+          
+          if (!fromPool) {
+            // Remove from arrangement
+            const newArrangement = userArrangement.filter(arrItem => arrItem !== item);
+            handleAnswer(newArrangement);
+          }
+        };
+
+        const unusedItems = sourcePool.filter(item => !userArrangement.includes(item));
+
+        return (
+          <div className="space-y-4">
+            <p className="text-sm text-gray-600 mb-4">
+              Drag items from the right side to the left side to arrange them in the correct order. Not all items need to be used.
+            </p>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {/* Answer Area - Left Side */}
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 min-h-[300px]">
+                <h4 className="text-sm font-medium text-gray-700 mb-3">Arrangement Area:</h4>
+                <div
+                  className="space-y-2"
+                  onDragOver={handleDragOver}
+                  onDrop={(e) => handleDropInArrangement(e)}
+                >
+                  {userArrangement.length === 0 ? (
+                    <div className="text-center text-gray-400 py-12">
+                      Drag items here to arrange them in order
+                    </div>
+                  ) : (
+                    userArrangement.map((item, index) => (
+                      <div
+                        key={`arranged-${item}-${index}`}
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, item, false)}
+                        className="flex items-center justify-between p-3 bg-indigo-50 border border-indigo-200 rounded-lg cursor-move hover:bg-indigo-100 transition-colors"
+                      >
+                        <div className="flex items-center">
+                          <span className="text-sm font-medium text-indigo-700 mr-2 min-w-[20px]">{index + 1}.</span>
+                          <GripVertical className="w-4 h-4 mr-2 text-indigo-400" />
+                          <span className="text-sm" dangerouslySetInnerHTML={{ __html: item }} />
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+
+              {/* Source Pool - Right Side */}
+              <div className="border border-gray-200 rounded-lg p-4 min-h-[300px]">
+                <h4 className="text-sm font-medium text-gray-700 mb-3">Available Options:</h4>
+                <div
+                  className="space-y-2"
+                  onDragOver={handleDragOver}
+                  onDrop={handleDropInPool}
+                >
+                  {unusedItems.length === 0 ? (
+                    <div className="text-center text-gray-400 py-12">
+                      All items have been used
+                    </div>
+                  ) : (
+                    unusedItems.map((item, index) => (
+                      <div
+                        key={`pool-${item}-${index}`}
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, item, true)}
+                        className="flex items-center p-3 bg-gray-50 border border-gray-200 rounded-lg cursor-move hover:bg-gray-100 transition-colors"
+                      >
+                        <GripVertical className="w-4 h-4 mr-2 text-gray-400" />
+                        <span className="text-sm" dangerouslySetInnerHTML={{ __html: item }} />
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {userArrangement.length > 0 && (
+              <div className="text-xs text-gray-500 text-center">
+                Tip: Drag items back to "Available Options" to remove them from your arrangement
+              </div>
+            )}
+          </div>
+        );
+
+      default:
+        return <p>Unsupported question type</p>;
     }
   };
 
@@ -334,7 +636,13 @@ export default function QuizPage() {
   }
 
   const currentQuestion = questions[currentQuestionIndex];
-  const answeredCount = answers.filter(answer => answer !== null && answer !== undefined && answer !== '').length;
+  const answeredCount = answers.filter(answer => {
+    if (answer === null || answer === undefined) return false;
+    if (typeof answer === 'string') return answer !== '';
+    if (Array.isArray(answer)) return answer.length > 0;
+    if (typeof answer === 'object') return Object.keys(answer).length > 0;
+    return false;
+  }).length;
   const flaggedCount = flaggedQuestions.size;
 
   return (
@@ -371,7 +679,7 @@ export default function QuizPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-          {/* Question Navigation Panel - Hidden on mobile, collapsible on tablet */}
+          {/* Question Navigation Panel */}
           <div className="lg:col-span-1 order-2 lg:order-1">
             <Card className="sticky top-4 shadow-md border-0 bg-white/80 backdrop-blur-sm">
               <CardHeader className="pb-3">
@@ -443,7 +751,11 @@ export default function QuizPage() {
                   {currentQuestion?.domain}
                 </Badge>
                 <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200 text-xs">
-                  {currentQuestion?.type === 'multiple_select' ? 'Multi' : 'Single'}
+                  {currentQuestion?.type === 'multiple_select' ? 'Multi Select' : 
+                   currentQuestion?.type === 'multiple_response' ? 'Multi Response' :
+                   currentQuestion?.type === 'true_false' ? 'True/False' :
+                   currentQuestion?.type === 'fill_in_blank' ? 'Fill Blanks' :
+                   currentQuestion?.type === 'ordering' ? 'Ordering' : 'Multiple Choice'}
                 </Badge>
               </div>
               
@@ -476,49 +788,7 @@ export default function QuizPage() {
                   dangerouslySetInnerHTML={{ __html: currentQuestion?.question || '' }}
                 />
                 
-                <div className="space-y-3">
-                  {currentQuestion?.options?.map((option, index) => {
-                    const isSelected = currentQuestion.type === 'multiple_select'
-                      ? Array.isArray(answers[currentQuestionIndex]) && 
-                        (answers[currentQuestionIndex] as string[]).includes(option)
-                      : answers[currentQuestionIndex] === option;
-
-                    return (
-                      <label
-                        key={index}
-                        className={`flex items-start p-3 sm:p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
-                          isSelected 
-                            ? 'border-indigo-400 bg-indigo-50 shadow-sm' 
-                            : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
-                        }`}
-                      >
-                        <input
-                          type={currentQuestion.type === 'multiple_select' ? 'checkbox' : 'radio'}
-                          name={`question-${currentQuestionIndex}`}
-                          value={option}
-                          checked={isSelected}
-                          onChange={(e) => {
-                            if (currentQuestion.type === 'multiple_select') {
-                              const currentAnswers = (answers[currentQuestionIndex] as string[]) || [];
-                              if (e.target.checked) {
-                                handleAnswer([...currentAnswers, option]);
-                              } else {
-                                handleAnswer(currentAnswers.filter(a => a !== option));
-                              }
-                            } else {
-                              handleAnswer(option);
-                            }
-                          }}
-                          className="mr-3 mt-1 w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0"
-                        />
-                        <span 
-                          className="text-sm sm:text-base text-gray-700 leading-relaxed"
-                          dangerouslySetInnerHTML={{ __html: option }} 
-                        />
-                      </label>
-                    );
-                  })}
-                </div>
+                {currentQuestion && renderQuestionContent(currentQuestion)}
               </CardContent>
             </Card>
 
