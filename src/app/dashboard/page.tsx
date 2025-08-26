@@ -34,7 +34,38 @@ interface ActiveSession {
   time_remaining: number;
   started_at: string;
 }
-
+const renderAnswer = (answer: any) => {
+  if (!answer) return <p className="text-gray-500">No answer selected</p>;
+  
+  if (Array.isArray(answer)) {
+    return (
+      <div>
+        {answer.map((item: string, idx: number) => (
+          <div key={idx} dangerouslySetInnerHTML={{ __html: item }} />
+        ))}
+      </div>
+    );
+  }
+  
+  if (typeof answer === 'object') {
+    // Handle fill-in-blank object answers
+    return (
+      <div className="space-y-1">
+        {Object.entries(answer).map(([key, value]) => (
+          <div key={key}>
+            <span className="font-medium">{key.replace(/_/g, ' ')}:</span> 
+            <span 
+              className="ml-2" 
+              dangerouslySetInnerHTML={{ __html: value as string }} 
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
+  
+  return <div dangerouslySetInnerHTML={{ __html: answer }} />;
+};
 export default function UserDashboard() {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [quizHistory, setQuizHistory] = useState<QuizAttempt[]>([]);
@@ -687,37 +718,15 @@ export default function UserDashboard() {
                             <div className="space-y-3">
                               <div className="p-3 bg-red-50 border border-red-200 rounded">
                                 <p className="text-sm font-medium text-red-800">Your Answer:</p>
-                                {question.userAnswer ? (
-                                  Array.isArray(question.userAnswer) ? (
-                                    <div className="text-red-700">
-                                      {question.userAnswer.map((answer: string, idx: number) => (
-                                        <div key={idx} dangerouslySetInnerHTML={{ __html: answer }} />
-                                      ))}
-                                    </div>
-                                  ) : (
-                                    <div 
-                                      className="text-red-700"
-                                      dangerouslySetInnerHTML={{ __html: question.userAnswer }}
-                                    />
-                                  )
-                                ) : (
-                                  <p className="text-red-700">No answer selected</p>
-                                )}
+                               <div className="text-red-700">
+                                  {renderAnswer(question.userAnswer)}
+                                </div>
                               </div>
                               <div className="p-3 bg-green-50 border border-green-200 rounded">
                                 <p className="text-sm font-medium text-green-800">Correct Answer:</p>
-                                {Array.isArray(question.correctAnswer) ? (
-                                  <div className="text-green-700">
-                                    {question.correctAnswer.map((answer: string, idx: number) => (
-                                      <div key={idx} dangerouslySetInnerHTML={{ __html: answer }} />
-                                    ))}
-                                  </div>
-                                ) : (
-                                  <div 
-                                    className="text-green-700"
-                                    dangerouslySetInnerHTML={{ __html: question.correctAnswer }}
-                                  />
-                                )}
+                               <div className="text-green-700">
+                                  {renderAnswer(question.correctAnswer)}
+                                </div>
                               </div>
                               {question.explanation && (
                                 <div className="p-3 bg-blue-50 border border-blue-200 rounded">

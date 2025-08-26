@@ -281,6 +281,7 @@ export default function QuizPage() {
     }
   };
 
+  // Fixed renderQuestionContent function for fill_in_blank questions
   const renderQuestionContent = (question: Question) => {
     const currentAnswer = answers[currentQuestionIndex];
 
@@ -359,34 +360,62 @@ export default function QuizPage() {
         );
 
       case 'fill_in_blank':
-        const optionsObj = question.options as { [key: string]: string[] };
-        const answerObj = (currentAnswer as { [key: string]: string }) || {};
+        // Check if options is an object (for multiple dropdowns) or array (for single dropdown)
+        const isMultipleDropdowns = question.options && typeof question.options === 'object' && !Array.isArray(question.options);
         
-        // Parse question text and replace [option_name] with selectors
-        const renderQuestionWithSelectors = (questionText: string) => {
-          // Find all [option_name] patterns in the question
-          const pattern = /\[([^\]]+)\]/g;
-          const parts = questionText.split(pattern);
+        if (isMultipleDropdowns) {
+          // Multiple dropdowns format - render the HTML structure directly
+          const optionsObj = question.options as { [key: string]: string[] };
+          const answerObj = (currentAnswer as { [key: string]: string }) || {};
           
-          return parts.map((part, index) => {
-            // Every odd index is a captured group (option name)
-            if (index % 2 === 1) {
-              const optionKey = part;
-              if (optionsObj[optionKey] && Array.isArray(optionsObj[optionKey])) {
-                return (
+          // Split question by code blocks and text
+          const beforeCodeMatch = question.question.match(/^(.*?)<div[^>]*class[^>]*bg-gray-800[^>]*>/);
+          const codeBlockMatch = question.question.match(/<div[^>]*class[^>]*bg-gray-800[^>]*>([\s\S]*?)<\/div>/);
+          const afterCodeMatch = question.question.match(/<\/div>([\s\S]*)$/);
+          
+          const beforeCode = beforeCodeMatch ? beforeCodeMatch[1] : '';
+          const codeContent = codeBlockMatch ? codeBlockMatch[1] : '';
+          const afterCode = afterCodeMatch ? afterCodeMatch[1] : '';
+          
+          // Parse the code content and replace ____ with dropdowns
+          const keys = Object.keys(optionsObj);
+          let keyIndex = 0;
+          
+          const renderCodeWithDropdowns = () => {
+            const codeParts = codeContent.split('____');
+            const elements = [];
+            
+            for (let i = 0; i < codeParts.length; i++) {
+              if (codeParts[i]) {
+                elements.push(
+                  <span key={`code-${i}`} dangerouslySetInnerHTML={{ __html: codeParts[i] }} />
+                );
+              }
+              
+              if (i < codeParts.length - 1 && keyIndex < keys.length) {
+                const key = keys[keyIndex++];
+                elements.push(
                   <Select 
-                    key={optionKey}
-                    value={answerObj[optionKey] || ''} 
+                    key={`dropdown-${key}`}
+                    value={answerObj[key] || ''} 
                     onValueChange={(value) => {
-                      const newAnswer = { ...answerObj, [optionKey]: value };
+                      const newAnswer = { ...answerObj, [key]: value };
                       handleAnswer(newAnswer);
                     }}
                   >
-                    <SelectTrigger className="inline-flex w-auto min-w-32 mx-1">
-                      <SelectValue placeholder="Choose..." />
+                    <SelectTrigger 
+                      className="inline-flex w-auto min-w-36 mx-1 h-6 text-sm bg-gray-100 border border-gray-300 rounded px-2"
+                      style={{ 
+                        display: 'inline-flex', 
+                        verticalAlign: 'baseline',
+                        fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
+                        fontSize: '14px'
+                      }}
+                    >
+                      <SelectValue placeholder="Choose One..." />
                     </SelectTrigger>
                     <SelectContent>
-                      {optionsObj[optionKey].map((option) => (
+                      {optionsObj[key].map((option) => (
                         <SelectItem key={option} value={option}>
                           <span dangerouslySetInnerHTML={{ __html: option }} />
                         </SelectItem>
@@ -395,52 +424,55 @@ export default function QuizPage() {
                   </Select>
                 );
               }
-              return <span key={index} className="text-red-500">[{part}]</span>;
             }
-            // Even indices are regular text
-            return <span key={index} dangerouslySetInnerHTML={{ __html: part }} />;
-          });
-        };
-
-        return (
-          <div className="space-y-4">
-            <div className="text-base leading-relaxed">
-              {renderQuestionWithSelectors(question.question)}
-            </div>
             
-            {/* Fallback: Show separate selectors if no inline patterns found */}
-            {!question.question.includes('[') && (
-              <>
-                <p className="text-sm text-gray-600 mb-4">Select the appropriate option for each dropdown:</p>
-                {Object.keys(optionsObj).map((key) => (
-                  <div key={key} className="flex flex-col space-y-2">
-                    <label className="text-sm font-medium text-gray-700 capitalize">
-                      {key.replace(/_/g, ' ')}:
-                    </label>
-                    <Select 
-                      value={answerObj[key] || ''} 
-                      onValueChange={(value) => {
-                        const newAnswer = { ...answerObj, [key]: value };
-                        handleAnswer(newAnswer);
-                      }}
-                    >
-                      <SelectTrigger className="w-full">
-                        <SelectValue placeholder={`Choose ${key.replace(/_/g, ' ')}...`} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {Array.isArray(optionsObj[key]) && optionsObj[key].map((option) => (
-                          <SelectItem key={option} value={option}>
-                            <span dangerouslySetInnerHTML={{ __html: option }} />
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                ))}
-              </>
-            )}
-          </div>
-        );
+            return elements;
+          };
+          
+          return (
+            <div className="space-y-4">
+              {/* Render question parts separately */}
+              <div>
+                <div dangerouslySetInnerHTML={{ __html: beforeCode }} />
+                
+                <div className="bg-gray-800 text-green-400 p-3 rounded font-mono mt-2" style={{ fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
+                  {renderCodeWithDropdowns()}
+                </div>
+                
+                <div dangerouslySetInnerHTML={{ __html: afterCode }} />
+              </div>
+            </div>
+          );
+        } else {
+          // Single dropdown format (array of options)
+          const optionsArray = question.options as string[];
+          const selectedAnswer = currentAnswer as string || '';
+          
+          return (
+            <div className="space-y-4">
+              <h2 
+                className="text-lg sm:text-xl font-bold text-gray-800 mb-4 leading-relaxed" 
+                dangerouslySetInnerHTML={{ __html: question.question }} 
+              />
+              <p className="text-sm text-gray-600 mb-4">Select the correct option:</p>
+              <Select 
+                value={selectedAnswer} 
+                onValueChange={(value) => handleAnswer(value)}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Choose an option..." />
+                </SelectTrigger>
+                <SelectContent>
+                  {optionsArray && optionsArray.map((option) => (
+                    <SelectItem key={option} value={option}>
+                      <span dangerouslySetInnerHTML={{ __html: option }} />
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          );
+        }
 
       case 'ordering':
         const sourcePool = question.options as string[];
@@ -568,17 +600,17 @@ export default function QuizPage() {
 
             {userArrangement.length > 0 && (
               <div className="text-xs text-gray-500 text-center">
-                Tip: Drag items back to "Available Options" to remove them from your arrangement
+                Tip: Drag items back to Available Options to remove them from your arrangement
               </div>
             )}
           </div>
         );
 
       default:
-        return <p>Unsupported question type</p>;
+        return <div className="text-red-500">Unknown question type: {question.type}</div>;
     }
   };
-
+  
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 flex items-center justify-center p-4">
@@ -783,10 +815,13 @@ export default function QuizPage() {
             {/* Question Card */}
             <Card className="mb-4 shadow-md border-0 bg-white/90 backdrop-blur-sm">
               <CardContent className="p-4 sm:p-6">
-                <h2 
-                  className="text-lg sm:text-xl font-bold text-gray-800 mb-4 leading-relaxed" 
-                  dangerouslySetInnerHTML={{ __html: currentQuestion?.question || '' }}
-                />
+                {/* For fill_in_blank questions, don't show the question text separately */}
+                {currentQuestion?.type !== 'fill_in_blank' && (
+                  <h2 
+                    className="text-lg sm:text-xl font-bold text-gray-800 mb-4 leading-relaxed" 
+                    dangerouslySetInnerHTML={{ __html: currentQuestion?.question || '' }}
+                  />
+                )}
                 
                 {currentQuestion && renderQuestionContent(currentQuestion)}
               </CardContent>

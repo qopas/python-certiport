@@ -1167,44 +1167,45 @@ const stats = {
                     
                     <CardContent className="space-y-4">
                       {/* All Answer Options */}
-                      {originalQuestion?.options && (
-                        <div className="space-y-2">
-                          <h4 className="font-medium text-sm text-gray-700 mb-3">Answer Options:</h4>
-                          {originalQuestion.options.map((option, index) => {
-                            const isCorrect = Array.isArray(stat.correctAnswer) 
-                              ? stat.correctAnswer.includes(option)
-                              : stat.correctAnswer === option;
-                            
-                            return (
-                              <div 
-                                key={index} 
-                                className={`p-3 rounded border ${
-                                  isCorrect 
-                                    ? 'border-green-200 bg-green-50' 
-                                    : 'border-gray-200 bg-gray-50'
-                                }`}
-                              >
-                                <div className="flex items-start space-x-2">
-                                  <span className={`text-sm font-medium px-2 py-1 rounded ${
-                                    isCorrect 
-                                      ? 'bg-green-100 text-green-700' 
-                                      : 'bg-gray-100 text-gray-600'
-                                  }`}>
-                                    {String.fromCharCode(65 + index)}
-                                  </span>
-                                  <div 
-                                    className="flex-1"
-                                    dangerouslySetInnerHTML={{ __html: option }}
-                                  />
-                                  {isCorrect && (
-                                    <Circle className="w-4 h-4 text-green-500" />
-                                  )}
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-                      )}
+                     {Array.isArray(originalQuestion?.options) && (
+  <div className="space-y-2">
+    <h4 className="font-medium text-sm text-gray-700 mb-3">Answer Options:</h4>
+    {originalQuestion.options.map((option, index) => {
+      const isCorrect = Array.isArray(stat.correctAnswer) 
+        ? stat.correctAnswer.includes(option)
+        : stat.correctAnswer === option;
+
+      return (
+        <div 
+          key={index} 
+          className={`p-3 rounded border ${
+            isCorrect 
+              ? 'border-green-200 bg-green-50' 
+              : 'border-gray-200 bg-gray-50'
+          }`}
+        >
+          <div className="flex items-start space-x-2">
+            <span className={`text-sm font-medium px-2 py-1 rounded ${
+              isCorrect 
+                ? 'bg-green-100 text-green-700' 
+                : 'bg-gray-100 text-gray-600'
+            }`}>
+              {String.fromCharCode(65 + index)}
+            </span>
+            <div 
+              className="flex-1"
+              dangerouslySetInnerHTML={{ __html: option }}
+            />
+            {isCorrect && (
+              <Circle className="w-4 h-4 text-green-500" />
+            )}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+)}
+
                       
                       {/* Explanation */}
                       {originalQuestion?.explanation && (
