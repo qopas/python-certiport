@@ -245,7 +245,7 @@ export const quizQuestions: Question[] = [
   "id": 15,
   "domain": "Operators & arithmetic",
   "type": "fill_in_blank",
-  "question": "Use the dropdown arrows to match the correct operator to the result of each variable calculation using these values:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a = 10<br>b = 3</div><br><br>Match each calculation:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a ____ b = 13<br>a ____ b = 7<br>a ____ b = 3.33<br>a ____ b = 3<br>a ____ b = 1</div>",
+  "question": "Use the dropdown arrows to match the correct operator to the result of each variable calculation using these values:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a = 10<br>b = 3<br>a ____ b = 13<br>a ____ b = 7<br>a ____ b = 3.33<br>a ____ b = 3<br>a ____ b = 1</div>",
   "options": {
     "operator1": ["+", "*", "//"],
     "operator2": ["-", "/", "//"],
