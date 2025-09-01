@@ -138,7 +138,13 @@ export default function UserDashboard() {
 
   const startNewQuiz = async () => {
     try {
-      const response = await fetch('/api/quiz/start', { method: 'POST' });
+      const response = await fetch('/api/quiz/start', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ mode: 'testing' }) // Add this!
+    });
       
       if (!response.ok) {
         console.error('Quiz start failed:', response.status, response.statusText);

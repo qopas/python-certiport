@@ -1,10 +1,11 @@
-"use client"
+// src/components/MainQuizComponent.tsx
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import QuizModeSelection from '@/components/QuizModeSelection';
-import TrainingQuiz from '@/components/TrainingQuiz';
-import TrainingResults from '@/components/TrainingResult';
+import QuizModeSelection from './QuizModeSelection';
+import TrainingQuiz from './TrainingQuiz';
+import TrainingResults from './TrainingResult';
 import QuizStorageManager from '@/lib/quiz-storage-enchanched';
+import { Question } from '@/lib/types';
 
 type QuizStage = 'mode-selection' | 'quiz' | 'results';
 type QuizMode = 'training' | 'testing';
@@ -13,11 +14,15 @@ const MainQuizComponent: React.FC = () => {
   const router = useRouter();
   const [stage, setStage] = useState<QuizStage>('mode-selection');
   const [selectedMode, setSelectedMode] = useState<QuizMode | null>(null);
-  const [questions, setQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [results, setResults] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+useEffect(() => {
+    if (stage === 'quiz' && selectedMode === 'testing') {
+      router.push('/quiz?mode=testing');
+    }
+  }, [stage, selectedMode, router]);
   // Check for existing sessions on component mount
   useEffect(() => {
     // Check if there's an existing training session
@@ -186,6 +191,7 @@ const MainQuizComponent: React.FC = () => {
           />
         );
       } else {
+    
         return (
           <div className="min-h-screen bg-gray-50 flex items-center justify-center">
             <div className="text-center">
