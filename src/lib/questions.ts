@@ -2559,11 +2559,11 @@ export const quizQuestions: Question[] = [
     "options": [
       "A. [6, 5, 4, 3, 2]",
       "B. [6, 4, 5, 2, 4]",
-      "C. [6, 5, 4, 3, 2]",
+      "C. [6, 8, 4, 4, 2]",
       "D. [4, 2, 5, 4, 6]"
     ],
-    "answer": "C. [6, 5, 4, 3, 2]",
-    "explanation": "Original: [1,2,3,4,5]. After transformation: [2,4,4,8,6] (odd+1, even*2). After reverse: [6,8,4,4,2]. Wait, let me recalculate: [1+1, 2*2, 3+1, 4*2, 5+1] = [2,4,4,8,6]. Reversed: [6,8,4,4,2]. The correct answer should be D."
+    "answer": "C. [6, 8, 4, 4, 2]",
+    "explanation": "Original: [1,2,3,4,5]. After transformation: [2,4,4,8,6] (odd+1, even*2). After reverse: [6,8,4,4,2]. Calcultation: [1+1, 2*2, 3+1, 4*2, 5+1] = [2,4,4,8,6]. Reversed: [6,8,4,4,2]"
   },
   {
     "id": 160,
@@ -2599,13 +2599,13 @@ export const quizQuestions: Question[] = [
     "type": "multiple_choice",
     "question": "Analyze this nested loop pattern. How many asterisks (*) will be printed in total?<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>total = 0<br>for i in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;for j in range(i, 5):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if (i + j) % 2 == 1:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(\"*\", end=\"\")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;print()  # newline</div>",
     "options": [
-      "A. 6",
+      "A. 4",
       "B. 7",
       "C. 8",
       "D. 9"
     ],
-    "answer": "B. 7",
-    "explanation": "i=1: j=1,2,3,4 → (i+j)=2,3,4,5 → odd sums: 3,5 (2 stars). i=2: j=2,3,4 → (i+j)=4,5,6 → odd sums: 5 (1 star). i=3: j=3,4 → (i+j)=6,7 → odd sums: 7 (1 star). Wait, let me recount: i=1,j=1→2(even), i=1,j=2→3(odd)★, i=1,j=3→4(even), i=1,j=4→5(odd)★. i=2,j=2→4(even), i=2,j=3→5(odd)★, i=2,j=4→6(even). i=3,j=3→6(even), i=3,j=4→7(odd)★. Total: 4 stars."
+    "answer": "A. 4",
+    "explanation": "i=1: j=1,2,3,4 → (i+j)=2,3,4,5 → odd sums: 3,5 (2 stars). i=2: j=2,3,4 → (i+j)=4,5,6 → odd sums: 5 (1 star). i=3: j=3,4 → (i+j)=6,7 → odd sums: 7 (1 star). The count: i=1,j=1→2(even), i=1,j=2→3(odd)★, i=1,j=3→4(even), i=1,j=4→5(odd)★. i=2,j=2→4(even), i=2,j=3→5(odd)★, i=2,j=4→6(even). i=3,j=3→6(even), i=3,j=4→7(odd)★. Total: 4 stars."
   },
   {
     "id": 163,
@@ -2632,8 +2632,8 @@ export const quizQuestions: Question[] = [
       "C. 45",
       "D. 50"
     ],
-    "answer": "B. 40",
-    "explanation": "Processing each key: 'a': 10≤15, delete from data, total += backup['a'] = 10. 'b': 20>15, data['b'] = 20//2 = 10, total += 10 = 20. 'c': 30>15, data['c'] = 30//2 = 15, total += 15 = 35. Wait: total = 10 + 10 + 15 = 35, not 40."
+    "answer": "A. 35",
+    "explanation": "Processing each key: 'a': 10≤15, delete from data, total += backup['a'] = 10. 'b': 20>15, data['b'] = 20//2 = 10, total += 10 = 20. 'c': 30>15, data['c'] = 30//2 = 15, total += 15 = 35."
   },
   {
     "id": 165,
@@ -2702,8 +2702,8 @@ export const quizQuestions: Question[] = [
       "C. [2, 3, 10]",
       "D. [2, 6, 5]"
     ],
-    "answer": "C. [2, 3, 10]",
-    "explanation": "i=0: numbers[0]=1 (odd), 1*2=2, i=1. i=1: numbers[1]=2 (even), remove 2, list=[2,3,4,5,6]. i=2: numbers[2]=4 (even), remove 4, list=[2,3,5,6]. i=3: numbers[3]=6 (even), remove 6, list=[2,3,5]. i=4: out of bounds. Wait, this is tricky - let me retrace more carefully."
+    "answer": "A. [2, 6, 10]",
+    "explanation": "i=0: numbers[0]=1 (odd), 1*2=2, i=1. i=1: numbers[1]=2 (even), remove 2, list=[2,3,4,5,6]. i=1: numbers[1]=3 (odd), 3*2=6, i=2. i=2: numbers[2]=4 (even), remove 4, list=[2,6,5,6]. i=2: numbers[2]=5 (odd), 5*2=10, i=3. i=3: numbers[3]=6 (even), remove 6, list=[2,6,10]. i=3: out"
   },
   {
     "id": 170,
@@ -2758,8 +2758,8 @@ export const quizQuestions: Question[] = [
       "C. Excellen",
       "D. Needs Im"
     ],
-    "answer": "B. Excellent",
-    "explanation": "score=85 (>=80), message=\"Good\". score+bonus=95 (>=95), so message=\"Excellent\". len(\"Excellent\")=9>8, so message=\"Excellent\"[:8]=\"Excellen\". Wait, that should be C."
+    "answer": "C. Excellen",
+    "explanation": "score=85 (>=80), message=\"Good\". score+bonus=95 (>=95), so message=\"Excellent\". len(\"Excellent\")=9>8, so message=\"Excellent\"[:8]=\"Excellen\"."
   },
   {
     "id": 174,
