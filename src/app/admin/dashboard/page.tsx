@@ -557,20 +557,40 @@ export default function AdminDashboard() {
   });
 
   const clearResults = async () => {
-    if (!confirm('Are you sure you want to clear all results?')) {
-      return;
-    }
+  // Get the selected class name for confirmation dialog
+  const selectedClassName = selectedClassFilter === 'all' 
+    ? 'all classes' 
+    : classes.find(c => c.id.toString() === selectedClassFilter)?.name || 'selected class';
+  
+  // Create appropriate confirmation message
+  const confirmMessage = selectedClassFilter === 'all'
+    ? 'Are you sure you want to clear all quiz results from all classes? This action cannot be undone.'
+    : `Are you sure you want to clear all quiz results for "${selectedClassName}"? This action cannot be undone.`;
+  
+  if (!confirm(confirmMessage)) {
+    return;
+  }
 
-    try {
-      const response = await fetch('/api/results', { method: 'DELETE' });
-      if (response.ok) {
-        setSubmissions([]);
-      }
-    } catch (error) {
-      console.error('Error clearing results:', error);
+  try {
+    const url = selectedClassFilter === 'all' 
+      ? '/api/results' 
+      : `/api/results?classId=${selectedClassFilter}`;
+      
+    const response = await fetch(url, { method: 'DELETE' });
+    
+    if (response.ok) {
+      const result = await response.json();
+      fetchResults();
+      alert(result.message || 'Results cleared successfully!');
+    } else {
+      const error = await response.json();
+      alert(`Error: ${error.error}`);
     }
-  };
-
+  } catch (error) {
+    console.error('Error clearing results:', error);
+    alert('Failed to clear results');
+  }
+};
   const exportResults = () => {
     if (submissions.length === 0) {
       alert('No results to export');
@@ -879,7 +899,10 @@ const stats = {
                     </Button>
                     <Button onClick={clearResults} variant="destructive" size="sm">
                       <Trash2 className="w-4 h-4 mr-2" />
-                      Clear All
+                      {selectedClassFilter === 'all' 
+                        ? 'Clear All Results' 
+                        : `Clear ${classes.find(c => c.id.toString() === selectedClassFilter)?.name || 'Class'} Results`
+                      }
                     </Button>
                   </div>
                 </CardHeader>

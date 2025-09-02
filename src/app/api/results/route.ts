@@ -68,14 +68,38 @@ export async function GET(request: NextRequest) {
 
 export async function DELETE(request: NextRequest) {
   const admin = requireAdmin(request);
-  
+ 
   if (!admin) {
     return NextResponse.json({ error: 'Admin access required' }, { status: 403 });
   }
 
   try {
-    await query('DELETE FROM quiz_submissions');
-    return NextResponse.json({ success: true });
+    // Get the class filter from URL search params
+    const url = new URL(request.url);
+    const classId = url.searchParams.get('classId');
+
+    if (classId && classId !== 'all') {
+      // Delete only submissions from the specified class
+      const result = await query(`
+        DELETE FROM quiz_submissions 
+        WHERE user_id IN (
+          SELECT id FROM users WHERE class_id = $1
+        )
+      `, [parseInt(classId)]);
+
+      return NextResponse.json({ 
+        success: true, 
+        message: `Cleared ${result.rowCount} submissions for the selected class`,
+        deletedCount: result.rowCount
+      });
+    } else {
+      const result = await query('DELETE FROM quiz_submissions');
+      return NextResponse.json({ 
+        success: true, 
+        message: `Cleared all ${result.rowCount} submissions`,
+        deletedCount: result.rowCount
+      });
+    }
   } catch (error) {
     console.error('Error clearing results:', error);
     return NextResponse.json(
