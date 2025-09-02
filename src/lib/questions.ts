@@ -1299,7 +1299,7 @@ export const quizQuestions: Question[] = [
     "isqrt(b)",
     "isqrt(a)",
     "sq(a)",
-    "pow",
+    "pow(3,2)",
     "math",
     "sqrt(a)",
     "**",
