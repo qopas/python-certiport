@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
       score,
       percentage,
       totalTime,
-      questionResults,
+      questionDetails,
       startedAt
     }: {
       sessionId: string;
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
       score: number;
       percentage: number;
       totalTime: number;
-      questionResults: QuestionResult[];
+      questionDetails: QuestionResult[];
       startedAt: string;
     } = body;
 
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
       score,
       percentage,
       totalTime,
-      questionsCount: questions?.length || questionResults?.length
+      questionsCount: questions?.length || questionDetails?.length
     });
 
     // Training mode submissions are NOT saved to database
@@ -58,8 +58,8 @@ export async function POST(request: NextRequest) {
           score,
           percentage,
           totalTime,
-          questionResults,
-          totalQuestions: questionResults?.length || 0
+          questionDetails,
+          totalQuestions: questionDetails?.length || 0
         }
       });
     }
@@ -91,7 +91,7 @@ export async function POST(request: NextRequest) {
           user.class_id || null,
           submissionId,
           score,
-          questionResults?.length || 0,
+          questionDetails?.length || 0,
           percentage,
           totalTime,
           new Date(startedAt),
@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
             mode,
             questions,
             answers,
-            questionResults
+            questionDetails
           })
         ]);
 
@@ -123,8 +123,8 @@ export async function POST(request: NextRequest) {
             score,
             percentage,
             totalTime,
-            questionResults,
-            totalQuestions: questionResults?.length || 0,
+            questionDetails,
+            totalQuestions: questionDetails?.length || 0,
             submissionId,
             completedAt: new Date().toISOString()
           }
@@ -142,8 +142,8 @@ export async function POST(request: NextRequest) {
             score,
             percentage,
             totalTime,
-            questionResults,
-            totalQuestions: questionResults?.length || 0
+            questionDetails,
+            totalQuestions: questionDetails?.length || 0
           }
         });
       }

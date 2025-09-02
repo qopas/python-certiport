@@ -281,7 +281,7 @@ const TrainingQuiz: React.FC<TrainingQuizProps> = ({
       default:
         return (
           <div className="text-gray-500 text-center py-8">
-            Question type "{currentQuestion.type}" not yet implemented in training mode
+            Question type {currentQuestion.type} not yet implemented in training mode
           </div>
         );
     }

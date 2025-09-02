@@ -1,10 +1,13 @@
-"use client"
+// src/app/quiz/page.tsx
+"use client";
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import QuizModeSelection from '@/components/QuizModeSelection';
 import TrainingQuiz from '@/components/TrainingQuiz';
+import TestingQuiz from '@/components/TestingQuiz';
 import TrainingResults from '@/components/TrainingResult';
 import QuizStorageManager from '@/lib/quiz-storage-enchanched';
+import { Question } from '@/lib/types';
 
 type QuizStage = 'mode-selection' | 'quiz' | 'results';
 type QuizMode = 'training' | 'testing';
@@ -13,7 +16,7 @@ const MainQuizComponent: React.FC = () => {
   const router = useRouter();
   const [stage, setStage] = useState<QuizStage>('mode-selection');
   const [selectedMode, setSelectedMode] = useState<QuizMode | null>(null);
-  const [questions, setQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [results, setResults] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -106,14 +109,14 @@ const MainQuizComponent: React.FC = () => {
     console.log('Quiz completed:', quizResults);
 
     if (selectedMode === 'training') {
-      // Training mode - just show results, don't submit to API
+      // Training mode - just show results, don't submit to API (already handled in TrainingQuiz)
       setResults(quizResults);
       setStage('results');
       QuizStorageManager.clearSession('training');
     } else if (selectedMode === 'testing') {
-      // Testing mode - submit results and redirect to regular quiz page
-      // This would typically redirect to your existing testing quiz component
-      router.push('/quiz?mode=testing');
+      // Testing mode - results already submitted to API in TestingQuiz component
+      // Redirect to dashboard or show a simple completion message
+      router.push('/dashboard');
     }
   };
 
@@ -185,12 +188,20 @@ const MainQuizComponent: React.FC = () => {
             onBackToDashboard={handleBackToDashboard}
           />
         );
+      } else if (selectedMode === 'testing') {
+        return (
+          <TestingQuiz
+            questions={questions}
+            onComplete={handleQuizComplete}
+            onBackToDashboard={handleBackToDashboard}
+          />
+        );
       } else {
         return (
           <div className="min-h-screen bg-gray-50 flex items-center justify-center">
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-              <p className="text-gray-600">Redirecting to testing mode...</p>
+              <p className="text-gray-600">Loading quiz...</p>
             </div>
           </div>
         );

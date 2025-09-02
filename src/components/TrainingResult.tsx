@@ -55,7 +55,7 @@ const TrainingResults: React.FC<TrainingResultsProps> = ({
             <h1 className="text-3xl font-bold text-gray-900">Training Complete!</h1>
           </div>
           <p className="text-gray-600">
-            Here's how you performed in training mode. Remember, these results are not recorded.
+            Here is how you performed in training mode. Remember, these results are not recorded.
           </p>
         </div>
 
