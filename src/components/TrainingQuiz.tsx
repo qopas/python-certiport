@@ -1,6 +1,6 @@
 // src/components/TrainingQuiz.tsx
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, ArrowRight, CheckCircle, XCircle, Flag, RotateCcw } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, XCircle, Flag, RotateCcw, GripVertical } from 'lucide-react';
 import { Question } from '@/lib/types';
 import { TrainingResult } from '@/lib/quiz-mode-types';
 
@@ -39,7 +39,11 @@ const TrainingQuiz: React.FC<TrainingQuizProps> = ({
     setAnswers(newAnswers);
     setHasAnswered(true);
   };
-
+ const handleAnswer = (answer: string | string[] | { [key: string]: string }) => {
+    const newAnswers = [...answers];
+    newAnswers[currentQuestionIndex] = answer;
+    setAnswers(newAnswers);
+  };
   const handleSubmitAnswer = () => {
     if (!hasAnswered) return;
     setShowExplanation(true);
@@ -275,6 +279,137 @@ const TrainingQuiz: React.FC<TrainingQuizProps> = ({
                 )}
               </div>
             ))}
+          </div>
+        );
+      case 'ordering':
+        const sourcePool = currentQuestion.options as string[];
+        const correctAnswer = currentQuestion.answer as string[];
+        const userArrangement = (userAnswer as string[]) || [];
+        
+        const handleDragStart = (e: React.DragEvent, item: string, fromPool: boolean) => {
+          e.dataTransfer.setData('text/plain', JSON.stringify({ item, fromPool }));
+        };
+
+        const handleDragOver = (e: React.DragEvent) => {
+          e.preventDefault();
+        };
+
+        const handleDropInArrangement = (e: React.DragEvent, index?: number) => {
+          e.preventDefault();
+          const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+          const { item, fromPool } = data;
+          
+          const newArrangement = [...userArrangement];
+          
+          if (fromPool) {
+            // Adding from pool - insert at specific index or at end
+            if (typeof index === 'number') {
+              newArrangement.splice(index, 0, item);
+            } else {
+              newArrangement.push(item);
+            }
+          } else {
+            // Reordering within arrangement
+            const currentIndex = newArrangement.indexOf(item);
+            if (currentIndex !== -1) {
+              newArrangement.splice(currentIndex, 1);
+              if (typeof index === 'number') {
+                newArrangement.splice(index, 0, item);
+              } else {
+                newArrangement.push(item);
+              }
+            }
+          }
+          
+          handleAnswer(newArrangement);
+        };
+
+        const handleDropInPool = (e: React.DragEvent) => {
+          e.preventDefault();
+          const data = JSON.parse(e.dataTransfer.getData('text/plain'));
+          const { item, fromPool } = data;
+          
+          if (!fromPool) {
+            // Remove from arrangement
+            const newArrangement = userArrangement.filter(arrItem => arrItem !== item);
+            handleAnswer(newArrangement);
+          }
+        };
+
+        const unusedItems = sourcePool.filter(item => !userArrangement.includes(item));
+
+        return (
+          <div className="space-y-4">
+            <p className="text-sm text-gray-600 mb-4">
+              Drag items from the right side to the left side to arrange them in the correct order. Not all items need to be used.
+            </p>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {/* Answer Area - Left Side */}
+              <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 min-h-[300px]">
+                <h4 className="text-sm font-medium text-gray-700 mb-3">Arrangement Area:</h4>
+                <div
+                  className="space-y-2"
+                  onDragOver={handleDragOver}
+                  onDrop={(e) => handleDropInArrangement(e)}
+                >
+                  {userArrangement.length === 0 ? (
+                    <div className="text-center text-gray-400 py-12">
+                      Drag items here to arrange them in order
+                    </div>
+                  ) : (
+                    userArrangement.map((item, index) => (
+                      <div
+                        key={`arranged-${item}-${index}`}
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, item, false)}
+                        className="flex items-center justify-between p-3 bg-indigo-50 border border-indigo-200 rounded-lg cursor-move hover:bg-indigo-100 transition-colors"
+                      >
+                        <div className="flex items-center">
+                          <span className="text-sm font-medium text-indigo-700 mr-2 min-w-[20px]">{index + 1}.</span>
+                          <GripVertical className="w-4 h-4 mr-2 text-indigo-400" />
+                          <span className="text-sm" dangerouslySetInnerHTML={{ __html: item }} />
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+
+              {/* Source Pool - Right Side */}
+              <div className="border border-gray-200 rounded-lg p-4 min-h-[300px]">
+                <h4 className="text-sm font-medium text-gray-700 mb-3">Available Options:</h4>
+                <div
+                  className="space-y-2"
+                  onDragOver={handleDragOver}
+                  onDrop={handleDropInPool}
+                >
+                  {unusedItems.length === 0 ? (
+                    <div className="text-center text-gray-400 py-12">
+                      All items have been used
+                    </div>
+                  ) : (
+                    unusedItems.map((item, index) => (
+                      <div
+                        key={`pool-${item}-${index}`}
+                        draggable
+                        onDragStart={(e) => handleDragStart(e, item, true)}
+                        className="flex items-center p-3 bg-gray-50 border border-gray-200 rounded-lg cursor-move hover:bg-gray-100 transition-colors"
+                      >
+                        <GripVertical className="w-4 h-4 mr-2 text-gray-400" />
+                        <span className="text-sm" dangerouslySetInnerHTML={{ __html: item }} />
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {userArrangement.length > 0 && (
+              <div className="text-xs text-gray-500 text-center">
+                Tip: Drag items back to Available Options to remove them from your arrangement
+              </div>
+            )}
           </div>
         );
 
