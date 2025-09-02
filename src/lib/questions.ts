@@ -2739,13 +2739,13 @@ export const quizQuestions: Question[] = [
     "type": "multiple_choice",
     "question": "Analyze this multi-step data processing. What will be the length of `final_result`?<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>data = [12, 7, 23, 4, 18, 31, 9, 15]<br>step1 = [x for x in data if x > 10]<br>step2 = [x + 5 if x % 2 == 0 else x - 3 for x in step1]<br>step3 = [x for x in step2 if x % 3 == 0]<br>final_result = sorted(step3, reverse=True)<br><br>print(len(final_result))</div>",
     "options": [
-      "A. 2",
+      "A. 1",
       "B. 3",
       "C. 4",
       "D. 5"
     ],
-    "answer": "B. 3",
-    "explanation": "step1: [12, 23, 18, 31, 15] (>10). step2: [17, 20, 23, 28, 12] (even+5, odd-3). step3: [12, 15, 21] wait... let me recalculate step2: 12+5=17, 23-3=20, 18+5=23, 31-3=28, 15-3=12. Then step3 (divisible by 3): none of [17,20,23,28,12] are divisible by 3. Let me recheck..."
+    "answer": "A. 1",
+    "explanation": "step1: [12, 23, 18, 31, 15] (>10). step2: [17, 20, 23, 28, 12] (even+5, odd-3). step2: 12+5=17, 23-3=20, 18+5=23, 31-3=28, 15-3=12. Then step3 (divisible by 3): [12] length(step3) = 1"
   },
   {
     "id": 173,
