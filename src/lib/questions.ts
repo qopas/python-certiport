@@ -674,6 +674,7 @@ export const quizQuestions: Question[] = [
     "print(response)",
     "while response not in location:",
     "print(\"Try again.\")",
+    "response = input(\"Enter North, South, West, or East for a location.\")",
     "response = input(\"Enter North, South, West, or East for a location.\")"
   ],
   "answer": [
@@ -822,7 +823,7 @@ export const quizQuestions: Question[] = [
   "id": 48,
   "domain": "Functions & parameters",
   "type": "fill_in_blank",
-  "question": "Complete the code example to build a function that does the following:<br><br>• Its name is calcSubtotal<br>• The function takes an amount and a sales tax rate and calculates a subtotal<br>• The new subtotal is returned<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____ ____:<br><br>&nbsp;&nbsp;&nbsp;subtotal = amount * (1 + salesTaxRate)<br><br>&nbsp;&nbsp;&nbsp;____subtotal</div>",
+  "question": "Complete the code example to build a function that does the following:<br><br>• Its name is calcSubtotal<br>• The function takes an amount and a sales tax rate and calculates a subtotal<br>• The new subtotal is returned<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____ ____:<br><br>&nbsp;&nbsp;&nbsp;subtotal = amount * (1 + salesTaxRate)<br><br>&nbsp;&nbsp;&nbsp;____</div>",
   "options": {
     "function_keyword": ["function", "def calcSubtotal", "calcSubtotal"],
     "parameters": ["()", "(amount, salesTaxRate)", "(amount, salesTaxRate):"],
@@ -830,7 +831,7 @@ export const quizQuestions: Question[] = [
   },
   "answer": {
     "function_keyword": "def calcSubtotal",
-    "parameters": "(amount, salesTaxRate):",
+    "parameters": "(amount, salesTaxRate)",
     "return_keyword": "return subtotal"
   },
   "explanation": "Python functions are defined using the `def` keyword, followed by the function name and parameters in parentheses. The function needs two parameters: `amount` and `salesTaxRate` to perform the calculation. The `return` statement sends the calculated subtotal back to the caller. The other options: `function` is not Python syntax (it's JavaScript), empty parentheses `()` wouldn't provide the needed parameters, and the function name `calcSubtotal` goes after `def`, not before it."
@@ -1214,7 +1215,7 @@ export const quizQuestions: Question[] = [
   "id": 71,
   "domain": "DateTime module & formatting",
   "type": "fill_in_blank",
-  "question": "A new developer is learning the code necessary to display dates in multiple formats. The developer has been tasked with creating a display with dates. Using the dropdown arrows, complete the code snippet to create the display, leaving open the possibility of time being displayed in the future.<br><br>Expected output:<br><div class='bg-gray-800'>2023-01-01 03:19:43.412476<br>The current date is 01/01/2023<br>The current weekday is: 6</div><br><br>Complete the code:<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____ datetime<br>current_date = ____<br>print(current_date)<br>print(\"The current date is\", datetime.datetime.strftime(current_date,\"____\"))<br>print(\"The current weekday is\", current_date.____)</div>",
+  "question": "A new developer is learning the code necessary to display dates in multiple formats. The developer has been tasked with creating a display with dates. Using the dropdown arrows, complete the code snippet to create the display, leaving open the possibility of time being displayed in the future.<br><br>Expected output:<br>2023-01-01 03:19:43.412476<br>The current date is 01/01/2023<br>The current weekday is: 6<br><br>Complete the code:<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____ datetime<br>current_date = ____<br>print(current_date)<br>print(\"The current date is\", datetime.datetime.strftime(current_date,\"____\"))<br>print(\"The current weekday is\", current_date.____)</div>",
   "options": {
     "import_statement": ["import", "import", "import"],
     "current_date_function": ["datetime.datetime.today()", "datetime.datetime.day()", "datetime.datetime.currentdate()"],
@@ -1228,25 +1229,6 @@ export const quizQuestions: Question[] = [
     "weekday_method": "weekday()"
   },
   "explanation": "The correct code uses: `import datetime` to import the module, `datetime.datetime.today()` to get current date and time, `%m/%d/%Y` format string for MM/DD/YYYY display (%m = month, %d = day, %Y = 4-digit year), and `weekday()` method which returns 0-6 (Monday=0, Sunday=6). The other options include invalid functions like `currentdate()` and incorrect format codes like `%MM` or `%YYYY`."
-},
-{
-  "id": 72,
-  "domain": "Random module & number generation",
-  "type": "ordering",
-  "question": "You are trying to generate 10 sets of random numbers. One random number is between 3 and 99, with the number being a multiple of 3. The other random number needs to be between 0 and 1.<br><br>Drag the snippets of code needed to complete the code block, which is part of a game app.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>for i in range(10):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(____, ____)</div>",
-  "options": [
-    "randrange(3,99,3)",
-    "randint()",
-    "randrange(3,102,3)",
-    "random()",
-    "for i in range(9):",
-    "randint(3,102,3)"
-  ],
-  "answer": [
-    "randrange(3,102,3)",
-    "random()"
-  ],
-  "explanation": "The correct combination is `randrange(3,102,3)` and `random()`. For multiples of 3 between 3 and 99: `randrange(3,102,3)` generates 3, 6, 9...99 (upper bound 102 is excluded, step of 3). For numbers between 0 and 1: `random()` generates float values from 0.0 to 1.0 (exclusive of 1.0). The option `randrange(3,99,3)` would miss 99 since randrange excludes the upper bound. `randint()` requires two arguments, and `for i in range(9):` would only loop 9 times instead of 10."
 },
 {
   "id": 73,
@@ -1390,13 +1372,13 @@ export const quizQuestions: Question[] = [
     "type": "multiple_choice",
     "question": "What will this code output?<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>text = \"Hello World\"<br>print(text.upper().replace(\"WORLD\", \"Python\"))</div>",
     "options": [
-      "A. Hello Python",
+      "A. HELLO Python",
       "B. HELLO PYTHON",
       "C. hello python",
       "D. HELLO World"
     ],
-    "answer": "B. HELLO PYTHON",
-    "explanation": "First, `upper()` converts the string to \"HELLO WORLD\", then `replace()` changes \"WORLD\" to \"Python\", resulting in \"HELLO PYTHON\"."
+    "answer": "B. HELLO Python",
+    "explanation": "First, `upper()` converts the string to \"HELLO WORLD\", then `replace()` changes \"WORLD\" to \"Python\", resulting in \"HELLO Python\"."
   },
   {
     "id": 82,
@@ -1731,8 +1713,7 @@ export const quizQuestions: Question[] = [
     "answer": [
       "\"w\" - Write mode",
       "\"a\" - Append mode", 
-      "\"r+\" - Read and write mode",
-      "\"x\" - Exclusive creation mode"
+      "\"r+\" - Read and write mode"
     ],
     "explanation": "All modes except 'r' (read-only) allow writing in different ways: 'w' overwrites, 'a' appends, 'r+' reads and writes, 'x' creates new files."
   },
@@ -1880,21 +1861,6 @@ export const quizQuestions: Question[] = [
     "explanation": "`enumerate()` returns pairs of (index, value) starting from index 0 by default."
   },
   {
-    "id": 114,
-    "domain": "Data conversion & JSON",
-    "type": "fill_in_blank",
-    "question": "Complete the code to convert a Python dictionary to JSON string and parse a JSON string back to dictionary.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import json<br><br>data = {\"name\": \"John\", \"age\": 30}<br>json_string = json.____(data)<br>parsed_data = json.____(json_string)</div>",
-    "options": {
-      "to_json": ["dumps", "dump", "stringify"],
-      "from_json": ["loads", "load", "parse"]
-    },
-    "answer": {
-      "to_json": "dumps",
-      "from_json": "loads"
-    },
-    "explanation": "`dumps()` converts Python objects to JSON strings, `loads()` converts JSON strings back to Python objects."
-  },
-  {
     "id": 115,
     "domain": "Functions & variable arguments",
     "type": "multiple_choice",
@@ -1926,20 +1892,6 @@ export const quizQuestions: Question[] = [
       "numbers.remove(4)"
     ],
     "explanation": "Start with [1,2,3], extend to [1,2,3,4,5], remove 2 to get [1,3,4,5], remove 4 to get [1,3,5]."
-  },
-  {
-    "id": 117,
-    "domain": "Operators & bitwise operations",
-    "type": "multiple_choice",
-    "question": "What is the result of this bitwise operation?<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a = 5  # Binary: 101<br>b = 3  # Binary: 011<br>result = a & b<br>print(result)</div>",
-    "options": [
-      "A. 1",
-      "B. 7",
-      "C. 8", 
-      "D. 0"
-    ],
-    "answer": "A. 1",
-    "explanation": "Bitwise AND (&) operation: 101 & 011 = 001 (binary) = 1 (decimal). AND returns 1 only when both bits are 1."
   },
   {
     "id": 118,
