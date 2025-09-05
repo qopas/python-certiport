@@ -4,10 +4,11 @@ export interface Question {
   domain: string;
   type: "multiple_choice" | "multiple_select" | "fill_in_blank" | "multiple_response" | "true_false" | "ordering";
   question: string;
-  options?: string[] | { [key: string]: string[] }; // Support both array and object formats for fill_in_blank
-  answer: string | string[] | { [key: string]: string }; // Support object format for fill_in_blank answers
+  options?: string[] | { [key: string]: string[] | string }; // Allow both string arrays and strings
+  answer: string | string[] | { [key: string]: string };
   explanation: string;
 }
+
 
 export interface QuizSubmission {
   id: string;

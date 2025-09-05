@@ -55,42 +55,36 @@ export const quizQuestions: Question[] = [
 {
   "id": 179,
   "domain": "Functions & logic analysis",
-  "type": "multiple_response",
-  "question": "Analyze the following function and determine which statements are true or false:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def grosspay(hours=40, rate=25, pieces=0, piecerate=0, salary=0):<br>&nbsp;&nbsp;&nbsp;&nbsp;overtime = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;if pieces > 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return pieces * piecerate<br>&nbsp;&nbsp;&nbsp;&nbsp;if salary > 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass<br>&nbsp;&nbsp;&nbsp;&nbsp;if hours > 40:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;overtime = (hours-40) * (1.5 * rate)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return overtime + (40 * rate)<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return hours * rate</div><br><br>Select True or False for each statement:",
-  "options": [
-    "False - A function call of grosspay() will create a syntax error.",
-    "True - A function call of grosspay() will create a syntax error.",
-    "True - A function call of grosspay(salary=50000) will return nothing.",
-    "False - A function call of grosspay(salary=50000) will return nothing.",
-    "True - A function call of grosspay(pieces=500, piecerate=4) will return a result of 2000.",
-    "False - A function call of grosspay(pieces=500, piecerate=4) will return a result of 2000."
-  ],
-  "answer": [
-    "False - A function call of grosspay() will create a syntax error.",
-    "True - A function call of grosspay(salary=50000) will return nothing.",
-    "True - A function call of grosspay(pieces=500, piecerate=4) will return a result of 2000."
-  ],
+  "type": "true_false",
+  "question": "Analyze the following function and determine which statements are true or false:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def grosspay(hours=40, rate=25, pieces=0, piecerate=0, salary=0):<br>&nbsp;&nbsp;&nbsp;&nbsp;overtime = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;if pieces > 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return pieces * piecerate<br>&nbsp;&nbsp;&nbsp;&nbsp;if salary > 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass<br>&nbsp;&nbsp;&nbsp;&nbsp;if hours > 40:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;overtime = (hours-40) * (1.5 * rate)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return overtime + (40 * rate)<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return hours * rate</div><br><br>For each statement, select True or False:",
+  "options": {
+    "statement1": "A function call of grosspay() will create a syntax error.",
+    "statement2": "A function call of grosspay(salary=50000) will return nothing.",
+    "statement3": "A function call of grosspay(pieces=500, piecerate=4) will return a result of 2000."
+  },
+  "answer": {
+    "statement1": "False",
+    "statement2": "True",
+    "statement3": "True"
+  },
   "explanation": "Statement 1 is False: grosspay() will not create a syntax error because all parameters have default values. Statement 2 is True: grosspay(salary=50000) will return None because the salary condition only has 'pass' and doesn't return anything. Statement 3 is True: grosspay(pieces=500, piecerate=4) returns 500 * 4 = 2000 because pieces > 0 triggers the first return statement."
 },
 {
   "id": 180,
   "domain": "Functions & error analysis",
-  "type": "multiple_response",
-  "question": "The following function calculates the value of an expression that uses an exponent.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def calc_power(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;return a**b<br>base = input(\"Enter the number for the base: \")<br>exponent = input(\"Enter the number for the exponent: \")<br>result = calc_power(base, exponent)<br>print(\"The result is \" + result)</div><br><br>For each statement, select True or False.<br><br>Note: You will receive partial credit for each correct selection.",
-  "options": [
-    "False - The code will generate an error in line 03 and line 04.",
-    "True - The code will generate an error in line 03 and line 04.",
-    "True - The code will generate an error in line 02 and line 05.",
-    "False - The code will generate an error in line 02 and line 05.",
-    "False - The code will correctly output data to the console.",
-    "True - The code will correctly output data to the console."
-  ],
-  "answer": [
-    "False - The code will generate an error in line 03 and line 04.",
-    "True - The code will generate an error in line 02 and line 05.",
-    "False - The code will correctly output data to the console."
-  ],
-  "explanation": "Statement 1 is False: Li,nes 03 and 04 are correct - input() returns strings without error. Statement 2 is True: Line 02 will cause a TypeError because you cannot use ** operator on strings, and line 05 calls the function that will fail. Statement 3 is False: The code will not output correctly due to the type error in the calc_power function when trying to perform exponentiation on string inputs."
+  "type": "true_false",
+  "question": "The following function calculates the value of an expression that uses an exponent.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def calc_power(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;return a**b<br>base = input(\"Enter the number for the base: \")<br>exponent = input(\"Enter the number for the exponent: \")<br>result = calc_power(base, exponent)<br>print(\"The result is \" + result)</div><br><br>For each statement, select True or False:",
+  "options": {
+    "statement1": "The code will generate an error in line 03 and line 04.",
+    "statement2": "The code will generate an error in line 02 and line 05.",
+    "statement3": "The code will correctly output data to the console."
+  },
+  "answer": {
+    "statement1": "False",
+    "statement2": "True",
+    "statement3": "False"
+  },
+  "explanation": "Statement 1 is False: Lines 03 and 04 are correct - input() returns strings without error. Statement 2 is True: Line 02 will cause a TypeError because you cannot use ** operator on strings, and line 05 calls the function that will fail. Statement 3 is False: The code will not output correctly due to the type error in the calc_power function when trying to perform exponentiation on string inputs."
 },
 {
   "id": 181,
@@ -124,7 +118,6 @@ export const quizQuestions: Question[] = [
   "answer": "D. Bacon",
   "explanation": "The sys.argv list contains all command line arguments. Index 0 is the script name 'Script.py', index 1 is 'Cheese', index 2 is 'Bacon', and index 3 is 'Bread'. Therefore, sys.argv[2] returns 'Bacon'."
 },
-
 {
   "id": 183,
   "domain": "Operators & precedence",
@@ -240,7 +233,6 @@ export const quizQuestions: Question[] = [
   },
   "explanation": "Use `while` to create a loop that continues until the user enters 'QUIT'. Use `for char in x:` to iterate through each character in the string x. The `in` operator is used for membership testing and iteration over sequences like strings."
 },
-
 {
   "id": 190,
   "domain": "Data types & operators",
@@ -307,7 +299,7 @@ export const quizQuestions: Question[] = [
 {
   "id": 194,
   "domain": "Loops & control flow",
-  "type": "multiple_response",
+  "type": "multiple_select",
   "question": "You need to write code that generates a random number that meets the following requirements:<br><br>- The number is a multiple of 5.<br>- The lowest number is 5.<br>- The highest number is 100.<br><br>Which two code segments will meet the requirements? (Choose 2)",
   "options": [
     "A.<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from random import randint<br>print(randint(1, 20) * 5)</div>",
@@ -327,60 +319,50 @@ export const quizQuestions: Question[] = [
   "type": "multiple_choice",
   "question": "What does the following statement do?<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>data = input()</div>",
   "options": [
-    "A. Displays a message box that allows user input",
-    "B. Displays all input peripheral devices on the computer",
-    "C. Allows a user to enter text in the console",
-    "D. Creates an HTML input element"
+    "A. Displays a message box that allows user input.",
+    "B. Displays all input peripheral devices on the computer.",
+    "C. Allows a user to drow",
+    "D. Allows a user to enter text in the console."
   ],
-  "answer": [
-    "C. Allows a user to enter text in the console"
-  ],
+  "answer": "D. Allows a user to enter text in the console.",
   "explanation": "The input() function in Python pauses program execution and waits for the user to type text in the console. The typed text is returned as a string and stored in the variable."
 },
 {
   "id": 196,
   "domain": "Comparison operators & logic errors",
-  "type": "multiple_response",
-  "question": "You are creating a Python program that compares numbers. You write the following code. Line numbers are included for reference only.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 nuni = eval(input (\"Please enter the first number: \"))<br>02 num2 = eval(input (\"Please enter the second number: \"))<br>03 if nuni == num2:<br>04 &nbsp;&nbsp;&nbsp;&nbsp;print(\"The two numbers are equal.\")<br>05 if nuni <= num2:<br>06 &nbsp;&nbsp;&nbsp;&nbsp;print(\"Number 1 is less than number 2.\")<br>07 if nuni > num2:<br>08 &nbsp;&nbsp;&nbsp;&nbsp;print(\"Number 1 is greater than number 2.\")<br>09 if num2 = num1:<br>10 &nbsp;&nbsp;&nbsp;&nbsp;print(\"The two numbers are the same.\")</div><br><br>You need to ensure that the comparisons are accurate. For each statement, select True or False.<br><br>Note: You will receive partial credit for each correct selection.",
-  "options": [
-    "True - The print statement at line 04 will print only if the two numbers are equal in value.",
-    "False - The print statement at line 04 will print only if the two numbers are equal in value.",
-    "True - The print statement at line 06 will print only if num1 is less than num2.",
-    "False - The print statement at line 06 will print only if num1 is less than num2.",
-    "True - The print statement at line 08 will print only if num1 is greater than num2.",
-    "False - The print statement at line 08 will print only if num1 is greater than num2.",
-    "True - The statement at line 09 is an invalid comparison.",
-    "False - The statement at line 09 is an invalid comparison."
-  ],
-  "answer": [
-    "True - The print statement at line 04 will print only if the two numbers are equal in value.",
-    "False - The print statement at line 06 will print only if num1 is less than num2.",
-    "True - The print statement at line 08 will print only if num1 is greater than num2.",
-    "True - The statement at line 09 is an invalid comparison."
-  ],
+  "type": "true_false",
+  "question": "You are creating a Python program that compares numbers. You write the following code. Line numbers are included for reference only.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 nuni = eval(input (\"Please enter the first number: \"))<br>02 num2 = eval(input (\"Please enter the second number: \"))<br>03 if nuni == num2:<br>04 &nbsp;&nbsp;&nbsp;&nbsp;print(\"The two numbers are equal.\")<br>05 if nuni <= num2:<br>06 &nbsp;&nbsp;&nbsp;&nbsp;print(\"Number 1 is less than number 2.\")<br>07 if nuni > num2:<br>08 &nbsp;&nbsp;&nbsp;&nbsp;print(\"Number 1 is greater than number 2.\")<br>09 if num2 = num1:<br>10 &nbsp;&nbsp;&nbsp;&nbsp;print(\"The two numbers are the same.\")</div><br><br>You need to ensure that the comparisons are accurate. For each statement, select True or False:",
+  "options": {
+    "statement1": "The print statement at line 04 will print only if the two numbers are equal in value.",
+    "statement2": "The print statement at line 06 will print only if num1 is less than num2.",
+    "statement3": "The print statement at line 08 will print only if num1 is greater than num2.",
+    "statement4": "The statement at line 09 is an invalid comparison."
+  },
+  "answer": {
+    "statement1": "True",
+    "statement2": "False",
+    "statement3": "True",
+    "statement4": "True"
+  },
   "explanation": "Line 04: Correct - == operator properly checks for equality. Line 06: False - <= operator will print for both less than AND equal cases, not just less than. Line 08: True - > operator correctly checks for greater than. Line 09: True - = is assignment, not comparison (should be ==), and there's a typo (num1 vs nuni)."
 },
 {
   "id": 197,
   "domain": "Exception handling & try statements",
-  "type": "multiple_response",
-  "question": "For each statement about try statements, select True or False.<br><br>Note: You will receive partial credit for each correct selection.",
-  "options": [
-    "True - A try statement can have one or more except clauses.",
-    "False - A try statement can have one or more except clauses.",
-    "True - A try statement can have a finally clause without an except clause.",
-    "False - A try statement can have a finally clause without an except clause.",
-    "True - A try statement can have a finally clause and an except clause.",
-    "False - A try statement can have a finally clause and an except clause.",
-    "True - A try statement can have one or more finally clauses.",
-    "False - A try statement can have one or more finally clauses."
-  ],
-  "answer": [
-    "True - A try statement can have one or more except clauses.",
-    "True - A try statement can have a finally clause without an except clause.",
-    "True - A try statement can have a finally clause and an except clause.",
-    "False - A try statement can have one or more finally clauses."
-  ],
+  "type": "true_false",
+  "question": "For each statement about try statements, select True or False:",
+  "options": {
+    "statement1": "A try statement can have one or more except clauses.",
+    "statement2": "A try statement can have a finally clause without an except clause.",
+    "statement3": "A try statement can have a finally clause and an except clause.",
+    "statement4": "A try statement can have one or more finally clauses."
+  },
+  "answer": {
+    "statement1": "True",
+    "statement2": "True",
+    "statement3": "True",
+    "statement4": "False"
+  },
   "explanation": "Python try statement rules: 1) Can have multiple except clauses for different exception types. 2) Can have a finally clause without except (try-finally structure). 3) Can have both except and finally clauses (try-except-finally). 4) Cannot have multiple finally clauses - only one finally is allowed per try block."
 },
 {
@@ -432,27 +414,24 @@ export const quizQuestions: Question[] = [
 {
   "id": 201,
   "domain": "Function parameters & variable scope",
-  "type": "multiple_response",
-  "question": "You are writing a function that increments the player score in a game. The function has the following requirements:<br><br>- If no value is specified for points, then points start at one.<br>- If bonus is True, then points must be doubled.<br><br>You write the following code. Line numbers are included for reference only.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 def increment_score(score, bonus, points):<br>02 &nbsp;&nbsp;&nbsp;&nbsp;if bonus == True:<br>03 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;points = points * 2<br>04 &nbsp;&nbsp;&nbsp;&nbsp;score = score + points<br>05 &nbsp;&nbsp;&nbsp;&nbsp;return score<br>06 points = 5<br>07 score = 10<br>08 new_score = increment_score(score, True, points)</div><br><br>For each statement, select <strong>True</strong> or <strong>False</strong>.<br><br>Note: You will receive partial credit for each correct selection.",
-  "options": [
-    "True - To meet the requirements, you must change line 01 to: def increment_score(score, bonus, points = 1):",
-    "False - To meet the requirements, you must change line 01 to: def increment_score(score, bonus, points = 1):",
-    "True - If you do not change line 01 and the function is called with only two parameters, an error occurs.",
-    "False - If you do not change line 01 and the function is called with only two parameters, an error occurs.",
-    "True - Line 03 will also modify the value of the variable points declared at line 06.",
-    "False - Line 03 will also modify the value of the variable points declared at line 06."
-  ],
-  "answer": [
-    "True - To meet the requirements, you must change line 01 to: def increment_score(score, bonus, points = 1):",
-    "True - If you do not change line 01 and the function is called with only two parameters, an error occurs.",
-    "False - Line 03 will also modify the value of the variable points declared at line 06."
-  ],
+  "type": "true_false",
+  "question": "You are writing a function that increments the player score in a game. The function has the following requirements:<br><br>- If no value is specified for points, then points start at one.<br>- If bonus is True, then points must be doubled.<br><br>You write the following code. Line numbers are included for reference only.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 def increment_score(score, bonus, points):<br>02 &nbsp;&nbsp;&nbsp;&nbsp;if bonus == True:<br>03 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;points = points * 2<br>04 &nbsp;&nbsp;&nbsp;&nbsp;score = score + points<br>05 &nbsp;&nbsp;&nbsp;&nbsp;return score<br>06 points = 5<br>07 score = 10<br>08 new_score = increment_score(score, True, points)</div><br><br>For each statement, select True or False:",
+  "options": {
+    "statement1": "To meet the requirements, you must change line 01 to: def increment_score(score, bonus, points = 1):",
+    "statement2": "If you do not change line 01 and the function is called with only two parameters, an error occurs.",
+    "statement3": "Line 03 will also modify the value of the variable points declared at line 06."
+  },
+  "answer": {
+    "statement1": "True",
+    "statement2": "True",
+    "statement3": "False"
+  },
   "explanation": "1) True - Default parameter (points=1) is needed to meet the 'if no value specified' requirement. 2) True - Without default parameter, calling with only 2 arguments would cause TypeError (missing required argument). 3) False - Line 03 modifies the local points parameter, not the global variable from line 06 (Python uses pass-by-object-reference, and reassignment creates a new local variable)."
 },
 {
   "id": 202,
   "domain": "Function definition & parameter passing",
-  "type": "multiple_response",
+  "type": "multiple_select",
   "question": "A bicycle company is creating a program that allows customers to log the number of miles biked. The program will send messages based on how many miles the customer logs.<br><br>You write the following Python code. Line numbers are included for reference only.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'><br>\tname = input(\"what is your name? \")<br>\treturn name<br><br>\tcalories = miles * calories_per_mile<br>\treturn calories<br>distance = int(input(\"How many miles did you bike this week? \")<br>burn_rate = 50<br>biker = get_name()<br>calories_burned = calc_calories(distance, burn_rate)<br>print(biker, \" , you burned about \", calories_burned, \" calories.\")</div><br><br>You need to define the two required functions.<br><br>Which two code segments should you use for line 01 and line 04? Each correct answer presents part of the solution. (Choose 2.)",
   "options": [
     "A. @1 def get_name():",
@@ -471,44 +450,37 @@ export const quizQuestions: Question[] = [
 {
   "id": 203,
   "domain": "Comments & syntax parsing",
-  "type": "multiple_response",
-  "question": "You create the following Python function to calculate the power of a number.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'> # The calc_power function calculates exponents<br># x is the base<br>03 # y is the exponent<br># The value of x raised to the y power is returned<br>def calc_power(x, y):<br>\tcomment = \"# Return the value\"<br>\treturn x ** y # raise x to the y power</div><br><br>For each statement, select <strong>True</strong> or <strong>False</strong>.<br><br>Note: You will receive partial credit for each correct selection.",
-  "options": [
-    "True - Python will not check the syntax of lines 01 through 04.",
-    "False - Python will not check the syntax of lines 01 through 04.",
-    "True - The pound sign (#) is optional for lines 02 and 03.",
-    "False - The pound sign (#) is optional for lines 02 and 03.",
-    "True - The string in line 06 will be interpreted as a comment.",
-    "False - The string in line 06 will be interpreted as a comment.",
-    "True - Line 07 contains an inline comment.",
-    "False - Line 07 contains an inline comment."
-  ],
-  "answer": [
-    "False - Python will not check the syntax of lines 01 through 04.",
-    "False - The pound sign (#) is optional for lines 02 and 03.",
-    "False - The string in line 06 will be interpreted as a comment.",
-    "True - Line 07 contains an inline comment."
-  ],
+  "type": "true_false",
+  "question": "You create the following Python function to calculate the power of a number.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'> # The calc_power function calculates exponents<br># x is the base<br>03 # y is the exponent<br># The value of x raised to the y power is returned<br>def calc_power(x, y):<br>\tcomment = \"# Return the value\"<br>\treturn x ** y # raise x to the y power</div><br><br>For each statement, select True or False:",
+  "options": {
+    "statement1": "Python will not check the syntax of lines 01 through 04.",
+    "statement2": "The pound sign (#) is optional for lines 02 and 03.",
+    "statement3": "The string in line 06 will be interpreted as a comment.",
+    "statement4": "Line 07 contains an inline comment."
+  },
+  "answer": {
+    "statement1": "False",
+    "statement2": "False",
+    "statement3": "False",
+    "statement4": "True"
+  },
   "explanation": "1) False - Python DOES check syntax of comment lines (invalid syntax in comments would still cause errors). 2) False - The # is REQUIRED for comments; without it, lines 02-03 would be invalid Python syntax. 3) False - Line 06 is a string assignment, not a comment (the # is inside quotes). 4) True - Line 07 has a valid inline comment after the # symbol."
 },
 {
   "id": 204,
   "domain": "File operations & I/O",
-  "type": "multiple_response",
-  "question": "Review the following code segment:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>f = open(\"python.txt\", \"a\")<br>f.write(\"This is a line of text.\")<br>f.close()</div><br><br>For each statement about the code segment, select <strong>True</strong> or <strong>False</strong>.",
-  "options": [
-    "True - A file named python.txt is created if it does not exist.",
-    "False - A file named python.txt is created if it does not exist.",
-    "True - The data in the file will be overwritten.",
-    "False - The data in the file will be overwritten.",
-    "True - Other code can open the file after this code runs.",
-    "False - Other code can open the file after this code runs."
-  ],
-  "answer": [
-    "True - A file named python.txt is created if it does not exist.",
-    "False - The data in the file will be overwritten.",
-    "True - Other code can open the file after this code runs."
-  ],
+  "type": "true_false",
+  "question": "Review the following code segment:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>f = open(\"python.txt\", \"a\")<br>f.write(\"This is a line of text.\")<br>f.close()</div><br><br>For each statement about the code segment, select True or False:",
+  "options": {
+    "statement1": "A file named python.txt is created if it does not exist.",
+    "statement2": "The data in the file will be overwritten.",
+    "statement3": "Other code can open the file after this code runs."
+  },
+  "answer": {
+    "statement1": "True",
+    "statement2": "False",
+    "statement3": "True"
+  },
   "explanation": "1) True - The 'a' (append) mode creates the file if it doesn't exist. 2) False - 'a' mode appends to the end of the file, it doesn't overwrite existing content ('w' mode would overwrite). 3) True - The file is properly closed with f.close(), so other processes can access it after this code runs."
 },
 {
@@ -529,7 +501,7 @@ export const quizQuestions: Question[] = [
 {
   "id": 206,
   "domain": "String formatting & output",
-  "type": "multiple_response",
+  "type": "multiple_select",
   "question": "You are creating an eCommerce script that accepts input from the user and outputs the data in a comma-delimited format.<br><br>You write the following code to accept input:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>item = input(\"Enter the item name: \")<br>sales = int(input(\"Enter the quantity: \"))</div><br><br>The output must meet the following requirements:<br><br>- Enclose strings in double quotes.<br>- Do not enclose numbers in quotes or other characters.<br>- Separate items by commas.<br><br>You need to complete the code to meet the requirements.<br><br>Which two code segments could you use? Each correct answer presents a complete solution. (Choose 2.)<br><br>Note: You will receive partial credit for each correct answer.",
   "options": [
     "A. print('\"' + item + '\",', sales)",

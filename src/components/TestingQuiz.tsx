@@ -45,36 +45,20 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
 
   // Timer effect
   useEffect(() => {
-    if (stage === 'quiz' && timeRemaining > 0) {
-      const timer = setInterval(() => {
-        setTimeRemaining(prev => {
-          const newTime = prev - 1;
-          if (newTime <= 0) {
-            submitQuiz();
-            return 0;
-          }
-          updateLocalStorage({ timeRemaining: newTime });
-          return newTime;
-        });
-      }, 1000);
-      return () => clearInterval(timer);
-    }
-  }, [stage, timeRemaining, updateLocalStorage]);
+    const timer = setInterval(() => {
+      setTimeRemaining((prev) => {
+        if (prev <= 1) {
+          submitQuiz();
+          return 0;
+        }
+        const newTime = prev - 1;
+        updateLocalStorage({ timeRemaining: newTime });
+        return newTime;
+      });
+    }, 1000);
 
-  // Auto-save effect
-  useEffect(() => {
-    if (stage === 'quiz') {
-      const autoSave = setInterval(() => {
-        updateLocalStorage({
-          currentQuestionIndex,
-          answers,
-          timeRemaining,
-          flaggedQuestions: Array.from(flaggedQuestions)
-        });
-      }, 5000);
-      return () => clearInterval(autoSave);
-    }
-  }, [stage, currentQuestionIndex, answers, timeRemaining, flaggedQuestions, updateLocalStorage]);
+    return () => clearInterval(timer);
+  }, [updateLocalStorage]);
 
   const handleAnswer = (answer: string | string[] | { [key: string]: string }) => {
     const newAnswers = [...answers];
@@ -83,20 +67,20 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
     updateLocalStorage({ answers: newAnswers });
   };
 
+  const toggleFlag = () => {
+    const newFlagged = new Set(flaggedQuestions);
+    if (newFlagged.has(currentQuestionIndex)) {
+      newFlagged.delete(currentQuestionIndex);
+    } else {
+      newFlagged.add(currentQuestionIndex);
+    }
+    setFlaggedQuestions(newFlagged);
+    updateLocalStorage({ flaggedQuestions: newFlagged });
+  };
+
   const goToQuestion = (index: number) => {
     setCurrentQuestionIndex(index);
     updateLocalStorage({ currentQuestionIndex: index });
-  };
-
-  const toggleFlag = (questionIndex: number) => {
-    const newFlagged = new Set(flaggedQuestions);
-    if (newFlagged.has(questionIndex)) {
-      newFlagged.delete(questionIndex);
-    } else {
-      newFlagged.add(questionIndex);
-    }
-    setFlaggedQuestions(newFlagged);
-    updateLocalStorage({ flaggedQuestions: Array.from(newFlagged) });
   };
 
   const nextQuestion = () => {
@@ -126,6 +110,15 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
       if (typeof userAnswer !== 'object' || typeof correctAnswer !== 'object') return false;
       const userKeys = Object.keys(userAnswer || {});
       const correctKeys = Object.keys(correctAnswer || {});
+      if (userKeys.length !== correctKeys.length) return false;
+      return userKeys.every(key => userAnswer[key] === correctAnswer[key]);
+    }
+    
+    if (questionType === 'true_false' && typeof correctAnswer === 'object' && !Array.isArray(correctAnswer)) {
+      // Multi-statement true/false question
+      if (typeof userAnswer !== 'object' || !userAnswer) return false;
+      const userKeys = Object.keys(userAnswer);
+      const correctKeys = Object.keys(correctAnswer);
       if (userKeys.length !== correctKeys.length) return false;
       return userKeys.every(key => userAnswer[key] === correctAnswer[key]);
     }
@@ -245,13 +238,12 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
     }
   };
 
-  // Fixed renderQuestionContent function for fill_in_blank questions (EXACT COPY from your original)
+  // Render question content based on type
   const renderQuestionContent = (question: Question) => {
     const currentAnswer = answers[currentQuestionIndex];
 
     switch (question.type) {
       case 'multiple_choice':
-      case 'true_false':
         return (
           <div className="space-y-3">
             {Array.isArray(question.options) && question.options.map((option, index) => {
@@ -283,13 +275,92 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
           </div>
         );
 
+      case 'true_false':
+        // Check if it's a multi-statement true/false question
+        if (typeof question.options === 'object' && !Array.isArray(question.options)) {
+          const statementsObj = question.options as { [key: string]: string };
+          const answerObj = (currentAnswer as { [key: string]: string }) || {};
+          
+          return (
+            <div className="space-y-6">
+              {Object.entries(statementsObj).map(([key, statement]) => (
+               <div className="flex justify-between items-start">
+  <div className="flex-1 pr-4"> {/* Statement takes available space, with padding-right */}
+    <p className="text-gray-800 font-medium" dangerouslySetInnerHTML={{ __html: statement }} />
+  </div>
+  
+  <div className="flex gap-3 flex-shrink-0"> {/* Buttons stay compact on the right */}
+    {['True', 'False'].map((option) => (
+      <label 
+        key={`${key}-${option}`}
+        className={`flex items-center cursor-pointer p-2 rounded-lg border-2 transition-all
+          ${answerObj[key] === option ? 'border-indigo-400 bg-indigo-50' : 'border-gray-300 hover:border-gray-400'}
+        `}
+      >
+        <input
+          type="radio"
+          name={`statement-${currentQuestionIndex}-${key}`}
+          value={option}
+          checked={answerObj[key] === option}
+          onChange={(e) => {
+            const newAnswer = { ...answerObj, [key]: e.target.value };
+            handleAnswer(newAnswer);
+          }}
+          className="mr-2 w-4 h-4"
+        />
+        <span className="font-semibold text-gray-700 text-sm">
+          {option}
+        </span>
+      </label>
+    ))}
+  </div>
+</div>
+              ))}
+            </div>
+          );
+        } else {
+          // Simple true/false question with two options
+          return (
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {['True', 'False'].map((option) => {
+                  const isSelected = currentAnswer === option;
+                  return (
+                    <label
+                      key={option}
+                      className={`flex items-center justify-center p-6 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
+                        isSelected 
+                          ? 'border-indigo-400 bg-indigo-50 shadow-sm' 
+                          : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name={`question-${currentQuestionIndex}`}
+                        value={option}
+                        checked={isSelected}
+                        onChange={(e) => handleAnswer(e.target.value)}
+                        className="mr-3 w-5 h-5"
+                      />
+                      <span className="text-lg font-semibold text-gray-700">
+                        {option}
+                      </span>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        }
+
       case 'multiple_select':
       case 'multiple_response':
         return (
           <div className="space-y-3">
-            <p className="text-sm text-gray-600 mb-3">Select all that apply:</p>
             {Array.isArray(question.options) && question.options.map((option, index) => {
-              const isSelected = Array.isArray(currentAnswer) && currentAnswer.includes(option);
+              const currentAnswers = (currentAnswer as string[]) || [];
+              const isSelected = currentAnswers.includes(option);
+              
               return (
                 <label
                   key={index}
@@ -376,12 +447,12 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
                         fontSize: '14px'
                       }}
                     >
-                      <SelectValue placeholder="Choose One..." />
+                      <SelectValue placeholder="____" />
                     </SelectTrigger>
                     <SelectContent>
-                      {optionsObj[key].map((option) => (
-                        <SelectItem key={option} value={option}>
-                          <span dangerouslySetInnerHTML={{ __html: option }} />
+                      {optionsObj[key].map((option, optionIndex) => (
+                        <SelectItem key={optionIndex} value={option}>
+                          {option}
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -395,226 +466,158 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
           
           return (
             <div className="space-y-4">
-              {/* Render question parts separately */}
-              <div>
-                <div dangerouslySetInnerHTML={{ __html: beforeCode }} />
-                
-                <div className="bg-gray-800 text-green-400 p-3 rounded font-mono mt-2" style={{ fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace' }}>
+              {beforeCode && (
+                <div 
+                  className="text-gray-700 leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: beforeCode }} 
+                />
+              )}
+              
+              {codeContent && (
+                <div className="bg-gray-800 text-green-400 p-3 rounded font-mono text-sm overflow-x-auto">
                   {renderCodeWithDropdowns()}
                 </div>
-                
-                <div dangerouslySetInnerHTML={{ __html: afterCode }} />
-              </div>
+              )}
+              
+              {afterCode && (
+                <div 
+                  className="text-gray-700 leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: afterCode }} 
+                />
+              )}
             </div>
           );
         } else {
-          // Single dropdown format (array of options)
-          const optionsArray = question.options as string[];
-          const selectedAnswer = currentAnswer as string || '';
-          
+          // Single dropdown case
           return (
             <div className="space-y-4">
-              <h2 
-                className="text-lg sm:text-xl font-bold text-gray-800 mb-4 leading-relaxed" 
-                dangerouslySetInnerHTML={{ __html: question.question }} 
-              />
-              <p className="text-sm text-gray-600 mb-4">Select the correct option:</p>
-              <Select 
-                value={selectedAnswer} 
-                onValueChange={(value) => handleAnswer(value)}
+              <select
+                value={currentAnswer as string || ''}
+                onChange={(e) => handleAnswer(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Choose an option..." />
-                </SelectTrigger>
-                <SelectContent>
-                  {optionsArray && optionsArray.map((option) => (
-                    <SelectItem key={option} value={option}>
-                      <span dangerouslySetInnerHTML={{ __html: option }} />
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                <option value="">Select an option</option>
+                {Array.isArray(question.options) && question.options.map((option, index) => (
+                  <option key={index} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
             </div>
           );
         }
 
       case 'ordering':
-        const sourcePool = question.options as string[];
-        const correctAnswer = question.answer as string[];
-        const userArrangement = (currentAnswer as string[]) || [];
+        const orderingAnswer = (currentAnswer as string[]) || [];
+        const availableOptions = Array.isArray(question.options) ? 
+          question.options.filter(option => !orderingAnswer.includes(option)) : [];
         
-        const handleDragStart = (e: React.DragEvent, item: string, fromPool: boolean) => {
-          e.dataTransfer.setData('text/plain', JSON.stringify({ item, fromPool }));
-        };
-
-        const handleDragOver = (e: React.DragEvent) => {
-          e.preventDefault();
-        };
-
-        const handleDropInArrangement = (e: React.DragEvent, index?: number) => {
-          e.preventDefault();
-          const data = JSON.parse(e.dataTransfer.getData('text/plain'));
-          const { item, fromPool } = data;
-          
-          const newArrangement = [...userArrangement];
-          
-          if (fromPool) {
-            // Adding from pool - insert at specific index or at end
-            if (typeof index === 'number') {
-              newArrangement.splice(index, 0, item);
-            } else {
-              newArrangement.push(item);
-            }
-          } else {
-            // Reordering within arrangement
-            const currentIndex = newArrangement.indexOf(item);
-            if (currentIndex !== -1) {
-              newArrangement.splice(currentIndex, 1);
-              if (typeof index === 'number') {
-                newArrangement.splice(index, 0, item);
-              } else {
-                newArrangement.push(item);
-              }
-            }
-          }
-          
-          handleAnswer(newArrangement);
-        };
-
-        const handleDropInPool = (e: React.DragEvent) => {
-          e.preventDefault();
-          const data = JSON.parse(e.dataTransfer.getData('text/plain'));
-          const { item, fromPool } = data;
-          
-          if (!fromPool) {
-            // Remove from arrangement
-            const newArrangement = userArrangement.filter(arrItem => arrItem !== item);
-            handleAnswer(newArrangement);
-          }
-        };
-
-        const unusedItems = sourcePool.filter(item => !userArrangement.includes(item));
-
         return (
           <div className="space-y-4">
-            <p className="text-sm text-gray-600 mb-4">
-              Drag items from the right side to the left side to arrange them in the correct order. Not all items need to be used.
-            </p>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {/* Answer Area - Left Side */}
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 min-h-[300px]">
-                <h4 className="text-sm font-medium text-gray-700 mb-3">Arrangement Area:</h4>
-                <div
-                  className="space-y-2"
-                  onDragOver={handleDragOver}
-                  onDrop={(e) => handleDropInArrangement(e)}
-                >
-                  {userArrangement.length === 0 ? (
-                    <div className="text-center text-gray-400 py-12">
-                      Drag items here to arrange them in order
-                    </div>
-                  ) : (
-                    userArrangement.map((item, index) => (
-                      <div
-                        key={`arranged-${item}-${index}`}
-                        draggable
-                        onDragStart={(e) => handleDragStart(e, item, false)}
-                        className="flex items-center justify-between p-3 bg-indigo-50 border border-indigo-200 rounded-lg cursor-move hover:bg-indigo-100 transition-colors"
-                      >
-                        <div className="flex items-center">
-                          <span className="text-sm font-medium text-indigo-700 mr-2 min-w-[20px]">{index + 1}.</span>
-                          <GripVertical className="w-4 h-4 mr-2 text-indigo-400" />
-                          <span className="text-sm" dangerouslySetInnerHTML={{ __html: item }} />
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
-
-              {/* Source Pool - Right Side */}
-              <div className="border border-gray-200 rounded-lg p-4 min-h-[300px]">
-                <h4 className="text-sm font-medium text-gray-700 mb-3">Available Options:</h4>
-                <div
-                  className="space-y-2"
-                  onDragOver={handleDragOver}
-                  onDrop={handleDropInPool}
-                >
-                  {unusedItems.length === 0 ? (
-                    <div className="text-center text-gray-400 py-12">
-                      All items have been used
-                    </div>
-                  ) : (
-                    unusedItems.map((item, index) => (
-                      <div
-                        key={`pool-${item}-${index}`}
-                        draggable
-                        onDragStart={(e) => handleDragStart(e, item, true)}
-                        className="flex items-center p-3 bg-gray-50 border border-gray-200 rounded-lg cursor-move hover:bg-gray-100 transition-colors"
-                      >
-                        <GripVertical className="w-4 h-4 mr-2 text-gray-400" />
-                        <span className="text-sm" dangerouslySetInnerHTML={{ __html: item }} />
-                      </div>
-                    ))
-                  )}
-                </div>
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h4 className="font-medium text-gray-700 mb-3">Available Options:</h4>
+              <div className="space-y-2">
+                {availableOptions.map((option, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleAnswer([...orderingAnswer, option])}
+                    className="block w-full text-left p-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    {option}
+                  </button>
+                ))}
               </div>
             </div>
-
-            {userArrangement.length > 0 && (
-              <div className="text-xs text-gray-500 text-center">
-                Tip: Drag items back to Available Options to remove them from your arrangement
+            
+            <div className="bg-indigo-50 p-4 rounded-lg">
+              <h4 className="font-medium text-gray-700 mb-3">Your Order:</h4>
+              <div className="space-y-2">
+                {orderingAnswer.map((option, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-3 bg-white border border-indigo-300 rounded-lg"
+                  >
+                    <span className="flex items-center">
+                      <GripVertical className="w-4 h-4 text-gray-400 mr-2" />
+                      <span className="font-medium text-indigo-600 mr-2">{index + 1}.</span>
+                      {option}
+                    </span>
+                    <button
+                      onClick={() => {
+                        const newAnswer = orderingAnswer.filter((_, i) => i !== index);
+                        handleAnswer(newAnswer);
+                      }}
+                      className="text-red-500 hover:text-red-700 text-sm"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+                {orderingAnswer.length === 0 && (
+                  <p className="text-gray-500 text-center py-4">
+                    Click options above to add them in order
+                  </p>
+                )}
               </div>
-            )}
+            </div>
           </div>
         );
 
       default:
-        return <div className="text-red-500">Unknown question type: {question.type}</div>;
+        return <div>Unsupported question type: {question.type}</div>;
     }
   };
 
+  // Results display
   if (stage === 'results') {
+    if (!results) return <div>Loading results...</div>;
+
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 p-3 sm:p-4">
-        <div className="max-w-3xl mx-auto">
-          <Card className="shadow-xl border-0 bg-white/80 backdrop-blur-sm">
-            <CardHeader className="text-center bg-gradient-to-r from-green-500 to-blue-600 text-white rounded-t-lg p-4 sm:p-6">
-              <div className="flex justify-center mb-3">
-                <Trophy className="w-16 h-16 sm:w-20 sm:h-20 text-yellow-300" />
+      <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 p-4">
+        <div className="max-w-4xl mx-auto">
+          <Card className="shadow-lg border-0 bg-white/90 backdrop-blur-sm">
+            <CardHeader className="text-center pb-4">
+              <div className="flex justify-center mb-4">
+                <Trophy className="w-16 h-16 text-yellow-500" />
               </div>
-              <CardTitle className="text-2xl sm:text-4xl mb-2">Quiz Complete!</CardTitle>
-              <p className="text-lg sm:text-xl opacity-90">
-                You scored {results.score} out of {results.totalQuestions} ({results.percentage}%)
-              </p>
+              <CardTitle className="text-3xl font-bold text-gray-800">Quiz Complete!</CardTitle>
+              <p className="text-gray-600">Here are your results</p>
             </CardHeader>
-            <CardContent className="p-4 sm:p-6">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-indigo-100 rounded-xl border border-blue-200">
-                  <h3 className="font-bold text-base text-blue-800 mb-1">Score</h3>
-                  <p className="text-2xl font-bold text-blue-900">{results.percentage}%</p>
+            <CardContent className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="text-center p-6 bg-blue-50 rounded-lg">
+                  <div className="text-3xl font-bold text-blue-600">{results.score}</div>
+                  <div className="text-gray-600">Correct Answers</div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-green-50 to-emerald-100 rounded-xl border border-green-200">
-                  <h3 className="font-bold text-base text-green-800 mb-1">Correct</h3>
-                  <p className="text-2xl font-bold text-green-900">{results.score}</p>
+                <div className="text-center p-6 bg-green-50 rounded-lg">
+                  <div className="text-3xl font-bold text-green-600">{results.percentage}%</div>
+                  <div className="text-gray-600">Score</div>
                 </div>
-                <div className="text-center p-4 bg-gradient-to-br from-purple-50 to-violet-100 rounded-xl border border-purple-200">
-                  <h3 className="font-bold text-base text-purple-800 mb-1">Time</h3>
-                  <p className="text-2xl font-bold text-purple-900">{formatTime(results.totalTime)}</p>
+                <div className="text-center p-6 bg-purple-50 rounded-lg">
+                  <div className="text-3xl font-bold text-purple-600">{formatTime(results.totalTime)}</div>
+                  <div className="text-gray-600">Time Taken</div>
                 </div>
               </div>
-              <div className="text-center">
-                <Button 
-                  onClick={onBackToDashboard} 
-                  className="bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white px-6 py-2 text-base w-full sm:w-auto"
-                >
-                  <ArrowLeft className="w-4 h-4 mr-2" />
+              
+              <div className="flex justify-center space-x-4">
+                <Button onClick={onBackToDashboard} variant="outline">
                   Back to Dashboard
                 </Button>
               </div>
             </CardContent>
           </Card>
+        </div>
+      </div>
+    );
+  }
+
+  // Main quiz interface
+  if (!questions.length || !questions[currentQuestionIndex]) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading questions...</p>
         </div>
       </div>
     );
@@ -695,14 +698,6 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
                 {/* Legend */}
                 <div className="grid grid-cols-2 gap-1 text-xs">
                   <div className="flex items-center space-x-1.5">
-                    <div className="w-3 h-3 rounded bg-blue-500"></div>
-                    <span>Current</span>
-                  </div>
-                  <div className="flex items-center space-x-1.5">
-                    <div className="w-3 h-3 rounded bg-green-500"></div>
-                    <span>Answered</span>
-                  </div>
-                  <div className="flex items-center space-x-1.5">
                     <div className="w-3 h-3 rounded bg-orange-500"></div>
                     <span>Flagged</span>
                   </div>
@@ -715,9 +710,9 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
                 {/* Quick Stats */}
                 <div className="pt-3 border-t border-gray-200">
                   <div className="text-xs text-gray-600 space-y-1">
-                    <div>Answered: {answeredCount}/{questions.length}</div>
+                    <div>Total: {questions.length}</div>
+                    <div>Answered: {answeredCount}</div>
                     <div>Remaining: {questions.length - answeredCount}</div>
-                    <div>Flagged: {flaggedCount}</div>
                   </div>
                 </div>
               </CardContent>
@@ -726,26 +721,28 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
 
           {/* Main Question Area */}
           <div className="lg:col-span-3 order-1 lg:order-2">
-            {/* Question Counter and Flag */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 gap-3">
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge variant="outline" className="bg-white/80 backdrop-blur-sm px-2 py-1 text-xs sm:text-sm">
-                  Q{currentQuestionIndex + 1}/{questions.length}
-                </Badge>
-                <Badge variant="outline" className="bg-blue-50 text-blue-700 border-blue-200 text-xs">
-                  {currentQuestion?.domain}
-                </Badge>
-                <Badge variant="outline" className="bg-purple-50 text-purple-700 border-purple-200 text-xs">
-                  {currentQuestion?.type === 'multiple_select' ? 'Multi Select' : 
-                   currentQuestion?.type === 'multiple_response' ? 'Multi Response' :
-                   currentQuestion?.type === 'true_false' ? 'True/False' :
-                   currentQuestion?.type === 'fill_in_blank' ? 'Fill Blanks' :
-                   currentQuestion?.type === 'ordering' ? 'Ordering' : 'Multiple Choice'}
-                </Badge>
+            {/* Progress Bar */}
+            <div className="mb-4">
+              <div className="flex justify-between text-sm text-gray-600 mb-2">
+                <span>Question {currentQuestionIndex + 1} of {questions.length}</span>
+                <span>{Math.round(((currentQuestionIndex + 1) / questions.length) * 100)}% Complete</span>
               </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div 
+                  className="bg-gradient-to-r from-indigo-500 to-purple-600 h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${((currentQuestionIndex + 1) / questions.length) * 100}%` }}
+                ></div>
+              </div>
+            </div>
+
+            {/* Question Header */}
+            <div className="flex justify-between items-start mb-4">
+              <Badge variant="outline" className="bg-white/80">
+                {currentQuestion.domain}
+              </Badge>
               
               <Button
-                onClick={() => toggleFlag(currentQuestionIndex)}
+                onClick={toggleFlag}
                 variant="outline"
                 size="sm"
                 className={`${

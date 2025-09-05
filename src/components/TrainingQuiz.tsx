@@ -39,11 +39,13 @@ const TrainingQuiz: React.FC<TrainingQuizProps> = ({
     setAnswers(newAnswers);
     setHasAnswered(true);
   };
- const handleAnswer = (answer: string | string[] | { [key: string]: string }) => {
+
+  const handleAnswer = (answer: string | string[] | { [key: string]: string }) => {
     const newAnswers = [...answers];
     newAnswers[currentQuestionIndex] = answer;
     setAnswers(newAnswers);
   };
+
   const handleSubmitAnswer = () => {
     if (!hasAnswered) return;
     setShowExplanation(true);
@@ -131,12 +133,22 @@ const TrainingQuiz: React.FC<TrainingQuizProps> = ({
       return userKeys.every(key => (userAnswer as any)[key] === (correctAnswer as any)[key]);
     }
     
+    if (questionType === 'true_false' && typeof correctAnswer === 'object' && !Array.isArray(correctAnswer)) {
+      // Multi-statement true/false question
+      if (typeof userAnswer !== 'object' || !userAnswer) return false;
+      const userKeys = Object.keys(userAnswer);
+      const correctKeys = Object.keys(correctAnswer);
+      if (userKeys.length !== correctKeys.length) return false;
+      return userKeys.every(key => (userAnswer as any)[key] === (correctAnswer as any)[key]);
+    }
+    
     if (questionType === 'multiple_response' || questionType === 'multiple_select') {
       if (!Array.isArray(userAnswer) || !Array.isArray(correctAnswer)) return false;
       return userAnswer.length === correctAnswer.length && 
              userAnswer.every(ans => correctAnswer.includes(ans));
     }
     
+    // Handle simple true_false and multiple_choice the same way
     return userAnswer === correctAnswer;
   };
 
@@ -145,7 +157,6 @@ const TrainingQuiz: React.FC<TrainingQuizProps> = ({
 
     switch (currentQuestion.type) {
       case 'multiple_choice':
-      case 'true_false':
         return (
           <div className="space-y-3">
             {(currentQuestion.options as string[]).map((option: string, index: number) => (
@@ -155,39 +166,69 @@ const TrainingQuiz: React.FC<TrainingQuizProps> = ({
                   ${userAnswer === option ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}
                   ${showExplanation ? 
                     option === currentQuestion.answer ? 'border-green-500 bg-green-50' :
-                    userAnswer === option && userAnswer !== currentQuestion.answer ? 'border-red-500 bg-red-50' :
-                    'border-gray-200'
-                    : ''
-                  }
+                    userAnswer === option && userAnswer !== currentQuestion.answer ? 
+                    'border-red-500 bg-red-50' : '' : ''}
                 `}
               >
                 <input
                   type="radio"
-                  name="answer"
+                  name={`question-${currentQuestionIndex}`}
                   value={option}
                   checked={userAnswer === option}
-                  onChange={(e) => !showExplanation && handleAnswerChange(e.target.value)}
-                  className="mr-3"
+                  onChange={(e) => handleAnswerChange(e.target.value)}
                   disabled={showExplanation}
+                  className="mr-3 w-4 h-4"
                 />
-                <span className="flex-1">{option}</span>
-                {showExplanation && option === currentQuestion.answer && (
-                  <CheckCircle className="w-5 h-5 text-green-500 ml-2" />
-                )}
-                {showExplanation && userAnswer === option && userAnswer !== currentQuestion.answer && (
-                  <XCircle className="w-5 h-5 text-red-500 ml-2" />
-                )}
+                <span 
+                  className="text-gray-700 leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: option }} 
+                />
               </label>
             ))}
           </div>
         );
 
+      case 'true_false':
+        
+        return (
+          <div className="space-y-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {['True', 'False'].map((option: string) => (
+                <label 
+                  key={option} 
+                  className={`flex items-center justify-center p-6 border-2 rounded-lg cursor-pointer transition-all
+                    ${userAnswer === option ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}
+                    ${showExplanation ? 
+                      option === currentQuestion.answer ? 'border-green-500 bg-green-50' :
+                      userAnswer === option && userAnswer !== currentQuestion.answer ? 
+                      'border-red-500 bg-red-50' : '' : ''}
+                  `}
+                >
+                  <input
+                    type="radio"
+                    name={`question-${currentQuestionIndex}`}
+                    value={option}
+                    checked={userAnswer === option}
+                    onChange={(e) => handleAnswerChange(e.target.value)}
+                    disabled={showExplanation}
+                    className="mr-3 w-5 h-5"
+                  />
+                  <span className="text-lg font-semibold text-gray-700">
+                    {option}
+                  </span>
+                </label>
+              ))}
+            </div>
+          </div>
+        );
+
       case 'multiple_response':
+      case 'multiple_select':
         return (
           <div className="space-y-3">
             {(currentQuestion.options as string[]).map((option: string, index: number) => {
-              const isSelected = Array.isArray(userAnswer) && userAnswer.includes(option);
-              const isCorrectOption = Array.isArray(currentQuestion.answer) && currentQuestion.answer.includes(option);
+              const currentAnswers = (userAnswer as string[]) || [];
+              const isSelected = currentAnswers.includes(option);
               
               return (
                 <label 
@@ -195,40 +236,32 @@ const TrainingQuiz: React.FC<TrainingQuizProps> = ({
                   className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all
                     ${isSelected ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300'}
                     ${showExplanation ? 
-                      isCorrectOption ? 'border-green-500 bg-green-50' :
-                      isSelected && !isCorrectOption ? 'border-red-500 bg-red-50' :
-                      'border-gray-200'
-                      : ''
-                    }
+                      Array.isArray(currentQuestion.answer) && (currentQuestion.answer as string[]).includes(option) ? 
+                      'border-green-500 bg-green-50' :
+                      isSelected && Array.isArray(currentQuestion.answer) && 
+                      !(currentQuestion.answer as string[]).includes(option) ? 
+                      'border-red-500 bg-red-50' : '' : ''}
                   `}
                 >
                   <input
                     type="checkbox"
+                    value={option}
                     checked={isSelected}
                     onChange={(e) => {
-                      if (showExplanation) return;
-                      
-                      const currentAnswers = Array.isArray(userAnswer) ? userAnswer : [];
-                      let newAnswers: string[];
-                      
+                      const currentAnswers = (userAnswer as string[]) || [];
                       if (e.target.checked) {
-                        newAnswers = [...currentAnswers, option];
+                        handleAnswerChange([...currentAnswers, option]);
                       } else {
-                        newAnswers = currentAnswers.filter((ans: string) => ans !== option);
+                        handleAnswerChange(currentAnswers.filter(a => a !== option));
                       }
-                      
-                      handleAnswerChange(newAnswers);
                     }}
-                    className="mr-3"
                     disabled={showExplanation}
+                    className="mr-3 w-4 h-4"
                   />
-                  <span className="flex-1">{option}</span>
-                  {showExplanation && isCorrectOption && (
-                    <CheckCircle className="w-5 h-5 text-green-500 ml-2" />
-                  )}
-                  {showExplanation && isSelected && !isCorrectOption && (
-                    <XCircle className="w-5 h-5 text-red-500 ml-2" />
-                  )}
+                  <span 
+                    className="text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: option }} 
+                  />
                 </label>
               );
             })}
@@ -236,313 +269,251 @@ const TrainingQuiz: React.FC<TrainingQuizProps> = ({
         );
 
       case 'fill_in_blank':
-        const fillOptions = currentQuestion.options as { [key: string]: string[] };
-        const fillAnswer = userAnswer as { [key: string]: string } || {};
+        const isMultipleDropdowns = currentQuestion.options && 
+          typeof currentQuestion.options === 'object' && 
+          !Array.isArray(currentQuestion.options);
         
-        return (
-          <div className="space-y-4">
-            {Object.keys(fillOptions).map((key) => (
-              <div key={key} className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700 capitalize">
-                  {key.replace(/_/g, ' ')}
-                </label>
-                <select
-                  value={fillAnswer[key] || ''}
-                  onChange={(e) => {
-                    if (showExplanation) return;
-                    const newAnswer = { ...fillAnswer, [key]: e.target.value };
-                    handleAnswerChange(newAnswer);
-                  }}
-                  className={`w-full p-3 border-2 rounded-lg ${
-                    showExplanation ? 
-                      fillAnswer[key] === (currentQuestion.answer as any)[key] ? 'border-green-500 bg-green-50' :
-                      fillAnswer[key] ? 'border-red-500 bg-red-50' : 'border-gray-200'
-                      : 'border-gray-200'
-                  }`}
-                  disabled={showExplanation}
-                >
-                  <option value="">Select an option...</option>
-                  {fillOptions[key].map((option) => (
-                    <option key={option} value={option}>
-                      {option}
-                    </option>
-                  ))}
-                </select>
-                {showExplanation && (
-                  <div className="flex items-center text-sm">
-                    {fillAnswer[key] === (currentQuestion.answer as any)[key] ? (
-                      <><CheckCircle className="w-4 h-4 text-green-500 mr-1" /> Correct</>
-                    ) : (
-                      <><XCircle className="w-4 h-4 text-red-500 mr-1" /> Correct answer: {(currentQuestion.answer as any)[key]}</>
-                    )}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        );
+        if (isMultipleDropdowns) {
+          const optionsObj = currentQuestion.options as { [key: string]: string[] };
+          const answerObj = (userAnswer as { [key: string]: string }) || {};
+          
+          return (
+            <div className="space-y-4">
+              {Object.entries(optionsObj).map(([key, options]) => (
+                <div key={key} className="flex flex-col space-y-2">
+                  <label className="font-medium text-gray-700 capitalize">
+                    {key.replace(/_/g, ' ')}:
+                  </label>
+                  <select
+                    value={answerObj[key] || ''}
+                    onChange={(e) => {
+                      const newAnswer = { ...answerObj, [key]: e.target.value };
+                      handleAnswerChange(newAnswer);
+                    }}
+                    disabled={showExplanation}
+                    className="p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  >
+                    <option value="">Select an option</option>
+                    {options.map((option, index) => (
+                      <option key={index} value={option}>
+                        {option}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              ))}
+            </div>
+          );
+        } else {
+          // Single dropdown
+          return (
+            <div className="space-y-4">
+              <select
+                value={userAnswer as string || ''}
+                onChange={(e) => handleAnswerChange(e.target.value)}
+                disabled={showExplanation}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              >
+                <option value="">Select an option</option>
+                {(currentQuestion.options as string[]).map((option, index) => (
+                  <option key={index} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+          );
+        }
+
       case 'ordering':
-        const sourcePool = currentQuestion.options as string[];
-        const correctAnswer = currentQuestion.answer as string[];
-        const userArrangement = (userAnswer as string[]) || [];
+        const orderingAnswer = (userAnswer as string[]) || [];
+        const availableOptions = (currentQuestion.options as string[]).filter(
+          option => !orderingAnswer.includes(option)
+        );
         
-        const handleDragStart = (e: React.DragEvent, item: string, fromPool: boolean) => {
-          e.dataTransfer.setData('text/plain', JSON.stringify({ item, fromPool }));
-        };
-
-        const handleDragOver = (e: React.DragEvent) => {
-          e.preventDefault();
-        };
-
-        const handleDropInArrangement = (e: React.DragEvent, index?: number) => {
-          e.preventDefault();
-          const data = JSON.parse(e.dataTransfer.getData('text/plain'));
-          const { item, fromPool } = data;
-          
-          const newArrangement = [...userArrangement];
-          
-          if (fromPool) {
-            // Adding from pool - insert at specific index or at end
-            if (typeof index === 'number') {
-              newArrangement.splice(index, 0, item);
-            } else {
-              newArrangement.push(item);
-            }
-          } else {
-            // Reordering within arrangement
-            const currentIndex = newArrangement.indexOf(item);
-            if (currentIndex !== -1) {
-              newArrangement.splice(currentIndex, 1);
-              if (typeof index === 'number') {
-                newArrangement.splice(index, 0, item);
-              } else {
-                newArrangement.push(item);
-              }
-            }
-          }
-          
-          handleAnswer(newArrangement);
-        };
-
-        const handleDropInPool = (e: React.DragEvent) => {
-          e.preventDefault();
-          const data = JSON.parse(e.dataTransfer.getData('text/plain'));
-          const { item, fromPool } = data;
-          
-          if (!fromPool) {
-            // Remove from arrangement
-            const newArrangement = userArrangement.filter(arrItem => arrItem !== item);
-            handleAnswer(newArrangement);
-          }
-        };
-
-        const unusedItems = sourcePool.filter(item => !userArrangement.includes(item));
-
         return (
           <div className="space-y-4">
-            <p className="text-sm text-gray-600 mb-4">
-              Drag items from the right side to the left side to arrange them in the correct order. Not all items need to be used.
-            </p>
-            
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-              {/* Answer Area - Left Side */}
-              <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 min-h-[300px]">
-                <h4 className="text-sm font-medium text-gray-700 mb-3">Arrangement Area:</h4>
-                <div
-                  className="space-y-2"
-                  onDragOver={handleDragOver}
-                  onDrop={(e) => handleDropInArrangement(e)}
-                >
-                  {userArrangement.length === 0 ? (
-                    <div className="text-center text-gray-400 py-12">
-                      Drag items here to arrange them in order
-                    </div>
-                  ) : (
-                    userArrangement.map((item, index) => (
-                      <div
-                        key={`arranged-${item}-${index}`}
-                        draggable
-                        onDragStart={(e) => handleDragStart(e, item, false)}
-                        className="flex items-center justify-between p-3 bg-indigo-50 border border-indigo-200 rounded-lg cursor-move hover:bg-indigo-100 transition-colors"
-                      >
-                        <div className="flex items-center">
-                          <span className="text-sm font-medium text-indigo-700 mr-2 min-w-[20px]">{index + 1}.</span>
-                          <GripVertical className="w-4 h-4 mr-2 text-indigo-400" />
-                          <span className="text-sm" dangerouslySetInnerHTML={{ __html: item }} />
-                        </div>
-                      </div>
-                    ))
-                  )}
-                </div>
-              </div>
-
-              {/* Source Pool - Right Side */}
-              <div className="border border-gray-200 rounded-lg p-4 min-h-[300px]">
-                <h4 className="text-sm font-medium text-gray-700 mb-3">Available Options:</h4>
-                <div
-                  className="space-y-2"
-                  onDragOver={handleDragOver}
-                  onDrop={handleDropInPool}
-                >
-                  {unusedItems.length === 0 ? (
-                    <div className="text-center text-gray-400 py-12">
-                      All items have been used
-                    </div>
-                  ) : (
-                    unusedItems.map((item, index) => (
-                      <div
-                        key={`pool-${item}-${index}`}
-                        draggable
-                        onDragStart={(e) => handleDragStart(e, item, true)}
-                        className="flex items-center p-3 bg-gray-50 border border-gray-200 rounded-lg cursor-move hover:bg-gray-100 transition-colors"
-                      >
-                        <GripVertical className="w-4 h-4 mr-2 text-gray-400" />
-                        <span className="text-sm" dangerouslySetInnerHTML={{ __html: item }} />
-                      </div>
-                    ))
-                  )}
-                </div>
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h4 className="font-medium text-gray-700 mb-3">Available Options:</h4>
+              <div className="space-y-2">
+                {availableOptions.map((option, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      if (!showExplanation) {
+                        handleAnswerChange([...orderingAnswer, option]);
+                      }
+                    }}
+                    disabled={showExplanation}
+                    className="block w-full text-left p-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:cursor-not-allowed"
+                  >
+                    {option}
+                  </button>
+                ))}
               </div>
             </div>
-
-            {userArrangement.length > 0 && (
-              <div className="text-xs text-gray-500 text-center">
-                Tip: Drag items back to Available Options to remove them from your arrangement
+            
+            <div className="bg-blue-50 p-4 rounded-lg">
+              <h4 className="font-medium text-gray-700 mb-3">Your Order:</h4>
+              <div className="space-y-2">
+                {orderingAnswer.map((option, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-3 bg-white border border-blue-300 rounded-lg"
+                  >
+                    <span className="flex items-center">
+                      <GripVertical className="w-4 h-4 text-gray-400 mr-2" />
+                      <span className="font-medium text-blue-600 mr-2">{index + 1}.</span>
+                      {option}
+                    </span>
+                    {!showExplanation && (
+                      <button
+                        onClick={() => {
+                          const newAnswer = orderingAnswer.filter((_, i) => i !== index);
+                          handleAnswerChange(newAnswer);
+                        }}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        Remove
+                      </button>
+                    )}
+                  </div>
+                ))}
+                {orderingAnswer.length === 0 && (
+                  <p className="text-gray-500 text-center py-4">
+                    Click options above to add them in order
+                  </p>
+                )}
               </div>
-            )}
+            </div>
           </div>
         );
 
       default:
-        return (
-          <div className="text-gray-500 text-center py-8">
-            Question type {currentQuestion.type} not yet implemented in training mode
-          </div>
-        );
+        return <div>Unsupported question type</div>;
     }
   };
 
+  if (!currentQuestion) {
+    return <div>No questions available</div>;
+  }
+
   return (
-    <div className="min-h-screen bg-gray-50 py-6">
-      <div className="max-w-4xl mx-auto px-4">
+    <div className="min-h-screen bg-gray-50 p-4">
+      <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center mb-4">
+            <h1 className="text-2xl font-bold text-gray-800">Training Mode</h1>
             <button
               onClick={onBackToDashboard}
               className="flex items-center text-gray-600 hover:text-gray-800"
             >
-              <ArrowLeft className="w-5 h-5 mr-2" />
+              <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Dashboard
             </button>
-            
-            <div className="flex items-center space-x-4">
-              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">
-                Training Mode
+          </div>
+          
+          <div className="flex justify-between items-center">
+            <div className="text-sm text-gray-600">
+              Question {currentQuestionIndex + 1} of {questions.length}
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="text-sm text-gray-600">Domain:</span>
+              <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">
+                {currentQuestion.domain}
               </span>
-              <span className="text-gray-600">
-                Question {currentQuestionIndex + 1} of {questions.length}
+              <span className="bg-purple-100 text-purple-800 px-2 py-1 rounded text-sm">
+                {currentQuestion.type.replace('_', ' ')}
               </span>
             </div>
           </div>
           
-          {/* Progress Bar */}
-          <div className="mt-4">
-            <div className="bg-gray-200 rounded-full h-2">
-              <div 
-                className="bg-green-500 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${((currentQuestionIndex + 1) / questions.length) * 100}%` }}
-              />
-            </div>
+          <div className="w-full bg-gray-200 rounded-full h-2 mt-4">
+            <div 
+              className="bg-blue-600 h-2 rounded-full transition-all duration-300"
+              style={{ width: `${((currentQuestionIndex + 1) / questions.length) * 100}%` }}
+            ></div>
           </div>
         </div>
 
-        {/* Question Card */}
-        <div className="bg-white rounded-lg shadow-sm">
-          {/* Question Header */}
-          <div className="p-6 border-b border-gray-200">
-            <div className="flex justify-between items-start">
-              <div className="flex-1">
-                <div className="text-sm text-gray-500 mb-2">
-                  Domain: {currentQuestion.domain}
-                </div>
-                <div 
-                  className="text-lg font-medium text-gray-900"
-                  dangerouslySetInnerHTML={{ __html: currentQuestion.question }}
-                />
-              </div>
-              
+        {/* Question */}
+        <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
+          <div className="flex justify-between items-start mb-6">
+            <div className="flex-1">
+              <h2 
+                className="text-lg font-medium text-gray-800 leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: currentQuestion.question }}
+              />
+            </div>
+            <button
+              onClick={toggleFlag}
+              className={`ml-4 p-2 rounded-lg transition-colors ${
+                flaggedQuestions.has(currentQuestionIndex)
+                  ? 'bg-orange-100 text-orange-600 hover:bg-orange-200'
+                  : 'bg-gray-100 text-gray-400 hover:bg-gray-200'
+              }`}
+            >
+              <Flag className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Answer Options */}
+          {renderAnswerInput()}
+
+          {/* Submit Button */}
+          {!showExplanation && (
+            <div className="mt-6">
               <button
-                onClick={toggleFlag}
-                className={`ml-4 p-2 rounded-lg transition-colors ${
-                  flaggedQuestions.has(currentQuestionIndex)
-                    ? 'bg-yellow-100 text-yellow-700'
-                    : 'bg-gray-100 text-gray-500 hover:bg-gray-200'
-                }`}
+                onClick={handleSubmitAnswer}
+                disabled={!hasAnswered}
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed"
               >
-                <Flag className="w-5 h-5" />
+                Submit Answer
               </button>
             </div>
-          </div>
+          )}
 
-          {/* Answer Section */}
-          <div className="p-6">
-            {renderAnswerInput()}
-            
-            {/* Submit Button */}
-            {!showExplanation && (
-              <div className="mt-6">
+          {/* Explanation */}
+          {showExplanation && (
+            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
+              <div className="flex items-center mb-3">
+                {compareAnswers(answers[currentQuestionIndex], currentQuestion.answer, currentQuestion.type) ? (
+                  <CheckCircle className="w-6 h-6 text-green-500 mr-2" />
+                ) : (
+                  <XCircle className="w-6 h-6 text-red-500 mr-2" />
+                )}
+                <h3 className="text-lg font-semibold">
+                  {compareAnswers(answers[currentQuestionIndex], currentQuestion.answer, currentQuestion.type) 
+                    ? 'Correct!' 
+                    : 'Incorrect'
+                  }
+                </h3>
+              </div>
+              
+              <div className="mb-4">
+                <p className="text-gray-700">{currentQuestion.explanation}</p>
+              </div>
+
+              <div className="flex space-x-3">
                 <button
-                  onClick={handleSubmitAnswer}
-                  disabled={!hasAnswered}
-                  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed font-medium"
+                  onClick={handleRetryQuestion}
+                  className="flex items-center bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700"
                 >
-                  Check Answer
+                  <RotateCcw className="w-4 h-4 mr-2" />
+                  Try Again
+                </button>
+                
+                <button
+                  onClick={handleNextQuestion}
+                  className="flex items-center bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
+                >
+                  {currentQuestionIndex === questions.length - 1 ? 'Finish Training' : 'Next Question'}
+                  <ArrowRight className="w-4 h-4 ml-2" />
                 </button>
               </div>
-            )}
-
-            {/* Explanation Section */}
-            {showExplanation && (
-              <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                <div className="flex items-center mb-3">
-                  {compareAnswers(answers[currentQuestionIndex], currentQuestion.answer, currentQuestion.type) ? (
-                    <CheckCircle className="w-6 h-6 text-green-500 mr-2" />
-                  ) : (
-                    <XCircle className="w-6 h-6 text-red-500 mr-2" />
-                  )}
-                  <h3 className="text-lg font-semibold">
-                    {compareAnswers(answers[currentQuestionIndex], currentQuestion.answer, currentQuestion.type) 
-                      ? 'Correct!' 
-                      : 'Incorrect'
-                    }
-                  </h3>
-                </div>
-                
-                <div className="mb-4">
-                  <p className="text-gray-700">{currentQuestion.explanation}</p>
-                </div>
-
-                <div className="flex space-x-3">
-                  <button
-                    onClick={handleRetryQuestion}
-                    className="flex items-center bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700"
-                  >
-                    <RotateCcw className="w-4 h-4 mr-2" />
-                    Try Again
-                  </button>
-                  
-                  <button
-                    onClick={handleNextQuestion}
-                    className="flex items-center bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700"
-                  >
-                    {currentQuestionIndex === questions.length - 1 ? 'Finish Training' : 'Next Question'}
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
 
         {/* Navigation */}
