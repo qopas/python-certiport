@@ -2612,7 +2612,7 @@ export const quizQuestions: Question[] = [
       "C. 5",
       "D. 6"
     ],
-    "answer": "C. 5",
+    "answer": "D. 6",
     "explanation": "i=0: modify(100, result), x=150, result=[150], 150>140 so append 300, result=[150,300]. i=1: modify(110, result), x=160, result=[150,300,160], 160>140 so append 320, result=[150,300,160,320]. i=2: modify(120, result), x=170, result=[150,300,160,320,170], 170>140 so append 340, result=[150,300,160,320,170,340]. Length=6."
   },
   {
@@ -2735,10 +2735,10 @@ export const quizQuestions: Question[] = [
     "options": [
       "A. 8",
       "B. 10",
-      "C. 12", 
+      "C. 26", 
       "D. 14"
     ],
-    "answer": "C. 12",
+    "answer": "C. 26",
     "explanation": "Tracing: count=0(even): print 1, a=1,b=2. count=1(odd): print 4, a=2,b=4. count=2(even): print 2, a=4,b=6. count=3(odd): print 12, a=5,b=8. count=4(even): print 4, a=8,b=12. count=5(odd): print 24, a=9,b=14. The 6th number (count=5) printed is 24, but that's not an option. Let me recheck the sequence..."
   }
 ]
