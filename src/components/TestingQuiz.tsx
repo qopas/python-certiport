@@ -116,28 +116,69 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
   };
 
   // Enhanced answer comparison for all question types
-  const compareAnswers = (userAnswer: any, correctAnswer: any, questionType: string) => {
-    if (questionType === 'ordering') {
-      if (!Array.isArray(userAnswer) || !Array.isArray(correctAnswer)) return false;
-      return JSON.stringify(userAnswer) === JSON.stringify(correctAnswer);
+ const compareAnswers = (userAnswer: any, correctAnswer: any, questionType: string) => {
+  // DEBUG LOGGING - KEEP THIS TO SEE WHAT'S HAPPENING
+  console.log(`\n=== COMPARING ${questionType} ===`);
+  console.log('User Answer:', userAnswer);
+  console.log('Correct Answer:', correctAnswer);
+  
+  if (questionType === 'ordering') {
+    if (!Array.isArray(userAnswer) || !Array.isArray(correctAnswer)) return false;
+    return JSON.stringify(userAnswer) === JSON.stringify(correctAnswer);
+  }
+  
+  if (questionType === 'fill_in_blank') {
+    if (typeof userAnswer !== 'object' || typeof correctAnswer !== 'object') return false;
+    const userKeys = Object.keys(userAnswer || {});
+    const correctKeys = Object.keys(correctAnswer || {});
+    if (userKeys.length !== correctKeys.length) return false;
+    return userKeys.every(key => userAnswer[key] === correctAnswer[key]);
+  }
+  
+  // ADD THIS MISSING BLOCK FOR MULTI-STATEMENT TRUE_FALSE
+  if (questionType === 'true_false' && typeof correctAnswer === 'object' && !Array.isArray(correctAnswer)) {
+    console.log('Processing multi-statement true_false question');
+    
+    if (typeof userAnswer !== 'object' || !userAnswer) {
+      console.log('❌ User answer is not an object');
+      return false;
     }
     
-    if (questionType === 'fill_in_blank') {
-      if (typeof userAnswer !== 'object' || typeof correctAnswer !== 'object') return false;
-      const userKeys = Object.keys(userAnswer || {});
-      const correctKeys = Object.keys(correctAnswer || {});
-      if (userKeys.length !== correctKeys.length) return false;
-      return userKeys.every(key => userAnswer[key] === correctAnswer[key]);
+    const userKeys = Object.keys(userAnswer);
+    const correctKeys = Object.keys(correctAnswer);
+    
+    if (userKeys.length !== correctKeys.length) {
+      console.log('❌ Key count mismatch:', userKeys.length, 'vs', correctKeys.length);
+      return false;
     }
     
-    if (questionType === 'multiple_response' || questionType === 'multiple_select') {
-      if (!Array.isArray(userAnswer) || !Array.isArray(correctAnswer)) return false;
-      return userAnswer.length === correctAnswer.length && 
-             userAnswer.every(ans => correctAnswer.includes(ans));
-    }
+    // Since you're storing full format, do direct comparison
+    const result = userKeys.every(key => {
+      const userValue = userAnswer[key];
+      const correctValue = correctAnswer[key];
+      
+      console.log(`  ${key}: 
+        User: "${userValue}"
+        Correct: "${correctValue}"
+        Match: ${userValue === correctValue ? '✅' : '❌'}`);
+      
+      return userValue === correctValue;
+    });
     
-    return userAnswer === correctAnswer;
-  };
+    console.log('Final result:', result ? '✅ CORRECT' : '❌ INCORRECT');
+    return result;
+  }
+  
+  if (questionType === 'multiple_response' || questionType === 'multiple_select') {
+    if (!Array.isArray(userAnswer) || !Array.isArray(correctAnswer)) return false;
+    return userAnswer.length === correctAnswer.length && 
+           userAnswer.every(ans => correctAnswer.includes(ans));
+  }
+  
+  // Handle simple true_false and multiple_choice
+  console.log('Using simple comparison:', userAnswer === correctAnswer);
+  return userAnswer === correctAnswer;
+};
 
   const submitQuiz = async () => {
     if (!startTime) return;
