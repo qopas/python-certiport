@@ -844,7 +844,7 @@ export const quizQuestions: Question[] = [
   "id": 222,
   "domain": "Arithmetic operators & operator precedence",
   "type": "ordering",
-  "question": "You are writing a Python program that evaluates an arithmetic formula.<br><br>The formula is described as b equals a multiplied by negative one, then raised to the second power, where a is the value that will be input and b is the result.<br><br>You create the following code segment. Line numbers are included for reference only.<br><br>01 a = eval(input(\"Enter a number for the question: \"))<br>02 b =<br><br>You need to ensure that the result is correct.<br><br>How should you complete the code on line 02? To answer, drag the appropriate code segment to the correct location. Each code segment may be used once, more than once, or not at all.<br><br>Note: You will receive partial credit for each correct placement ONLY 4 TO USE!.<br><br>b = ____",
+  "question": "You are writing a Python program that evaluates an arithmetic formula.<br><br>The formula is described as b equals a multiplied by negative one, then raised to the second power, where a is the value that will be input and b is the result.<br><br>You create the following code segment. Line numbers are included for reference only.<br><br>01 a = eval(input(\"Enter a number for the question: \"))<br>02 b =<br><br>You need to ensure that the result is correct.<br><br>How should you complete the code on line 02? To answer, drag the appropriate code segment to the correct location. Each code segment may be used once, more than once, or not at all.<br><br>Note: You will receive partial credit for each correct placement ONLY 5 TO USE!.<br><br>b = ____",
   "options": [
     "-",
     "(",
@@ -1094,7 +1094,7 @@ export const quizQuestions: Question[] = [
   "id": 232,
   "domain": "Function definition & parameters",
   "type": "fill_in_blank",
-  "question": "You are developing a Python application for an online game.<br><br>You need to create a function that meets the following criteria:<br>• The function is named update_score<br>• The function receives the current score and a value<br>• The function adds the value to the current score<br>• The function returns the new score<br><br>How should you complete the code? To answer, select the appropriate code segments in the answer area.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____ ____<br>&nbsp;&nbsp;&nbsp;&nbsp;current += value<br>&nbsp;&nbsp;&nbsp;&nbsp;____</div>",
+  "question": "You are developing a Python application for an online game.<br><br>You need to create a function that meets the following criteria:<br>• The function is named update_score<br>• The function receives the current score and a value<br>• The function adds the value to the current score<br>• The function returns the new score<br><br>How should you complete the code? To answer, select the appropriate code segments in the answer area.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;current += value<br>&nbsp;&nbsp;&nbsp;&nbsp;____</div>",
   "options": {
     "function_definition": ["update_score", "def update_score", "return update_score"],
     "parameters": ["(current, value):", "()", "(current, value)", "()"],
