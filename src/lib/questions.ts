@@ -746,9 +746,9 @@ export const quizQuestions: Question[] = [
     "statement3": "After executing code segment 3, the data type of variable c is int."
   },
   "answer": {
-    "statement1": "Yes: After executing code segment 1, the data type of variable a is str.",
-    "statement2": "Yes: After executing code segment 2, the data type of variable b is float.",
-    "statement3": "No: After executing code segment 3, the data type of variable c is int."
+    "statement1": "True: After executing code segment 1, the data type of variable a is str.",
+    "statement2": "True: After executing code segment 2, the data type of variable b is float.",
+    "statement3": "False: After executing code segment 3, the data type of variable c is int."
   },
   "explanation": "Statement 1: Yes - String multiplication (\"20\" * 3) results in \"202020\", which is a string. Statement 2: Yes - Division in Python 3 always returns a float, so 6 / 4 = 1.5 (float). Statement 3: No - Division always returns float in Python 3, so 2.5 / 1 = 2.5 (float), not int."
 },
@@ -1094,7 +1094,7 @@ export const quizQuestions: Question[] = [
   "id": 232,
   "domain": "Function definition & parameters",
   "type": "fill_in_blank",
-  "question": "You are developing a Python application for an online game.<br><br>You need to create a function that meets the following criteria:<br>• The function is named update_score<br>• The function receives the current score and a value<br>• The function adds the value to the current score<br>• The function returns the new score<br><br>How should you complete the code? To answer, select the appropriate code segments in the answer area.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____<br>&nbsp;&nbsp;&nbsp;&nbsp;current += value<br>&nbsp;&nbsp;&nbsp;&nbsp;____</div>",
+  "question": "You are developing a Python application for an online game.<br><br>You need to create a function that meets the following criteria:<br>• The function is named update_score<br>• The function receives the current score and a value<br>• The function adds the value to the current score<br>• The function returns the new score<br><br>How should you complete the code? To answer, select the appropriate code segments in the answer area.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____ ____<br>&nbsp;&nbsp;&nbsp;&nbsp;current += value<br>&nbsp;&nbsp;&nbsp;&nbsp;____</div>",
   "options": {
     "function_definition": ["update_score", "def update_score", "return update_score"],
     "parameters": ["(current, value):", "()", "(current, value)", "()"],
