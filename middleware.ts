@@ -1,48 +1,36 @@
 // middleware.ts
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { verifyTokenEdge } from './src/lib/auth-edge';
 
-// middleware.ts
+// Maintenance mode middleware - redirect all routes to maintenance page
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   
-  console.log('🔥 MIDDLEWARE RUNNING FOR:', pathname);
+  console.log('🔥 MAINTENANCE MODE - MIDDLEWARE RUNNING FOR:', pathname);
 
-  // Public routes that don't require authentication
-  const publicRoutes = ['/login', '/api/auth', '/api/test-db', '/api/debug-auth'];
+  // Allow static assets and API routes to load properly
+  const allowedPaths = [
+    '/_next',     // Next.js assets
+    '/favicon.ico',
+    '/api',       // Keep API routes accessible if needed
+    '/public'     // Public assets
+  ];
   
-  if (publicRoutes.some(route => pathname.startsWith(route))) {
-    console.log('✅ Public route, allowing access');
+  // If accessing static assets, allow them through
+  if (allowedPaths.some(path => pathname.startsWith(path))) {
+    console.log('✅ Static asset, allowing access');
     return NextResponse.next();
   }
 
-  // Get token from cookie
-  const token = request.cookies.get('auth-token')?.value;
-  console.log('🔑 Token found:', !!token);
-
-  // If no token, redirect to login
-  if (!token) {
-    console.log('🔄 No token, redirecting to login');
-    return NextResponse.redirect(new URL('/login', request.url));
+  // If already on the main page (maintenance page), allow it
+  if (pathname === '/') {
+    console.log('✅ On maintenance page, allowing access');
+    return NextResponse.next();
   }
 
-  // Verify token (now async)
-  const decoded = await verifyTokenEdge(token);
-  if (!decoded) {
-    console.log('❌ Invalid token, redirecting to login');
-    const response = NextResponse.redirect(new URL('/login', request.url));
-    response.cookies.delete('auth-token');
-    return response;
-  }
-
-  console.log('✅ Valid token for user:', decoded.email);
-  
-  // Rest of your middleware logic...
-  // ... (keep the admin route checks and redirects as they are)
-  
-  console.log('✅ Access allowed');
-  return NextResponse.next();
+  // For all other routes, redirect to maintenance page
+  console.log('🔄 Redirecting to maintenance page from:', pathname);
+  return NextResponse.redirect(new URL('/', request.url));
 }
 export const config = {
   matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Droid+Sans+Mono');
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -119,4 +120,360 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Custom animations for the maintenance page */
+@keyframes scan {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes progress-bar {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 75%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-scan {
+  animation: scan 4s linear infinite;
+}
+
+.animate-progress-bar {
+  animation: progress-bar 3s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+/* Glitch effect for futuristic feel */
+@keyframes glitch {
+  0%, 74%, 76%, 100% {
+    transform: translate(0);
+  }
+  75% {
+    transform: translate(-2px, 2px);
+  }
+}
+
+.animate-glitch {
+  animation: glitch 2s infinite;
+}
+
+/* Additional futuristic effects */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Individual light spot animations */
+@keyframes light-drift-1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 1;
+  }
+  25% {
+    transform: translate(50px, -30px) scale(1.1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(30px, 40px) scale(0.9);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translate(-20px, 20px) scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+@keyframes light-drift-2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  33% {
+    transform: translate(-40px, 30px) scale(1.2) rotate(2deg);
+    opacity: 0.7;
+  }
+  66% {
+    transform: translate(25px, -25px) scale(0.85) rotate(-1deg);
+    opacity: 0.5;
+  }
+}
+
+@keyframes light-drift-3 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translate(-35px, -40px) scale(1.15);
+    opacity: 0.6;
+  }
+}
+
+.light-spot-1 {
+  animation: light-drift-1 22s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.light-spot-2 {
+  animation: light-drift-2 28s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+.light-spot-3 {
+  animation: light-drift-3 25s ease-in-out infinite;
+  animation-delay: 6s;
+}
+
+.light-spot-4 {
+  animation: light-drift-1 30s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.light-spot-5 {
+  animation: light-drift-2 24s ease-in-out infinite;
+  animation-delay: 5s;
+}
+
+.light-spot-6 {
+  animation: light-drift-3 32s ease-in-out infinite;
+  animation-delay: 8s;
+}
+
+.light-spot-7 {
+  animation: light-drift-2 26s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.light-spot-8 {
+  animation: light-drift-1 29s ease-in-out infinite;
+  animation-delay: 4s;
+}
+
+.light-spot-9 {
+  animation: light-drift-3 27s ease-in-out infinite;
+  animation-delay: 7s;
+}
+
+/* Glow effect */
+.glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.3), 0 0 60px rgba(0, 255, 255, 0.1);
+}
+
+.glow-purple {
+  box-shadow: 0 0 20px rgba(147, 51, 234, 0.5), 0 0 40px rgba(147, 51, 234, 0.3), 0 0 60px rgba(147, 51, 234, 0.1);
+}
+
+/* Text glow effect */
+.glow-text {
+  text-shadow: 
+    0 0 10px rgba(59, 130, 246, 0.5),
+    0 0 20px rgba(99, 102, 241, 0.4),
+    0 0 40px rgba(139, 92, 246, 0.3),
+    0 0 80px rgba(139, 92, 246, 0.2);
+}
+
+/* White text with black stroke */
+.text-stroke {
+  -webkit-text-stroke: 3px black;
+  text-stroke: 3px black;
+  text-shadow: 
+    3px 3px 0 #000,
+    -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000,
+    3px 0px 0 #000,
+    0px 3px 0 #000,
+    -3px 0px 0 #000,
+    0px -3px 0 #000;
+}
+
+/* Flip Clock Styles - Converted from SASS */
+.flipClock {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.flipUnitContainer {
+  display: block;
+  position: relative;
+  width: 140px;
+  height: 120px;
+  perspective-origin: 50% 50%;
+  perspective: 300px;
+  background-color: white;
+  border-radius: 3px;
+  box-shadow: 0px 10px 10px -10px grey;
+}
+
+.upperCard, .lowerCard {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  border: 1px solid whitesmoke;
+}
+
+.upperCard span, .lowerCard span {
+  font-size: 5em;
+  font-family: 'Droid Sans Mono', monospace;
+  font-weight: lighter;
+  color: #333333;
+}
+
+.upperCard {
+  align-items: flex-end;
+  border-bottom: 0.5px solid whitesmoke;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.upperCard span {
+  transform: translateY(50%);
+}
+
+.lowerCard {
+  align-items: flex-start;
+  border-top: 0.5px solid whitesmoke;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.lowerCard span {
+  transform: translateY(-50%);
+}
+
+.flipCard {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+.flipCard span {
+  font-family: 'Droid Sans Mono', monospace;
+  font-size: 5em;
+  font-weight: lighter;
+  color: #333333;
+}
+
+.flipCard.unfold {
+  top: 50%;
+  align-items: flex-start;
+  transform-origin: 50% 0%;
+  transform: rotateX(180deg); /* from 180 to 0 */
+  background-color: white;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border: 0.5px solid whitesmoke;
+  border-top: 0.5px solid whitesmoke;
+}
+
+.flipCard.unfold span {
+  transform: translateY(-50%);
+}
+
+.flipCard.fold {
+  top: 0%;
+  align-items: flex-end;
+  transform-origin: 50% 100%;
+  transform: rotateX(0deg); /* from 0 to -180 */
+  background-color: white;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  border: 0.5px solid whitesmoke;
+  border-bottom: 0.5px solid whitesmoke;
+}
+
+.flipCard.fold span {
+  transform: translateY(50%);
+}
+
+.fold {
+  animation: fold 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
+  transform-style: preserve-3d;
+}
+
+.unfold {
+  animation: unfold 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
+  transform-style: preserve-3d;
+}
+
+@keyframes fold {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(-180deg);
+  }
+}
+
+@keyframes unfold {
+  0% {
+    transform: rotateX(180deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+.timer-label {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: 0.1em;
+  text-shadow: 
+    1px 1px 0 #fff,
+    -1px -1px 0 #fff,  
+    1px -1px 0 #fff,
+    -1px 1px 0 #fff;
 }
