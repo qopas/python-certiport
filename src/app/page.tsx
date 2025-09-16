@@ -204,79 +204,79 @@ export default function MaintenancePage() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
       {/* Animated diffused light spots */}
       <div className="absolute inset-0">
-        {/* Blue light spots */}
-        <div className="absolute rounded-full blur-3xl light-spot-1" 
+        {/* Blue light spots - responsive sizes */}
+        <div className="absolute rounded-full blur-2xl lg:blur-3xl light-spot-1" 
              style={{
-               width: '500px', 
-               height: '500px',
+               width: 'clamp(200px, 40vw, 500px)', 
+               height: 'clamp(200px, 40vw, 500px)',
                background: 'radial-gradient(circle, rgba(147, 197, 253, 0.4) 0%, rgba(147, 197, 253, 0.1) 70%, transparent 100%)',
                top: '10%', 
-               left: '20%'
+               left: 'clamp(5%, 20vw, 20%)'
              }} />
-        <div className="absolute rounded-full blur-3xl light-spot-2" 
+        <div className="absolute rounded-full blur-2xl lg:blur-3xl light-spot-2" 
              style={{
-               width: '450px', 
-               height: '450px',
+               width: 'clamp(180px, 35vw, 450px)', 
+               height: 'clamp(180px, 35vw, 450px)',
                background: 'radial-gradient(circle, rgba(164, 202, 254, 0.3) 0%, rgba(164, 202, 254, 0.1) 70%, transparent 100%)',
                top: '60%', 
-               left: '70%'
+               left: 'clamp(60%, 70vw, 70%)'
              }} />
-        <div className="absolute rounded-full blur-3xl light-spot-3" 
+        <div className="absolute rounded-full blur-2xl lg:blur-3xl light-spot-3" 
              style={{
-               width: '400px', 
-               height: '400px',
+               width: 'clamp(160px, 32vw, 400px)', 
+               height: 'clamp(160px, 32vw, 400px)',
                background: 'radial-gradient(circle, rgba(219, 234, 254, 0.5) 0%, rgba(219, 234, 254, 0.2) 70%, transparent 100%)',
                top: '80%', 
                left: '10%'
              }} />
         
-        {/* Yellow light spots */}
-        <div className="absolute rounded-full blur-3xl light-spot-4" 
+        {/* Yellow light spots - responsive sizes */}
+        <div className="absolute rounded-full blur-2xl lg:blur-3xl light-spot-4" 
              style={{
-               width: '480px', 
-               height: '480px',
+               width: 'clamp(190px, 38vw, 480px)', 
+               height: 'clamp(190px, 38vw, 480px)',
                background: 'radial-gradient(circle, rgba(254, 240, 138, 0.4) 0%, rgba(254, 240, 138, 0.1) 70%, transparent 100%)',
                top: '30%', 
-               right: '15%'
+               right: 'clamp(5%, 15vw, 15%)'
              }} />
-        <div className="absolute rounded-full blur-3xl light-spot-5" 
+        <div className="absolute rounded-full blur-2xl lg:blur-3xl light-spot-5" 
              style={{
-               width: '350px', 
-               height: '350px',
+               width: 'clamp(140px, 28vw, 350px)', 
+               height: 'clamp(140px, 28vw, 350px)',
                background: 'radial-gradient(circle, rgba(253, 224, 71, 0.3) 0%, rgba(253, 224, 71, 0.1) 70%, transparent 100%)',
                top: '5%', 
                left: '60%'
              }} />
-        <div className="absolute rounded-full blur-3xl light-spot-6" 
+        <div className="absolute rounded-full blur-2xl lg:blur-3xl light-spot-6" 
              style={{
-               width: '520px', 
-               height: '520px',
+               width: 'clamp(210px, 42vw, 520px)', 
+               height: 'clamp(210px, 42vw, 520px)',
                background: 'radial-gradient(circle, rgba(254, 249, 195, 0.4) 0%, rgba(254, 249, 195, 0.15) 70%, transparent 100%)',
                bottom: '20%', 
                right: '40%'
              }} />
         
-        {/* Red/Pink light spots */}
-        <div className="absolute rounded-full blur-3xl light-spot-7" 
+        {/* Red/Pink light spots - responsive sizes */}
+        <div className="absolute rounded-full blur-2xl lg:blur-3xl light-spot-7" 
              style={{
-               width: '460px', 
-               height: '460px',
+               width: 'clamp(185px, 37vw, 460px)', 
+               height: 'clamp(185px, 37vw, 460px)',
                background: 'radial-gradient(circle, rgba(254, 202, 202, 0.3) 0%, rgba(254, 202, 202, 0.1) 70%, transparent 100%)',
                top: '50%', 
                left: '5%'
              }} />
-        <div className="absolute rounded-full blur-3xl light-spot-8" 
+        <div className="absolute rounded-full blur-2xl lg:blur-3xl light-spot-8" 
              style={{
-               width: '420px', 
-               height: '420px',
+               width: 'clamp(170px, 34vw, 420px)', 
+               height: 'clamp(170px, 34vw, 420px)',
                background: 'radial-gradient(circle, rgba(251, 207, 232, 0.35) 0%, rgba(251, 207, 232, 0.1) 70%, transparent 100%)',
                bottom: '10%', 
                left: '50%'
              }} />
-        <div className="absolute rounded-full blur-3xl light-spot-9" 
+        <div className="absolute rounded-full blur-2xl lg:blur-3xl light-spot-9" 
              style={{
-               width: '440px', 
-               height: '440px',
+               width: 'clamp(175px, 35vw, 440px)', 
+               height: 'clamp(175px, 35vw, 440px)',
                background: 'radial-gradient(circle, rgba(254, 226, 226, 0.4) 0%, rgba(254, 226, 226, 0.15) 70%, transparent 100%)',
                top: '20%', 
                right: '5%'
@@ -287,26 +287,26 @@ export default function MaintenancePage() {
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen p-8">
-        <div className="text-center space-y-8 max-w-4xl mx-auto">
+      <div className="relative z-10 flex items-center justify-center min-h-screen p-4 sm:p-6 lg:p-8">
+        <div className="text-center space-y-4 sm:space-y-6 lg:space-y-8 max-w-7xl mx-auto w-full">
 
           {/* Main heading with typing effect */}
-          <div className="space-y-6">
-            <h1 className="text-6xl md:text-8xl font-bold text-white leading-tight text-stroke">
+          <div className="space-y-3 sm:space-y-4 lg:space-y-6 px-2">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-tight text-stroke break-words">
               {typedText}
               <span className="animate-pulse">|</span>
             </h1>
             
             {/* Subtitle */}
-            <p className="text-2xl md:text-4xl text-gray-600 font-light tracking-wider opacity-80">
+            <p className="text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-gray-600 font-light tracking-wider opacity-80 break-words">
               {subtitle}
               {subtitle && <span className="animate-pulse">|</span>}
             </p>
           </div>
 
           {/* Countdown Timer */}
-          <div className="max-w-4xl mx-auto mt-16">
-            <div className={'flipClock'}>
+          <div className="max-w-6xl mx-auto mt-8 sm:mt-12 lg:mt-16 px-2">
+            <div className={'flipClock flex flex-wrap justify-center gap-2 sm:gap-4 lg:gap-6'}>
               <FlipUnitContainer 
                 unit={'days'}
                 digit={timeLeft.days} 
@@ -331,11 +331,11 @@ export default function MaintenancePage() {
           </div>
 
           {/* Floating elements */}
-          <div className="flex justify-center space-x-8 mt-16">
+          <div className="flex justify-center space-x-4 sm:space-x-6 lg:space-x-8 mt-8 sm:mt-12 lg:mt-16">
             {[...Array(3)].map((_, i) => (
               <div
                 key={i}
-                className="w-4 h-4 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-bounce"
+                className="w-3 h-3 sm:w-4 sm:h-4 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full animate-bounce"
                 style={{
                   animationDelay: `${i * 0.2}s`,
                   animationDuration: '1.5s'
@@ -345,20 +345,153 @@ export default function MaintenancePage() {
           </div>
 
           {/* Bottom text */}
-          <div className="mt-16 space-y-4">
-            <p className="text-gray-500 text-sm">
+          <div className="mt-8 sm:mt-12 lg:mt-16 space-y-4 px-4">
+            <p className="text-gray-500 text-xs sm:text-sm lg:text-base">
               We&apos;re working hard to bring you something amazing
             </p>
           </div>
         </div>
       </div>
 
-      {/* Corner decorations */}
-      <div className="absolute top-0 left-0 w-32 h-32 border-l-2 border-t-2 border-blue-400/40" />
-      <div className="absolute top-0 right-0 w-32 h-32 border-r-2 border-t-2 border-blue-400/40" />
-      <div className="absolute bottom-0 left-0 w-32 h-32 border-l-2 border-b-2 border-blue-400/40" />
-      <div className="absolute bottom-0 right-0 w-32 h-32 border-r-2 border-b-2 border-blue-400/40" />
+      {/* Corner decorations - responsive sizes */}
+      <div className="absolute top-0 left-0 w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32 border-l-2 border-t-2 border-blue-400/40" />
+      <div className="absolute top-0 right-0 w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32 border-r-2 border-t-2 border-blue-400/40" />
+      <div className="absolute bottom-0 left-0 w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32 border-l-2 border-b-2 border-blue-400/40" />
+      <div className="absolute bottom-0 right-0 w-16 h-16 sm:w-24 sm:h-24 lg:w-32 lg:h-32 border-r-2 border-b-2 border-blue-400/40" />
 
+      {/* Additional CSS for flip clock responsiveness */}
+      <style jsx>{`
+        .flipClock {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 0.5rem;
+        }
+        
+        @media (min-width: 640px) {
+          .flipClock {
+            gap: 1rem;
+          }
+        }
+        
+        @media (min-width: 1024px) {
+          .flipClock {
+            gap: 1.5rem;
+          }
+        }
+        
+        .flipUnitContainer {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          min-width: 60px;
+        }
+        
+        @media (min-width: 640px) {
+          .flipUnitContainer {
+            min-width: 80px;
+          }
+        }
+        
+        @media (min-width: 1024px) {
+          .flipUnitContainer {
+            min-width: 100px;
+          }
+        }
+        
+        .timer-label {
+          font-size: 0.75rem;
+          margin-top: 0.5rem;
+          color: #6b7280;
+          font-weight: 500;
+          letter-spacing: 0.05em;
+        }
+        
+        @media (min-width: 640px) {
+          .timer-label {
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+          }
+        }
+        
+        @media (min-width: 1024px) {
+          .timer-label {
+            font-size: 1rem;
+            margin-top: 1rem;
+          }
+        }
+        
+        .flipCard, .upperCard, .lowerCard {
+          width: 100%;
+          height: 40px;
+          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+          font-weight: bold;
+          color: #1e293b;
+          border: 1px solid #e2e8f0;
+          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        @media (min-width: 640px) {
+          .flipCard, .upperCard, .lowerCard {
+            height: 50px;
+            font-size: 1.875rem;
+          }
+        }
+        
+        @media (min-width: 1024px) {
+          .flipCard, .upperCard, .lowerCard {
+            height: 60px;
+            font-size: 2.25rem;
+          }
+        }
+        
+        /* Animation styles */
+        .fold {
+          animation: flipDown 0.6s ease-in-out;
+        }
+        
+        .unfold {
+          animation: flipUp 0.6s ease-in-out;
+        }
+        
+        @keyframes flipDown {
+          0% { transform: rotateX(0deg); }
+          50% { transform: rotateX(-90deg); }
+          100% { transform: rotateX(0deg); }
+        }
+        
+        @keyframes flipUp {
+          0% { transform: rotateX(0deg); }
+          50% { transform: rotateX(90deg); }
+          100% { transform: rotateX(0deg); }
+        }
+        
+        .text-stroke {
+          text-shadow: 
+            -1px -1px 0 #e2e8f0,  
+            1px -1px 0 #e2e8f0,
+            -1px 1px 0 #e2e8f0,
+            1px 1px 0 #e2e8f0,
+            2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 639px) {
+          .text-stroke {
+            text-shadow: 
+              -1px -1px 0 #e2e8f0,  
+              1px -1px 0 #e2e8f0,
+              -1px 1px 0 #e2e8f0,
+              1px 1px 0 #e2e8f0,
+              1px 1px 2px rgba(0,0,0,0.1);
+          }
+        }
+      `}</style>
     </div>
   );
 }
