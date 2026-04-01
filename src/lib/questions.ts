@@ -10,7 +10,7 @@ export const quizQuestions: Question[] = [
       "import_keyword": ["import", "from", "use", "include"],
       "first_part": ["unittest", "test", "TestCase", "unit"],
       "second_part": ["TestCase", "Test", "UnitTest", "Case"],
-      "test_method": ["test_isinstance", "test_instance", "testIsInstance", "test_type"],
+      "test_method": ["test_isinstance", "isinstance_test", "check_IsInstance", "verify_type"],
       "assert_method": ["assertIsInstance", "assertEqual", "assertTrue", "assertIs"]
     },
     "answer": {
@@ -20,7 +20,7 @@ export const quizQuestions: Question[] = [
       "test_method": "test_isinstance",
       "assert_method": "assertIsInstance"
     },
-    "explanation": "Use `import` to bring in the unittest module. Test classes inherit from `unittest.TestCase` (two separate parts). Test methods must start with 'test_'. Use `assertIsInstance(obj, class)` to check if an object is an instance of a specific class."
+    "explanation": "Use `import` to bring in the unittest module. Test classes inherit from `unittest.TestCase` (two separate parts). Test methods must start with 'test_' to be automatically discovered and run by the unittest runner — options like `isinstance_test`, `check_IsInstance`, and `verify_type` do not start with 'test_' and would never be executed as tests. Use `assertIsInstance(obj, class)` to check if an object is an instance of a specific class."
   },
   {
     "id": 177,
@@ -169,7 +169,7 @@ export const quizQuestions: Question[] = [
     "type": "fill_in_blank",
     "question": "You find errors while evaluating the following code. Line numbers are included for reference only.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]<br>02 index = 0<br>03 while (index < 10) # change to : ____<br>04 &nbsp;&nbsp;&nbsp;&nbsp;print(numbers[index])<br>06 &nbsp;&nbsp;&nbsp;&nbsp;if numbers[index] = 6 # change to ____<br>07 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>08 &nbsp;&nbsp;&nbsp;&nbsp;else:<br>09 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index += 1</div><br><br>You need to correct the code at line 03 and line 06.",
     "options": {
-      "line_03": ["while (index < 10):", "while index < 10:", "while (index < 10);", "for (index < 10):"],
+      "line_03": ["while (index < 10):", "while (index < 10)", "while (index < 10);", "for (index < 10):"],
       "line_06": ["if numbers[index] == 6:", "if numbers[index] = 6:", "if (numbers[index] == 6)", "if numbers[index] === 6:"]
     },
     "answer": {
@@ -207,7 +207,7 @@ export const quizQuestions: Question[] = [
     "type": "fill_in_blank",
     "question": "You are writing a program to randomly assign rooms (room_number) and team-building groups (group) for a company retreat.<br><br>Complete the code by selecting the correct code segment from each dropdown list.<br><br>Note: You will receive partial credit for each correct selection.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import random<br>roomsAssigned=[1]<br>room_number=1<br>groupList=[\"Ropes\",\"Rafting\",\"Obstacle\",\"Wellness\"]<br>count=0<br>print(\"Welcome to CompanyPro's Team-Building Weekend!\")<br>name=input(\"Please enter your name (q to quit)? \")<br>while name.lower() != 'q' and count < 50:<br>&nbsp;&nbsp;&nbsp;&nbsp;while room_number in roomsAssigned:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f\"{name}, your room number is {room_number}\")<br>&nbsp;&nbsp;&nbsp;&nbsp;roomsAssigned.append(room_number)<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f\"You will meet with the {group} Group this afternoon.\")<br>&nbsp;&nbsp;&nbsp;&nbsp;count+=1<br>&nbsp;&nbsp;&nbsp;&nbsp;name=input(\"Please enter your name (q to quit)? \")</div>",
     "options": {
-      "room_generation": ["room_number = random.randint(1, 100)", "room_number = random.choice([1,2,3,4,5])", "room_number = random.random()", "room_number = random.randrange(1, 101)"],
+      "room_generation": ["room_number = random.randint(1, 100)", "room_number = random.choice([1,2,3,4,5])", "room_number = random.random()", "room_number = random.randrange(1, 100)"],
       "group_selection": ["group = random.choice(groupList)", "group = random.randint(0, 3)", "group = random.sample(groupList, 1)", "group = groupList[random.randint(0, 3)]"]
     },
     "answer": {
@@ -371,8 +371,8 @@ export const quizQuestions: Question[] = [
     "type": "fill_in_blank",
     "question": "You are writing a Python program to determine if a number (num) the user inputs is one, two, or more than two digits (digits).<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>num = int(input(\"Enter a number with 1 or 2 digits: \"))<br><br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;digits = \"1\"<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;digits = \"2\"<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;digits = \">2\"<br><br>print(digits + \" digits.\")</div><br><br>Complete the code by selecting the correct code segment from each drop-down list.",
     "options": {
-      "first_condition": ["if num < 10:", "if num <= 9:", "if len(str(num)) == 1:", "if num < 0:"],
-      "second_condition": ["elif num < 100:", "elif num <= 99:", "elif num > 9 and num < 100:", "elif len(str(num)) == 2:"],
+      "first_condition": ["if num < 10:", "if num <= 10:", "if len(str(num)) == 1:", "if num < 0:"],
+      "second_condition": ["elif num < 100:", "elif num <= 100:", "elif num > 9 and num < 100:", "elif len(str(num)) == 2:"],
       "third_condition": ["else:", "elif num >= 100:", "elif num > 99:", "elif len(str(num)) > 2:"]
     },
     "answer": {
@@ -523,7 +523,7 @@ export const quizQuestions: Question[] = [
     "options": {
       "loop_statement": ["while chance <= 3:", "while chance < 3:", "for chance in range(1, 4):"],
       "break_statement": ["break", "pass", "continue"],
-      "increment_statement": ["chance += 1", "chance = chance + 1", "chance = 2"]
+      "increment_statement": ["chance += 1", "chance = chance - 1", "chance = 2"]
     },
     "answer": {
       "loop_statement": "while chance <= 3:",
@@ -1072,7 +1072,8 @@ export const quizQuestions: Question[] = [
     "answer": [
       "E. Line 05",
       "F. Line 06",
-      "G. Line 07"
+      "G. Line 07",
+      "H. Line 08"
     ],
     "explanation": "Line 05 (data = open...) must be indented inside the if block — it currently sits at the same level as the if statement, meaning the file is opened regardless of whether it exists. Line 06 (while line != '') must also be indented inside the if block for the same reason. Line 07 (line = data.readline()) must be indented inside the while block. Line 08 (print(line)) is already correctly indented inside the while block. The corrected structure should be: if block contains lines 05 and 06, while block inside if contains lines 07 and 08."
   },
