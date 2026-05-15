@@ -1149,5 +1149,944 @@ export const quizQuestions: Question[] = [
     ],
     "answer": "d) Rate: 0.25 ; Value: 12000",
     "explanation": "In Python, integers and floats are immutable. Inside calc1(), the parameters 'rate' and 'item' are local variables. The line `item *= (1 + rate)` computes 12000 * 1.25 = 15000 and rebinds the local 'item' to 15000, but this has no effect on the global 'item' variable. After the function returns, the global variables remain unchanged: rate = 0.25 and item = 12000."
+  },
+  {
+    "id": 235,
+    "domain": "String methods & loops",
+    "type": "fill_in_blank",
+    "question": "You receive a comma-separated string of product codes. You must split the string and print each code.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>raw = \"A101,B202,C303,D404\"<br>codes = raw.____(\",\")<br>for code ____ codes:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(code)</div>",
+    "options": {
+      "split_method": ["split", "partition", "separate", "divide"],
+      "iteration_keyword": ["in", "of", "within", "inside"]
+    },
+    "answer": {
+      "split_method": "split",
+      "iteration_keyword": "in"
+    },
+    "explanation": "`split(\",\")` breaks the string on commas and returns a list. The `for ... in` syntax iterates through each item in the list. `partition` returns a 3-tuple instead of a list, so it wouldn't work here."
+  },
+  {
+    "id": 236,
+    "domain": "List operations & loops",
+    "type": "multiple_choice",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numbers = [1, 2, 3, 4, 5, 6, 7]<br>result = []<br>for x in numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;if x % 2 != 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.append(x * 2)<br>print(result)</div><br><br>What is the output?",
+    "options": [
+      "A. [2, 4, 6, 8, 10, 12, 14]",
+      "B. [2, 6, 10, 14]",
+      "C. [2, 4, 6, 10, 14]",
+      "D. [1, 3, 5, 7]"
+    ],
+    "answer": "B. [2, 6, 10, 14]",
+    "explanation": "The condition `x % 2 != 0` keeps only odd numbers: 1, 3, 5, 7. Each is multiplied by 2 before being appended, giving [2, 6, 10, 14]. Option A ignores the filter; Option D forgets the multiplication; Option C includes an even number."
+  },
+  {
+    "id": 237,
+    "domain": "Function parameters & default values",
+    "type": "multiple_choice",
+    "question": "You write the following function:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def greet(name, greeting=\"Hello\"):<br>&nbsp;&nbsp;&nbsp;&nbsp;return greeting + \", \" + name + \"!\"<br><br>print(greet(\"Anna\"))<br>print(greet(\"Ben\", \"Hi\"))</div><br><br>What is the output?",
+    "options": [
+      "A. Hello, Anna! followed by Hi, Ben!",
+      "B. Hello, Anna! followed by Hello, Ben!",
+      "C. The code generates a syntax error.",
+      "D. Anna, Hello! followed by Ben, Hi!"
+    ],
+    "answer": "A. Hello, Anna! followed by Hi, Ben!",
+    "explanation": "The first call uses the default value \"Hello\" for `greeting`, producing \"Hello, Anna!\". The second call overrides the default with \"Hi\", producing \"Hi, Ben!\". Default parameters are used only when no value is passed for that argument."
+  },
+  {
+    "id": 238,
+    "domain": "Nested loops & control flow",
+    "type": "multiple_choice",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>count = 0<br>for i in range(4):<br>&nbsp;&nbsp;&nbsp;&nbsp;for j in range(4):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if i == j:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if j > i:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>print(count)</div><br><br>What value is printed?",
+    "options": [
+      "A. 6",
+      "B. 4",
+      "C. 10",
+      "D. 16"
+    ],
+    "answer": "A. 6",
+    "explanation": "For each i, the inner loop iterates j from 0. When j == i, `continue` skips. When j > i, `break` exits the inner loop. So count increments only when j < i. For i=0: 0 increments. For i=1: j=0 increments (count=1). For i=2: j=0, j=1 increment (count=3). For i=3: j=0, j=1, j=2 increment (count=6). Total = 6."
+  },
+  {
+    "id": 239,
+    "domain": "Dictionary operations & methods",
+    "type": "fill_in_blank",
+    "question": "You have a dictionary of inventory items. You need to safely retrieve the stock count for an item — returning 0 if the item is not in the dictionary — without raising an error.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>inventory = {\"apples\": 50, \"bread\": 12, \"cheese\": 8}<br><br>stock = inventory.____(\"milk\", 0)<br><br>print(stock)</div>",
+    "options": {
+      "safe_get": ["get", "fetch", "find", "lookup"]
+    },
+    "answer": {
+      "safe_get": "get"
+    },
+    "explanation": "`dict.get(key, default)` returns the value for the key if it exists, or the default value (here 0) if it doesn't. This avoids the `KeyError` that would occur with `inventory[\"milk\"]`. The other options are not valid dictionary methods."
+  },
+  {
+    "id": 240,
+    "domain": "Loops & accumulator pattern",
+    "type": "fill_in_blank",
+    "question": "You are writing a program that asks the user to enter numbers one at a time. When the user enters 0, the program stops asking and prints the total of all numbers entered.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>total = 0<br>number = int(input(\"Enter a number (0 to stop): \"))<br><br>____ number != 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;total ____ number<br>&nbsp;&nbsp;&nbsp;&nbsp;number = int(input(\"Enter a number (0 to stop): \"))<br><br>print(\"The total is:\", total)</div>",
+    "options": {
+      "loop_keyword": ["while", "for", "if", "repeat"],
+      "accumulator": ["+=", "==", "=+", "++"]
+    },
+    "answer": {
+      "loop_keyword": "while",
+      "accumulator": "+="
+    },
+    "explanation": "Use `while` to keep looping as long as the user doesn't enter 0. Use `+=` to add the new number to the running total. `=+` would simply assign the positive value of `number` to `total`, overwriting the previous total."
+  },
+  {
+    "id": 241,
+    "domain": "String methods & case handling",
+    "type": "multiple_choice",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>answer = \" YES \"<br>if answer.strip().lower() == \"yes\":<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Confirmed\")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Denied\")</div><br><br>What is the output?",
+    "options": [
+      "A. Confirmed",
+      "B. Denied",
+      "C. The code generates a syntax error.",
+      "D. The code generates a runtime error."
+    ],
+    "answer": "A. Confirmed",
+    "explanation": "`strip()` removes the leading and trailing spaces, turning \" YES \" into \"YES\". `lower()` converts it to \"yes\". The comparison \"yes\" == \"yes\" is True, so \"Confirmed\" is printed. Chaining string methods like this is a common pattern for sanitizing input."
+  },
+  {
+    "id": 243,
+    "domain": "Range function & loops",
+    "type": "multiple_choice",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>total = 0<br>for i in range(2, 11, 2):<br>&nbsp;&nbsp;&nbsp;&nbsp;total += i<br>print(total)</div><br><br>What is the output?",
+    "options": [
+      "A. 20",
+      "B. 30",
+      "C. 25",
+      "D. 55"
+    ],
+    "answer": "B. 30",
+    "explanation": "`range(2, 11, 2)` generates 2, 4, 6, 8, 10 (start at 2, stop before 11, step by 2). Sum: 2 + 4 + 6 + 8 + 10 = 30. A common mistake is to include 12 (would give 42) or to stop at 8 (would give 20)."
+  },
+  {
+    "id": 245,
+    "domain": "Operators & precedence",
+    "type": "multiple_choice",
+    "question": "Review the following Python code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a = 6<br>b = 2<br>c = 3<br><br>result = a + b ** c * 2 - 4 // b</div><br><br>What is the value of `result`?",
+    "options": [
+      "A. 20",
+      "B. 22",
+      "C. 90",
+      "D. 18"
+    ],
+    "answer": "A. 20",
+    "explanation": "Following operator precedence: 1) Exponent first: b ** c = 2 ** 3 = 8. 2) Multiplication and floor division (left to right): 8 * 2 = 16, and 4 // b = 4 // 2 = 2. 3) Addition and subtraction (left to right): 6 + 16 - 2 = 20."
+  },
+  {
+    "id": 246,
+    "domain": "System modules & command line",
+    "type": "true_false",
+    "question": "A file named `Tool.py` contains the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import sys<br>print(len(sys.argv))<br>print(sys.argv[-1])</div><br><br>The user runs the following command:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>python Tool.py alpha beta gamma</div><br><br>For each statement, select True or False:",
+    "options": {
+      "statement1": "The first print statement outputs 3.",
+      "statement2": "The second print statement outputs gamma.",
+      "statement3": "The script name Tool.py is included in sys.argv."
+    },
+    "answer": {
+      "statement1": "False: The first print statement outputs 3.",
+      "statement2": "True: The second print statement outputs gamma.",
+      "statement3": "True: The script name Tool.py is included in sys.argv."
+    },
+    "explanation": "Statement 1 is False — sys.argv contains 4 items: the script name plus 3 arguments, so len(sys.argv) is 4, not 3. Statement 2 is True — sys.argv[-1] accesses the last element, which is gamma. Statement 3 is True — sys.argv[0] is always the script name."
+  },
+  {
+    "id": 247,
+    "domain": "String formatting & methods",
+    "type": "multiple_choice",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>data = \"{title} by {author}, published in {year}\"<br>result = data.format(year=1954, author=\"Tolkien\", title=\"The Fellowship\")<br>print(result)</div><br><br>What is the output?",
+    "options": [
+      "A. The Fellowship by Tolkien, published in 1954",
+      "B. 1954 by Tolkien, published in The Fellowship",
+      "C. The code generates a syntax error because positional and keyword arguments are mixed.",
+      "D. {title} by {author}, published in {year}"
+    ],
+    "answer": "A. The Fellowship by Tolkien, published in 1954",
+    "explanation": "The `format()` method supports named placeholders that match keyword arguments by name, regardless of the order they are passed in. `{title}` is replaced with \"The Fellowship\", `{author}` with \"Tolkien\", and `{year}` with 1954, producing the expected sentence."
+  },
+  {
+    "id": 248,
+    "domain": "Random module & list operations",
+    "type": "multiple_select",
+    "question": "You need to randomly select 3 different prize winners from a list of 20 names. Each name must appear at most once in the result.<br><br>Which two code segments meet the requirements? (Choose 2.)",
+    "options": [
+      "A. winners = random.sample(names, 3)",
+      "B. winners = [random.choice(names) for _ in range(3)]",
+      "C. winners = random.choices(names, k=3)",
+      "D. winners = []<br>&nbsp;&nbsp;&nbsp;&nbsp;while len(winners) < 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pick = random.choice(names)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if pick not in winners:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;winners.append(pick)"
+    ],
+    "answer": [
+      "A. winners = random.sample(names, 3)",
+      "D. winners = []<br>&nbsp;&nbsp;&nbsp;&nbsp;while len(winners) < 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pick = random.choice(names)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if pick not in winners:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;winners.append(pick)"
+    ],
+    "explanation": "`random.sample(names, 3)` picks 3 unique items without replacement — exactly what is required. Option D uses `random.choice` in a loop but explicitly checks `not in winners` before appending, guaranteeing uniqueness. Option B uses `random.choice` without uniqueness checking, so the same name can appear multiple times. Option C uses `random.choices`, which samples *with* replacement and can return duplicates."
+  },
+  {
+    "id": 249,
+    "domain": "Conditional logic & operators",
+    "type": "true_false",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>age = 17<br>has_license = True<br><br>if age >= 18 or has_license == True:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Can drive\")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Cannot drive\")</div><br><br>For each statement, select True or False:",
+    "options": {
+      "statement1": "The code prints Can drive.",
+      "statement2": "Changing or to and would make the code print Cannot drive.",
+      "statement3": "If has_license is set to False, the code still prints Can drive."
+    },
+    "answer": {
+      "statement1": "True: The code prints Can drive.",
+      "statement2": "True: Changing or to and would make the code print Cannot drive.",
+      "statement3": "False: If has_license is set to False, the code still prints Can drive."
+    },
+    "explanation": "Statement 1 is True — with `or`, only one side needs to be true. `has_license == True` is True, so the condition passes. Statement 2 is True — with `and`, both sides must be true. `age >= 18` is False (17 < 18), so the condition fails. Statement 3 is False — if `has_license` is False, both sides of the `or` are False, so the else branch runs and prints Cannot drive."
+  },
+  {
+    "id": 250,
+    "domain": "Exception handling & input validation",
+    "type": "fill_in_blank",
+    "question": "You are creating a program that divides two numbers entered by the user. The program must handle the case where the user enters non-numeric input, and the case where the user enters zero as the divisor.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____:<br>&nbsp;&nbsp;&nbsp;&nbsp;a = int(input(\"Enter numerator: \"))<br>&nbsp;&nbsp;&nbsp;&nbsp;b = int(input(\"Enter denominator: \"))<br>&nbsp;&nbsp;&nbsp;&nbsp;print(a / b)<br>____ ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Please enter valid numbers.\")<br>____ ZeroDivisionError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Cannot divide by zero.\")</div>",
+    "options": {
+      "try_block": ["try", "attempt", "check", "test"],
+      "first_except": ["except", "catch", "handle", "error"],
+      "second_except": ["except", "catch", "handle", "error"]
+    },
+    "answer": {
+      "try_block": "try",
+      "first_except": "except",
+      "second_except": "except"
+    },
+    "explanation": "The `try` block contains code that might raise an exception. A `try` statement can have multiple `except` clauses for different exception types. `ValueError` is raised when `int()` cannot convert the input string, and `ZeroDivisionError` is raised when division by zero is attempted."
+  },
+  {
+    "id": 251,
+    "domain": "Loops & control flow",
+    "type": "multiple_choice",
+    "question": "Review the following code segment:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>total = 1<br>n = 4<br>while (n > 0):<br>&nbsp;&nbsp;&nbsp;&nbsp;total *= n<br>&nbsp;&nbsp;&nbsp;&nbsp;print(total)<br>&nbsp;&nbsp;&nbsp;&nbsp;n -= 1<br>&nbsp;&nbsp;&nbsp;&nbsp;if total > 10:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</div><br><br>How many lines of output does the code print?",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 4"
+    ],
+    "answer": "B. 2",
+    "explanation": "Iteration 1: total = 1 * 4 = 4, print 4 (line 1), n=3, 4 > 10 is False, continue. Iteration 2: total = 4 * 3 = 12, print 12 (line 2), n=2, 12 > 10 is True → break. Total = 2 lines of output."
+  },
+  {
+    "id": 252,
+    "domain": "Functions & logic analysis",
+    "type": "true_false",
+    "question": "Analyze the following function:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def calc_shipping(weight=1, distance=10, express=False, freebie=False):<br>&nbsp;&nbsp;&nbsp;&nbsp;if freebie == True:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0<br>&nbsp;&nbsp;&nbsp;&nbsp;cost = weight * 2 + distance * 0.5<br>&nbsp;&nbsp;&nbsp;&nbsp;if express == True:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cost = cost * 1.5<br>&nbsp;&nbsp;&nbsp;&nbsp;return cost</div><br><br>For each statement, select True or False:",
+    "options": {
+      "statement1": "A function call of calc_shipping() will return 7.0.",
+      "statement2": "A function call of calc_shipping(freebie=True, weight=20) will return 40.",
+      "statement3": "A function call of calc_shipping(weight=5, express=True) will return 22.5."
+    },
+    "answer": {
+      "statement1": "True: A function call of calc_shipping() will return 7.0.",
+      "statement2": "False: A function call of calc_shipping(freebie=True, weight=20) will return 40.",
+      "statement3": "True: A function call of calc_shipping(weight=5, express=True) will return 22.5."
+    },
+    "explanation": "Statement 1 is True — defaults: 1*2 + 10*0.5 = 2 + 5 = 7.0, express is False so no multiplier. Statement 2 is False — freebie=True returns 0 immediately, ignoring weight. Statement 3 is True — 5*2 + 10*0.5 = 10 + 5 = 15, then express multiplies by 1.5 → 15 * 1.5 = 22.5."
+  },
+  {
+    "id": 253,
+    "domain": "String slicing & indexing",
+    "type": "ordering",
+    "question": "You need to identify the results of performing various slicing operations on the following sequence structure:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>word = \"programming\"</div><br><br>Move the appropriate results from the list on the left to the correct slicing operations on the right. You may use each result once, more than once, or not at all.<br><br>word[3:7] → ____<br>word[-4:] → ____<br>word[:5] → ____",
+    "options": [
+      "gram",
+      "ming",
+      "progr",
+      "gramm",
+      "rogra"
+    ],
+    "answer": [
+      "gram",
+      "ming",
+      "progr"
+    ],
+    "explanation": "`word[3:7]` gets characters at indices 3, 4, 5, 6 which are g, r, a, m = \"gram\". `word[-4:]` gets the last 4 characters: m, i, n, g = \"ming\". `word[:5]` gets characters at indices 0-4: p, r, o, g, r = \"progr\"."
+  },
+  {
+    "id": 254,
+    "domain": "Unit testing & assertions",
+    "type": "fill_in_blank",
+    "question": "You need to test whether a function returns the expected integer value.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____ unittest<br><br>def double(x):<br>&nbsp;&nbsp;&nbsp;&nbsp;return x * 2<br><br>class TestDouble(____.____):<br>&nbsp;&nbsp;&nbsp;&nbsp;def ____(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = double(5)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.____(result, 10)<br><br>if __name__ == \"__main__\":<br>&nbsp;&nbsp;&nbsp;&nbsp;unittest.main()</div>",
+    "options": {
+      "import_keyword": ["import", "from", "use", "include"],
+      "module_part": ["unittest", "test", "TestCase", "unit"],
+      "class_part": ["TestCase", "Test", "UnitTest", "Case"],
+      "test_method": ["test_double", "double_test", "check_double", "verify_double"],
+      "assert_method": ["assertEqual", "assertIsInstance", "assertTrue", "assertIs"]
+    },
+    "answer": {
+      "import_keyword": "import",
+      "module_part": "unittest",
+      "class_part": "TestCase",
+      "test_method": "test_double",
+      "assert_method": "assertEqual"
+    },
+    "explanation": "Use `import` to bring in the unittest module. Test classes inherit from `unittest.TestCase`. Test methods must start with `test_` to be automatically discovered and run — options like `double_test`, `check_double`, and `verify_double` would never execute as tests. Use `assertEqual(actual, expected)` to verify that two values are equal."
+  },
+  {
+    "id": 255,
+    "domain": "Functions & conditional logic",
+    "type": "fill_in_blank",
+    "question": "You are creating a function to calculate a movie ticket price (ticket_price) based on the following rules:<br><br>• Anyone under age 3 = free admission<br>• Anyone age 3 or older who is a student = $8<br>• Anyone age 3 to 64 who is not a student = $15<br>• Anyone age 65 or older who is not a student = $10<br><br>price represents the price in dollars.<br><br>Complete the code by selecting the correct code segment from each dropdown list.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def ticket_price(age, student):<br>&nbsp;&nbsp;&nbsp;&nbsp;price = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price = 8<br>&nbsp;&nbsp;&nbsp;&nbsp;____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price = 15<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price = 10<br>&nbsp;&nbsp;&nbsp;&nbsp;return price</div>",
+    "options": {
+      "first_condition": ["if age >= 3 and student == True", "if age < 3", "if student == True", "if age >= 3"],
+      "second_condition": ["elif age >= 3 and age < 65 and student == False", "elif age < 65 and student == False", "elif not student == False", "elif age >= 3 and not student == False"]
+    },
+    "answer": {
+      "first_condition": "if age >= 3 and student == True",
+      "second_condition": "elif age >= 3 and age < 65 and student == False"
+    },
+    "explanation": "The first condition checks if someone is 3 or older AND a student ($8). The elif condition must check for ages 3 to 64 who are NOT students ($15) — it must include 'age >= 3' to avoid catching under-3 children who are not students. The else handles everyone 65 or older not a student ($10). Ages under 3 get free admission since price starts at 0 and no conditions match."
+  },
+  {
+    "id": 256,
+    "domain": "Loops & debugging",
+    "type": "fill_in_blank",
+    "question": "You find errors while evaluating the following code. Line numbers are included for reference only.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 names = [\"Ana\", \"Ben\", \"Carol\", \"Dan\"]<br>02 i = 0<br>03 for name in names # change to: ____<br>04 &nbsp;&nbsp;&nbsp;&nbsp;print(name)<br>05 &nbsp;&nbsp;&nbsp;&nbsp;if i = 2 # change to: ____<br>06 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>07 &nbsp;&nbsp;&nbsp;&nbsp;i += 1</div><br><br>You need to correct the code at line 03 and line 05.",
+    "options": {
+      "line_03": ["for name in names:", "for name in names", "for name in names;", "while name in names:"],
+      "line_05": ["if i == 2:", "if i = 2:", "if (i == 2)", "if i === 2:"]
+    },
+    "answer": {
+      "line_03": "for name in names:",
+      "line_05": "if i == 2:"
+    },
+    "explanation": "Line 03 needs a colon (:) at the end to properly start the for loop block. Line 05 needs double equals (==) for comparison instead of single equals (=) which is for assignment, and it also needs a colon at the end. The corrected statements are 'for name in names:' and 'if i == 2:'."
+  },
+  {
+    "id": 257,
+    "domain": "Functions & error analysis",
+    "type": "true_false",
+    "question": "The following function is supposed to compute the average of three test scores entered by the user.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def average(a, b, c):<br>&nbsp;&nbsp;&nbsp;&nbsp;return (a + b + c) / 3<br>score1 = input(\"Enter score 1: \")<br>score2 = input(\"Enter score 2: \")<br>score3 = input(\"Enter score 3: \")<br>result = average(score1, score2, score3)<br>print(\"Average is: \" + result)</div><br><br>For each statement, select True or False:",
+    "options": {
+      "statement1": "The code will generate an error in line 1 (the function definition).",
+      "statement2": "The code will generate an error inside the function body when called.",
+      "statement3": "The code will correctly output the average to the console."
+    },
+    "answer": {
+      "statement1": "False: The code will generate an error in line 1 (the function definition).",
+      "statement2": "True: The code will generate an error inside the function body when called.",
+      "statement3": "False: The code will correctly output the average to the console."
+    },
+    "explanation": "Statement 1 is False — the function definition is syntactically valid. Statement 2 is True — input() returns strings, so a + b + c concatenates strings (e.g., \"8\" + \"9\" + \"10\" = \"8910\"), and then dividing a string by 3 raises a TypeError. Statement 3 is False — the code fails before producing correct output. Even if division worked, the final concatenation 'Average is: ' + result would also fail if result were numeric."
+  },
+  {
+    "id": 258,
+    "domain": "File operations & I/O",
+    "type": "fill_in_blank",
+    "question": "A company needs help updating their file system. You must create a simple file-manipulation program that performs the following actions:<br><br>• Opens an existing file in read-only mode.<br>• Reads the entire contents of the file into a single string.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>file = ____<br>contents = ____<br>file.close()</div>",
+    "options": {
+      "file_open": ["open(\"data.txt\", \"r\")", "open(\"data.txt\", \"w\")", "open(\"data.txt\", \"a\")", "read(\"data.txt\")"],
+      "read_operation": ["file.read()", "file.readline()", "file.write()", "file.open()"]
+    },
+    "answer": {
+      "file_open": "open(\"data.txt\", \"r\")",
+      "read_operation": "file.read()"
+    },
+    "explanation": "Use `open(\"data.txt\", \"r\")` to open the file in read-only mode. Use `file.read()` to read the entire contents of the file into a single string. `readline()` would only read one line at a time; `write()` and `open()` are not for reading content."
+  },
+  {
+    "id": 260,
+    "domain": "Conditional logic & operator precedence",
+    "type": "multiple_choice",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a = True<br>b = False<br>c = True<br><br>if not a and b or c:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Path 1\")<br>elif a and not b and not c:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Path 2\")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Path 3\")</div><br><br>What is the output?",
+    "options": [
+      "A. Path 1",
+      "B. Path 2",
+      "C. Path 3",
+      "D. The code generates a syntax error."
+    ],
+    "answer": "A. Path 1",
+    "explanation": "Operator precedence is `not` > `and` > `or`. So `not a and b or c` is evaluated as `((not a) and b) or c` = `((False) and False) or True` = `False or True` = `True`. The first branch executes and prints Path 1. A common trap is to read this as `not (a and b or c)`."
+  },
+  {
+    "id": 261,
+    "domain": "Nested conditionals & control flow",
+    "type": "fill_in_blank",
+    "question": "You are writing a function that classifies a temperature reading (temp, in Celsius) into a weather category:<br><br>• Temperature below 0 → \"Freezing\"<br>• Temperature 0 to 14 → \"Cold\"<br>• Temperature 15 to 24 → \"Mild\"<br>• Temperature 25 or higher → \"Hot\"<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def classify(temp):<br>&nbsp;&nbsp;&nbsp;&nbsp;category = \"\"<br>&nbsp;&nbsp;&nbsp;&nbsp;____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category = \"Freezing\"<br>&nbsp;&nbsp;&nbsp;&nbsp;____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category = \"Cold\"<br>&nbsp;&nbsp;&nbsp;&nbsp;____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category = \"Mild\"<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category = \"Hot\"<br>&nbsp;&nbsp;&nbsp;&nbsp;return category</div>",
+    "options": {
+      "first_condition": ["if temp < 0:", "if temp >= 0:", "if temp < 25:", "if temp > 0:"],
+      "second_condition": ["elif temp < 15:", "elif temp <= 14:", "elif temp < 0:", "elif temp >= 0 and temp < 15:"],
+      "third_condition": ["elif temp < 25:", "elif temp <= 24:", "elif temp >= 15:", "elif temp > 14 and temp < 25:"]
+    },
+    "answer": {
+      "first_condition": "if temp < 0:",
+      "second_condition": "elif temp < 15:",
+      "third_condition": "elif temp < 25:"
+    },
+    "explanation": "When using if/elif chains, earlier conditions act as guards for later ones. After `temp < 0` fails, the elif `temp < 15` correctly captures the range 0–14 (since negative values were already handled). After that, `temp < 25` correctly captures 15–24. The simpler forms work because of the order — adding explicit lower bounds is unnecessary and easy to get wrong."
+  },
+  {
+    "id": 262,
+    "domain": "Conditional logic & short-circuit evaluation",
+    "type": "true_false",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>values = [10, 20, 30]<br>index = 5<br><br>if index < len(values) and values[index] > 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Found positive\")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Not found\")</div><br><br>For each statement, select True or False:",
+    "options": {
+      "statement1": "The code runs without an error.",
+      "statement2": "The code prints Not found.",
+      "statement3": "Swapping the two conditions (so values[index] > 0 is checked first) would still run without an error."
+    },
+    "answer": {
+      "statement1": "True: The code runs without an error.",
+      "statement2": "True: The code prints Not found.",
+      "statement3": "False: Swapping the two conditions (so values[index] > 0 is checked first) would still run without an error."
+    },
+    "explanation": "Statement 1 is True — Python uses short-circuit evaluation. Since `index < len(values)` is `5 < 3` which is False, the second part `values[index] > 0` is never evaluated, avoiding an IndexError. Statement 2 is True — the condition is False, so the else branch runs. Statement 3 is False — if you swap them, `values[5]` is evaluated first and raises IndexError because index 5 is out of range. Order matters with short-circuit evaluation."
+  },
+  {
+    "id": 263,
+    "domain": "Nested if statements & flow analysis",
+    "type": "multiple_choice",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>score = 75<br>bonus = True<br><br>if score >= 90:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade = \"A\"<br>if score >= 80:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade = \"B\"<br>if score >= 70:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade = \"C\"<br>&nbsp;&nbsp;&nbsp;&nbsp;if bonus == True:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grade = \"B\"<br>if score >= 60:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade = \"D\"<br><br>print(grade)</div><br><br>What is printed?",
+    "options": [
+      "A. A",
+      "B. B",
+      "C. C",
+      "D. D"
+    ],
+    "answer": "D. D",
+    "explanation": "This uses separate `if` statements (not `elif`), so all conditions are checked independently. With score=75: first if (>=90) False. Second if (>=80) False. Third if (>=70) True → grade=C, then bonus is True → grade=B. Fourth if (>=60) True → grade=D. The last assignment wins, so D is printed. This is a classic trap showing why elif matters — using if everywhere creates unintended overwrites."
+  },
+  {
+    "id": 264,
+    "domain": "Conditional logic & input handling",
+    "type": "fill_in_blank",
+    "question": "You are writing a program that asks the user a yes/no question. The program must accept any of these answers as \"yes\": \"Y\", \"y\", \"Yes\", \"YES\", \"yes\". Any other input is treated as \"no\".<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>response = input(\"Continue? \")<br>response = response.____()<br><br>if response ____ \"y\" ____ response ____ \"yes\":<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Continuing...\")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Stopping.\")</div>",
+    "options": {
+      "normalize": ["lower", "upper", "title", "capitalize"],
+      "first_comparison": ["==", "=", "is", "in"],
+      "logical_operator": ["or", "and", "not", "if"],
+      "second_comparison": ["==", "=", "is", "in"]
+    },
+    "answer": {
+      "normalize": "lower",
+      "first_comparison": "==",
+      "logical_operator": "or",
+      "second_comparison": "=="
+    },
+    "explanation": "`lower()` converts the input to lowercase so all variations (\"Y\", \"YES\", \"Yes\", etc.) become either \"y\" or \"yes\". Use `==` for equality comparison (`=` is assignment, `is` checks object identity which can give wrong results for strings). Use `or` because the user only needs to match one of the two accepted forms. Using `and` would require the response to equal both \"y\" AND \"yes\" simultaneously — which is impossible."
+  },
+  {
+    "id": 265,
+    "domain": "Functions & conditional logic",
+    "type": "fill_in_blank",
+    "question": "You are writing a function that returns the loan interest rate offered to a customer. The function must meet the following requirements:<br><br>• If the customer's credit score is high (credit_high == True):<br>&nbsp;&nbsp;&nbsp;&nbsp;◦ If they have collateral, the rate is 3.5<br>&nbsp;&nbsp;&nbsp;&nbsp;◦ If they do not have collateral, the rate is 5.0<br>• If the customer's credit score is not high:<br>&nbsp;&nbsp;&nbsp;&nbsp;◦ If they have a co-signer, the rate is 6.5<br>&nbsp;&nbsp;&nbsp;&nbsp;◦ If they do not have a co-signer, the rate is 9.0<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def loan_rate(credit_high, collateral, cosigner):<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rate = 3.5<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rate = 5.0<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rate = 6.5<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rate = 9.0<br>&nbsp;&nbsp;&nbsp;&nbsp;return rate</div>",
+    "options": {
+      "first_dropdown": ["if credit_high == True:", "if collateral == True:", "if cosigner == True:", "else:", "elif:"],
+      "second_dropdown": ["if credit_high == True:", "if collateral == True:", "if cosigner == True:", "else:", "elif:"],
+      "third_dropdown": ["if credit_high == True:", "if collateral == True:", "if cosigner == True:", "else:", "elif:"],
+      "fourth_dropdown": ["if credit_high == True:", "if collateral == True:", "if cosigner == True:", "else:", "elif:"],
+      "fifth_dropdown": ["if credit_high == True:", "if collateral == True:", "if cosigner == True:", "else:", "elif:"],
+      "sixth_dropdown": ["if credit_high == True:", "if collateral == True:", "if cosigner == True:", "else:", "elif:"]
+    },
+    "answer": {
+      "first_dropdown": "if credit_high == True:",
+      "second_dropdown": "if collateral == True:",
+      "third_dropdown": "else:",
+      "fourth_dropdown": "else:",
+      "fifth_dropdown": "if cosigner == True:",
+      "sixth_dropdown": "else:"
+    },
+    "explanation": "The outer split is on credit_high. The first outer branch (if credit_high == True) contains a nested decision on collateral — if collateral == True gives 3.5, the inner else gives 5.0. The outer else (for non-high credit) contains a different nested decision on cosigner — if cosigner == True gives 6.5, the inner else gives 9.0. The key trick is recognizing that the two halves of the function use different secondary variables."
+  },
+  {
+    "id": 266,
+    "domain": "Functions & conditional logic",
+    "type": "fill_in_blank",
+    "question": "You are writing a function that returns a delivery label based on a package weight (weight) in kilograms. The function must meet the following requirements:<br><br>• If the weight is unknown (None), the label is \"Unknown\"<br>• Weight 20 or more → \"Heavy\"<br>• Weight 5 or more, but less than 20 → \"Medium\"<br>• Weight less than 5 → \"Light\"<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def get_label(weight):<br>&nbsp;&nbsp;&nbsp;&nbsp;label = \"\"<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;return label</div>",
+    "options": {
+      "if_clause": [
+        "if weight is None: label = \"Unknown\"",
+        "if weight >= 20: label = \"Heavy\"",
+        "if weight >= 5: label = \"Medium\"",
+        "if weight < 5: label = \"Light\""
+      ],
+      "elif1_clause": [
+        "elif weight >= 20: label = \"Heavy\"",
+        "elif weight >= 5: label = \"Medium\"",
+        "elif weight < 5: label = \"Light\"",
+        "elif weight is None: label = \"Unknown\""
+      ],
+      "elif2_clause": [
+        "elif weight >= 5: label = \"Medium\"",
+        "elif weight >= 20: label = \"Heavy\"",
+        "elif weight < 5: label = \"Light\"",
+        "elif weight is None: label = \"Unknown\""
+      ],
+      "else_clause": [
+        "else: label = \"Light\"",
+        "else: label = \"Medium\"",
+        "else: label = \"Heavy\""
+      ]
+    },
+    "answer": {
+      "if_clause": "if weight is None: label = \"Unknown\"",
+      "elif1_clause": "elif weight >= 20: label = \"Heavy\"",
+      "elif2_clause": "elif weight >= 5: label = \"Medium\"",
+      "else_clause": "else: label = \"Light\""
+    },
+    "explanation": "Check `weight is None` first to avoid a TypeError when comparing None to numbers in later conditions. Then check `weight >= 20` for Heavy (the highest bracket comes next). Then `weight >= 5` for Medium (covers 5–19 since 20+ was already handled). The else catches the remaining case (weight less than 5), giving Light."
+  },
+  {
+    "id": 267,
+    "domain": "Functions & conditional logic",
+    "type": "fill_in_blank",
+    "question": "You are writing a function that returns a shipping tier from a package weight in pounds (weight):<br><br>• Weight 2 pounds or less → \"Letter\"<br>• Weight more than 2, up to and including 10 → \"Small\"<br>• Weight more than 10, but less than 50 → \"Medium\"<br>• Weight 50 or more → \"Freight\"<br><br>Some of the dropdown options use > instead of <=, which changes the logic depending on what comes before — choose carefully.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def shipping_tier(weight):<br>&nbsp;&nbsp;&nbsp;&nbsp;tier = \"\"<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;return tier</div>",
+    "options": {
+      "if_clause": [
+        "if weight <= 2: tier = \"Letter\"",
+        "if weight > 2: tier = \"Small\"",
+        "if weight >= 50: tier = \"Freight\"",
+        "if weight < 50: tier = \"Medium\""
+      ],
+      "elif1_clause": [
+        "elif weight <= 10: tier = \"Small\"",
+        "elif weight > 10: tier = \"Medium\"",
+        "elif weight <= 2: tier = \"Letter\"",
+        "elif weight >= 50: tier = \"Freight\""
+      ],
+      "elif2_clause": [
+        "elif weight < 50: tier = \"Medium\"",
+        "elif weight > 50: tier = \"Freight\"",
+        "elif weight <= 10: tier = \"Small\"",
+        "elif weight > 2: tier = \"Small\""
+      ],
+      "else_clause": [
+        "else: tier = \"Freight\"",
+        "else: tier = \"Medium\"",
+        "else: tier = \"Small\"",
+        "else: tier = \"Letter\""
+      ]
+    },
+    "answer": {
+      "if_clause": "if weight <= 2: tier = \"Letter\"",
+      "elif1_clause": "elif weight <= 10: tier = \"Small\"",
+      "elif2_clause": "elif weight < 50: tier = \"Medium\"",
+      "else_clause": "else: tier = \"Freight\""
+    },
+    "explanation": "The chain works because each elif relies on what was already filtered out above it. After `weight <= 2` fails, `weight <= 10` correctly captures the range from just above 2 up to and including 10. After that, `weight < 50` captures 11 to 49. The else catches 50 and above for Freight. Option `elif weight > 10` looks tempting but would wrongly include weights 50 and up as Medium."
+  },
+  {
+    "id": 268,
+    "domain": "Functions & conditional logic",
+    "type": "fill_in_blank",
+    "question": "You are writing a function that decides whether a user can access a system. The function must meet the following requirements:<br><br>• If the account is locked, return \"Denied: account locked\"<br>• If the account is not locked and the password is correct, return \"Access granted\"<br>• If the account is not locked and the password is incorrect, return \"Denied: wrong password\"<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def check_access(locked, password_correct):<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = \"Denied: account locked\"<br><br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = \"Access granted\"<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = \"Denied: wrong password\"<br>&nbsp;&nbsp;&nbsp;&nbsp;return result</div>",
+    "options": {
+      "first_dropdown": ["if locked == True:", "if password_correct == True:", "else:", "elif:"],
+      "second_dropdown": ["if locked == True:", "if password_correct == True:", "else:", "elif:"],
+      "third_dropdown": ["if locked == True:", "if password_correct == True:", "else:", "elif:"],
+      "fourth_dropdown": ["if locked == True:", "if password_correct == True:", "else:", "elif:"]
+    },
+    "answer": {
+      "first_dropdown": "if locked == True:",
+      "second_dropdown": "else:",
+      "third_dropdown": "if password_correct == True:",
+      "fourth_dropdown": "else:"
+    },
+    "explanation": "The outer if locked == True handles the locked case first since it overrides everything. The outer else covers all unlocked accounts. Within that, the nested if password_correct == True distinguishes between successful access and wrong password. The inner else covers the wrong password case."
+  },
+  {
+    "id": 269,
+    "domain": "Functions & conditional logic",
+    "type": "fill_in_blank",
+    "question": "You are writing a function that calculates the BMI category from a person's BMI value (bmi). The function must meet the following requirements:<br><br>• If bmi is negative or zero, return \"Invalid\"<br>• BMI below 18.5 → \"Underweight\"<br>• BMI 18.5 to below 25 → \"Normal\"<br>• BMI 25 or higher → \"Overweight\"<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def bmi_category(bmi):<br>&nbsp;&nbsp;&nbsp;&nbsp;category = \"\"<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;return category</div>",
+    "options": {
+      "if_clause": [
+        "if bmi <= 0: category = \"Invalid\"",
+        "if bmi < 18.5: category = \"Underweight\"",
+        "if bmi < 25: category = \"Normal\"",
+        "if bmi >= 25: category = \"Overweight\""
+      ],
+      "elif1_clause": [
+        "elif bmi < 18.5: category = \"Underweight\"",
+        "elif bmi <= 0: category = \"Invalid\"",
+        "elif bmi < 25: category = \"Normal\"",
+        "elif bmi >= 25: category = \"Overweight\""
+      ],
+      "elif2_clause": [
+        "elif bmi < 25: category = \"Normal\"",
+        "elif bmi < 18.5: category = \"Underweight\"",
+        "elif bmi <= 0: category = \"Invalid\"",
+        "elif bmi >= 25: category = \"Overweight\""
+      ],
+      "else_clause": [
+        "else: category = \"Overweight\"",
+        "else: category = \"Normal\"",
+        "else: category = \"Underweight\"",
+        "else: category = \"Invalid\""
+      ]
+    },
+    "answer": {
+      "if_clause": "if bmi <= 0: category = \"Invalid\"",
+      "elif1_clause": "elif bmi < 18.5: category = \"Underweight\"",
+      "elif2_clause": "elif bmi < 25: category = \"Normal\"",
+      "else_clause": "else: category = \"Overweight\""
+    },
+    "explanation": "Check bmi <= 0 first as a guard clause to filter out invalid values before any real classification. Then check bmi < 18.5 for Underweight (since invalid values are gone, this only catches valid low BMI). Then bmi < 25 for Normal (covers 18.5 to just under 25). The else catches everything 25 or higher → Overweight."
+  },
+  {
+    "id": 270,
+    "domain": "String formatting & f-strings",
+    "type": "multiple_choice",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>name = \"Ana\"<br>score = 87.5421<br>attempts = 3<br><br>result = f\"{name.upper()} scored {score:.2f} in {attempts} tries\"<br>print(result)</div><br><br>What is the output?",
+    "options": [
+      "A. ANA scored 87.54 in 3 tries",
+      "B. Ana scored 87.5421 in 3 tries",
+      "C. ANA scored 87.5 in 3 tries",
+      "D. The code generates a syntax error."
+    ],
+    "answer": "A. ANA scored 87.54 in 3 tries",
+    "explanation": "f-strings allow method calls and expressions inside the braces. `{name.upper()}` evaluates name.upper() → \"ANA\". The format specifier `:.2f` rounds the float to 2 decimal places → 87.54. `{attempts}` inserts the integer as-is."
+  },
+  {
+    "id": 271,
+    "domain": "String formatting & % operator",
+    "type": "multiple_choice",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>product = \"Coffee\"<br>quantity = 5<br>price = 4.99<br><br>print(\"Item: %-10s Qty: %3d Total: $%6.2f\" % (product, quantity, quantity * price))</div><br><br>What is the output?",
+    "options": [
+      "A. Item: Coffee     Qty:   5 Total: $ 24.95",
+      "B. Item: Coffee Qty: 5 Total: $24.95",
+      "C. Item: -Coffee    Qty: 5   Total: $24.950",
+      "D. The code generates a runtime error because of mixed format specifiers."
+    ],
+    "answer": "A. Item: Coffee     Qty:   5 Total: $ 24.95",
+    "explanation": "`%-10s` formats the string left-aligned in a 10-character field → \"Coffee\" + 4 spaces. `%3d` formats the integer right-aligned in a 3-character field → 2 spaces + \"5\". `%6.2f` formats the float in a 6-character field with 2 decimal places → 1 space + \"24.95\". Total expression: 5 * 4.99 = 24.95."
+  },
+  {
+    "id": 272,
+    "domain": "String formatting methods",
+    "type": "fill_in_blank",
+    "question": "You need to print the message: <code>Order #42: total = $19.99</code><br><br>The variables are defined as:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>order_id = 42<br>total = 19.99</div><br><br>Match each formatting style on the right with the correct expression by selecting from the dropdowns.",
+    "options": {
+      "f_string_style": [
+        "f\"Order #{order_id}: total = ${total}\"",
+        "f\"Order #{order_id}: total = $total\"",
+        "f\"Order #order_id: total = ${total}\"",
+        "f(\"Order #{order_id}: total = ${total}\")"
+      ],
+      "format_method_style": [
+        "\"Order #{}: total = ${}\".format(order_id, total)",
+        "\"Order #{0}: total = $%f\".format(order_id, total)",
+        "\"Order #{order_id}: total = ${total}\".format()",
+        "\"Order #{}: total = ${}\" % (order_id, total)"
+      ],
+      "percent_style": [
+        "\"Order #%d: total = $%s\" % (order_id, total)",
+        "\"Order #%d: total = $%s\".format(order_id, total)",
+        "\"Order #{d}: total = ${s}\" % (order_id, total)",
+        "\"Order #%d: total = $%s\" % order_id, total"
+      ]
+    },
+    "answer": {
+      "f_string_style": "f\"Order #{order_id}: total = ${total}\"",
+      "format_method_style": "\"Order #{}: total = ${}\".format(order_id, total)",
+      "percent_style": "\"Order #%d: total = $%s\" % (order_id, total)"
+    },
+    "explanation": "All three produce equivalent output. The f-string embeds variables directly inside {}. The .format() method uses positional {} placeholders filled in order. The % operator uses %d for integers and %s to convert any value to its string form, with the values supplied as a tuple on the right."
+  },
+  {
+    "id": 273,
+    "domain": "String formatting with .format()",
+    "type": "fill_in_blank",
+    "question": "A weather station needs to print a daily temperature report. The output must look like this:<br><br><code>Day 5: high=28.7C low=14.2C</code><br><br>The variables are:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>day = 5<br>high = 28.7<br>low = 14.2<br><br>message = \"Day ____: high=____C low=____C\".format(day, high, low)<br>print(message)</div>",
+    "options": {
+      "first_placeholder": ["{0}", "{1}", "{2}", "{d}"],
+      "second_placeholder": ["{1}", "{0}", "{2}", "{f}"],
+      "third_placeholder": ["{2}", "{0}", "{1}", "{f}"]
+    },
+    "answer": {
+      "first_placeholder": "{0}",
+      "second_placeholder": "{1}",
+      "third_placeholder": "{2}"
+    },
+    "explanation": "With `.format(day, high, low)`, position 0 is day, position 1 is high, position 2 is low. The placeholders must use positional indices that match the argument order. The format method does not support type letters like {d} or {f} as standalone identifiers — those go after a colon (e.g., {0:d})."
+  },
+  {
+    "id": 274,
+    "domain": "String formatting with %",
+    "type": "fill_in_blank",
+    "question": "You are writing a Python report that displays a student's name, ID, and average grade. The output must meet the following requirements:<br><br>• The student name must be left-aligned in a field of 15 characters.<br>• The ID must be displayed as an integer right-aligned in a field of 6 characters.<br>• The grade must show exactly 1 decimal place.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>name = \"Maria\"<br>student_id = 482<br>grade = 88.46<br><br>print(\"Name: ____ ID: ____ Grade: ____\" % (name, student_id, grade))</div>",
+    "options": {
+      "name_format": ["%-15s", "%15s", "%-15d", "%15.5s"],
+      "id_format": ["%6d", "%-6d", "%6s", "%6f"],
+      "grade_format": ["%.1f", "%1f", "%.1d", "%f.1"]
+    },
+    "answer": {
+      "name_format": "%-15s",
+      "id_format": "%6d",
+      "grade_format": "%.1f"
+    },
+    "explanation": "`%-15s` formats a string left-aligned (-) in a 15-character field. `%6d` formats an integer right-aligned (default) in a 6-character field. `%.1f` formats a float with exactly 1 digit after the decimal point. `%-15d` would treat the name as an integer (TypeError), and `%.1d` is not a valid integer format."
+  },
+  {
+    "id": 275,
+    "domain": "String formatting with .format()",
+    "type": "fill_in_blank",
+    "question": "A bookstore needs to print invoice lines that look like this:<br><br><code>Title: Python Basics&nbsp;&nbsp;&nbsp;&nbsp;Copies: &nbsp;3 Price: $&nbsp;&nbsp;&nbsp;19.99</code><br><br>The output must meet the following requirements:<br><br>• Title is left-aligned in a 20-character field.<br>• Copies is right-aligned in a 2-character field.<br>• Price is right-aligned in a 8-character field with 2 decimal places.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>title = \"Python Basics\"<br>copies = 3<br>price = 19.99<br><br>line = \"Title: ____ Copies: ____ Price: $____\".format(title, copies, price)<br>print(line)</div>",
+    "options": {
+      "title_format": ["{0:<20}", "{0:>20}", "{0:^20}", "{0:20d}"],
+      "copies_format": ["{1:>2}", "{1:<2}", "{1:2f}", "{1:.2}"],
+      "price_format": ["{2:>8.2f}", "{2:<8.2f}", "{2:.2f8}", "{2:8.2d}"]
+    },
+    "answer": {
+      "title_format": "{0:<20}",
+      "copies_format": "{1:>2}",
+      "price_format": "{2:>8.2f}"
+    },
+    "explanation": "In `.format()` mini-language, `<` means left-align, `>` means right-align, and `^` means centered. `{0:<20}` left-aligns the title in 20 characters. `{1:>2}` right-aligns the integer in 2 characters. `{2:>8.2f}` right-aligns a float in 8 characters with 2 decimal places."
+  },
+  {
+    "id": 276,
+    "domain": "String formatting with %",
+    "type": "fill_in_blank",
+    "question": "A company needs to print a sales summary that looks like this:<br><br><code>Region: NORTH&nbsp;&nbsp;&nbsp;sold 1245 units at $ 23.50 each</code><br><br>The variables are:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>region = \"north\"<br>units = 1245<br>price = 23.5</div><br><br>The output must meet the following requirements:<br><br>• The region must be uppercase and left-aligned in a 7-character field.<br>• The units must appear as an integer (no decimal point).<br>• The price must show 2 decimal places in a 6-character field.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>print(\"Region: ____ sold ____ units at $____ each\" % (____, units, price))</div>",
+    "options": {
+      "region_format": ["%-7s", "%7s", "%-7d", "%.7s"],
+      "units_format": ["%d", "%f", "%s", "%.0d"],
+      "price_format": ["%6.2f", "%.6f", "%2.6f", "%6.2d"],
+      "region_argument": ["region.upper()", "region", "upper(region)", "region.UPPER"]
+    },
+    "answer": {
+      "region_format": "%-7s",
+      "units_format": "%d",
+      "price_format": "%6.2f",
+      "region_argument": "region.upper()"
+    },
+    "explanation": "`%-7s` left-aligns the string in 7 characters. `%d` formats an integer with no decimal. `%6.2f` formats a float in a 6-character field with 2 decimal places. The uppercase conversion must happen before % substitution, by calling region.upper() as the actual argument. % formatting does not support a built-in uppercase modifier."
+  },
+  {
+    "id": 277,
+    "domain": "String formatting — mixed styles",
+    "type": "fill_in_blank",
+    "question": "You are debugging a coworker's code. Three different lines must all produce the same output:<br><br><code>User alice has 7 messages (priority=high)</code><br><br>The variables are:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>user = \"alice\"<br>count = 7<br>priority = \"high\"</div><br><br>Match each line to the missing piece.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'># Line 1 — f-string<br>line1 = f\"User ____ has ____ messages (priority=____)\"<br><br># Line 2 — .format()<br>line2 = \"User {} has {} messages (priority=____)\".format(user, count, priority)<br><br># Line 3 — % operator<br>line3 = \"User %s has %d messages (priority=____)\" % (user, count, priority)</div>",
+    "options": {
+      "line1_first": ["{user}", "%s", "{}", "user"],
+      "line1_second": ["{count}", "%d", "{}", "count"],
+      "line1_third": ["{priority}", "%s", "{}", "priority"],
+      "line2_third": ["{}", "{2}", "%s", "{priority}"],
+      "line3_third": ["%s", "{}", "{2}", "%priority"]
+    },
+    "answer": {
+      "line1_first": "{user}",
+      "line1_second": "{count}",
+      "line1_third": "{priority}",
+      "line2_third": "{}",
+      "line3_third": "%s"
+    },
+    "explanation": "f-strings (f\"...\") embed variable names directly inside braces — {user}, {count}, {priority}. The .format() method uses empty {} placeholders that are filled positionally from the arguments. The % operator uses type codes — %s for strings, %d for integers — and takes its arguments from the tuple on the right."
+  },
+  {
+    "id": 278,
+    "domain": "File operations & writing",
+    "type": "fill_in_blank",
+    "question": "A logistics company needs a script that creates a new log file from scratch, writes a header line, and closes the file. If the log file already exists, its contents must be erased.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>log = ____<br>log.____(\"=== Daily Log ===\\n\")<br>log.____()</div>",
+    "options": {
+      "file_open": ["open(\"log.txt\", \"w\")", "open(\"log.txt\", \"r\")", "open(\"log.txt\", \"a\")", "open(\"log.txt\", \"x\")"],
+      "write_method": ["write", "append", "print", "save"],
+      "close_method": ["close", "end", "stop", "exit"]
+    },
+    "answer": {
+      "file_open": "open(\"log.txt\", \"w\")",
+      "write_method": "write",
+      "close_method": "close"
+    },
+    "explanation": "`\"w\"` opens the file in write mode, creating it if it doesn't exist and erasing existing content if it does. `\"a\"` would append instead of erasing. `\"x\"` fails if the file already exists. The write() method adds the text, and close() releases the file handle."
+  },
+  {
+    "id": 279,
+    "domain": "File operations & line-by-line reading",
+    "type": "fill_in_blank",
+    "question": "You are writing a function that opens a text file and returns the number of non-empty lines it contains. Empty lines (lines that contain only a newline) must not be counted.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def count_lines(filename):<br>&nbsp;&nbsp;&nbsp;&nbsp;count = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;file = ____<br>&nbsp;&nbsp;&nbsp;&nbsp;for line ____ file:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if line ____ \"\\n\":<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;file.close()<br>&nbsp;&nbsp;&nbsp;&nbsp;return count</div>",
+    "options": {
+      "open_call": ["open(filename, \"r\")", "open(filename, \"w\")", "open(filename)", "read(filename)"],
+      "iteration_keyword": ["in", "of", "within", "from"],
+      "comparison_operator": ["!=", "==", "is", "not"]
+    },
+    "answer": {
+      "open_call": "open(filename, \"r\")",
+      "iteration_keyword": "in",
+      "comparison_operator": "!="
+    },
+    "explanation": "Open the file in read mode. Iterating over a file object yields each line one at a time, including the trailing newline character. Use != to check that the line is not just a newline — if line != \"\\n\", the line has actual content and should be counted. Note: open(filename, \"w\") would erase the file."
+  },
+  {
+    "id": 280,
+    "domain": "Functions & multiple return values",
+    "type": "multiple_choice",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def stats(numbers):<br>&nbsp;&nbsp;&nbsp;&nbsp;return min(numbers), max(numbers), sum(numbers)<br><br>low, high, total = stats([3, 7, 2, 9, 5])<br>print(high - low)</div><br><br>What is the output?",
+    "options": [
+      "A. 7",
+      "B. 26",
+      "C. 9",
+      "D. The code generates a runtime error."
+    ],
+    "answer": "A. 7",
+    "explanation": "A function can return multiple values as a tuple by separating them with commas. The values (2, 9, 26) are unpacked into low, high, and total in order. high - low = 9 - 2 = 7. Option B (26) would only be correct if the print used total."
+  },
+  {
+    "id": 281,
+    "domain": "Functions & file operations combined",
+    "type": "fill_in_blank",
+    "question": "A company asks you to write a function that appends a single line of text to an existing file. The function must meet the following requirements:<br><br>• The function is named append_line.<br>• The function takes two parameters: the file name and the text to append.<br>• The text must be written followed by a newline character.<br>• The file must be properly closed before the function returns.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____ append_line(____):<br>&nbsp;&nbsp;&nbsp;&nbsp;file = open(filename, ____)<br>&nbsp;&nbsp;&nbsp;&nbsp;file.write(text + \"\\n\")<br>&nbsp;&nbsp;&nbsp;&nbsp;____</div>",
+    "options": {
+      "function_keyword": ["def", "function", "fn", "func"],
+      "parameters": ["filename, text", "text, filename", "(filename, text)", "filename + text"],
+      "file_mode": ["\"a\"", "\"w\"", "\"r\"", "\"x\""],
+      "close_call": ["file.close()", "close(file)", "file.end()", "file.stop()"]
+    },
+    "answer": {
+      "function_keyword": "def",
+      "parameters": "filename, text",
+      "file_mode": "\"a\"",
+      "close_call": "file.close()"
+    },
+    "explanation": "`def` defines a function. The parameters are listed inside parentheses as filename, text (without extra parentheses since they're already in the def line). Use \"a\" (append mode) so the file is not erased — \"w\" would overwrite existing content. Finally, file.close() properly releases the file handle."
+  },
+  {
+    "id": 282,
+    "domain": "Functions, file operations & exception handling",
+    "type": "true_false",
+    "question": "Review the following function:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def safe_open(filename):<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file = open(filename, \"r\")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content = file.read()<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file.close()<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return content<br>&nbsp;&nbsp;&nbsp;&nbsp;except FileNotFoundError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return None</div><br><br>For each statement, select True or False:",
+    "options": {
+      "statement1": "If filename refers to an existing file, the function returns the file's contents as a string.",
+      "statement2": "If filename does not exist, the function returns None instead of crashing.",
+      "statement3": "If the file exists but the user lacks permission to read it, the function returns None."
+    },
+    "answer": {
+      "statement1": "True: If filename refers to an existing file, the function returns the file's contents as a string.",
+      "statement2": "True: If filename does not exist, the function returns None instead of crashing.",
+      "statement3": "False: If the file exists but the user lacks permission to read it, the function returns None."
+    },
+    "explanation": "Statement 1 is True — read() returns the whole file content as a string. Statement 2 is True — FileNotFoundError is the specific exception raised when the file is missing, and the except clause catches it. Statement 3 is False — a permission error raises PermissionError, which is NOT caught by except FileNotFoundError. The function would crash with an unhandled exception."
+  },
+  {
+    "id": 283,
+    "domain": "File operations & file modes",
+    "type": "fill_in_blank",
+    "question": "A company asks you to update an existing inventory file. Each time the program runs, it must add a new line at the end of the file without erasing what is already there. If the file does not exist yet, it must be created automatically.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>file = open(\"inventory.txt\", ____)<br>file.write(\"item added on Friday\\n\")<br>file.close()</div>",
+    "options": {
+      "file_mode": ["\"a\"", "\"w\"", "\"r\"", "\"x\""]
+    },
+    "answer": {
+      "file_mode": "\"a\""
+    },
+    "explanation": "Mode \"a\" (append) adds new content at the end of the file without erasing existing content, and creates the file if it doesn't exist. Mode \"w\" would erase existing content. Mode \"r\" is read-only. Mode \"x\" (exclusive creation) fails if the file already exists."
+  },
+  {
+    "id": 284,
+    "domain": "Functions & default parameters",
+    "type": "fill_in_blank",
+    "question": "You are writing a function for a delivery system that calculates the total cost of a shipment. The function must meet the following requirements:<br><br>• The function is named shipment_cost.<br>• The first parameter is weight (no default).<br>• The second parameter is rate_per_kg with a default value of 1.5.<br>• The third parameter is surcharge with a default value of 0.<br>• The function returns weight * rate_per_kg + surcharge.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def ____(____, ____, ____):<br>&nbsp;&nbsp;&nbsp;&nbsp;return weight * rate_per_kg + surcharge</div>",
+    "options": {
+      "function_name": ["shipment_cost", "ShipmentCost", "shipment-cost", "shipmentCost()"],
+      "first_param": ["weight", "weight = 0", "weight = None", "weight = 1.5"],
+      "second_param": ["rate_per_kg = 1.5", "rate_per_kg", "rate_per_kg == 1.5", "1.5 = rate_per_kg"],
+      "third_param": ["surcharge = 0", "surcharge", "surcharge == 0", "0 = surcharge"]
+    },
+    "answer": {
+      "function_name": "shipment_cost",
+      "first_param": "weight",
+      "second_param": "rate_per_kg = 1.5",
+      "third_param": "surcharge = 0"
+    },
+    "explanation": "Python function names use lowercase with underscores (snake_case). Required parameters must come before parameters with default values, so weight has no default. The defaults are written with a single = (assignment), not == (comparison). The parameter name must always be on the left of the =."
+  },
+  {
+    "id": 285,
+    "domain": "Functions & variable scope",
+    "type": "true_false",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>count = 0<br><br>def increment():<br>&nbsp;&nbsp;&nbsp;&nbsp;count = count + 1<br>&nbsp;&nbsp;&nbsp;&nbsp;return count<br><br>result = increment()<br>print(count)<br>print(result)</div><br><br>For each statement, select True or False:",
+    "options": {
+      "statement1": "The code runs without an error.",
+      "statement2": "After the function runs, the global count is 1.",
+      "statement3": "To modify the global count from inside the function, the global keyword must be used."
+    },
+    "answer": {
+      "statement1": "False: The code runs without an error.",
+      "statement2": "False: After the function runs, the global count is 1.",
+      "statement3": "True: To modify the global count from inside the function, the global keyword must be used."
+    },
+    "explanation": "Statement 1 is False — assigning to count inside the function makes it a local variable, so the read count + 1 raises an UnboundLocalError (the local has no value yet). Statement 2 is False — even if the code worked, assignment inside a function does not affect the global by default. Statement 3 is True — declaring global count inside the function tells Python to use the outer variable, allowing both the read and the modification to refer to the global."
+  },
+  {
+    "id": 286,
+    "domain": "File operations & with statement",
+    "type": "fill_in_blank",
+    "question": "A company asks you to rewrite an old file-reading script to use the with statement, so the file is automatically closed even if an error occurs.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____ open(\"data.txt\", \"r\") ____ file:<br>&nbsp;&nbsp;&nbsp;&nbsp;content = file.____()<br>&nbsp;&nbsp;&nbsp;&nbsp;print(content)</div>",
+    "options": {
+      "with_keyword": ["with", "using", "open", "for"],
+      "as_keyword": ["as", "to", "into", "="],
+      "read_method": ["read", "readline", "write", "load"]
+    },
+    "answer": {
+      "with_keyword": "with",
+      "as_keyword": "as",
+      "read_method": "read"
+    },
+    "explanation": "The `with` statement creates a context manager. The syntax is `with <expression> as <variable>:` — here the file object is assigned to file. read() returns the entire file content as a single string. The major benefit of with is that the file is automatically closed when the block ends, even if an exception is raised."
+  },
+  {
+    "id": 287,
+    "domain": "Functions & return values",
+    "type": "multiple_choice",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def check(value):<br>&nbsp;&nbsp;&nbsp;&nbsp;if value < 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return \"negative\"<br>&nbsp;&nbsp;&nbsp;&nbsp;if value == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return \"zero\"<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"positive\")<br><br>result = check(5)<br>print(result)</div><br><br>What is the output?",
+    "options": [
+      "A. positive then positive",
+      "B. positive then None",
+      "C. None then positive",
+      "D. The code generates a runtime error."
+    ],
+    "answer": "B. positive then None",
+    "explanation": "When check(5) is called, both if conditions are False, so the code reaches the print(\"positive\") line, which outputs positive to the console. The function then ends without a return statement, so it implicitly returns None. That None is stored in result and printed on the next line. A common mistake is to confuse printing with returning — print only displays text, it does not give a value back to the caller."
+  },
+  {
+    "id": 288,
+    "domain": "Nested loops & output counting",
+    "type": "multiple_choice",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>total = 0<br>for i in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;for j in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total += 1<br>print(total)</div><br><br>What is the output?",
+    "options": [
+      "A. 6",
+      "B. 9",
+      "C. 12",
+      "D. 16"
+    ],
+    "answer": "B. 9",
+    "explanation": "`range(1, 4)` produces 1, 2, 3 (three values). The outer loop runs 3 times, and for each outer iteration the inner loop runs 3 times. Total iterations = 3 × 3 = 9. total is incremented once per inner iteration, so it ends at 9."
+  },
+  {
+    "id": 291,
+    "domain": "Nested loops & triangle pattern with range",
+    "type": "fill_in_blank",
+    "question": "You are writing a Python program that prints the following right triangle pattern:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>*<br>**<br>***<br>****<br>*****</div><br><br>The number of stars in each row matches the row number (row 1 has 1 star, row 2 has 2 stars, etc.). There are 5 rows total.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>for row in range(____):<br>&nbsp;&nbsp;&nbsp;&nbsp;for col in range(____):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(\"*\", end=\"\")<br>&nbsp;&nbsp;&nbsp;&nbsp;print()</div>",
+    "options": {
+      "outer_range": ["1, 6", "0, 5", "5", "1, 5"],
+      "inner_range": ["row", "5", "row + 1", "1, row"]
+    },
+    "answer": {
+      "outer_range": "1, 6",
+      "inner_range": "row"
+    },
+    "explanation": "Using range(1, 6) makes row take the values 1, 2, 3, 4, 5 — which directly match the number of stars in each row. The inner range(row) then runs that many times (e.g., when row=3, the inner loop runs 3 times, printing 3 stars). An alternative valid pairing would be range(5) (0–4) with range(row + 1), but the question dropdown forces matching the simpler pairing."
+  },
+  {
+    "id": 292,
+    "domain": "Nested loops & continue",
+    "type": "multiple_choice",
+    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>result = 0<br>for i in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;for j in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if i == j:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result += i * j<br>print(result)</div><br><br>What is the output?",
+    "options": [
+      "A. 22",
+      "B. 36",
+      "C. 14",
+      "D. 18"
+    ],
+    "answer": "A. 22",
+    "explanation": "`continue` skips the rest of the current inner iteration when i == j. Trace each (i, j) where i != j: (1,2)→2, (1,3)→3, (2,1)→2, (2,3)→6, (3,1)→3, (3,2)→6. Sum = 2+3+2+6+3+6 = 22. The skipped pairs (1,1), (2,2), (3,3) would have added 1+4+9 = 14 (giving 36 total), which is the trap answer."
   }
 ]
