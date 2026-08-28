@@ -34,14 +34,24 @@ interface ActiveSession {
   time_remaining: number;
   started_at: string;
 }
-const renderAnswer = (answer: any) => {
+// fill_in_blank and ordering store their options/answers as plain text, because both quiz
+// components render those as React text rather than as HTML. Every other type stores
+// HTML-escaped markup. Rendering the wrong way round either swallows the value (a plain
+// "<class 'int'>" parsed as a tag) or shows entities literally, so branch on the type.
+const renderAnswer = (answer: any, type?: string) => {
   if (!answer) return <p className="text-gray-500">No answer selected</p>;
-  
+
+  const isPlainText = type === 'fill_in_blank' || type === 'ordering';
+  const renderValue = (value: string, className?: string) =>
+    isPlainText
+      ? <span className={`${className ?? ''} whitespace-pre-wrap font-mono`}>{value}</span>
+      : <span className={className} dangerouslySetInnerHTML={{ __html: value }} />;
+
   if (Array.isArray(answer)) {
     return (
       <div>
         {answer.map((item: string, idx: number) => (
-          <div key={idx} dangerouslySetInnerHTML={{ __html: item }} />
+          <div key={idx}>{renderValue(item)}</div>
         ))}
       </div>
     );
@@ -54,17 +64,14 @@ const renderAnswer = (answer: any) => {
         {Object.entries(answer).map(([key, value]) => (
           <div key={key}>
             <span className="font-medium">{key.replace(/_/g, ' ')}:</span> 
-            <span 
-              className="ml-2" 
-              dangerouslySetInnerHTML={{ __html: value as string }} 
-            />
+            {renderValue(value as string, 'ml-2')}
           </div>
         ))}
       </div>
     );
   }
   
-  return <div dangerouslySetInnerHTML={{ __html: answer }} />;
+  return <div>{renderValue(answer)}</div>;
 };
 export default function UserDashboard() {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
@@ -725,13 +732,13 @@ export default function UserDashboard() {
                               <div className="p-3 bg-red-50 border border-red-200 rounded">
                                 <p className="text-sm font-medium text-red-800">Your Answer:</p>
                                <div className="text-red-700">
-                                  {renderAnswer(question.userAnswer)}
+                                  {renderAnswer(question.userAnswer, question.type)}
                                 </div>
                               </div>
                               <div className="p-3 bg-green-50 border border-green-200 rounded">
                                 <p className="text-sm font-medium text-green-800">Correct Answer:</p>
                                <div className="text-green-700">
-                                  {renderAnswer(question.correctAnswer)}
+                                  {renderAnswer(question.correctAnswer, question.type)}
                                 </div>
                               </div>
                               {question.explanation && (

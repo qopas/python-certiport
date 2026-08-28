@@ -196,6 +196,7 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
       return {
         questionId: question.id,
         domain: question.domain,
+        type: question.type,
         question: question.question,
         userAnswer,
         correctAnswer: question.answer,
@@ -421,7 +422,7 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
                     <SelectContent>
                       {optionsObj[key].map((option) => (
                         <SelectItem key={option} value={option}>
-                          <span dangerouslySetInnerHTML={{ __html: option }} />
+                          <span className="font-mono">{option}</span>
                         </SelectItem>
                       ))}
                     </SelectContent>
@@ -565,7 +566,7 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
                             <div className="flex items-center">
                               <span className="text-sm font-medium text-indigo-700 mr-2 min-w-[20px]">{index + 1}.</span>
                               <GripVertical className="w-4 h-4 mr-2 text-indigo-400" />
-                              <span className="text-sm" dangerouslySetInnerHTML={{ __html: item }} />
+                              <span className="text-sm font-mono whitespace-pre-wrap">{item}</span>
                             </div>
                           </div>
                         ))
@@ -594,7 +595,7 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
                             className="flex items-center p-3 bg-gray-50 border border-gray-200 rounded-lg cursor-move hover:bg-gray-100 transition-colors"
                           >
                             <GripVertical className="w-4 h-4 mr-2 text-gray-400" />
-                            <span className="text-sm" dangerouslySetInnerHTML={{ __html: item }} />
+                            <span className="text-sm font-mono whitespace-pre-wrap">{item}</span>
                           </div>
                         ))
                       )}
