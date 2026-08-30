@@ -118,7 +118,8 @@ export const quizQuestions: Question[] = [
       "int",
       "float",
       "str",
-      "bool"
+      "bool",
+      "float"
     ],
     "answer": [
       "float",
@@ -137,6 +138,7 @@ export const quizQuestions: Question[] = [
       "bool",
       "float",
       "int",
+      "str",
       "str"
     ],
     "answer": [
@@ -3456,7 +3458,7 @@ export const quizQuestions: Question[] = [
       "C. The code will generate a runtime error.",
       "D. The code will generate a syntax error."
     ],
-    "answer": "A. No change is needed.",
+    "answer": "C. The code will generate a runtime error.",
     "explanation": "Opening a file in 'w+' mode creates it when it does not already exist, so no IOError is raised, the else block runs and the file is copied line by line. Because the except branch never executes, the undefined name file_name inside it is never evaluated, so there is no runtime error, and the syntax is valid throughout."
   },
   {
