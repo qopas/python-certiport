@@ -96,6 +96,7 @@ const TrainingQuiz: React.FC<TrainingQuizProps> = ({
       return {
         questionId: question.id,
         domain: question.domain,
+        type: question.type,
         question: question.question,
         userAnswer,
         correctAnswer: question.answer,
@@ -189,7 +190,60 @@ const TrainingQuiz: React.FC<TrainingQuizProps> = ({
         );
 
       case 'true_false':
-        
+        // Multi-statement form: options is a map of statementN -> statement text, and the
+        // answer is the same map with each value prefixed "True: " / "False: ". Grading in
+        // compareAnswers already expects that shape, so build it here rather than the bare
+        // True/False pair, which can never satisfy a multi-statement question.
+        if (currentQuestion.options && typeof currentQuestion.options === 'object' && !Array.isArray(currentQuestion.options)) {
+          const statements = currentQuestion.options as { [key: string]: string };
+          const statementAnswers = (userAnswer as { [key: string]: string }) || {};
+          const correctAnswers = currentQuestion.answer as { [key: string]: string };
+
+          return (
+            <div className="space-y-4">
+              {Object.entries(statements).map(([key, statement]) => {
+                const selected = statementAnswers[key]?.split(':')[0];
+                const correct = correctAnswers?.[key]?.split(':')[0];
+
+                return (
+                  <div key={key} className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                      <p className="flex-1 text-gray-800 font-medium">{statement}</p>
+                      <div className="flex gap-3">
+                        {['True', 'False'].map((option: string) => (
+                          <label
+                            key={`${key}-${option}`}
+                            className={`flex items-center cursor-pointer p-2 rounded-lg border-2 transition-all
+                              ${selected === option ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'}
+                              ${showExplanation ?
+                                option === correct ? 'border-green-500 bg-green-50' :
+                                selected === option ? 'border-red-500 bg-red-50' : '' : ''}
+                            `}
+                          >
+                            <input
+                              type="radio"
+                              name={`statement-${currentQuestionIndex}-${key}`}
+                              value={option}
+                              checked={selected === option}
+                              onChange={(e) => handleAnswerChange({
+                                ...statementAnswers,
+                                [key]: `${e.target.value}: ${statement.replace(/<[^>]*>/g, '')}`
+                              })}
+                              disabled={showExplanation}
+                              className="mr-2 w-4 h-4"
+                            />
+                            <span className="font-semibold text-gray-700 text-sm">{option}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        }
+
         return (
           <div className="space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -345,7 +399,7 @@ const TrainingQuiz: React.FC<TrainingQuizProps> = ({
                       }
                     }}
                     disabled={showExplanation}
-                    className="block w-full text-left p-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:cursor-not-allowed"
+                    className="block w-full text-left p-3 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 disabled:cursor-not-allowed font-mono whitespace-pre-wrap"
                   >
                     {option}
                   </button>
@@ -364,7 +418,7 @@ const TrainingQuiz: React.FC<TrainingQuizProps> = ({
                     <span className="flex items-center">
                       <GripVertical className="w-4 h-4 text-gray-400 mr-2" />
                       <span className="font-medium text-blue-600 mr-2">{index + 1}.</span>
-                      {option}
+                      <span className="font-mono whitespace-pre-wrap">{option}</span>
                     </span>
                     {!showExplanation && (
                       <button

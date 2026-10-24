@@ -27,6 +27,7 @@ export interface QuizSubmission {
 export interface QuestionResult {
   questionId: number;
   domain: string;
+  type: Question["type"];
   question: string;
   userAnswer: string | string[] | { [key: string]: string } | null;
   correctAnswer: string | string[] | { [key: string]: string };

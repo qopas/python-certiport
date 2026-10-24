@@ -2,16 +2,4236 @@ import { Question } from './types';
 
 export const quizQuestions: Question[] = [
   {
+    "id": 1,
+    "domain": "Data types & variable assignment",
+    "type": "multiple_choice",
+    "question": "Consider the following Python code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>age=0<br>minor=False<br>name='Durga'</div>The types of age, minor and name variables respectively:",
+    "options": [
+      "A. int, bool, str",
+      "B. bool, bool, str",
+      "C. int, bool, char",
+      "D. float, bool, str"
+    ],
+    "answer": "A. int, bool, str",
+    "explanation": "The literal 0 has no decimal point so it creates an int, False is one of the two bool literals, and quoted text creates a str. Python has no char type, which rules out option C, and 0 is an int rather than a float, which rules out option D."
+  },
+  {
+    "id": 2,
+    "domain": "Data types & variable assignment",
+    "type": "multiple_choice",
+    "question": "Consider the following Python code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>weight = 62.4<br>zip='880098'<br>value=+23E4</div>The types of weight, zip and value variables respectively:",
+    "options": [
+      "A. float, str, str",
+      "B. int, str, float",
+      "C. double, str, float",
+      "D. float, str, float"
+    ],
+    "answer": "D. float, str, float",
+    "explanation": "62.4 is a float literal, '880098' is quoted so it is a str even though it looks numeric, and exponent notation such as +23E4 always produces a float (230000.0). Python has no double type, so option C is wrong, and option A wrongly treats the exponent literal as a string."
+  },
+  {
+    "id": 3,
+    "domain": "Data types & variable assignment",
+    "type": "fill_in_blank",
+    "question": "You create the following program to locate a conference room and display the room name. Line numbers are included for reference only. Colleagues report that the program sometimes produces incorrect results. You need to troubleshoot the program. Use the drop-down menus to select the answer choice that answers each question based on the information presented in the code segment.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 rooms = {1: 'Left Conference Room', 2: 'Right conference Room'}<br>02 room = input('Enter the room number: ')<br>03 if not room in rooms:<br>04&nbsp;&nbsp;&nbsp;&nbsp;print('Room does not exist.')<br>05 else:<br>06&nbsp;&nbsp;&nbsp;&nbsp;print(\"The room name is \" + rooms[room])<br><br>Which two data types are stored in the rooms list at line 01? ____<br>What is the data type of room at line 02? ____<br>Why does line 03 fail to find the rooms? ____</div>",
+    "options": {
+      "rooms_data_types": [
+        "bool and string",
+        "float and bool",
+        "int and string",
+        "float and int"
+      ],
+      "room_data_type": [
+        "bool",
+        "float",
+        "int",
+        "string"
+      ],
+      "failure_reason": [
+        "Invalid syntax",
+        "Mismatched data type(s)",
+        "Misnamed variable(s)"
+      ]
+    },
+    "answer": {
+      "rooms_data_types": "int and string",
+      "room_data_type": "string",
+      "failure_reason": "Mismatched data type(s)"
+    },
+    "explanation": "The literal at line 01 stores int keys (1 and 2) paired with str values (the room names). input() always returns a str, so room holds '1' rather than the number 1, and testing a str against int keys never matches. The code parses fine and the names are spelled correctly, so the fault is a data type mismatch, not syntax or naming."
+  },
+  {
+    "id": 4,
+    "domain": "Data types & variable assignment",
+    "type": "fill_in_blank",
+    "question": "You are writing a program that calculates a user's year of birth. The program asks users for their age and the current year, then outputs the user's year of birth. You write the following code. Line numbers are included for reference only. You need to ensure that the program uses the appropriate data types. Use the drop-down menus to select the answer choice that answers each question based on the information presented in the code segment.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 age = input('Enter your age: ')<br>02 year = input('Enter the four digit year: ')<br>03 born = eval(year) - eval(age)<br>04 message = 'You were born in ' + str(born)<br>05 print(message)<br><br>What data type is age in line 01? ____<br>What data type is born in line 03? ____<br>What data type is message in line 04? ____</div>",
+    "options": {
+      "age_type": [
+        "int",
+        "str",
+        "float",
+        "bool"
+      ],
+      "born_type": [
+        "int",
+        "str",
+        "float",
+        "bool"
+      ],
+      "message_type": [
+        "int",
+        "str",
+        "float",
+        "bool"
+      ]
+    },
+    "answer": {
+      "age_type": "str",
+      "born_type": "int",
+      "message_type": "str"
+    },
+    "explanation": "input() always hands back a str, so age is a str even when the user types digits. eval() turns those digit strings back into whole numbers, so the subtraction at line 03 is int arithmetic and born is an int. Line 04 concatenates a str literal with str(born), which produces a str."
+  },
+  {
+    "id": 5,
+    "domain": "Data types & variable assignment",
+    "type": "true_false",
+    "question": "During school holidays, you volunteer to explain some basic programming concepts to your younger siblings. You want to introduce the concept of data types in Python. You create the following three code segments:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'># Code segment 1<br>x1 = \"20\"<br>y1 = 3<br>a = x1 * y1<br># Code segment 2<br>x2 = 6<br>y2 = 4<br>b = x2 / y2<br># Code segment 3<br>x3 = 2.5<br>y3 = 1<br>c = x3 / y3</div>You need to evaluate the code segments. For each of the following statements, select True if the statement is correct. Otherwise, select False.",
+    "options": {
+      "statement1": "After executing code segment 1, the data type of variable a is str.",
+      "statement2": "After executing code segment 2, the data type of variable b is float.",
+      "statement3": "After executing code segment 3, the data type of variable c is int."
+    },
+    "answer": {
+      "statement1": "True: After executing code segment 1, the data type of variable a is str.",
+      "statement2": "True: After executing code segment 2, the data type of variable b is float.",
+      "statement3": "False: After executing code segment 3, the data type of variable c is int."
+    },
+    "explanation": "Multiplying a str by an int repeats the string, so a becomes '202020', a str. True division with the single slash operator always returns a float, so b is 1.5 and c is 2.5. Because c is a float and not an int, the third statement is false."
+  },
+  {
+    "id": 6,
+    "domain": "Data types & variable assignment",
+    "type": "fill_in_blank",
+    "question": "Match the data type to the type operations. To answer, select the appropriate data type for each type operation. Each data type may be used once, more than once, or not at all.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>type(+1E10) &rarr; ____<br>type(5.0) &rarr; ____<br>type(\"True\") &rarr; ____<br>type(False) &rarr; ____</div>",
+    "options": {
+      "slot_1": [
+        "int",
+        "float",
+        "str",
+        "bool"
+      ],
+      "slot_2": [
+        "int",
+        "float",
+        "str",
+        "bool"
+      ],
+      "slot_3": [
+        "int",
+        "float",
+        "str",
+        "bool"
+      ],
+      "slot_4": [
+        "int",
+        "float",
+        "str",
+        "bool"
+      ]
+    },
+    "answer": {
+      "slot_1": "float",
+      "slot_2": "float",
+      "slot_3": "str",
+      "slot_4": "bool"
+    },
+    "explanation": "Exponent notation such as +1E10 always produces a float, and 5.0 is a float literal because of the decimal point. \"True\" is quoted, so it is a str rather than a bool, while the bare keyword False is a bool. None of these expressions produces an int."
+  },
+  {
+    "id": 7,
+    "domain": "Data types & variable assignment",
+    "type": "fill_in_blank",
+    "question": "You are writing a Python program. The program collects customer data and stores it in a database. The program handles a wide variety of data. You need to ensure that the program handles the data correctly so that it can be stored in the database correctly. Match the data type to the code segment. Each data type may be used once, more than once, or not at all.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>age = 2 &rarr; ____<br>minor = False &rarr; ____<br>name = \"Contoso\" &rarr; ____<br>weight = 123.5 &rarr; ____<br>zip = \"81000\" &rarr; ____</div>",
+    "options": {
+      "slot_1": [
+        "bool",
+        "float",
+        "int",
+        "str"
+      ],
+      "slot_2": [
+        "bool",
+        "float",
+        "int",
+        "str"
+      ],
+      "slot_3": [
+        "bool",
+        "float",
+        "int",
+        "str"
+      ],
+      "slot_4": [
+        "bool",
+        "float",
+        "int",
+        "str"
+      ],
+      "slot_5": [
+        "bool",
+        "float",
+        "int",
+        "str"
+      ]
+    },
+    "answer": {
+      "slot_1": "int",
+      "slot_2": "bool",
+      "slot_3": "str",
+      "slot_4": "float",
+      "slot_5": "str"
+    },
+    "explanation": "An unquoted whole number is an int, the keyword False is a bool, quoted text is a str, and a number written with a decimal point is a float. zip = \"81000\" is quoted, so it is a str even though every character is a digit."
+  },
+  {
+    "id": 8,
+    "domain": "Data types & variable assignment",
+    "type": "multiple_select",
+    "question": "Consider the variable declarations:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a='5'<br>b='2'</div>Which of the following expressions are of type str? (Choose 2.)",
+    "options": [
+      "A. a+b",
+      "B. a*b",
+      "C. a-b",
+      "D. a*2"
+    ],
+    "answer": [
+      "A. a+b",
+      "D. a*2"
+    ],
+    "explanation": "Because a and b are both strings, a+b concatenates them into '52' and a*2 repeats a into '55', so both results are str. a*b raises a TypeError because a sequence can only be multiplied by an int, and a-b raises a TypeError because subtraction is not defined for strings."
+  },
+  {
+    "id": 9,
+    "domain": "Data types & variable assignment",
+    "type": "multiple_choice",
+    "question": "You are writing a Python program. You are required to handle data types properly. Consider the code segment:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) a=10+20<br>2) b='10'+'20'<br>3) c='10'*3</div>Identify the types of a, b and c.",
+    "options": [
+      "A. a is of int type, b is of str type and c is of str type",
+      "B. a is of int type, b is of str type and c is of int type",
+      "C. a is of int type, b is of int type and c is of int type",
+      "D. a is of int type, b and c are invalid declarations"
+    ],
+    "answer": "A. a is of int type, b is of str type and c is of str type",
+    "explanation": "10+20 is integer arithmetic, so a is an int equal to 30. '10'+'20' concatenates two strings into '1020' and '10'*3 repeats a string into '101010', so b and c are both str. Neither of those operations is invalid, so option D is wrong."
+  },
+  {
+    "id": 10,
+    "domain": "Data types & variable assignment",
+    "type": "fill_in_blank",
+    "question": "You are writing a function that returns the data type of the value that is passed in. You write the following code. Line numbers are included for reference only. Use the drop-down menus to select the answer choice that answers each question based on the information presented in the code segment.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 def checkType(value):<br>02&nbsp;&nbsp;&nbsp;&nbsp;dataType = type(value)<br>03&nbsp;&nbsp;&nbsp;&nbsp;return dataType<br>04 print(checkType(True))<br>05 print(checkType(1.0))<br>06 print(checkType(1))<br>07 print(checkType('True'))<br><br>What is printed at line 04? ____<br>What is printed at line 05? ____<br>What is printed at line 06? ____<br>What is printed at line 07? ____</div>",
+    "options": {
+      "line_04_output": [
+        "<class 'bool'>",
+        "<class 'int'>",
+        "<class 'float'>",
+        "<class 'str'>"
+      ],
+      "line_05_output": [
+        "<class 'bool'>",
+        "<class 'int'>",
+        "<class 'float'>",
+        "<class 'str'>"
+      ],
+      "line_06_output": [
+        "<class 'bool'>",
+        "<class 'int'>",
+        "<class 'float'>",
+        "<class 'str'>"
+      ],
+      "line_07_output": [
+        "<class 'bool'>",
+        "<class 'int'>",
+        "<class 'float'>",
+        "<class 'str'>"
+      ]
+    },
+    "answer": {
+      "line_04_output": "<class 'bool'>",
+      "line_05_output": "<class 'float'>",
+      "line_06_output": "<class 'int'>",
+      "line_07_output": "<class 'str'>"
+    },
+    "explanation": "checkType returns the class object produced by type(), and printing a class object shows it in the class repr form. True is a bool, 1.0 is a float because of the decimal point, 1 is an int, and the quoted 'True' is a str rather than a bool."
+  },
+  {
+    "id": 11,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "You have the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) a=bool([False])<br>2) b=bool(3)<br>3) c=bool(\"\")<br>4) d=bool(' ')</div>Which of the variables will represent False?",
+    "options": [
+      "A. a",
+      "B. b",
+      "C. c",
+      "D. d"
+    ],
+    "answer": "C. c",
+    "explanation": "bool() is False only for empty or zero values. The empty string \"\" is falsy, so c is False, while [False] is a non-empty list, 3 is a non-zero number, and ' ' is a one-character string containing a space, so a, b and d are all True."
+  },
+  {
+    "id": 12,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the following variable declarations:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) a= bool([])<br>2) b= bool(())<br>3) c= bool(range(0))<br>4) d= bool({})<br>5) e= bool(set())</div>Which of the above variables represent True?",
+    "options": [
+      "A. c",
+      "B. a, b, c, d",
+      "C. All Variables represent True",
+      "D. None of the variables represents True"
+    ],
+    "answer": "D. None of the variables represents True",
+    "explanation": "Every value here is an empty container: an empty list, an empty tuple, range(0), an empty dict and an empty set. Empty containers are falsy in Python, so all five variables are False and none of them represents True."
+  },
+  {
+    "id": 13,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) a=bool(0)<br>2) b=bool(3)<br>3) c=bool(0.5)<br>4) d=bool(0.0)</div>Which variables represent True?",
+    "options": [
+      "A. a,b",
+      "B. b,c",
+      "C. c,d",
+      "D. d,a",
+      "E. All Variables"
+    ],
+    "answer": "B. b,c",
+    "explanation": "For numbers, only zero is falsy, so bool(0) and bool(0.0) are False while bool(3) and bool(0.5) are True. That makes b and c the only variables representing True, so any answer including a or d is wrong."
+  },
+  {
+    "id": 14,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "You are writing a Python program to read two int values from the keyboard and print the sum.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) x=input('Enter First Number:')<br>2) y=input('Enter Second Number:')<br>3) #Line-1</div>Which of the following code should we write at Line-1 to print the sum of the given numbers?",
+    "options": [
+      "A. print('The Result:'+(int(x)+int(y)))",
+      "B. print('The Result:'+(int(x+y)))",
+      "C. print('The Result:'+str(int(x)+int(y)))",
+      "D. print('The Result:'+str(int(x+y)))"
+    ],
+    "answer": "C. print('The Result:'+str(int(x)+int(y)))",
+    "explanation": "input() returns strings, so each value must be converted with int() before adding, and the numeric total must be converted back with str() before it can be joined to a string. Option D writes int(x+y), which concatenates '10' and '20' into '1020' first and prints the wrong total, while options A and B raise a TypeError because a str cannot be concatenated with an int."
+  },
+  {
+    "id": 15,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the Python code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) result=str(bool(1) + float(10)/float(2))<br>2) print(result)</div>What is the output?",
+    "options": [
+      "A. SyntaxError",
+      "B. TypeError",
+      "C. 6",
+      "D. 6.0"
+    ],
+    "answer": "D. 6.0",
+    "explanation": "bool(1) is True, which behaves as 1 in arithmetic, and float(10)/float(2) is 5.0, so the sum is the float 6.0. Converting that float to a string keeps the decimal point, so 6.0 is printed rather than 6, and mixing bool with float is perfectly legal, so no error is raised."
+  },
+  {
+    "id": 16,
+    "domain": "Data type operations",
+    "type": "fill_in_blank",
+    "question": "You write the following code. Use the drop-down menus to select the answer choice that answers each question based on the information presented in the code segment.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a = 'Config1'<br>print(a)<br>b = a<br>a += 'Config2'<br>print(a)<br>print(b)<br><br>What is displayed after the first print? ____<br>What is displayed after the second print? ____<br>What is displayed after the third print? ____</div>",
+    "options": {
+      "first_print": [
+        "Config1",
+        "Config1Config2",
+        "Config2"
+      ],
+      "second_print": [
+        "Config1",
+        "Config1Config2",
+        "Config2"
+      ],
+      "third_print": [
+        "Config1",
+        "Config1Config2",
+        "Config2"
+      ]
+    },
+    "answer": {
+      "first_print": "Config1",
+      "second_print": "Config1Config2",
+      "third_print": "Config1"
+    },
+    "explanation": "Strings are immutable, so a += 'Config2' builds a brand new string and rebinds a to it instead of changing the original object. b was bound to the original 'Config1' before that, so it still refers to the old value, giving Config1, Config1Config2 and Config1 in order."
+  },
+  {
+    "id": 17,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "You develop an application for your school. A list named colors contains 200 colors. You need to slice the list to display every other color starting with the second color. Which code should you use?",
+    "options": [
+      "A. colors[1:2]",
+      "B. colors[::2]",
+      "C. colors[2:2]",
+      "D. colors[1::2]"
+    ],
+    "answer": "D. colors[1::2]",
+    "explanation": "A slice written as list[start::step] begins at start and then takes every step-th item, so colors[1::2] starts at index 1 (the second color) and returns every other one to the end. colors[::2] starts at the first color instead, while colors[1:2] returns a single color and colors[2:2] returns an empty list."
+  },
+  {
+    "id": 18,
+    "domain": "Data type operations",
+    "type": "multiple_select",
+    "question": "You develop an application for your company. A list named employees contains 200 employee names, the last five being company management. You need to slice the list to display all employees excluding management. Which two code segments should you use? Each correct answer presents a complete solution. (Choose 2.)",
+    "options": [
+      "A. employees[0:-4]",
+      "B. employees[1:-5]",
+      "C. employees[:-5]",
+      "D. employees[0:-5]",
+      "E. employees[1:-4]"
+    ],
+    "answer": [
+      "C. employees[:-5]",
+      "D. employees[0:-5]"
+    ],
+    "explanation": "A negative stop of -5 excludes the last five items, and an omitted start is the same as a start of 0, so employees[:-5] and employees[0:-5] both return all 195 non-management names. Stopping at -4 leaves one manager in the result, and starting at 1 drops the first employee."
+  },
+  {
+    "id": 19,
+    "domain": "Data type operations",
+    "type": "multiple_select",
+    "question": "You are developing a Python application for your company. A list named employees contains 600 employee names, the last 3 being company management. You need to slice employees to display all employees excluding management. Which two code segments should you use? (Choose 2.)",
+    "options": [
+      "A. employees[1:-2]",
+      "B. employees[:-3]",
+      "C. employees[1:-3]",
+      "D. employees[0:-2]",
+      "E. employees[0:-3]"
+    ],
+    "answer": [
+      "B. employees[:-3]",
+      "E. employees[0:-3]"
+    ],
+    "explanation": "An omitted start behaves exactly like a start of 0, and a stop of -3 drops the last three names, so employees[:-3] and employees[0:-3] both return all 597 non-management employees. Slices stopping at -2 still include a manager, and slices starting at 1 skip the first employee."
+  },
+  {
+    "id": 20,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "You are developing a Python application for your company. A list named employees contains 500 employee names, the last 3 being company management. Which of the following represents only management employees?",
+    "options": [
+      "A. employees[497:]",
+      "B. employees[-3:]",
+      "C. employees[497:500]",
+      "D. All the above"
+    ],
+    "answer": "D. All the above",
+    "explanation": "With 500 names the managers sit at indices 497, 498 and 499. Slicing from 497 to the end, slicing the last three with a negative start, and slicing 497 to 500 all describe exactly that range, so every listed option is correct."
+  },
+  {
+    "id": 21,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "You write the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>list_1 = [1, 2]<br>list_2 = [3, 4]<br>list_3 = list_1 + list_2<br>list_4 = list_3 * 3<br>print(list_4)</div>You run the code. What is the output value?",
+    "options": [
+      "A. [3, 6, 9, 12]",
+      "B. [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]",
+      "C. [[1, 2], [3, 4], [1, 2], [3, 4], [1, 2], [3, 4]]",
+      "D. [[1, 2, 3, 4], [1, 2, 3, 4], [1, 2, 3, 4]]"
+    ],
+    "answer": "B. [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4]",
+    "explanation": "The + operator concatenates the two lists into [1, 2, 3, 4], and multiplying a list by 3 repeats its elements into one flat list of 12 items. Multiplication does not scale the numbers, which rules out option A, and it does not nest the lists, which rules out options C and D."
+  },
+  {
+    "id": 22,
+    "domain": "Data type operations",
+    "type": "multiple_select",
+    "question": "Woodgrove Bank must generate a report that shows the average balance for all customers each day. The report must truncate the decimal portion of the balance. Which two code segments should you use? Each correct answer presents a complete solution. (Choose 2.)",
+    "options": [
+      "A. average_balance = total_deposits**number_of_customers",
+      "B. average_balance = total_deposits//number_of_customers",
+      "C. average_balance = int(total_deposits/number_of_customers)",
+      "D. average_balance = float(total_deposits//number_of_customers)"
+    ],
+    "answer": [
+      "B. average_balance = total_deposits//number_of_customers",
+      "C. average_balance = int(total_deposits/number_of_customers)"
+    ],
+    "explanation": "Floor division with // and wrapping true division in int() both drop the fractional part and leave a whole-number average. The ** operator raises one value to the power of the other instead of dividing, and wrapping the floor division in float() turns the whole number back into a value with a decimal portion."
+  },
+  {
+    "id": 23,
+    "domain": "Data type operations",
+    "type": "ordering",
+    "question": "You are creating a script to evaluate input and check for upper and lower case. Which four code segments should you use to develop the solution? Arrange the correct code segments in order. Not all code segments will be used.<br>Line 1 &rarr; ____<br>Line 2 &rarr; ____<br>Line 3 &rarr; ____<br>Line 4 &rarr; ____",
+    "options": [
+      "name = input(\"Enter your name: \")",
+      "if name.lower() == name: print(name, \"is all lower case.\")",
+      "elif name.upper() == name: print(name, \"is all upper case.\")",
+      "else: print(name, \"is mixed case.\")",
+      "else: print(name, \"is lower case.\")",
+      "else: print(name, \"is upper case.\")"
+    ],
+    "answer": [
+      "name = input(\"Enter your name: \")",
+      "if name.lower() == name: print(name, \"is all lower case.\")",
+      "elif name.upper() == name: print(name, \"is all upper case.\")",
+      "else: print(name, \"is mixed case.\")"
+    ],
+    "explanation": "The script must read the name first, then test the all-lowercase case with if, chain the all-uppercase test with elif, and finish with a single else that catches everything remaining, which is mixed case. An elif or else has to follow an if, and only one else may close the chain, so the alternative else blocks that report lower or upper case are not used."
+  },
+  {
+    "id": 24,
+    "domain": "Data type operations",
+    "type": "ordering",
+    "question": "You are writing a Python program to perform arithmetic operations. You create the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a = 11<br>b = 4</div>What is the result of each arithmetic expression? Drag the appropriate expression to its result.<br>2 &rarr; ____<br>3 &rarr; ____<br>2.75 &rarr; ____",
+    "options": [
+      "print(a / b)",
+      "print(a // b)",
+      "print(a % b)"
+    ],
+    "answer": [
+      "print(a // b)",
+      "print(a % b)",
+      "print(a / b)"
+    ],
+    "explanation": "With a = 11 and b = 4, floor division // discards the fractional part and gives 2, the modulo operator % returns the remainder 3, and true division / keeps the fraction and gives 2.75. Only the single slash produces a float result."
+  },
+  {
+    "id": 25,
+    "domain": "Data type operations",
+    "type": "fill_in_blank",
+    "question": "You have the following string. You need to evaluate the result of performing various slicing operations. Select the appropriate result for each slicing operation. Each result may be used once, more than once, or not at all.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>alph = \"abcdefghijklmnopqrstuvwxyz\"<br><br>alph[3:15] &rarr; ____<br>alph[3:15:3] &rarr; ____<br>alph[3:15:-3] &rarr; ____<br>alph[15:3:-3] &rarr; ____<br>alph[15:3] &rarr; ____<br>alph[::-3] &rarr; ____</div>",
+    "options": {
+      "slot_1": [
+        "zwtqnkheb",
+        "pmjg",
+        "defghijklmno",
+        "ponmlkjihgfe",
+        "defghijklmnop",
+        "dgjm",
+        "olif",
+        "(empty string)"
+      ],
+      "slot_2": [
+        "zwtqnkheb",
+        "pmjg",
+        "defghijklmno",
+        "ponmlkjihgfe",
+        "defghijklmnop",
+        "dgjm",
+        "olif",
+        "(empty string)"
+      ],
+      "slot_3": [
+        "zwtqnkheb",
+        "pmjg",
+        "defghijklmno",
+        "ponmlkjihgfe",
+        "defghijklmnop",
+        "dgjm",
+        "olif",
+        "(empty string)"
+      ],
+      "slot_4": [
+        "zwtqnkheb",
+        "pmjg",
+        "defghijklmno",
+        "ponmlkjihgfe",
+        "defghijklmnop",
+        "dgjm",
+        "olif",
+        "(empty string)"
+      ],
+      "slot_5": [
+        "zwtqnkheb",
+        "pmjg",
+        "defghijklmno",
+        "ponmlkjihgfe",
+        "defghijklmnop",
+        "dgjm",
+        "olif",
+        "(empty string)"
+      ],
+      "slot_6": [
+        "zwtqnkheb",
+        "pmjg",
+        "defghijklmno",
+        "ponmlkjihgfe",
+        "defghijklmnop",
+        "dgjm",
+        "olif",
+        "(empty string)"
+      ]
+    },
+    "answer": {
+      "slot_1": "defghijklmno",
+      "slot_2": "dgjm",
+      "slot_3": "(empty string)",
+      "slot_4": "pmjg",
+      "slot_5": "(empty string)",
+      "slot_6": "zwtqnkheb"
+    },
+    "explanation": "A positive step walks left to right and a negative step walks right to left, and a slice whose bounds contradict its direction returns nothing. alph[3:15] takes indices 3 through 14, alph[3:15:3] keeps every third of those, alph[15:3:-3] walks backwards from index 15, and alph[::-3] reverses the whole string in steps of three, while alph[3:15:-3] and alph[15:3] are both empty because their start and stop run the wrong way for their step."
+  },
+  {
+    "id": 26,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "What is a variable defined outside a function referred to as?",
+    "options": [
+      "A. A static variable",
+      "B. A global variable",
+      "C. A local variable",
+      "D. An automatic variable"
+    ],
+    "answer": "B. A global variable",
+    "explanation": "A name bound at module level lives in the module's global namespace, so it is called a global variable and is visible to every function in that module. A local variable is one bound inside a function body, and Python has no 'static' or 'automatic' storage classes as C does."
+  },
+  {
+    "id": 27,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a = 10<br>b = 20<br><br>def change():<br>&nbsp;&nbsp;&nbsp;&nbsp;global b<br>&nbsp;&nbsp;&nbsp;&nbsp;a = 45<br>&nbsp;&nbsp;&nbsp;&nbsp;b = 56<br><br>change()<br>print(a)<br>print(b)</div>",
+    "options": [
+      "A. 10,56",
+      "B. 45,56",
+      "C. 10, 20",
+      "D. Syntax Error"
+    ],
+    "answer": "A. 10,56",
+    "explanation": "Only b is declared global, so b = 56 rebinds the module-level b, while a = 45 creates a new local variable inside change() and leaves the global a at 10. The code therefore prints 10 and then 56; it is syntactically valid, so no error occurs."
+  },
+  {
+    "id": 28,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def change(i=1, j=2):<br>&nbsp;&nbsp;&nbsp;&nbsp;i = i + j<br>&nbsp;&nbsp;&nbsp;&nbsp;j = j + 1<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i, j)<br><br>change(j=1, i=2)</div>",
+    "options": [
+      "A. An exception is thrown because of conflicting values",
+      "B. 1 2",
+      "C. 3 3",
+      "D. 3 2"
+    ],
+    "answer": "D. 3 2",
+    "explanation": "Keyword arguments may be passed in any order, so change(j=1, i=2) simply binds i to 2 and j to 1, overriding both defaults without any conflict. Then i becomes 2 + 1 = 3 and j becomes 1 + 1 = 2, so the function prints 3 2."
+  },
+  {
+    "id": 29,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>names=['itvedant','Thane','Andheri','Navi Mumbai']<br>print(names[-1][-1])</div>",
+    "options": [
+      "A. Navi Mumbai",
+      "B. Mumbai",
+      "C. i",
+      "D. a"
+    ],
+    "answer": "C. i",
+    "explanation": "names[-1] selects the last element of the list, the string 'Navi Mumbai', and the second [-1] then indexes that string to get its last character. The last character of 'Navi Mumbai' is 'i', so a single character is printed rather than the whole string or a word."
+  },
+  {
+    "id": 30,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "What is the return type of the function id()?",
+    "options": [
+      "A. int",
+      "B. float",
+      "C. bool",
+      "D. str"
+    ],
+    "answer": "A. int",
+    "explanation": "id() returns the identity of an object as an integer that is unique and constant for that object during its lifetime, so type(id(x)) is int. It is a memory-address-like number, not a textual or floating point value."
+  },
+  {
+    "id": 31,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>f=lambda x:bool(x%2)<br>print(f(20), f(21))</div>",
+    "options": [
+      "A. False True",
+      "B. False False",
+      "C. True True",
+      "D. True False"
+    ],
+    "answer": "A. False True",
+    "explanation": "The lambda returns bool(x % 2), which is False for even numbers because 20 % 2 is 0 and bool(0) is False. For 21 the remainder is 1 and bool(1) is True, so the call prints False True in that order."
+  },
+  {
+    "id": 32,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the following lists:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>n1=[10,20,30,40,50]<br>n2=[10,20,30,40,50]<br>print(n1 is n2)<br>print(n1 == n2)</div><br>What is the output?",
+    "options": [
+      "A. False, False",
+      "B. True, True",
+      "C. True, False",
+      "D. False, True"
+    ],
+    "answer": "D. False, True",
+    "explanation": "The two list literals build two separate objects, so the identity test n1 is n2 is False even though the contents match. The == operator compares lists element by element, so n1 == n2 is True; identity and equality are different questions in Python."
+  },
+  {
+    "id": 33,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the following lists:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>n1=[10,20,30,40,50]<br>n2=[10,20,30,40,50]<br>print(n1 is n2)<br>print(n1 == n2)<br>n1=n2<br>print(n1 is n2)<br>print(n1 == n2)</div><br>What is the result?",
+    "options": [
+      "A. False, False, True, True",
+      "B. False, True, False, True",
+      "C. False, True, True, True",
+      "D. True, False, True, False"
+    ],
+    "answer": "C. False, True, True, True",
+    "explanation": "Initially the two literals are distinct objects with equal contents, giving False for is and True for ==. After n1 = n2 both names refer to the very same list object, so is becomes True and == stays True, producing False, True, True, True."
+  },
+  {
+    "id": 34,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the lists:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numbers=[10,20,30,40,50]<br>alphabets=['a','b','c','d','e']<br>print( numbers is alphabets)<br>print( numbers == alphabets)<br>numbers=alphabets<br>print( numbers is alphabets)<br>print( numbers == alphabets)</div><br>What is the result?",
+    "options": [
+      "A. False, False, True, True",
+      "B. False, True, False, True",
+      "C. True, False, True, False",
+      "D. False, True, True, True"
+    ],
+    "answer": "A. False, False, True, True",
+    "explanation": "Before the assignment the two lists are different objects holding different values, so both is and == are False. The statement numbers = alphabets rebinds numbers to the same object, after which is and == are both True, giving False, False, True, True."
+  },
+  {
+    "id": 35,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>s='AB CD'<br>list=list(s)<br>list.append('EF')<br>print(list)</div><br>What is the result?",
+    "options": [
+      "A. ['A', 'B', 'C', 'D', 'E', 'F']",
+      "B. {'A', 'B', ' ', 'C', 'D', 'EF'}",
+      "C. ['A', 'B', ' ', 'C', 'D', 'EF']",
+      "D. ('A', 'B', ' ', 'C', 'D', 'EF')"
+    ],
+    "answer": "C. ['A', 'B', ' ', 'C', 'D', 'EF']",
+    "explanation": "list(s) splits the string into one element per character, including the space, giving ['A', 'B', ' ', 'C', 'D']. append() adds the two-character string 'EF' as a single element, and the result is still a list, so it prints with square brackets rather than the braces of a set or the parentheses of a tuple."
+  },
+  {
+    "id": 36,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x='ACROTE'<br>y='APPLE'<br>z='TOMATO'</div><br>Which of the following will NOT print 'CAT' to the console?",
+    "options": [
+      "A. print(x[1]+y[0]+z[0])",
+      "B. print(x[2]+y[1]+z[1])",
+      "C. print(x[-5]+y[0]+z[0])",
+      "D. print(x[-5]+y[0]+z[-2])"
+    ],
+    "answer": "B. print(x[2]+y[1]+z[1])",
+    "explanation": "Option B picks x[2] = 'R', y[1] = 'P' and z[1] = 'O', which concatenate to 'RPO'. The other three all select 'C' (x[1] and x[-5] are the same character), 'A' from y[0], and 'T' from z[0] or z[-2], so they each print CAT."
+  },
+  {
+    "id": 37,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>s='Python is easy'<br>s1=s[-7:]<br>s2=s[-4:]<br>print(s1+s2)</div><br>What is the result?",
+    "options": [
+      "A. is easyeasy",
+      "B. easyeasy",
+      "C. iseasyeasy",
+      "D. s easyeasy",
+      "E. is easy easy"
+    ],
+    "answer": "A. is easyeasy",
+    "explanation": "s[-7:] takes the last seven characters, 'is easy', and s[-4:] takes the last four, 'easy'. Concatenation adds no separator, so the two pieces run together as 'is easyeasy'."
+  },
+  {
+    "id": 38,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>s='Python is easy'<br>s1=s[6:-4]<br>#Line-1<br>print(len(s2))</div><br>To print 2 as the output, which code do we have to insert at Line-1?",
+    "options": [
+      "A. s2 = s1.lstrip()",
+      "B. s2 = s1.rstrip()",
+      "C. s2 = s1.lrstrip()",
+      "D. s2 = s1.strip()"
+    ],
+    "answer": "D. s2 = s1.strip()",
+    "explanation": "s[6:-4] is the four-character slice ' is ', with a space on both sides. Only strip() removes whitespace from both ends, leaving 'is' with length 2; lstrip() and rstrip() each remove one side and leave length 3, and lrstrip() is not a string method at all."
+  },
+  {
+    "id": 39,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>t=([10,20],10,False)</div><br>Which line of the code assigns &lt;class 'list'&gt; to x?",
+    "options": [
+      "A. x = type(t)",
+      "B. x = type(t[0])",
+      "C. x = type(t[1])",
+      "D. x = type(t[0:])"
+    ],
+    "answer": "B. x = type(t[0])",
+    "explanation": "t is a tuple whose first element is the list [10, 20], so type(t[0]) is the list type. type(t) and type(t[0:]) both report tuple because slicing a tuple returns a tuple, and type(t[1]) reports int."
+  },
+  {
+    "id": 40,
+    "domain": "Data type operations",
+    "type": "multiple_select",
+    "question": "Consider the variable declaration:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>b = 'BANANA'</div><br>Which of the following lines will print 'AA' to the console? (Choose 3.)",
+    "options": [
+      "A. print(b[1]+b[2])",
+      "B. print(b[1]+b[3])",
+      "C. print(b[1]+b[5])",
+      "D. print(b[3]+b[5])"
+    ],
+    "answer": [
+      "B. print(b[1]+b[3])",
+      "C. print(b[1]+b[5])",
+      "D. print(b[3]+b[5])"
+    ],
+    "explanation": "In 'BANANA' the letter A sits at indexes 1, 3 and 5, so any pair drawn from those positions concatenates to 'AA'. Option A uses index 2, which is 'N', so it prints 'AN' instead."
+  },
+  {
+    "id": 41,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the list:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>list = ['Apple', 'Banana', 'Carrot', 'Mango']</div><br>Which of the following are valid ways of accessing 'Mango'?<br>Option A: list[3]<br>Option B: list[4]<br>Option C: list[-1]<br>Option D: list[0]",
+    "options": [
+      "A. A and B",
+      "B. B and D",
+      "C. A and C",
+      "D. All options"
+    ],
+    "answer": "C. A and C",
+    "explanation": "The list has four items, so the last one is at index 3 counting forward or index -1 counting backward, and both reach 'Mango'. Index 4 is out of range and raises IndexError, while index 0 returns 'Apple'."
+  },
+  {
+    "id": 42,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "You are given the following Python code snippet:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 'TEXT'</div><br>Which line of code will assign the string 'TT' to the variable output?",
+    "options": [
+      "A. output = x[1] + x[1]",
+      "B. output = x[1] + x[4]",
+      "C. output = x[0] + x[2]",
+      "D. output = x[0] + x[-1]"
+    ],
+    "answer": "D. output = x[0] + x[-1]",
+    "explanation": "'TEXT' has T at index 0 and T at the last position, which is index -1, so x[0] + x[-1] gives 'TT'. Option A yields 'EE', option C yields 'TX', and option B raises IndexError because index 4 is past the end of a four-character string."
+  },
+  {
+    "id": 43,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the Python code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a=['a','b','c','d']<br>for i in a:<br>&nbsp;&nbsp;&nbsp;&nbsp;a.append(i.upper())<br>print(a)</div><br>What is the result?",
+    "options": [
+      "A. ['A', 'B', 'C', 'D']",
+      "B. ['a', 'b', 'c', 'd']",
+      "C. SyntaxError",
+      "D. MemoryError thrown at runtime"
+    ],
+    "answer": "D. MemoryError thrown at runtime",
+    "explanation": "A for loop over a list walks it by index while the body appends a new item on every pass, so the list grows faster than the iterator can reach its end and the loop never terminates. The list keeps expanding until the interpreter runs out of memory and raises MemoryError, so print(a) is never reached and the code is syntactically valid."
+  },
+  {
+    "id": 44,
+    "domain": "Data type operations",
+    "type": "true_false",
+    "question": "Evaluate each of the following statements about Python expressions and decide whether it is valid (true) or invalid (false).",
+    "options": {
+      "statement1": "After result = 456 + 456.0 the type of result is int.",
+      "statement2": "The assignment s = \"Durga Sir's Python Classes are Good\" causes an error because double quotes and single quotes cannot be combined.",
+      "statement3": "The line print((7/2) + (False or True) + (9%3)) prints the result 4.5.",
+      "statement4": "The expression b = False+5-True+35//4 makes b equal to 12."
+    },
+    "answer": {
+      "statement1": "False: After result = 456 + 456.0 the type of result is int.",
+      "statement2": "False: The assignment s = \"Durga Sir's Python Classes are Good\" causes an error because double quotes and single quotes cannot be combined.",
+      "statement3": "True: The line print((7/2) + (False or True) + (9%3)) prints the result 4.5.",
+      "statement4": "True: The expression b = False+5-True+35//4 makes b equal to 12."
+    },
+    "explanation": "Adding an int to a float gives a float, so result is 4.5 rather than an int, and a double-quoted literal may freely contain an apostrophe, so no error occurs. In statement 3, 7/2 is 3.5, (False or True) is 1 and 9%3 is 0, giving 4.5; in statement 4, 0 + 5 - 1 + 8 equals 12 because // has higher precedence than + and -."
+  },
+  {
+    "id": 45,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>t=([10,20],10,False)</div><br>Which line of the code assigns &lt;class 'list'&gt; to x?",
+    "options": [
+      "A. x = type(t)",
+      "B. x = type(t[0])",
+      "C. x = type(t[1])",
+      "D. x = type(t[0:1])"
+    ],
+    "answer": "B. x = type(t[0])",
+    "explanation": "Indexing the tuple with t[0] returns the list object [10, 20], so type(t[0]) is the list type. Slicing with t[0:1] returns a one-element tuple, not the list itself, and type(t) is tuple while type(t[1]) is int."
+  },
+  {
+    "id": 46,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>count=input('Enter the number of customers of the bank:')<br>#Line-1<br>print(output)</div><br>Which code inserted at Line-1 will print 20 to the console if we pass 15 as the count value from the console?",
+    "options": [
+      "A. output=int(count)+5",
+      "B. output=count+5",
+      "C. output=str(count)+5",
+      "D. output=float(count)+5"
+    ],
+    "answer": "A. output=int(count)+5",
+    "explanation": "input() always returns a string, so the value must be converted before arithmetic; int('15') + 5 is 20 and prints exactly 20. Adding 5 to a string, or to str(count), raises TypeError, and float('15') + 5 evaluates to 20.0, which prints as 20.0 rather than 20."
+  },
+  {
+    "id": 47,
+    "domain": "Data type operations",
+    "type": "multiple_choice",
+    "question": "In which of the following cases will we get &lt;class 'int'&gt; as output?",
+    "options": [
+      "A. x=47.0<br>print(type(x))",
+      "B. x='47'<br>print(type(x))",
+      "C. x=10+20j<br>print(type(x))",
+      "D. x=2**2**2<br>print(type(x))"
+    ],
+    "answer": "D. x=2**2**2<br>print(type(x))",
+    "explanation": "The ** operator is right associative, so 2**2**2 is 2**(2**2) = 16, an integer. A literal with a decimal point is a float, a quoted literal is a str, and a literal ending in j is a complex number."
+  },
+  {
+    "id": 48,
+    "domain": "Data type operations",
+    "type": "multiple_select",
+    "question": "Which of the following are valid statements? (Choose 2.)",
+    "options": [
+      "A. 5+False evaluates to False",
+      "B. True+1 evaluates to 2",
+      "C. True and False evaluates to False",
+      "D. True or False evaluates to False",
+      "E. type('') is &lt;class 'bool'&gt;"
+    ],
+    "answer": [
+      "B. True+1 evaluates to 2",
+      "C. True and False evaluates to False"
+    ],
+    "explanation": "bool is a subclass of int, so True counts as 1 and False as 0 in arithmetic: True + 1 is 2, while 5 + False is 5, not False. The and operator returns False when either operand is false, but or returns True when at least one operand is true, and an empty pair of quotes is a str, not a bool."
+  },
+  {
+    "id": 49,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a=15<br>b=5<br>print(a/b)</div><br>What is the result?",
+    "options": [
+      "A. 3",
+      "B. 3.0",
+      "C. 0",
+      "D. 0.0"
+    ],
+    "answer": "B. 3.0",
+    "explanation": "In Python 3 the single slash is true division and always produces a float, even when the division comes out exact. 15/5 is therefore 3.0, not the integer 3; you would need the // operator to obtain 3."
+  },
+  {
+    "id": 50,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a=21<br>b=6<br>print(a/b)<br>print(a//b)<br>print(a%b)</div><br>What is the result?",
+    "options": [
+      "A. 3 3 3",
+      "B. 3.5 3 3",
+      "C. 3.0 3 3",
+      "D. 3.5 3.5 3"
+    ],
+    "answer": "B. 3.5 3 3",
+    "explanation": "True division 21/6 gives the float 3.5, floor division 21//6 discards the fraction and gives the integer 3, and the modulus 21%6 gives the remainder 3. Only one of the three results is a float, so the output is 3.5, 3, 3."
+  },
+  {
+    "id": 51,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "You have the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a=3<br>b=5<br>a += 2**3<br>a -= b//2//3<br>print(a)</div><br>What is the result?",
+    "options": [
+      "A. 13",
+      "B. 12",
+      "C. 11",
+      "D. 10"
+    ],
+    "answer": "C. 11",
+    "explanation": "The exponent binds tighter than the augmented assignment, so a += 2**3 makes a equal 3 + 8 = 11. Floor division is left associative, so b//2//3 is (5//2)//3 = 2//3 = 0, and subtracting 0 leaves a at 11."
+  },
+  {
+    "id": 52,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Consider the following expression:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>result=8//6%5+2**3-2<br>print(result)</div><br>What is the result?",
+    "options": [
+      "A. 6",
+      "B. 7",
+      "C. 8",
+      "D. 9"
+    ],
+    "answer": "B. 7",
+    "explanation": "Exponentiation runs first, so 2**3 is 8; then // and % share the next precedence level and evaluate left to right, giving 8//6 = 1 and 1%5 = 1. Finally the additions and subtractions run left to right: 1 + 8 - 2 = 7."
+  },
+  {
+    "id": 53,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Which of the following expressions will generate the maximum value?",
+    "options": [
+      "A. 8%3*4",
+      "B. 8-3*4",
+      "C. 8//3*4",
+      "D. 8/3*4"
+    ],
+    "answer": "D. 8/3*4",
+    "explanation": "%, //, / and * all share the same precedence and evaluate left to right, so each expression is computed as (first operation) then *4. 8/3*4 uses true division and gives about 10.67, the largest value; 8%3*4 and 8//3*4 both give 8, and 8-3*4 gives -4 because * binds tighter than the subtraction."
+  },
+  {
+    "id": 54,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Which expression would evaluate to 2?",
+    "options": [
+      "A. 3**2",
+      "B. 22%5",
+      "C. 13//4",
+      "D. 11/2"
+    ],
+    "answer": "B. 22%5",
+    "explanation": "The modulo operator returns the remainder, and 22 divided by 5 leaves a remainder of 2. 3**2 is 9, 13//4 floor-divides to 3, and 11/2 is the float 5.5."
+  },
+  {
+    "id": 55,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a=7<br>b=3<br>c=5<br>d=1</div>Which line of code assigns 9 to output?",
+    "options": [
+      "A. output=a%c+1",
+      "B. output=a+c//d",
+      "C. output=c*d-1",
+      "D. output=a+d*2"
+    ],
+    "answer": "D. output=a+d*2",
+    "explanation": "Multiplication has higher precedence than addition, so a+d*2 is 7+(1*2), which is 9. Option A gives 7%5+1 = 3, option B gives 7+(5//1) = 12, and option C gives (5*1)-1 = 4."
+  },
+  {
+    "id": 56,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x=3<br>x += 1<br>#Line-1</div>Which statement should be inserted at Line-1 so that the value of x becomes 16?",
+    "options": [
+      "A. x+=2",
+      "B. x-=2",
+      "C. x*=2",
+      "D. x**=2"
+    ],
+    "answer": "D. x**=2",
+    "explanation": "After x += 1 the value of x is 4, and x **= 2 raises it to the power of 2, giving 16. Adding 2 gives 6, subtracting 2 gives 2, and multiplying by 2 gives only 8."
+  },
+  {
+    "id": 57,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Which expression evaluates to 4?",
+    "options": [
+      "A. 7/2*3",
+      "B. 7%2+3",
+      "C. 7//2-3",
+      "D. 7-2*3"
+    ],
+    "answer": "B. 7%2+3",
+    "explanation": "Modulo binds tighter than addition, so 7%2+3 is (7%2)+3, which is 1+3 = 4. Option A gives 10.5, option C gives (7//2)-3 = 0, and option D gives 7-(2*3) = 1."
+  },
+  {
+    "id": 58,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Consider the following expression:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>6//4%5+2**3-2//3</div>This expression results in:",
+    "options": [
+      "A. 9",
+      "B. 3",
+      "C. -1",
+      "D. 25"
+    ],
+    "answer": "A. 9",
+    "explanation": "** is evaluated first (2**3 = 8), then // and % left to right ((6//4)%5 = 1%5 = 1 and 2//3 = 0), and finally + and - left to right: 1+8-0 = 9. Answers such as 3 or 25 come from evaluating strictly left to right, which applies the + and - before the exponent; Python evaluates ** first."
+  },
+  {
+    "id": 59,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x=2<br>y=6<br>x+=2**3<br>x//=y//2//3<br>print(x)</div>What is the output?",
+    "options": [
+      "A. 0",
+      "B. 9",
+      "C. 10",
+      "D. 7"
+    ],
+    "answer": "C. 10",
+    "explanation": "x += 2**3 evaluates the exponent first, so x becomes 2+8 = 10. The right side y//2//3 evaluates left to right as (6//2)//3 = 3//3 = 1, so x //= 1 leaves x at 10."
+  },
+  {
+    "id": 60,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x=3/3+3**3-3<br>print(x)</div>What is the output?",
+    "options": [
+      "A. 25",
+      "B. 32",
+      "C. 0.11",
+      "D. 25.0"
+    ],
+    "answer": "D. 25.0",
+    "explanation": "** is applied first (3**3 = 27), then / (3/3 = 1.0), giving 1.0+27-3 = 25.0. Because true division always produces a float, the result prints as 25.0 rather than the integer 25."
+  },
+  {
+    "id": 61,
+    "domain": "Operator precedence",
+    "type": "multiple_select",
+    "question": "In which of the following cases will True be printed to the console? (Choose 2.)",
+    "options": [
+      "A. a=45<br>b=45<br>print(a is not b)",
+      "B. s1='Python'<br>s2='Python'.upper()<br>print(s1 is s2)",
+      "C. x=[1,2,3]<br>y=[1,2,3]<br>print(x is y)",
+      "D. print('r' in 'durga')",
+      "E. print('is' in 'This IS a Fake News')"
+    ],
+    "answer": [
+      "D. print('r' in 'durga')",
+      "E. print('is' in 'This IS a Fake News')"
+    ],
+    "explanation": "The in operator tests for a substring, and both 'r' in 'durga' and 'is' in 'This IS a Fake News' are true, since the word This ends with the letters i and s. In option A small integers are cached so a is b, making a is not b False; in option B upper() builds a new string object; and in option C two equal lists are still two distinct objects, so is returns False."
+  },
+  {
+    "id": 62,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "You evaluate the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numList = [0,1,2,3,4]<br>print(5 in numList)</div>What is the output of the print statement?",
+    "options": [
+      "A. 4",
+      "B. False",
+      "C. True",
+      "D. 5"
+    ],
+    "answer": "B. False",
+    "explanation": "The containment operator in returns a boolean, not an element or an index. The list holds 0 through 4, so 5 is not a member and the expression evaluates to False."
+  },
+  {
+    "id": 63,
+    "domain": "Operator precedence",
+    "type": "fill_in_blank",
+    "question": "You develop an application for your company. You have the following code. Line numbers are included for reference only.<br>01 def main(a,b,c,d):<br>02&nbsp;&nbsp;&nbsp;&nbsp;value = a+b*c-d<br>03&nbsp;&nbsp;&nbsp;&nbsp;return value<br><br>Use the drop-down menus to select the answer choice that answers each question based on the information presented in the code segment.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>Which part of the expression will be evaluated first? ____<br>Which operation will be evaluated second? ____<br>Which expression is equivalent to the expression in the function? ____</div>",
+    "options": {
+      "evaluated_first": [
+        "a+b",
+        "b*c",
+        "c-d"
+      ],
+      "second_operation": [
+        "addition",
+        "subtraction",
+        "multiplication"
+      ],
+      "equivalent_expression": [
+        "(a+b) * (c-d)",
+        "(a + (b*c)) - d",
+        "a + ((b * c) - d)"
+      ]
+    },
+    "answer": {
+      "evaluated_first": "b*c",
+      "second_operation": "addition",
+      "equivalent_expression": "(a + (b*c)) - d"
+    },
+    "explanation": "Multiplication has higher precedence than addition and subtraction, so b*c is computed first. Addition and subtraction share the same precedence and associate left to right, so the addition a + (b*c) happens second and the subtraction of d last, which is exactly the grouping ((a + (b*c)) - d)."
+  },
+  {
+    "id": 64,
+    "domain": "Operator precedence",
+    "type": "multiple_select",
+    "question": "Consider the expression:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>result=a-b*c+d</div>Which of the following statements are valid? (Choose 2.)",
+    "options": [
+      "A. First b*c will be evaluated followed by subtraction and addition",
+      "B. First b*c will be evaluated followed by addition and subtraction",
+      "C. First a-b will be evaluated followed by multiplication and addition",
+      "D. The above expression is equivalent to a-(b*c)+d"
+    ],
+    "answer": [
+      "A. First b*c will be evaluated followed by subtraction and addition",
+      "D. The above expression is equivalent to a-(b*c)+d"
+    ],
+    "explanation": "Multiplication outranks both + and -, so b*c is evaluated first, which is the same as writing a-(b*c)+d. The remaining + and - share one precedence level and associate left to right, so the subtraction runs before the addition, making option B's order wrong and ruling out option C entirely."
+  },
+  {
+    "id": 65,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a=2<br>a += 1<br># Line-1</div>To make the value of a equal to 9, which expression is required at Line-1?",
+    "options": [
+      "A. a*=2",
+      "B. a**=2",
+      "C. a+=2",
+      "D. a-=2"
+    ],
+    "answer": "B. a**=2",
+    "explanation": "After a += 1 the value of a is 3, and a **= 2 squares it to 9. Multiplying by 2 gives 6, adding 2 gives 5, and subtracting 2 gives 1."
+  },
+  {
+    "id": 66,
+    "domain": "Operator precedence",
+    "type": "multiple_select",
+    "question": "Consider the Python code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a=1<br>b=3<br>c=5<br>d=7</div>In which of the following cases is the value of result 0? (Choose 2.)",
+    "options": [
+      "A. result = a+b*2",
+      "B. result = a%b-1",
+      "C. result = a-b//d",
+      "D. result = a**d-1"
+    ],
+    "answer": [
+      "B. result = a%b-1",
+      "D. result = a**d-1"
+    ],
+    "explanation": "% and ** both bind tighter than the trailing subtraction, so a%b-1 is (1%3)-1 = 0 and a**d-1 is (1**7)-1 = 0. Option A gives 1+(3*2) = 7 and option C gives 1-(3//7) = 1-0 = 1."
+  },
+  {
+    "id": 67,
+    "domain": "Operator precedence",
+    "type": "multiple_select",
+    "question": "In which of the following cases will we get the same result? (Choose 3.)",
+    "options": [
+      "A. 23%5",
+      "B. 3**1",
+      "C. 11/3",
+      "D. 13//4"
+    ],
+    "answer": [
+      "A. 23%5",
+      "B. 3**1",
+      "D. 13//4"
+    ],
+    "explanation": "23%5 leaves remainder 3, 3**1 is 3, and 13//4 floor-divides to 3, so those three agree. 11/3 uses true division and produces the float 3.666..., which is not equal to 3."
+  },
+  {
+    "id": 68,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a=1<br>b=2<br>c=4<br>d=6</div>Which of the following expressions results in -4?",
+    "options": [
+      "A. (a+b)//c%d",
+      "B. (b+c)//a%d",
+      "C. (a+b)//c*d",
+      "D. (a+b)//d-c"
+    ],
+    "answer": "D. (a+b)//d-c",
+    "explanation": "Parentheses run first, so (1+2)//6 is 0, and the lower-precedence subtraction then gives 0-4 = -4. Options A, B and C all evaluate to 0 because 3//4 is 0, 6%6 is 0, and 0*6 is 0."
+  },
+  {
+    "id": 69,
+    "domain": "Operator precedence",
+    "type": "true_false",
+    "question": "You are developing a Python application for your company. You write the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numList = [1,2,3,4,5]<br>alphaList = [\"a\",\"b\",\"c\",\"d\",\"e\"]<br>print(numList is alphaList)<br>print(numList == alphaList)<br>numList = alphaList<br>print(numList is alphaList)<br>print(numList == alphaList)</div>For each of the following statements, select True if the statement is correct. Otherwise, select False.",
+    "options": {
+      "statement1": "The first print statement displays True.",
+      "statement2": "The second print statement displays True.",
+      "statement3": "The third print statement displays True.",
+      "statement4": "The fourth print statement displays True."
+    },
+    "answer": {
+      "statement1": "False: The first print statement displays True.",
+      "statement2": "False: The second print statement displays True.",
+      "statement3": "True: The third print statement displays True.",
+      "statement4": "True: The fourth print statement displays True."
+    },
+    "explanation": "Before the assignment the two lists are separate objects with different contents, so is prints False and == prints False. After numList = alphaList both names refer to the same list object, so is prints True, and an object is always equal to itself, so == prints True as well."
+  },
+  {
+    "id": 70,
+    "domain": "Operator precedence",
+    "type": "multiple_select",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>subjects=['java','python','sap']<br>more_subjects=['java','python','sap']<br>extra_subjects=more_subjects</div>In which cases will True be printed to the console? (Choose 2.)",
+    "options": [
+      "A. print(extra_subjects is more_subjects)",
+      "B. print(subjects is more_subjects)",
+      "C. print(subjects is extra_subjects)",
+      "D. print(subjects == extra_subjects)"
+    ],
+    "answer": [
+      "A. print(extra_subjects is more_subjects)",
+      "D. print(subjects == extra_subjects)"
+    ],
+    "explanation": "The assignment extra_subjects = more_subjects binds a second name to the same list object, so is returns True for that pair, and == compares contents so it is True for the two identical lists. Options B and C use is on lists that were built separately, which are distinct objects even though their contents match."
+  },
+  {
+    "id": 71,
+    "domain": "Operator precedence",
+    "type": "multiple_select",
+    "question": "Consider the Python code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numbers=[10,20,30,40]<br>x=0</div>In which of the following cases will 10 be printed to the console? (Choose 2.)",
+    "options": [
+      "A. for i in (30,40,50):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i in numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x=x+5<br>print(x)",
+      "B. for i in (30,40,50):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i not in numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x=x+5<br>print(x)",
+      "C. for i in (30,40,50):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i not in numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x=x+10<br>print(x)",
+      "D. for i in (30,40,50):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i in numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x=x+10<br>print(x)"
+    ],
+    "answer": [
+      "A. for i in (30,40,50):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i in numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x=x+5<br>print(x)",
+      "C. for i in (30,40,50):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i not in numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x=x+10<br>print(x)"
+    ],
+    "explanation": "Of the values 30, 40 and 50, exactly two are in numbers and exactly one is not. Option A adds 5 twice for the two matches and option C adds 10 once for the single non-match, so both print 10; option B prints 5 and option D prints 20."
+  },
+  {
+    "id": 72,
+    "domain": "Operator precedence",
+    "type": "multiple_select",
+    "question": "Which of the following code snippets will produce the output shown below? (Choose 2.)<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>Boy<br>Cat<br>Dog</div>",
+    "options": [
+      "A. l=['Apple','Boy','Cat','Dog']<br>for x in l:<br>&nbsp;&nbsp;&nbsp;&nbsp;if len(x) == 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(x)",
+      "B. l=['Apple','Boy','Cat','Dog']<br>for x in l:<br>&nbsp;&nbsp;&nbsp;&nbsp;if len(x) != 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(x)",
+      "C. l=['Apple','Boy','Cat','Dog']<br>for x in l:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(x)",
+      "D. l=['Apple','Boy','Cat','Dog']<br>l1=l[1:]<br>for x in l1:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(x)"
+    ],
+    "answer": [
+      "A. l=['Apple','Boy','Cat','Dog']<br>for x in l:<br>&nbsp;&nbsp;&nbsp;&nbsp;if len(x) == 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(x)",
+      "D. l=['Apple','Boy','Cat','Dog']<br>l1=l[1:]<br>for x in l1:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(x)"
+    ],
+    "explanation": "Boy, Cat and Dog are the three-letter items and also the items from index 1 onward, so filtering on len(x) == 3 and slicing with l[1:] both yield the same three names in order. Option B keeps only Apple, and option C prints all four items including Apple."
+  },
+  {
+    "id": 73,
+    "domain": "Operator precedence",
+    "type": "ordering",
+    "question": "The ABC company is converting an existing application to Python. You are creating documentation that will be used by several interns who are working on the team. You need to ensure that arithmetic expressions are coded correctly. What is the correct order of operations for the six classes of operations, ordered from first to last in order of precedence?<br>1st (evaluated first) &rarr; ____<br>2nd &rarr; ____<br>3rd &rarr; ____<br>4th &rarr; ____<br>5th &rarr; ____<br>6th (evaluated last) &rarr; ____",
+    "options": [
+      "Parenthesis",
+      "Exponents",
+      "And",
+      "Multiplication and Division",
+      "Addition and Subtraction",
+      "Unary positive, negative, not"
+    ],
+    "answer": [
+      "Parenthesis",
+      "Exponents",
+      "Unary positive, negative, not",
+      "Multiplication and Division",
+      "Addition and Subtraction",
+      "And"
+    ],
+    "explanation": "Parentheses always override precedence, then exponentiation, then the unary sign and not operators, then multiplication and division, then addition and subtraction, and finally the logical and. Placing and anywhere but last is the common mistake, because logical operators are evaluated after every arithmetic operator."
+  },
+  {
+    "id": 74,
+    "domain": "Operator precedence",
+    "type": "ordering",
+    "question": "You are writing a Python program that evaluates an arithmetic formula. The formula is described as b equals a multiplied by negative one, then raised to the second power, where a is the value that will be input and b is the result. You create the following code segment; line numbers are included for reference only.<br>01 a = eval(input('Enter a number for the equation: '))<br>02 b =<br><br>You need to ensure that the result is correct. Drag the appropriate code segments into the five slots of line 02, in order.<br>Slot 1 &rarr; ____<br>Slot 2 &rarr; ____<br>Slot 3 &rarr; ____<br>Slot 4 &rarr; ____<br>Slot 5 &rarr; ____",
+    "options": [
+      "-",
+      "(",
+      ")",
+      "**",
+      "**2",
+      "2",
+      "a"
+    ],
+    "answer": [
+      "(",
+      "-",
+      "a",
+      ")",
+      "**2"
+    ],
+    "explanation": "The negation must be applied before the exponent, so a is negated inside parentheses and the whole grouped value is squared, giving b = (-a) ** 2. Without the parentheses Python applies ** before the unary minus, so -a ** 2 would compute the negative of a squared instead."
+  },
+  {
+    "id": 75,
+    "domain": "Operator precedence",
+    "type": "fill_in_blank",
+    "question": "You are developing a Python program that compares numbers. You need to ensure that you are using the correct comparison operators. Evaluate each expression and indicate the correct result.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>0 or 5 &rarr; ____<br>bool(0) &rarr; ____<br>None is None &rarr; ____<br>-5 &lt; 0 &lt; 5 &rarr; ____</div>",
+    "options": {
+      "zero_or_five": [
+        "True",
+        "False",
+        "5",
+        "None"
+      ],
+      "bool_of_zero": [
+        "True",
+        "False",
+        "5",
+        "None"
+      ],
+      "none_is_none": [
+        "True",
+        "False",
+        "5",
+        "None"
+      ],
+      "chained_comparison": [
+        "True",
+        "False",
+        "5",
+        "None"
+      ]
+    },
+    "answer": {
+      "zero_or_five": "5",
+      "bool_of_zero": "False",
+      "none_is_none": "True",
+      "chained_comparison": "True"
+    },
+    "explanation": "The or operator returns one of its operands rather than a boolean, and since 0 is falsy it returns the object 5. bool(0) converts the falsy 0 to False, None is None compares an object with itself and is True, and the chained comparison is True because -5 is less than 0 and 0 is less than 5."
+  },
+  {
+    "id": 76,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "What will be the value of X in the following Python expression?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>X = 2+9*((3*12)-8)/10</div>",
+    "options": [
+      "A. 30.0",
+      "B. 30.8",
+      "C. 28.4",
+      "D. 27.2"
+    ],
+    "answer": "D. 27.2",
+    "explanation": "The innermost parentheses give 3*12 = 36, then 36-8 = 28. Multiplication and division then run left to right, so 9*28 = 252 and 252/10 = 25.2, and the final addition gives 2+25.2 = 27.2."
+  },
+  {
+    "id": 77,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Operators with the same precedence are evaluated in which manner?",
+    "options": [
+      "A. Left to Right",
+      "B. Right to Left",
+      "C. Can't say",
+      "D. None of the mentioned"
+    ],
+    "answer": "A. Left to Right",
+    "explanation": "Python's arithmetic and comparison operators are left-associative, so equal-precedence operators such as * and / or + and - are applied from left to right. Right-to-left associativity applies only to a few special cases such as exponentiation and assignment, not to operators in general."
+  },
+  {
+    "id": 78,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "You are writing a Python program that evaluates an arithmetic expression. The expression is described as b equals a multiplied by negative one, then raised to the second power, where a is the value that will be input and b is the result.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a=eval(input('Enter a number for the expression:'))</div>Which of the following is a valid expression for the given requirement?",
+    "options": [
+      "A. b = (a) ** -2",
+      "B. b = (-a) ** 2",
+      "C. b = (a-) ** 2",
+      "D. b = -(a) ** 2"
+    ],
+    "answer": "B. b = (-a) ** 2",
+    "explanation": "Negating a inside parentheses first and then squaring the grouped value matches the described formula, so b = (-a) ** 2 is correct. Option A raises a to the power of -2, option C is a syntax error, and option D squares a before applying the minus because ** binds tighter than a leading unary minus."
+  },
+  {
+    "id": 79,
+    "domain": "Operator precedence",
+    "type": "multiple_choice",
+    "question": "Which expression evaluates to 4?",
+    "options": [
+      "A. 7//2-3",
+      "B. 7%2+3",
+      "C. 7/2*3",
+      "D. 7-2*3"
+    ],
+    "answer": "B. 7%2+3",
+    "explanation": "Modulo has higher precedence than addition, so 7%2+3 is (7%2)+3 = 1+3 = 4. Option A gives 3-3 = 0, option C gives 3.5*3 = 10.5, and option D gives 7-6 = 1."
+  },
+  {
+    "id": 80,
+    "domain": "Selecting operators",
+    "type": "multiple_choice",
+    "question": "Evaluate the following arithmetic expression:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>(3*(1+2)**2 - (2**2)*3)</div>What is the result?",
+    "options": [
+      "A. 3",
+      "B. 13",
+      "C. 15",
+      "D. 69"
+    ],
+    "answer": "C. 15",
+    "explanation": "Python evaluates parentheses first, then ** (exponent), then * and /, and finally + and -. So (1+2)**2 is 9 and 3*9 is 27, while (2**2)*3 is 4*3 = 12, giving 27 - 12 = 15. The answer 69 would only appear if you multiplied 3*(1+2) before applying the exponent, but ** binds tighter than *."
+  },
+  {
+    "id": 81,
+    "domain": "Selecting operators",
+    "type": "multiple_choice",
+    "question": "Consider the following expression:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>result = (2*(3+4)**2-(3**3)*3)</div>What is the value of result?",
+    "options": [
+      "A. 17",
+      "B. 16",
+      "C. 18",
+      "D. 19"
+    ],
+    "answer": "A. 17",
+    "explanation": "Parentheses are resolved first, then exponentiation, then multiplication, then subtraction. (3+4)**2 is 49 so 2*49 = 98, and 3**3 is 27 so 27*3 = 81, leaving 98 - 81 = 17. Answers such as 16 or 18 come from applying * before ** or from mis-squaring 7."
+  },
+  {
+    "id": 82,
+    "domain": "Selecting operators",
+    "type": "multiple_choice",
+    "question": "Which of the following expressions results in an error?",
+    "options": [
+      "A. float('10')",
+      "B. int('10')",
+      "C. float('10.8')",
+      "D. int('10.8')"
+    ],
+    "answer": "D. int('10.8')",
+    "explanation": "int() only accepts a string that is a valid whole-number literal, so int('10.8') raises ValueError: invalid literal for int() with base 10. float() happily parses both '10' and '10.8', and int('10') is a valid integer literal, so those three succeed."
+  },
+  {
+    "id": 83,
+    "domain": "Selecting operators",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = '10'<br>y = '20'</div>What is the type of x+y?",
+    "options": [
+      "A. int",
+      "B. float",
+      "C. str",
+      "D. complex"
+    ],
+    "answer": "C. str",
+    "explanation": "Both x and y are string literals, so + is the concatenation operator rather than addition: x+y produces '1020', whose type is str. Python never silently converts numeric-looking strings to numbers, so int and float are wrong."
+  },
+  {
+    "id": 84,
+    "domain": "Selecting operators",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a = float('123.456')</div>Which expression evaluates to 2?",
+    "options": [
+      "A. int(a)+False",
+      "B. bool(a)+True",
+      "C. str(a)",
+      "D. bool(a)"
+    ],
+    "answer": "B. bool(a)+True",
+    "explanation": "bool is a subclass of int, so True counts as 1 and False as 0 in arithmetic. bool(123.456) is True, so bool(a)+True is 1+1 = 2. int(a)+False is 123+0 = 123, str(a) is the string '123.456', and bool(a) alone is just True (1)."
+  },
+  {
+    "id": 85,
+    "domain": "Selecting operators",
+    "type": "multiple_choice",
+    "question": "Consider the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) x = 'Durga'<br>2) y = 'Durga'<br>3) result = condition<br>4) print(result)</div>For which of the following conditions will True be printed to the console?",
+    "options": [
+      "A. x is y",
+      "B. x is not y",
+      "C. x != y",
+      "D. x &lt; y"
+    ],
+    "answer": "A. x is y",
+    "explanation": "CPython interns short identifier-like string literals, so both names refer to the very same string object and x is y evaluates to True. Because the two strings are also equal in value, x is not y and x != y are both False, and x is not alphabetically before y so x &lt; y is False too."
+  },
+  {
+    "id": 86,
+    "domain": "Selecting operators",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) x = 8<br>2) y = 10<br>3) result = x//3*3/2+y%2**2<br>4) print(result)</div>What is the result?",
+    "options": [
+      "A. 5",
+      "B. 5.0",
+      "C. 6.0",
+      "D. 7.0"
+    ],
+    "answer": "B. 5.0",
+    "explanation": "** binds tighter than %, and //, * , / and % all share the same precedence and evaluate left to right. So 8//3 = 2, 2*3 = 6, 6/2 = 3.0 (true division always yields a float), and 10 % (2**2) = 10 % 4 = 2, giving 3.0 + 2 = 5.0. The value is a float, so the integer 5 is not what is printed."
+  },
+  {
+    "id": 87,
+    "domain": "Selecting operators",
+    "type": "multiple_choice",
+    "question": "Consider the Python code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) l1=['sunny','bunny','chinny','vinny']<br>2) l2=['sunny','bunny','chinny','vinny']<br>3) print(l1 is not l2)<br>4) print(l1 != l2)<br>5) l1=l2<br>6) print(l1 is not l2)<br>7) print(l1 != l2)</div>What is the result?",
+    "options": [
+      "A. True, True, False, False",
+      "B. True, False, True, False",
+      "C. True, False, False, True",
+      "D. True, False, False, False"
+    ],
+    "answer": "D. True, False, False, False",
+    "explanation": "is not compares object identity while != compares values. Lines 1 and 2 build two separate list objects with equal contents, so l1 is not l2 is True but l1 != l2 is False. After l1 = l2 both names point to the same object, so both the identity test and the inequality test become False."
+  },
+  {
+    "id": 88,
+    "domain": "Selecting operators",
+    "type": "multiple_choice",
+    "question": "Consider the Python code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) l1=['sunny','bunny','chinny','vinny']<br>2) l2=['sunny','bunny','chinny','vinny']<br>3) print(l1 is l2)<br>4) print(l1 == l2)<br>5) l1=l2<br>6) print(l1 is l2)<br>7) print(l1 == l2)</div>What is the result?",
+    "options": [
+      "A. False, True, True, True",
+      "B. False, False, True, True",
+      "C. False, True, False, True",
+      "D. False, True, True, False"
+    ],
+    "answer": "A. False, True, True, True",
+    "explanation": "Two list literals with the same contents are still two distinct objects, so l1 is l2 is False while l1 == l2 is True. The assignment l1 = l2 rebinds l1 to the same object, after which both the identity test and the equality test are True."
+  },
+  {
+    "id": 89,
+    "domain": "Selecting operators",
+    "type": "multiple_choice",
+    "question": "Consider the Python code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) print(10==10 and 20!=20)<br>2) print(10==10 or 20!=20)<br>3) print( not 10==10)</div>What is the result?",
+    "options": [
+      "A. True, True, False",
+      "B. False, True, True",
+      "C. False, True, False",
+      "D. False, False, False"
+    ],
+    "answer": "C. False, True, False",
+    "explanation": "Comparison operators run before the logical operators. 10==10 is True and 20!=20 is False, so and yields False while or yields True. In line 3, not applies to the result of 10==10, which is True, so not True prints False."
+  },
+  {
+    "id": 90,
+    "domain": "Selecting operators",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) print(not 0)<br>2) print(not 10)<br>3) print(not '')<br>4) print(not 'durga')<br>5) print(not None)</div>What is the result?",
+    "options": [
+      "A. True, False, False, False, True",
+      "B. True, False, True, False, True",
+      "C. False, False, True, False, True",
+      "D. True, False, True, False, False"
+    ],
+    "answer": "B. True, False, True, False, True",
+    "explanation": "not returns True for falsy values and False for truthy ones. The number 0, the empty string, and None are all falsy, so those three print True; the non-zero number 10 and the non-empty string 'durga' are truthy, so they print False."
+  },
+  {
+    "id": 91,
+    "domain": "Selecting operators",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) lst = [7, 8, 9]<br>2) b = lst[:]<br>3) print(b is lst)<br>4) print(b == lst)</div>What is the result?",
+    "options": [
+      "A. False, True",
+      "B. False, False",
+      "C. True, False",
+      "D. True, True"
+    ],
+    "answer": "A. False, True",
+    "explanation": "A full slice lst[:] builds a brand-new list object that shares the same elements, so b is lst is False. Because the two lists hold equal items in the same order, b == lst is True. Only a plain assignment such as b = lst would make the identity test True."
+  },
+  {
+    "id": 93,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "A classmate has asked you to debug the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 4<br>while x &gt;= 1:<br>&nbsp;&nbsp;&nbsp;&nbsp;if x % 4 == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(\"party\")<br>&nbsp;&nbsp;&nbsp;&nbsp;elif x - 2 &lt; 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(\"cake\")<br>&nbsp;&nbsp;&nbsp;&nbsp;elif x / 3 == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(\"greeting\")<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(\"birthday\")<br>&nbsp;&nbsp;&nbsp;&nbsp;x = x - 1</div>What is the output that is printed to the screen?",
+    "options": [
+      "A. birthday, party, greeting, cake",
+      "B. party, birthday, birthday, cake",
+      "C. party, greeting, birthday, cake",
+      "D. birthday, greeting, party, cake"
+    ],
+    "answer": "B. party, birthday, birthday, cake",
+    "explanation": "The loop runs for x = 4, 3, 2, 1 and only the first matching branch of the if/elif chain executes. x=4 satisfies x % 4 == 0 so it prints party; x=3 and x=2 fail every test (3/3 is 1.0, not 0) so both fall to else and print birthday; x=1 makes x-2 negative so it prints cake. The greeting branch can never fire because x / 3 is never exactly 0 for these values."
+  },
+  {
+    "id": 94,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "You are writing a Python application for a dance studio. The studio wants to encourage youth and seniors to sign up. Minors and seniors must receive a 10% discount.<br>You write the following code. Line numbers are included for reference only.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 def get_discount(minor, senior):<br>02 &nbsp;&nbsp;&nbsp;&nbsp;discount = .1<br>03 &nbsp;&nbsp;&nbsp;&nbsp;____<br>04 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;discount = 0<br>05 &nbsp;&nbsp;&nbsp;&nbsp;return discount</div>You need to complete the code. Which code should you add on line 03?",
+    "options": [
+      "A. if not (minor and senior):",
+      "B. if not (minor or senior):",
+      "C. if (not minor) and senior:",
+      "D. if (not minor) or senior:"
+    ],
+    "answer": "B. if not (minor or senior):",
+    "explanation": "discount starts at 0.1 and line 04 wipes it out, so the condition must be true only for people who are neither minors nor seniors: not (minor or senior). Option A, not (minor and senior), is true for a person who is only a minor, so it would wrongly remove that discount; options C and D are true for seniors, which also removes a discount they are entitled to."
+  },
+  {
+    "id": 95,
+    "domain": "Branching statements",
+    "type": "true_false",
+    "question": "You are creating a Python program that compares numbers. You create the following code. Line numbers are included for reference only.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 num1 = eval(input(\"Please enter the first number: \"))<br>02 num2 = eval(input(\"Please enter the second number: \"))<br>03 if num1 == num2:<br>04 &nbsp;&nbsp;&nbsp;&nbsp;print(\"The two numbers are equal. \")<br>05 if num1 &lt;= num2:<br>06 &nbsp;&nbsp;&nbsp;&nbsp;print(\"Number 1 is less than number 2. \")<br>07 if num1 &gt; num2:<br>08 &nbsp;&nbsp;&nbsp;&nbsp;print(\"Number 1 is greater than number 2. \")<br>09 if num2 = num1:<br>10 &nbsp;&nbsp;&nbsp;&nbsp;print(\"The two numbers are the same. \")</div>You need to ensure that the comparisons are accurate. For each of the following statements, select True if the statement is true. Otherwise, select False.",
+    "options": {
+      "statement1": "The print statement at line 04 will only print if the two numbers are equal in value.",
+      "statement2": "The print statement at line 06 will only print if num1 is less than num2.",
+      "statement3": "The print statement at line 08 will only print if num1 is greater than num2.",
+      "statement4": "The statement at line 09 is an invalid comparison."
+    },
+    "answer": {
+      "statement1": "True: The print statement at line 04 will only print if the two numbers are equal in value.",
+      "statement2": "False: The print statement at line 06 will only print if num1 is less than num2.",
+      "statement3": "True: The print statement at line 08 will only print if num1 is greater than num2.",
+      "statement4": "True: The statement at line 09 is an invalid comparison."
+    },
+    "explanation": "Line 03 uses ==, which is true only when the values are equal, so statement 1 holds. Line 05 uses the less-than-or-equal operator, so its message also appears when the two numbers are equal, which makes statement 2 false. Line 07 uses a strict greater-than test, so statement 3 holds, and line 09 uses a single = which is assignment, not comparison, so Python raises a SyntaxError and statement 4 holds."
+  },
+  {
+    "id": 96,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "You are developing a loan collection agent application. Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) collected_amount=3000<br>2) commission=0<br>3) if collected_amount &lt;= 2000:<br>4) &nbsp;&nbsp;&nbsp;&nbsp;commission=50<br>5) elif collected_amount &gt; 2500 and collected_amount &lt; 3000:<br>6) &nbsp;&nbsp;&nbsp;&nbsp;commission=100<br>7) elif collected_amount &gt; 2500:<br>8) &nbsp;&nbsp;&nbsp;&nbsp;commission=150<br>9) if collected_amount &gt;= 3000:<br>10) &nbsp;&nbsp;&nbsp;commission+=200</div>What will be the value of commission?",
+    "options": [
+      "A. 350",
+      "B. 200",
+      "C. 150",
+      "D. 100"
+    ],
+    "answer": "A. 350",
+    "explanation": "In the first chain 3000 is not less than or equal to 2000, and the second test fails because 3000 is not less than 3000, so the third branch sets commission to 150. Line 9 starts a brand-new if statement rather than continuing the chain, so it also runs and adds 200, giving 350. Answering 150 assumes line 9 is part of the earlier elif chain, which it is not."
+  },
+  {
+    "id": 97,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "You are developing an online shopping application. Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 order_value = 1500<br>02 state = 'ap'<br>03 delivery_charge = 0<br>04 if state in ['up', 'mp', 'ts']:<br>05 &nbsp;&nbsp;&nbsp;&nbsp;if order_value &lt;= 1000:<br>06 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delivery_charge = 50<br>07 &nbsp;&nbsp;&nbsp;&nbsp;elif 1000 &lt; order_value &lt; 2000:<br>08 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delivery_charge = 100<br>09 &nbsp;&nbsp;&nbsp;&nbsp;else:<br>10 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delivery_charge = 150<br>11 else:<br>12 &nbsp;&nbsp;&nbsp;&nbsp;delivery_charge = 25<br>13 if state in ['lp', 'kp', 'ap']:<br>14 &nbsp;&nbsp;&nbsp;&nbsp;if order_value &gt; 1000:<br>15 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delivery_charge += 20<br>16 &nbsp;&nbsp;&nbsp;&nbsp;if order_value &lt; 2000 and state in ['kp', 'ap']:<br>17 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delivery_charge += 30<br>18 &nbsp;&nbsp;&nbsp;&nbsp;else:<br>19 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delivery_charge += 15<br>20 print(delivery_charge)</div>What is the result?",
+    "options": [
+      "A. 65",
+      "B. 75",
+      "C. 85",
+      "D. 55"
+    ],
+    "answer": "B. 75",
+    "explanation": "'ap' is not in the first list, so the else on line 11 sets delivery_charge to 25. 'ap' is in the second list, and 1500 is greater than 1000, so line 15 adds 20 to give 45; the test on line 16 is also true, so line 17 adds 30 for a total of 75. The else on line 18 belongs to the if on line 16, so its 15 is never added."
+  },
+  {
+    "id": 98,
+    "domain": "Branching statements",
+    "type": "fill_in_blank",
+    "question": "You are designing a decision structure to convert a student's numeric grade to a letter grade. The program must assign a letter grade as specified in the following table:<br>90 through 100 &rarr; A<br>80 through 89 &rarr; B<br>70 through 79 &rarr; C<br>65 through 69 &rarr; D<br>0 through 64 &rarr; F<br><br>For example, if the user enters 90 the output should be \"Your letter grade is : A\", and if a user enters 89 the output should be \"Your letter grade is : B\".<br><br>How should you complete the code? To answer, select the appropriate code segment for each blank.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>#Letter Grade converter<br>grade = int(input(\"Enter a numeric grade\"))<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;letter_grade = 'A'<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;letter_grade = 'B'<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;letter_grade = 'C'<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;letter_grade = 'D'<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;letter_grade = 'F'<br>print(\"Your letter grade is : \", letter_grade)</div>",
+    "options": {
+      "grade_a_condition": [
+        "if grade >= 90:",
+        "if grade <= 90:",
+        "if grade > 90:",
+        "elif grade >= 90:"
+      ],
+      "grade_b_condition": [
+        "elif grade >= 80:",
+        "elif grade > 80:",
+        "if grade >= 80:",
+        "elif grade <= 80:"
+      ],
+      "grade_c_condition": [
+        "elif grade >= 70:",
+        "elif grade > 70:",
+        "if grade >= 70:",
+        "elif grade <= 70:"
+      ],
+      "grade_d_condition": [
+        "elif grade >= 65:",
+        "elif grade > 65:",
+        "if grade >= 65:",
+        "elif grade <= 65:"
+      ]
+    },
+    "answer": {
+      "grade_a_condition": "if grade >= 90:",
+      "grade_b_condition": "elif grade >= 80:",
+      "grade_c_condition": "elif grade >= 70:",
+      "grade_d_condition": "elif grade >= 65:"
+    },
+    "explanation": "A grade-band decision must be a single if/elif/else chain tested from the highest boundary downward, so that once a branch matches the rest are skipped. Starting with a greater-than-or-equal test against 90 and then using elif for 80, 70 and 65 gives exactly one letter per score, and the trailing else catches everything below 65 as F. Using separate if statements would let a later branch overwrite the grade, and a strict greater-than test would misclassify boundary values such as 90 and 80."
+  },
+  {
+    "id": 99,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "You are writing a Python script to convert student marks into a grade. The grades are defined as follows:<br>90 through 100 &rarr; A grade<br>80 through 89 &rarr; B grade<br>70 through 79 &rarr; C grade<br>65 through 69 &rarr; D grade<br>0 through 64 &rarr; E grade<br><br>The developed application is:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 #Grade converter<br>02 marks=int(input(\"Enter Student marks:\"))<br>03 if marks &gt;= 90:<br>04 &nbsp;&nbsp;&nbsp;&nbsp;grade = 'A'<br>05 if marks &gt;= 80:<br>06 &nbsp;&nbsp;&nbsp;&nbsp;grade = 'B'<br>07 if marks &gt;= 70:<br>08 &nbsp;&nbsp;&nbsp;&nbsp;grade = 'C'<br>09 if marks &gt;= 65:<br>10 &nbsp;&nbsp;&nbsp;&nbsp;grade = 'D'<br>11 else:<br>12 &nbsp;&nbsp;&nbsp;&nbsp;grade = 'E'<br>13 print(\"Your grade is : \", grade)</div>Which of the following changes should be performed to fulfill the requirement?",
+    "options": [
+      "A. Line 3 should be replaced with if marks &lt;= 90:",
+      "B. Line 5 should be replaced with if marks &gt;= 80 and marks &lt;= 90:",
+      "C. Line 7 should be replaced with if marks &gt;= 70 and marks &lt;= 80:",
+      "D. Lines 5, 7, and 9 should be replaced with elif statements."
+    ],
+    "answer": "D. Lines 5, 7, and 9 should be replaced with elif statements.",
+    "explanation": "As written, lines 3, 5, 7 and 9 are four independent if statements, so a mark of 95 satisfies all of them and grade ends up as 'D'. Turning lines 5, 7 and 9 into elif makes them one chain, so the first matching band wins and the final else correctly assigns 'E'. Narrowing individual conditions, as options A, B and C do, still leaves the later independent ifs free to overwrite the grade."
+  },
+  {
+    "id": 100,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "You are developing a school automation application. If a student's marks are between 80 and 100 inclusive, you have to offer the 'A' grade. Which code block should you use?",
+    "options": [
+      "A. if marks &gt;= 80 and marks &gt;= 100:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade='A'",
+      "B. if marks &gt;= 80 or marks &lt;= 100:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade='A'",
+      "C. if 80 &lt;= marks &lt;= 100:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade='A'",
+      "D. if marks &gt; 80:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade='A'"
+    ],
+    "answer": "C. if 80 &lt;= marks &lt;= 100:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade='A'",
+    "explanation": "Python supports chained comparisons, so 80 &lt;= marks &lt;= 100 is exactly the closed range required and is true only for 80 through 100. Option A requires marks to be at least 100, option B is true for every possible number because at least one side always holds, and option D excludes 80 itself while accepting anything above 100."
+  },
+  {
+    "id": 101,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "Consider the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) marks=[30,40,50,45,50,100]<br>2) average=sum(marks)//len(marks)<br>3) grades={1:'A',2:'B',3:'C',4:'D'}<br>4) if average &gt;= 90 and average &lt;= 100:<br>5) &nbsp;&nbsp;&nbsp;key=1<br>6) elif average &gt;= 80 and average &lt; 90:<br>7) &nbsp;&nbsp;&nbsp;key=2<br>8) elif average &gt;= 50 and average &lt; 80:<br>9) &nbsp;&nbsp;&nbsp;key=3<br>10) else:<br>11) &nbsp;&nbsp;key=4<br>12) print(grades[key])</div>Which grade will be printed to the console?",
+    "options": [
+      "A. A",
+      "B. B",
+      "C. C",
+      "D. D"
+    ],
+    "answer": "C. C",
+    "explanation": "The marks total 315 and floor division by the 6 elements gives an average of 52. That value fails the first two branches and satisfies the third one, so key becomes 3 and grades[3] prints C. Answer D would require the average to fall below 50, which floor division does not produce here."
+  },
+  {
+    "id": 103,
+    "domain": "Branching statements",
+    "type": "fill_in_blank",
+    "question": "You are coding a math utility by using Python. You are writing a function to compute roots. The function must meet the following requirements:<br>&bull; If a is non-negative, return a**(1/b)<br>&bull; If a is negative and even, return \"Result is an imaginary number\"<br>&bull; If a is negative and odd, return -(-a)**(1/b)<br><br>How should you complete the code? Select the appropriate code segment for each blank.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def safe_root(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;answer = a**(1/b)<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;answer = \"Result is an imaginary number\"<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;answer = -(-a)**(1/b)<br>&nbsp;&nbsp;&nbsp;&nbsp;return answer</div>",
+    "options": {
+      "outer_if": [
+        "if a >= 0:",
+        "if a % 2 == 0:",
+        "else:",
+        "elif:"
+      ],
+      "outer_else": [
+        "if a >= 0:",
+        "if a % 2 == 0:",
+        "else:",
+        "elif:"
+      ],
+      "inner_if": [
+        "if a >= 0:",
+        "if a % 2 == 0:",
+        "else:",
+        "elif:"
+      ],
+      "inner_else": [
+        "if a >= 0:",
+        "if a % 2 == 0:",
+        "else:",
+        "elif:"
+      ]
+    },
+    "answer": {
+      "outer_if": "if a >= 0:",
+      "outer_else": "else:",
+      "inner_if": "if a % 2 == 0:",
+      "inner_else": "else:"
+    },
+    "explanation": "The outer test separates non-negative values, which can be raised to a fractional power directly, from negative values, so it is 'if a >= 0:' followed by 'else:'. Inside the negative branch a second test on 'a % 2 == 0' splits even values, which give an imaginary result, from odd values, which are handled by negating the root of -a. 'elif:' is not valid Python because elif always requires a condition, and putting 'if a % 2 == 0:' in the outer slot would send positive odd numbers into the negative-value branch, where they would be wrongly reported as imaginary or negated."
+  },
+  {
+    "id": 104,
+    "domain": "Branching statements",
+    "type": "fill_in_blank",
+    "question": "You work for a company that distributes media for all ages. You are writing a function that assigns a rating based on a user's age. The function must meet the following requirements:<br>&bull; Anyone 18 years old or older receives a rating of \"A\".<br>&bull; Anyone 13 or older, but younger than 18, receives a rating of \"T\".<br>&bull; Anyone 12 years old or younger receives a rating of \"C\".<br>&bull; If the age is unknown, the rating is set to \"C\".<br><br>How should you complete the code? Select the appropriate code segment for each blank.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def get_rating(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;rating = \"\"<br>&nbsp;&nbsp;&nbsp;&nbsp;if ____<br>&nbsp;&nbsp;&nbsp;&nbsp;elif ____<br>&nbsp;&nbsp;&nbsp;&nbsp;elif ____<br>&nbsp;&nbsp;&nbsp;&nbsp;else ____<br>&nbsp;&nbsp;&nbsp;&nbsp;return rating</div>",
+    "options": {
+      "if_clause": [
+        "age < 13 : rating = \"C\"",
+        "age < 18 : rating = \"T\"",
+        ":rating = \"A\"",
+        "age== None:rating = \"C\""
+      ],
+      "first_elif_clause": [
+        "age < 13 : rating = \"C\"",
+        "age < 18 : rating = \"T\"",
+        ":rating = \"A\"",
+        "age== None:rating = \"C\""
+      ],
+      "second_elif_clause": [
+        "age < 13 : rating = \"C\"",
+        "age < 18 : rating = \"T\"",
+        ":rating = \"A\"",
+        "age== None:rating = \"C\""
+      ],
+      "else_clause": [
+        "age < 13 : rating = \"C\"",
+        "age < 18 : rating = \"T\"",
+        ":rating = \"A\"",
+        "age== None:rating = \"C\""
+      ]
+    },
+    "answer": {
+      "if_clause": "age== None:rating = \"C\"",
+      "first_elif_clause": "age < 13 : rating = \"C\"",
+      "second_elif_clause": "age < 18 : rating = \"T\"",
+      "else_clause": ":rating = \"A\""
+    },
+    "explanation": "The unknown-age test must come first, because comparing None with an integer raises a TypeError in Python 3, so any ordering that reaches 'age < 13' before the None check crashes on an unknown age. After that the remaining tests run from smallest to largest: under 13 gives \"C\", then under 18 gives \"T\", and the final else catches everyone 18 and over with \"A\". Because elif branches are evaluated in order, putting the \"A\" rule anywhere but last would swallow the younger cases."
+  },
+  {
+    "id": 105,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "You work for a company that distributes media for all ages. You are writing a function that assigns a rating based on a user's age. The function must meet the following requirements:<br>&bull; Anyone 18 years old or older receives a rating of \"A\".<br>&bull; Anyone 13 or older, but younger than 18, receives a rating of \"T\".<br>&bull; Anyone 12 years old or younger receives a rating of \"C\".<br><br>Which of the following code segments meets the requirements?",
+    "options": [
+      "A. def get_rating(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;if age&gt;=18:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"A\"<br>&nbsp;&nbsp;&nbsp;&nbsp;elif age&gt;=13:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"T\"<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"C\"<br>&nbsp;&nbsp;&nbsp;&nbsp;return rating",
+      "B. def get_rating(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;if age&gt;=18:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"A\"<br>&nbsp;&nbsp;&nbsp;&nbsp;if age&gt;=13:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"T\"<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"C\"<br>&nbsp;&nbsp;&nbsp;&nbsp;return rating",
+      "C. def get_rating(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;if age&gt;18:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"A\"<br>&nbsp;&nbsp;&nbsp;&nbsp;elif age&gt;13:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"T\"<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"C\"<br>&nbsp;&nbsp;&nbsp;&nbsp;return rating",
+      "D. def get_rating(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;if age&gt;=18:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"A\"<br>&nbsp;&nbsp;&nbsp;&nbsp;elif age&gt;=13:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"T\"<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"C\"<br>&nbsp;&nbsp;&nbsp;&nbsp;pass rating"
+    ],
+    "answer": "A. def get_rating(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;if age&gt;=18:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"A\"<br>&nbsp;&nbsp;&nbsp;&nbsp;elif age&gt;=13:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"T\"<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rating=\"C\"<br>&nbsp;&nbsp;&nbsp;&nbsp;return rating",
+    "explanation": "Only option A chains the tests with elif and uses the inclusive comparisons for 18 and 13, so age 18 gives \"A\", ages 13 through 17 give \"T\", and everything else gives \"C\". Option B starts a second independent if, so an 18-year-old is re-tested and overwritten with \"T\". Option C uses strict greater-than and therefore misclassifies exactly 18 and exactly 13, and option D ends with 'pass rating', which is not valid Python."
+  },
+  {
+    "id": 106,
+    "domain": "Branching statements",
+    "type": "fill_in_blank",
+    "question": "Southridge Video needs a way to determine the cost that a customer will pay for renting a DVD. The cost depends on the time of day the DVD is returned, and there are also special rates on Thursdays and Sundays. The fee structure is:<br>&bull; The cost is $1.59 per night.<br>&bull; If the DVD is returned after 8 PM, the customer is charged an extra day.<br>&bull; If the video is rented on a Sunday, the customer gets 30% off for as long as they keep the video.<br>&bull; If the video is rented on a Thursday, the customer gets 50% off for as long as they keep the video.<br><br>How should you complete the code? Select the appropriate code segment for each blank.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>#Southridge Video, DVD Rental calculator<br>ontime = input(\"Was video returned before 8 pm? y or n\").lower()<br>days_rented = int(input(\"How many days was video rented? \"))<br>day_rented = input(\"What day was the video rented?\").capitalize()<br>cost_per_day = 1.59<br>if ontime ____<br>&nbsp;&nbsp;&nbsp;&nbsp;days_rented +=1<br>if day_rented ____<br>&nbsp;&nbsp;&nbsp;&nbsp;total = (days_rented * cost_per_day) * .7<br>elif day_rented ____<br>&nbsp;&nbsp;&nbsp;&nbsp;total = (days_rented * cost_per_day) * .5<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;total = days_rented * cost_per_day<br>print(\"Cost of the DVD rental is : $\", total)</div>",
+    "options": {
+      "ontime_condition": [
+        "!= \"n\":",
+        "== \"n\":",
+        "== \"y\":"
+      ],
+      "sunday_condition": [
+        "== \"Sunday\":",
+        ">= \"Sunday\":",
+        "is \"Sunday\":"
+      ],
+      "thursday_condition": [
+        "== \"Thursday\":",
+        "<= \"Thursday\":",
+        "is \"Thursday\":"
+      ]
+    },
+    "answer": {
+      "ontime_condition": "== \"n\":",
+      "sunday_condition": "== \"Sunday\":",
+      "thursday_condition": "== \"Thursday\":"
+    },
+    "explanation": "The prompt asks whether the video was returned before 8 pm, so the answer \"n\" means it came back late and an extra day must be added, which makes 'if ontime == \"n\":' the correct test. The day comparisons must use == because the goal is to match one exact string, and capitalize() has already normalised the input to \"Sunday\" or \"Thursday\". Ordering comparisons such as greater-or-equal would match many unrelated day names alphabetically, and 'is' compares object identity rather than value, which is unreliable for strings built at runtime."
+  },
+  {
+    "id": 107,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "The XYZ Book Company needs a way to determine the cost that a student will pay for renting a book. The cost is $3.00 per night. If the book is returned after 9 PM, the student is charged an extra day. If the book is rented on a Sunday, the student gets 50% off for as long as they keep the book. If the book is rented on a Saturday, the student gets 30% off for as long as they keep the book.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'># XYZ Book Rented Amount Calculator<br>ontime = input(\"Was Book returned before 9 pm? y or n\").lower()<br>days_rented = int(input(\"How many days was book rented? \"))<br>day_rented = input(\"What day was the book rented?\").capitalize()<br>cost_per_day = 3.00<br>if ontime == 'n':<br>&nbsp;&nbsp;&nbsp;&nbsp;days_rented = days_rented + 1<br>if day_rented == 'Sunday':<br>&nbsp;&nbsp;&nbsp;&nbsp;total = (days_rented * cost_per_day) *0.5<br>elif day_rented == 'Saturday':<br>&nbsp;&nbsp;&nbsp;&nbsp;total = (days_rented * cost_per_day) *0.7<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;total = days_rented * cost_per_day<br>print(\"The Cost of the Book rental is : $\", total)</div>If the book is rented on 'Sunday', the number of days the book is rented is 5, and the book is returned after 9 PM, what is the result?",
+    "options": [
+      "A. The Cost of Book Rental is: $7.0",
+      "B. The Cost of Book Rental is: $8.0",
+      "C. The Cost of Book Rental is: $9.0",
+      "D. The Cost of Book Rental is: $10.0"
+    ],
+    "answer": "C. The Cost of Book Rental is: $9.0",
+    "explanation": "Returning after 9 PM makes ontime equal 'n', so days_rented becomes 5 + 1 = 6. Sunday matches the first day test, giving total = 6 * 3.00 * 0.5 = 9.0. None of $7.0, $8.0 or $10.0 corresponds to a whole number of days at either the full $3.00 or the Sunday-discounted $1.50 nightly rate."
+  },
+  {
+    "id": 108,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "We are developing a gold loan application for XYZ company.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>amount=float(input('Enter Loan Amount:'))<br>interest_rate=0<br>if amount &gt; 0 and amount&lt;= 50000:<br>&nbsp;&nbsp;&nbsp;&nbsp;interest_rate = 10<br>elif amount &gt; 50000 and amount&lt;100000:<br>&nbsp;&nbsp;&nbsp;&nbsp;interest_rate = 12<br>elif amount &gt;= 100000 and amount&lt;150000:<br>&nbsp;&nbsp;&nbsp;&nbsp;interest_rate = 16<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;interest_rate = 22</div>For which of the following user inputs will interest_rate be 12?",
+    "options": [
+      "A. 50000",
+      "B. 50001",
+      "C. 100000",
+      "D. 100001",
+      "E. 150000"
+    ],
+    "answer": "B. 50001",
+    "explanation": "interest_rate is set to 12 only by the second branch, which requires the amount to be strictly greater than 50000 and strictly less than 100000, so 50001 is the only listed value that qualifies. 50000 satisfies the first branch and gives 10, 100000 and 100001 fall in the third branch and give 16, and 150000 falls through to the else and gives 22."
+  },
+  {
+    "id": 109,
+    "domain": "Branching statements",
+    "type": "fill_in_blank",
+    "question": "You are writing a Python program that asks the user to enter a number and determines whether the number is 1 digit, 2 digits, or more than 2 digits long.<br><br>How should you complete the code? Select the appropriate code segment for each blank.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>num = int(input(\"Enter a number with 1 or 2 digits: \"))<br>digits = 0<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;digits = \"1\"<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;digits = \"2\"<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;digits = \"&gt;2\"<br>print(digits + \" digits.\")</div>",
+    "options": {
+      "one_digit_condition": [
+        "if num > -10 and num < 10:",
+        "if num > -100 and num < 100:"
+      ],
+      "two_digit_condition": [
+        "if num > -100 and num < 100:",
+        "elif num > -100 and num < 100:",
+        "if num > -10 and num < 10:",
+        "elif num > -10 and num < 10:"
+      ],
+      "more_digits_clause": [
+        "else:",
+        "elif:"
+      ]
+    },
+    "answer": {
+      "one_digit_condition": "if num > -10 and num < 10:",
+      "two_digit_condition": "elif num > -100 and num < 100:",
+      "more_digits_clause": "else:"
+    },
+    "explanation": "A single-digit number lies strictly between -10 and 10, so that test has to come first. A two-digit number lies between -100 and 100 but has already failed the first test, so the second slot must be an elif on that wider range, and anything failing both is longer than two digits and is caught by the final else. Using a second plain 'if' instead of elif would re-test every one-digit number and overwrite its result with \"2\", and 'elif:' is not valid Python because elif requires a condition."
+  },
+  {
+    "id": 110,
+    "domain": "Branching statements",
+    "type": "fill_in_blank",
+    "question": "You are creating a function to calculate admission fees by using Python. Admission fees are calculated based on the following rules:<br>&bull; Anyone under age 5 = free admission<br>&bull; Anyone age 5 or older who is in school = 10 USD<br>&bull; Anyone age 5 to 17 who is not in school = 20 USD<br>&bull; Anyone older than age 17 who is not in school = 50 USD<br><br>How should you complete the code? Select the appropriate code segment for each blank.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def admission_fee(age, school):<br>&nbsp;&nbsp;&nbsp;&nbsp;rate = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rate = 10<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rate = 20<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rate = 50<br>&nbsp;&nbsp;&nbsp;&nbsp;return rate</div>",
+    "options": {
+      "in_school_condition": [
+        "if age >= 5 and school == True:",
+        "if age >= 5 and age <= 17:",
+        "if age >= 5 and school == False:"
+      ],
+      "not_in_school_condition": [
+        "elif age >= 5 and school == False:",
+        "else age >= 5 and school == False:",
+        "elif age >= 5 and school == True:"
+      ],
+      "age_range_condition": [
+        "if age >= 5 and school == True:",
+        "if age >= 5 and school == False:",
+        "if age <= 17:"
+      ]
+    },
+    "answer": {
+      "in_school_condition": "if age >= 5 and school == True:",
+      "not_in_school_condition": "elif age >= 5 and school == False:",
+      "age_range_condition": "if age <= 17:"
+    },
+    "explanation": "rate starts at 0, so anyone under 5 simply falls through both branches and pays nothing. The first branch charges 10 for anyone 5 or older who is in school, the elif catches everyone 5 or older who is not in school, and inside it a nested 'if age <= 17:' splits the 20 USD and 50 USD cases. 'else age >= 5 and school == False:' is a syntax error because else never takes a condition, and repeating the school test in the nested slot would leave the older-than-17 case unhandled."
+  },
+  {
+    "id": 111,
+    "domain": "Branching statements",
+    "type": "fill_in_blank",
+    "question": "You develop a Python application for your company. How should you complete the code so that the print statements are accurate? Select the appropriate code segment for each blank.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numList = [1,2,3,4,5]<br>alphaList = [\"a\",\"b\",\"c\",\"d\",\"e\"]<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"The values in numList are equal to alphaList\")<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"The values in numList are not equal to alphaList\")</div>",
+    "options": {
+      "equality_check": [
+        "if numList == alphaList:",
+        "if numList == alphaList",
+        "else:",
+        "else"
+      ],
+      "else_clause": [
+        "if numList == alphaList:",
+        "if numList == alphaList",
+        "else:",
+        "else"
+      ]
+    },
+    "answer": {
+      "equality_check": "if numList == alphaList:",
+      "else_clause": "else:"
+    },
+    "explanation": "Exactly one of the two messages must print, so the second block has to be the else of the first test rather than a second independent if. Python requires a colon at the end of every if and else header, so the versions without a colon raise a SyntaxError. With these two lists the comparison is False, so the else branch runs and the 'not equal' message is printed."
+  },
+  {
+    "id": 112,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "Consider the following Python code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a=5<br>b=10<br>c=2<br>d=True<br><br>x=a+b*c<br>y=a+b/d<br><br>if(condition):<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Valid')<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Invalid')</div>Which condition must be used in the if statement so that 'Valid' is printed to the console?",
+    "options": [
+      "A. x &gt; y",
+      "B. x == y",
+      "C. x &lt; y",
+      "D. x &lt;= y"
+    ],
+    "answer": "A. x &gt; y",
+    "explanation": "Multiplication binds tighter than addition, so x = 5 + 10*2 = 25. True behaves as the integer 1 in arithmetic and the / operator always produces a float, so y = 5 + 10/True = 15.0. Since 25 is greater than 15.0, only 'x greater than y' is True; the equality test and both less-than forms are False and would print 'Invalid'."
+  },
+  {
+    "id": 113,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "We are developing an online shopping application. Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>d = input('Enter day of the week:')<br>discount_percentage = 3<br>if d == 'Monday':<br>&nbsp;&nbsp;&nbsp;&nbsp;discount_percentage+=5<br>elif d == 'Tuesday':<br>&nbsp;&nbsp;&nbsp;&nbsp;discount_percentage+=7<br>elif d == 'Saturday':<br>&nbsp;&nbsp;&nbsp;&nbsp;discount_percentage+=10<br>elif d == 'Sunday':<br>&nbsp;&nbsp;&nbsp;&nbsp;discount_percentage+=20<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;discount_percentage+=2</div>To get 5 as discount_percentage, which of the following inputs should the end user provide?",
+    "options": [
+      "A. Monday",
+      "B. Tuesday",
+      "C. Thursday",
+      "D. Saturday",
+      "E. Sunday"
+    ],
+    "answer": "C. Thursday",
+    "explanation": "discount_percentage starts at 3, so reaching 5 requires an increase of exactly 2, which only the else branch provides. Thursday is the only listed day that does not match any of the explicit tests, so it falls through to the else. Monday gives 8, Tuesday gives 10, Saturday gives 13 and Sunday gives 23."
+  },
+  {
+    "id": 114,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "Which of the following is true about the else block of a try statement?",
+    "options": [
+      "A. The else block is executed if no exception is raised in the try block",
+      "B. Without writing an except block we cannot write an else block",
+      "C. For the same try statement we can write at most one else block",
+      "D. All the above"
+    ],
+    "answer": "D. All the above",
+    "explanation": "The else clause of a try statement runs only when the try body completes without raising an exception, so statement A is true. Python's grammar attaches else to the except clauses, so a try with an else but no except is a SyntaxError, which makes statement B true, and a try statement accepts at most one else, which makes statement C true. Because all three statements hold individually, 'All the above' is the answer."
+  },
+  {
+    "id": 115,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "We are developing an application for leave approval in XYZ Company.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>days=int(input('Enter number of days for leave:'))<br>cause=input('Enter the cause:')<br>if days==1:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Leave will be approved immediately')<br>elif days&gt;1 and days&lt;=3:<br>&nbsp;&nbsp;&nbsp;&nbsp;if cause=='Sick':<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Leave will be approved immediately')<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Needs Lead Approval')<br>elif days&gt;3 and days&lt;5:<br>&nbsp;&nbsp;&nbsp;&nbsp;if cause=='Sick':<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Needs Manager Approval')<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Needs Director Approval')<br>elif days&gt;=5 and days&lt;=10:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Needs Director Approval')</div>In which of the following cases will 'Needs Director Approval' be printed to the console?",
+    "options": [
+      "A. days = 2 and cause='sick'",
+      "B. days = 3 and cause='personal'",
+      "C. days = 4 and cause='Sick'",
+      "D. days = 4 and cause='official'"
+    ],
+    "answer": "D. days = 4 and cause='official'",
+    "explanation": "With days = 4 the third branch runs, because 4 is greater than 3 and less than 5. Inside it the cause is compared with 'Sick', and 'official' does not match, so the else prints 'Needs Director Approval'. days = 4 with cause 'Sick' matches the inner test and prints 'Needs Manager Approval' instead, while 2 or 3 days land in the second branch, which never prints the director message."
+  },
+  {
+    "id": 116,
+    "domain": "Branching statements",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a=12<br>b=4<br>s='He shall not be happy if he does not work'</div>In which of the following cases will the value of result become 9?",
+    "options": [
+      "A. result=3 if None else a/b",
+      "B. result=s.find('not') if s else None",
+      "C. result=s.rfind('not') if s else None",
+      "D. result=5 if len(s)&gt;4 else 6"
+    ],
+    "answer": "B. result=s.find('not') if s else None",
+    "explanation": "A non-empty string is truthy, so the conditional expression in option B evaluates s.find('not'), which returns the index of the first occurrence of 'not' in the string: 9. Option C uses rfind, which finds the last occurrence at index 33. Option A evaluates a/b because None is falsy, giving 3.0, and option D gives 5 because the string is longer than 4 characters."
+  },
+  {
+    "id": 117,
+    "domain": "Iteration & loops",
+    "type": "fill_in_blank",
+    "question": "You find errors while evaluating the following code. Line numbers are included for reference only. You need to correct the code at line 03 and line 06. Use the drop-down menus to select the correct code segment for each line.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01&nbsp;numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]<br>02&nbsp;index = 0<br>03&nbsp;____<br>04&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(numbers[index])<br>05&nbsp;<br>06&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>07&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>08&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:<br>09&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index += 1</div>",
+    "options": {
+      "line_03": [
+        "while (index < 10) :",
+        "while [index < 10]",
+        "while (index < 5) :",
+        "while [index < 5]"
+      ],
+      "line_06": [
+        "if numbers[index] == 6",
+        "if numbers[index] == 6 :",
+        "if numbers(index) = 6 :",
+        "if numbers(index) != 6"
+      ]
+    },
+    "answer": {
+      "line_03": "while (index < 10) :",
+      "line_06": "if numbers[index] == 6 :"
+    },
+    "explanation": "A while header needs a condition followed by a colon, and the list holds ten elements indexed 0 through 9, so the loop must run while index is below 10; the square-bracket versions build a list instead of a condition and are also missing the colon. Line 06 must index the list with square brackets, compare with == rather than assign with =, and end with a colon, which only 'if numbers[index] == 6 :' does. Round brackets would try to call the list as a function and raise a TypeError."
+  },
+  {
+    "id": 118,
+    "domain": "Iteration & loops",
+    "type": "ordering",
+    "question": "You are building a Python program that displays all of the prime numbers from 2 to 100. The program must stop testing divisors for a candidate as soon as one is found.<br>Drag the appropriate code segments into slots 1 to 4 of the following skeleton. Each code segment may be used once, more than once, or not at all.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>[slot 1]<br>&nbsp;&nbsp;&nbsp;&nbsp;[slot 2]<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[slot 3]<br>&nbsp;&nbsp;&nbsp;&nbsp;if is_prime == True:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(p)<br>&nbsp;&nbsp;&nbsp;&nbsp;[slot 4]</div>Slot 1 &rarr; ____<br>Slot 2 &rarr; ____<br>Slot 3 &rarr; ____<br>Slot 4 &rarr; ____",
+    "options": [
+      "p = 2\nwhile p <= 100:\n    is_prime = True",
+      "p = 2\nis_prime = True\nwhile p <= 100:",
+      "for i in range(2, p):\n    if p % i == 0:\n        is_prime = False",
+      "for i in range(2, p):\n    if p / i == 0:\n        is_prime = False",
+      "break",
+      "continue",
+      "p = p + 1"
+    ],
+    "answer": [
+      "p = 2\nwhile p <= 100:\n    is_prime = True",
+      "for i in range(2, p):\n    if p % i == 0:\n        is_prime = False",
+      "break",
+      "p = p + 1"
+    ],
+    "explanation": "The candidate p is set to 2 once, but is_prime must be reset to True on every pass, so the flag assignment belongs inside the while loop rather than before it. Divisibility is tested with the modulus operator, because p / i == 0 is only ever true when p is 0 and would never mark anything as composite. Once a divisor is found the inner for loop can stop, which is what break does, whereas continue would keep testing the remaining divisors, which the requirement forbids, and the final p = p + 1 advances the candidate so the while loop terminates."
+  },
+  {
+    "id": 119,
+    "domain": "Iteration & loops",
+    "type": "fill_in_blank",
+    "question": "You are creating a Python program that lets a user guess a number from 1 to 10. The user is allowed up to three guesses. You write the following code. Line numbers are included for reference only. The program must allow three guesses, and if the user guesses the correct number the program must stop asking for guesses. How should you complete lines 05, 13 and 14?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01&nbsp;from random import randint<br>02&nbsp;target = randint(1, 10)<br>03&nbsp;chance = 1<br>04&nbsp;print(\"Guess an integer from 1 to 10. You will have 3 chances.\")<br>05&nbsp;____<br>06&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;guess = int(input(\"Guess an integer: \"))<br>07&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if guess &gt; target:<br>08&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(\"Guess is too high\")<br>09&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif guess &lt; target:<br>10&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(\"Guess is too low\")<br>11&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:<br>12&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(\"Guess is just right!\")<br>13&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>14&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____</div>",
+    "options": {
+      "line_05": [
+        "while chance <= 3:",
+        "while chance < 3",
+        "break",
+        "pass",
+        "chance += 1",
+        "chance = 2"
+      ],
+      "line_13": [
+        "while chance <= 3:",
+        "while chance < 3",
+        "break",
+        "pass",
+        "chance += 1",
+        "chance = 2"
+      ],
+      "line_14": [
+        "while chance <= 3:",
+        "while chance < 3",
+        "break",
+        "pass",
+        "chance += 1",
+        "chance = 2"
+      ]
+    },
+    "answer": {
+      "line_05": "while chance <= 3:",
+      "line_13": "break",
+      "line_14": "chance += 1"
+    },
+    "explanation": "chance starts at 1 and is incremented once per pass, so 'while chance <= 3:' runs the body for chance 1, 2 and 3, giving exactly three guesses; 'while chance < 3' would allow only two and is also missing its colon. Line 13 sits inside the else branch that fires on a correct guess, so break is what stops the loop early, while pass would simply keep asking. Line 14 must advance the counter with 'chance += 1', because 'chance = 2' would pin the counter and loop forever."
+  },
+  {
+    "id": 120,
+    "domain": "Iteration & loops",
+    "type": "fill_in_blank",
+    "question": "You are developing a Python application for an online product distribution company. You need the program to iterate through a list of products and escape (stop looping) as soon as a target product ID is found.<br>How should you complete the code? Select the appropriate code segment for each blank.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>productIdList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]<br>index = 0<br>____ (index &lt; 10) :<br>&nbsp;&nbsp;&nbsp;&nbsp;print(productIdList[index])<br>&nbsp;&nbsp;&nbsp;&nbsp;if productIdList[index] == 6 :<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;else :<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____</div>",
+    "options": {
+      "loop_keyword": [
+        "while",
+        "for",
+        "if",
+        "break"
+      ],
+      "found_action": [
+        "while",
+        "for",
+        "if",
+        "break"
+      ],
+      "index_update": [
+        "continue",
+        "break",
+        "index += 1",
+        "index = 1"
+      ]
+    },
+    "answer": {
+      "loop_keyword": "while",
+      "found_action": "break",
+      "index_update": "index += 1"
+    },
+    "explanation": "A condition-controlled loop is needed because the loop must end early, so the header is a while statement guarded by the index test. break immediately leaves the loop the moment the target ID 6 is found, and index += 1 advances to the next product otherwise. continue would skip the increment and loop forever, and index = 1 would reset the counter instead of advancing it."
+  },
+  {
+    "id": 121,
+    "domain": "Iteration & loops",
+    "type": "fill_in_blank",
+    "question": "Lucerne Publishing Company needs a way to find the count of particular letters in their publications to ensure that there is a good balance. There have been complaints about overuse of the letter e. You need to create a function that counts how many words in a list contain a given letter.<br>How should you complete the code? Select the appropriate code segment for each blank.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>#Function accepts list of words from a file,<br>#and letter to search for.<br>#Returns count of a particular letter in that list.<br>def count_letter(letter, word_list):<br>&nbsp;&nbsp;&nbsp;&nbsp;count = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;for ____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;return count<br>word_list = []<br>#word_list is populated from a file, code not shown.<br>letter = input(\"Which letter would you like to count? \")<br>letter_count = count_letter(letter, word_list)<br>print(\"There are: \", letter_count, \" instances of \" + letter)</div>",
+    "options": {
+      "for_clause": [
+        "word_list in word:",
+        "word in word_list:",
+        "word == word_list:",
+        "word is word_list:"
+      ],
+      "if_condition": [
+        "word is letter:",
+        "letter is word:",
+        "word in letter:",
+        "letter in word:"
+      ]
+    },
+    "answer": {
+      "for_clause": "word in word_list:",
+      "if_condition": "letter in word:"
+    },
+    "explanation": "A for loop iterates over the collection and binds each element to the loop variable, so for word in word_list: walks the list one word at a time. The membership operator in tests whether the substring appears in the string, so letter in word: is true when that word contains the letter. Reversing the operands (word in letter:) tests the wrong direction, and is compares object identity rather than containment."
+  },
+  {
+    "id": 122,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "Consider the following Python code.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def count_letter(letter, word_list):<br>&nbsp;&nbsp;&nbsp;&nbsp;count = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;for word in word_list:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if letter in word:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;return count<br>word_list = ['apple', 'pears', 'orange', 'mango']<br>letter = input('Enter some alphabet symbol:')<br>letter_count = count_letter(letter, word_list)<br>print(letter_count)</div><br>If the user provides the input 'a', what is the result?",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 4"
+    ],
+    "answer": "D. 4",
+    "explanation": "The function counts words that contain the letter, not total occurrences of the letter. Every one of 'apple', 'pears', 'orange' and 'mango' contains an 'a', so count is incremented four times and 4 is printed. Answers such as 2 or 3 would require some word without an 'a'."
+  },
+  {
+    "id": 123,
+    "domain": "Iteration & loops",
+    "type": "fill_in_blank",
+    "question": "Best For You Organics Company needs a simple program that their call center will use to enter survey data for a new coffee variety. The program must accept input and return the average rating based on a five-star scale, and the output must be rounded to two decimal places.<br>How should you complete the code? Select the appropriate code segment for each blank.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>sum = count = done = 0<br>average = 0.0<br>while (done != -1):<br>&nbsp;&nbsp;&nbsp;&nbsp;rating = ____<br>&nbsp;&nbsp;&nbsp;&nbsp;if rating == -1:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;&nbsp;&nbsp;sum += rating<br>&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>average = float(sum / count)<br>____ + ____</div>",
+    "options": {
+      "rating_input": [
+        "print(\"Enter next rating (1-5), -1 for done\")",
+        "float(input(\"Enter next rating (1-5), -1 for done\"))",
+        "input(\"Enter next rating (1-5), -1 for done\")",
+        "input \"Enter next rating (1-5), -1 for done\""
+      ],
+      "output_call": [
+        "output(\"The average star rating for NetVerZleep coffee is: \"",
+        "console.input(\"The average star rating for the new coffee is: \"",
+        "printline(\"The average star rating for the new coffee is: \"",
+        "print(\"The average star rating for the new coffee is: \""
+      ],
+      "format_expression": [
+        "format(average, '.2f'))",
+        "format(average, '.2d'))",
+        "{average, '.2f'}",
+        "format.average .{2d}"
+      ]
+    },
+    "answer": {
+      "rating_input": "float(input(\"Enter next rating (1-5), -1 for done\"))",
+      "output_call": "print(\"The average star rating for the new coffee is: \"",
+      "format_expression": "format(average, '.2f'))"
+    },
+    "explanation": "input() always returns a string, so it must be wrapped in float() before it can be compared with -1 and added to sum. print() is Python's output function, and format(average, '.2f') renders the float with exactly two decimal places so it can be concatenated to the message string. The '.2d' variants raise a ValueError because the d presentation type does not accept a float."
+  },
+  {
+    "id": 124,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "The XYZ Organics company needs a simple program that their call center will use to enter survey data for a new coffee variety. The program must accept input and return the average rating based on a five-star scale. The output must be rounded to two decimal places.<br>Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>sum = count = done = 0<br>average = 0.0<br>while(done != -1):<br>&nbsp;&nbsp;&nbsp;&nbsp;rating = float(input('Enter Next Rating(1-5),-1 for done'))<br>&nbsp;&nbsp;&nbsp;&nbsp;if rating == -1:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;&nbsp;&nbsp;sum += rating<br>&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>average = float(sum/count)<br>#Line-1</div><br>Which print() statement should be placed at Line-1 to meet the requirement?",
+    "options": [
+      "A. print('The average star rating for the new coffee is:{:.2f}'.format(average))",
+      "B. print('The average star rating for the new coffee is:{:.2d}'.format(average))",
+      "C. print('The average star rating for the new coffee is:{:2f}'.format(average))",
+      "D. print('The average star rating for the new coffee is:{:2.2d}'.format(average))"
+    ],
+    "answer": "A. print('The average star rating for the new coffee is:{:.2f}'.format(average))",
+    "explanation": "In a format specification the number after the dot is the precision, so {:.2f} prints the float with exactly two digits after the decimal point. {:2f} sets only a minimum field width of 2 and therefore prints the default six decimals, while both {:.2d} and {:2.2d} raise ValueError because the d presentation type cannot format a float."
+  },
+  {
+    "id": 125,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>l = [10, 20, [30, 40], [50, 60]]<br>count = 0<br>for i in range(len(l)):<br>&nbsp;&nbsp;&nbsp;&nbsp;if type(l[i]) == list:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count = count + 1<br>print(count)</div><br>What is the result?",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. 4"
+    ],
+    "answer": "B. 2",
+    "explanation": "The loop inspects each top-level element of l and increments count only when that element is itself a list. 10 and 20 are integers, while [30, 40] and [50, 60] are lists, so count ends at 2. The nested elements such as 30 and 40 are never visited, so the count is not 4."
+  },
+  {
+    "id": 126,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>l = [10, (20,), {30}, {}, {}, [40, 50]]<br>count = 0<br>for i in range(len(l)):<br>&nbsp;&nbsp;&nbsp;&nbsp;if type(l[i]) == list:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;elif type(l[i]) == tuple:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 2<br>&nbsp;&nbsp;&nbsp;&nbsp;elif type(l[i]) == set:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 3<br>&nbsp;&nbsp;&nbsp;&nbsp;elif type(l[i]) == dict:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 4<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 5<br>print(count)</div><br>What is the result?",
+    "options": [
+      "A. 17",
+      "B. 18",
+      "C. 19",
+      "D. 20"
+    ],
+    "answer": "C. 19",
+    "explanation": "Empty braces {} create a dict, not a set, so the elements are int, tuple, set, dict, dict and list. That gives 5 + 2 + 3 + 4 + 4 + 1 = 19. Treating {} as a set would give 5 + 2 + 3 + 3 + 3 + 1 = 17, which is the trap in option A."
+  },
+  {
+    "id": 127,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>t = (2, 4, 6, 8, 10, 12)<br>d = {1:'A', 2:'B', 3:'C', 4:'D', 5:'E', 6:'F'}<br>result = 1<br>for t1 in t:<br>&nbsp;&nbsp;&nbsp;&nbsp;if t1 in d:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result += t1<br>print(result)</div><br>What is the result?",
+    "options": [
+      "A. 12",
+      "B. 13",
+      "C. 19",
+      "D. 6"
+    ],
+    "answer": "B. 13",
+    "explanation": "Using in on a dictionary tests membership against its keys, which are 1 through 6. Only 2, 4 and 6 from the tuple are keys, so result becomes 1 + 2 + 4 + 6 = 13. Option A (12) forgets that result starts at 1 rather than 0."
+  },
+  {
+    "id": 128,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>t = (2, 4, 6, 8, 10, 12)<br>d = {1:'A', 2:'B', 3:'C', 4:'D', 5:'E', 6:'F'}<br>result = 1<br>for t1 in t:<br>&nbsp;&nbsp;&nbsp;&nbsp;if t1 in d:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result += t1<br>print(result)</div><br>What is the result?",
+    "options": [
+      "A. 29",
+      "B. 30",
+      "C. 31",
+      "D. 32"
+    ],
+    "answer": "C. 31",
+    "explanation": "continue skips the rest of the body for every tuple value that is a key of d (2, 4 and 6), so only 8, 10 and 12 are added. result is 1 + 8 + 10 + 12 = 31. Option B (30) omits the initial value of 1."
+  },
+  {
+    "id": 129,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>values = [[3, 4, 5, 1], [33, 6, 1, 2]]<br><br>v = values[0][0]<br>for lst in values:<br>&nbsp;&nbsp;&nbsp;&nbsp;for element in lst:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if v &gt; element:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v = element<br><br>print(v)</div><br>What is the result?",
+    "options": [
+      "A. 3",
+      "B. 2",
+      "C. 1",
+      "D. 4"
+    ],
+    "answer": "C. 1",
+    "explanation": "The nested loops walk every element of both inner lists and keep the smallest value seen, starting from values[0][0], which is 3. The minimum across 3, 4, 5, 1, 33, 6, 1 and 2 is 1, so 1 is printed. Option B (2) would be the answer only if the second list were scanned in isolation."
+  },
+  {
+    "id": 130,
+    "domain": "Iteration & loops",
+    "type": "fill_in_blank",
+    "question": "Tailspin Toys is building a basketball court for its employees. You are creating a Python program that employees can use to keep track of their average score. The output must meet the following requirements:<br>&bull; The user name must be left-aligned.<br>&bull; If the user name has fewer than 20 characters, additional space must be added to the right.<br>&bull; The average score must have three places to the left of the decimal point and one place to the right of the decimal (XXX.X).<br>How should you complete the code? Select the appropriate code segment for each blank.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>name = input(\"What is your name? \")<br>score = 0<br>count = 0<br>sum = 0<br>while(score != -1):<br>&nbsp;&nbsp;&nbsp;&nbsp;score = int(input(\"Enter your scores: (-1 to end) \"))<br>&nbsp;&nbsp;&nbsp;&nbsp;if score == -1:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;&nbsp;&nbsp;sum += score<br>&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>average_score = sum / count<br>print(\"____ , your average score is: ____ \" %(name, average_score))</div>",
+    "options": {
+      "name_format": [
+        "%-20i",
+        "%-20d",
+        "%-20f",
+        "%-20s"
+      ],
+      "score_format": [
+        "%1.4s",
+        "%4.1f",
+        "%4.1s",
+        "%1.4f"
+      ]
+    },
+    "answer": {
+      "name_format": "%-20s",
+      "score_format": "%4.1f"
+    },
+    "explanation": "In printf-style formatting s is the conversion for a string and the minus sign left-aligns it inside the given field width, so %-20s pads the name on the right up to 20 characters. For the score, f is the float conversion and the digit after the dot is the precision, so %4.1f prints exactly one digit after the decimal point as XXX.X. %1.4f would print four decimals, and the %s-based or integer conversions cannot render a float with one decimal place."
+  },
+  {
+    "id": 131,
+    "domain": "Iteration & loops",
+    "type": "fill_in_blank",
+    "question": "Relecloud Virtual Learning asks you to debug some code that is causing problems with their payroll. The following variables have been declared:<br>employee_pay = [15000, 120000, 35000, 45000]<br>count = 0<br>sum = 0<br><br>There are two errors in the following code: the loop misses the last employee, and the average is computed with floor division.<br>for index in range(0, len(employee_pay)-1):<br>&nbsp;&nbsp;&nbsp;count += 1<br>&nbsp;&nbsp;&nbsp;sum += employee_pay[index]<br>average = sum//count<br><br>Which code should you use to fix the errors? Select the appropriate code segment for each blank.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>for index in range ____<br>&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;sum += employee_pay[index]<br>average = ____<br>print(\"The total payroll is: \", sum )<br>print(\"The average salary is: \", average)</div>",
+    "options": {
+      "range_expression": [
+        "(size(employee_pay)):",
+        "(size(employee_pay)-1):",
+        "(len(employee_pay)+1):",
+        "(len(employee_pay)):"
+      ],
+      "average_expression": [
+        "sum/count",
+        "sum**count",
+        "sum*count"
+      ]
+    },
+    "answer": {
+      "range_expression": "(len(employee_pay)):",
+      "average_expression": "sum/count"
+    },
+    "explanation": "range(len(employee_pay)) yields every valid index 0..3, whereas subtracting 1 drops the last salary and adding 1 causes an IndexError. Python has no built-in size() function, so those choices raise NameError. True division with / returns the exact average 53750.0, while // would truncate it and ** or * would not compute an average at all."
+  },
+  {
+    "id": 132,
+    "domain": "Iteration & loops",
+    "type": "fill_in_blank",
+    "question": "Adventure Works Cycles sales are so exceptional that they decide to give a bonus to all employees who do not make $150,000 or more. The following formula applies to each eligible employee:<br><b>New salary = current salary x 3% + a $500 bonus.</b><br>You write code that reads the employee salaries into a variable named salary_list. You need to complete the code that applies the increase to each eligible employee's salary.<br>How should you complete the code? Select the appropriate code segment for each blank.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>#Each salary in the list is updated based on the increase. Employees making<br>#$150,000 or more will not get a raise.<br>#Salary list is populated from the employee database, code not shown.<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;if salary_list[index] &gt;= 150000:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;salary_list[index] = (salary_list[index] * 1.03) + 500</div>",
+    "options": {
+      "loop_header": [
+        "for index in range(len(salary_list)+1):",
+        "for index in range(len(salary_list)-1):",
+        "for index in range(len(salary_list)):",
+        "for index in salary_list:"
+      ],
+      "skip_statement": [
+        "exit()",
+        "continue",
+        "break",
+        "end"
+      ]
+    },
+    "answer": {
+      "loop_header": "for index in range(len(salary_list)):",
+      "skip_statement": "continue"
+    },
+    "explanation": "The body assigns through salary_list[index], so the loop must produce indexes: range(len(salary_list)) covers every position exactly once, while +1 causes an IndexError, -1 skips the last employee, and iterating the list directly would bind salaries rather than indexes. continue abandons only the current iteration so a high earner is skipped and the rest of the list is still processed; break would stop the loop entirely and end is not Python."
+  },
+  {
+    "id": 133,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>True = False<br>while True:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(True)<br>&nbsp;&nbsp;&nbsp;&nbsp;break</div>",
+    "options": [
+      "A. True",
+      "B. False",
+      "C. None",
+      "D. none of the mentioned"
+    ],
+    "answer": "D. none of the mentioned",
+    "explanation": "In Python 3 True is a reserved keyword, so the assignment True = False is rejected at compile time with SyntaxError: cannot assign to True. Nothing is ever printed, so none of True, False or None is produced and the only fitting choice is none of the mentioned."
+  },
+  {
+    "id": 134,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 123<br>for i in x:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</div>",
+    "options": [
+      "A. 1 2 3",
+      "B. 123",
+      "C. error",
+      "D. none of the mentioned"
+    ],
+    "answer": "C. error",
+    "explanation": "A for loop needs an iterable, and an int is not iterable, so the code raises TypeError: 'int' object is not iterable. Digits would only be produced if x were the string '123', which is what options A and B assume."
+  },
+  {
+    "id": 135,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>for i in range(5):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i == 5:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Here\")</div>",
+    "options": [
+      "A. 0 1 2 3 4 Here",
+      "B. 0 1 2 3 4 5 Here",
+      "C. 0 1 2 3 4",
+      "D. 1 2 3 4 5"
+    ],
+    "answer": "A. 0 1 2 3 4 Here",
+    "explanation": "range(5) produces 0 through 4, so i never equals 5 and the inner else prints each value. Because the loop finishes without ever executing break, the for/else clause runs and prints Here. Option C forgets the for/else, and option B wrongly assumes range(5) includes 5."
+  },
+  {
+    "id": 136,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>for i in range(0):<br>print(i)</div>",
+    "options": [
+      "A. 0",
+      "B. no output",
+      "C. error",
+      "D. None of the mentioned."
+    ],
+    "answer": "C. error",
+    "explanation": "A compound statement must have an indented block after the colon, and print(i) sits at column 0, so Python raises IndentationError: expected an indented block after 'for' statement before anything runs. Option B would be right only if the body were correctly indented, since range(0) is empty."
+  },
+  {
+    "id": 137,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a = [0, 1, 2, 3]<br>i = -2<br>for i not in a:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)<br>&nbsp;&nbsp;&nbsp;&nbsp;i += 1</div>",
+    "options": [
+      "A. -2 -1",
+      "B. 0",
+      "C. error",
+      "D. none of the mentioned"
+    ],
+    "answer": "C. error",
+    "explanation": "The for statement grammar is 'for TARGET in ITERABLE:'; not in is a comparison operator and cannot appear in a for header, so the file fails to compile with SyntaxError. Because the failure happens at parse time, no value is ever printed."
+  },
+  {
+    "id": 138,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 1567<br>for i in x:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(i)</div>",
+    "options": [
+      "A. 1 5 6 7",
+      "B. 1567",
+      "C. error",
+      "D. none of the mentioned"
+    ],
+    "answer": "C. error",
+    "explanation": "Integers do not implement the iterator protocol, so for i in x raises TypeError: 'int' object is not iterable. Digit-by-digit output would require iterating str(x) instead."
+  },
+  {
+    "id": 139,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>l = [10, (20,), {30}, {}, {}, [48, 50]]<br>count = 0<br>for i in range(len(l)):<br>&nbsp;&nbsp;&nbsp;&nbsp;if type(l[i]) == list:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;elif type(l[i]) == tuple:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 2<br>&nbsp;&nbsp;&nbsp;&nbsp;elif type(l[i]) == set:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 3<br>&nbsp;&nbsp;&nbsp;&nbsp;elif type(l[i]) == dict:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 4<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 5<br>print(count)</div><br>What is the result?",
+    "options": [
+      "A. 17",
+      "B. 18",
+      "C. 19",
+      "D. 20"
+    ],
+    "answer": "C. 19",
+    "explanation": "The elements are int, tuple, set, dict, dict and list because empty braces {} build a dict rather than a set. Adding 5 + 2 + 3 + 4 + 4 + 1 gives 19. Counting {} as a set instead would give 17, the distractor in option A."
+  },
+  {
+    "id": 140,
+    "domain": "Iteration & loops",
+    "type": "multiple_choice",
+    "question": "You are writing a Python program that displays all prime numbers from 2 to 200.<br>Which of the following is the proper code to fulfil the requirement?<br><b>Code A</b><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>p = 2<br>is_prime = True<br>while p &lt;= 200:<br>&nbsp;&nbsp;for i in range(2, p):<br>&nbsp;&nbsp;&nbsp;&nbsp;if p % i == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is_prime = False<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;if is_prime == True:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(p)<br>&nbsp;&nbsp;p = p + 1</div><br><b>Code B</b><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>p = 2<br>while p &lt;= 200:<br>&nbsp;&nbsp;is_prime = True<br>&nbsp;&nbsp;for i in range(2, p):<br>&nbsp;&nbsp;&nbsp;&nbsp;if p % i == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is_prime = False<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;if is_prime == True:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(p)<br>&nbsp;&nbsp;p = p + 1</div><br><b>Code C</b><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>p = 2<br>while p &lt;= 200:<br>&nbsp;&nbsp;is_prime = True<br>&nbsp;&nbsp;for i in range(2, p):<br>&nbsp;&nbsp;&nbsp;&nbsp;if p % i == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is_prime = False<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;if is_prime == False:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(p)<br>&nbsp;&nbsp;p = p + 1</div><br><b>Code D</b><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>p = 2<br>while p &lt;= 200:<br>&nbsp;&nbsp;is_prime = True<br>&nbsp;&nbsp;for i in range(2, p):<br>&nbsp;&nbsp;&nbsp;&nbsp;if p % i == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is_prime = False<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;if is_prime == True:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(p)</div>",
+    "options": [
+      "A. Code A",
+      "B. Code B",
+      "C. Code C",
+      "D. Code D"
+    ],
+    "answer": "B. Code B",
+    "explanation": "The is_prime flag has to be reset at the top of every iteration of the while loop, which only Code B does; Code A sets it once, so after 4 is found composite the flag stays False and only 2 and 3 are printed. Code C and Code D indent break one level too far and fail with IndentationError, and in addition Code C prints composites and Code D never increments p."
+  },
+  {
+    "id": 141,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "You are writing a program to automate inventory. Your first task is to read a file of inventory transactions. The file contains sales from the previous day, including the item id, price, and quantity. The following shows a sample of data from the file:<br>10, 200, 5<br>20, 100, 1<br>The code must meet the following requirements:<br>&bull; Each line of the file must be read and printed<br>&bull; If a blank line is encountered, it must be ignored<br>&bull; When all lines have been read, the file must be closed<br>You create the following code. Line numbers are included for reference only.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 inventory = open(\"inventory.txt\", 'r')<br>02 eof = False<br>03 while eof == False:<br>04   line = inventory.readline()<br>05<br>06<br>07       print(line)<br>08     else:<br>09       print(\"End of file\")<br>10       eof = True<br>11 inventory.close()</div><br>Which code should you write for line 05 and line 06?",
+    "options": [
+      "A. 05 if line != '':<br>&nbsp;&nbsp;&nbsp;06     if line != \"\":",
+      "B. 05 if line != '\\n':<br>&nbsp;&nbsp;&nbsp;06     if line != None:",
+      "C. 05 if line != '\\n':<br>&nbsp;&nbsp;&nbsp;06     if line != \"\":",
+      "D. 05 if line != '':<br>&nbsp;&nbsp;&nbsp;06     if line != \"\\n\":"
+    ],
+    "answer": "C. 05 if line != '\\n':<br>&nbsp;&nbsp;&nbsp;06     if line != \"\":",
+    "explanation": "readline() returns '\\n' for a blank line and '' only at end of file. The outer test on line 05 must therefore skip blank lines, and the inner test on line 06 must distinguish real content from the empty string so its else branch can print End of file and set eof = True. Any option that tests for '' on line 05 never reaches that else branch and loops forever, and comparing with None is useless because readline() never returns None."
+  },
+  {
+    "id": 142,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "You are creating a function that reads a data file and prints each line of that file. Consider the following code.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) import os<br>2) def read_file(file):<br>3)   line = None<br>4)   if os.path.isfile(file):<br>5)     data = open(file, 'r')<br>6)   while line != '':<br>7)     line = data.readline()<br>8)     print(line)</div><br>The code attempts to read the file even if the file does not exist. You need to correct the code. Which lines have indentation problems?",
+    "options": [
+      "A. First 3 lines inside the function",
+      "B. Last 3 lines inside the function",
+      "C. Last 2 lines inside the function",
+      "D. There is no indentation problem"
+    ],
+    "answer": "B. Last 3 lines inside the function",
+    "explanation": "Lines 6, 7 and 8 sit at the same level as the if statement, so the while loop runs even when os.path.isfile returns False and data was never assigned, raising UnboundLocalError. Indenting those last three lines of the function into the if block makes the read happen only when the file exists. The first three lines (import, def and the line = None initialisation) are already at the correct level."
+  },
+  {
+    "id": 143,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "You develop a Python application for your school. You need to read and write data to a text file. If the file does not exist it must be created. If the file has content, the content must be removed.<br>Which code should you use?",
+    "options": [
+      "A. open(\"local_data\", \"r+\")",
+      "B. open(\"local_data\", \"w+\")",
+      "C. open(\"local_data\", \"r\")",
+      "D. open(\"local_data\", \"w\")"
+    ],
+    "answer": "B. open(\"local_data\", \"w+\")",
+    "explanation": "Mode w+ opens a file for both writing and reading, creates the file when it is missing, and truncates it to zero length when it already exists. Mode r+ also allows reading and writing but raises FileNotFoundError when the file does not exist and it keeps the existing content; r is read-only and w is write-only, so neither supports reading and writing together."
+  },
+  {
+    "id": 144,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "You develop a Python application for your school. You need to read and write data to a text file. If the file does not exist, it must be created. If the file has content, the content must be removed.<br>Which code should you use?",
+    "options": [
+      "A. open('abc.txt', 'w+')",
+      "B. open('abc.txt', 'r')",
+      "C. open('abc.txt', 'a')",
+      "D. open('abc.txt', 'r+')"
+    ],
+    "answer": "A. open('abc.txt', 'w+')",
+    "explanation": "Only w+ gives read and write access while creating a missing file and truncating an existing one. Mode r is read-only and fails when the file is missing, a appends instead of clearing the content, and r+ needs the file to already exist and preserves what is in it."
+  },
+  {
+    "id": 145,
+    "domain": "Input & output operations",
+    "type": "multiple_select",
+    "question": "You are creating a function that reads a data file and prints each line of the file. You write the following code. Line numbers are included for reference only.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 import os<br>02 def read_file(file):<br>03 &nbsp;&nbsp;&nbsp;&nbsp;line = None<br>04 &nbsp;&nbsp;&nbsp;&nbsp;if os.path.isfile(file):<br>05 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data = open(file, 'r')<br>06 &nbsp;&nbsp;&nbsp;&nbsp;while line != '':<br>07 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;line = data.readline()<br>08 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(line)</div>The code attempts to read the file even if the file does not exist. You need to correct the code. Which three lines have indentation problems? Each correct answer presents part of the solution. (Choose 3.)",
+    "options": [
+      "A. Line 01",
+      "B. Line 02",
+      "C. Line 03",
+      "D. Line 04",
+      "E. Line 05",
+      "F. Line 06",
+      "G. Line 07",
+      "H. Line 08"
+    ],
+    "answer": [
+      "F. Line 06",
+      "G. Line 07",
+      "H. Line 08"
+    ],
+    "explanation": "Lines 06, 07 and 08 are indented at the function body level, so the reading loop runs even when os.path.isfile() returns False and data was never assigned, which raises UnboundLocalError. Indenting those three lines one more level moves the whole loop inside the if block so the file is only read when it exists. Lines 01 to 05 are already at the correct level: line 05 is properly nested under the if statement."
+  },
+  {
+    "id": 146,
+    "domain": "Input & output operations",
+    "type": "ordering",
+    "question": "You are writing a function that works with files. You need to ensure that the function returns None if the file does not exist. If the file does exist, the function must return the first line.<br>You write the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import os<br>def get_first_line(filename, mode):</div>In which order should you arrange the code segments to complete the function body? Every segment is used exactly once.<br>Segment 1 &rarr; ____<br>Segment 2 &rarr; ____<br>Segment 3 &rarr; ____<br>Segment 4 &rarr; ____<br>Segment 5 &rarr; ____",
+    "options": [
+      "if os.path.isfile(filename):",
+      "return file.readline()",
+      "with open(filename, 'r') as file:",
+      "return None",
+      "else:"
+    ],
+    "answer": [
+      "if os.path.isfile(filename):",
+      "with open(filename, 'r') as file:",
+      "return file.readline()",
+      "else:",
+      "return None"
+    ],
+    "explanation": "The existence test must come first so the file is only opened when os.path.isfile() is True. Inside that branch the with statement opens the file and readline() returns its first line, and the else branch returns None for a missing file. Putting the with statement or the return before the if test would either crash on a missing file or make the existence check useless."
+  },
+  {
+    "id": 147,
+    "domain": "Input & output operations",
+    "type": "multiple_select",
+    "question": "Consider the following code.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import os<br>def get_data(filename, mode):<br>&nbsp;&nbsp;&nbsp;&nbsp;if os.path.isfile(filename):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with open(filename, 'r') as file:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return file.readline()<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return None</div>Which two statements are valid about this code? (Choose 2.)",
+    "options": [
+      "A. This function returns the first line of the file if it is available",
+      "B. This function returns None if the file does not exist",
+      "C. This function returns the total data present in the file",
+      "D. This function returns the last line of the file"
+    ],
+    "answer": [
+      "A. This function returns the first line of the file if it is available",
+      "B. This function returns None if the file does not exist"
+    ],
+    "explanation": "readline() reads a single line and the return statement exits the function immediately, so only the first line is ever produced, and the else branch returns None when os.path.isfile() is False. Returning the whole file would require read() and returning the last line would require reading to the end of the file, so neither C nor D describes this code."
+  },
+  {
+    "id": 148,
+    "domain": "Input & output operations",
+    "type": "fill_in_blank",
+    "question": "Northwind Electric Cars needs help updating their file system using Python code. You must create a simple file manipulation program that performs the following actions:<br>- Checks to see if a file exists.<br>- If the file exists, displays its contents.<br>- If the file does not exist, creates a file using the specified name.<br>- Appends the phrase \"End of listing\" to the file. The file must be reopened for writing only, with no read access.<br>How should you complete the code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import os<br>if ____<br>&nbsp;&nbsp;&nbsp;&nbsp;file = open('myFile.txt')<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;file.close()<br>file = ____<br>____(\"End of listing\")</div>",
+    "options": {
+      "file_exists_check": [
+        "isfile('myFile.txt'):",
+        "os.exist('myFile.txt'):",
+        "os.find('myFile.txt'):",
+        "os.path.isfile('myFile.txt'):"
+      ],
+      "display_contents": [
+        "output('myFile.txt')",
+        "print(file.get('myFile.txt'))",
+        "print(file.read())",
+        "print('myFile.txt')"
+      ],
+      "open_for_append": [
+        "open('myFile.txt', 'a')",
+        "open('myFile.txt', 'a+')",
+        "open('myFile.txt', 'w')",
+        "open('myFile.txt', 'w+')"
+      ],
+      "write_call": [
+        "append",
+        "file.add",
+        "file.write",
+        "write"
+      ]
+    },
+    "answer": {
+      "file_exists_check": "os.path.isfile('myFile.txt'):",
+      "display_contents": "print(file.read())",
+      "open_for_append": "open('myFile.txt', 'a')",
+      "write_call": "file.write"
+    },
+    "explanation": "os.path.isfile() is the standard existence test, and file.read() returns the whole content of the opened file so print() can display it. Mode a creates the file when it is missing and positions the stream at the end so new text is appended, while w and w+ would erase the existing content and a+ would add read access the requirements exclude. Writing is done through the file object's write() method, so the call must be file.write(\"End of listing\")."
+  },
+  {
+    "id": 149,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "Which of the following statements about opening files in Python are true?",
+    "options": [
+      "A. When you open a file for reading, if the file does not exist, an error occurs",
+      "B. When you open a file for writing, if the file does not exist, a new file is created",
+      "C. When you open a file for writing, if the file exists, the existing file is overwritten with the new file",
+      "D. All of the mentioned"
+    ],
+    "answer": "D. All of the mentioned",
+    "explanation": "Opening a missing file with mode r raises FileNotFoundError, opening a missing file with mode w creates it, and opening an existing file with mode w truncates it to zero length. Since statements A, B and C are all correct descriptions of Python's file modes, the complete answer is D."
+  },
+  {
+    "id": 150,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "To read the entire remaining contents of the file as a string from a file object named infile, we use ____",
+    "options": [
+      "A. infile.read(2)",
+      "B. infile.read()",
+      "C. infile.readline()",
+      "D. infile.readlines()"
+    ],
+    "answer": "B. infile.read()",
+    "explanation": "Calling read() with no size argument returns everything left in the file as a single string. read(2) returns only two characters, readline() returns just the next line, and readlines() returns a list of lines rather than one string."
+  },
+  {
+    "id": 151,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "What is the use of the tell() method in Python?",
+    "options": [
+      "A. tells you the current position within the file",
+      "B. tells you the end position within the file",
+      "C. tells you the file is opened or not",
+      "D. none of the mentioned"
+    ],
+    "answer": "A. tells you the current position within the file",
+    "explanation": "tell() returns the current offset of the file pointer, which is the position where the next read or write will happen. To reach the end of the file you would have to seek(0, 2) first, and whether a file is open is exposed by the closed attribute, not by tell()."
+  },
+  {
+    "id": 152,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "Which of the following string declarations spans more than one line and considers whitespace properly when the string is printed to the console?",
+    "options": [
+      "A. s1='durga<br>software<br>solutions'",
+      "B. s1=\"durga<br>software<br>solutions\"",
+      "C. s1='durga\\n<br>software\\n<br>solutions'",
+      "D. s1='''durga<br>software<br>solutions'''"
+    ],
+    "answer": "D. s1='''durga<br>software<br>solutions'''",
+    "explanation": "Only a triple-quoted literal may contain real line breaks, and it keeps every newline and space exactly as typed. Single- and double-quoted literals must end on the line they start on, so options A, B and C all raise SyntaxError: unterminated string literal."
+  },
+  {
+    "id": 153,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "Consider the following code.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>print(type(input('Enter some value:')))</div>If you enter 10 on the first run and 10.0 on the second run, what is the output?",
+    "options": [
+      "A. 1) &lt;class 'str'&gt;<br>2) &lt;class 'str'&gt;",
+      "B. 1) &lt;class 'int'&gt;<br>2) &lt;class 'float'&gt;",
+      "C. 1) &lt;class 'int'&gt;<br>2) &lt;class 'int'&gt;",
+      "D. 1) &lt;class 'float'&gt;<br>2) &lt;class 'float'&gt;"
+    ],
+    "answer": "A. 1) &lt;class 'str'&gt;<br>2) &lt;class 'str'&gt;",
+    "explanation": "In Python 3 input() always returns the typed characters as a str and never converts them, so both runs report the str type. Getting int or float would require wrapping the call in int(), float() or eval()."
+  },
+  {
+    "id": 154,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "Consider the following code.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>print(type(eval(input('Enter some value:'))))</div>If you enter 10 on the first run and 10.0 on the second run, what is the output?",
+    "options": [
+      "A. 1) &lt;class 'str'&gt;<br>2) &lt;class 'str'&gt;",
+      "B. 1) &lt;class 'int'&gt;<br>2) &lt;class 'float'&gt;",
+      "C. 1) &lt;class 'int'&gt;<br>2) &lt;class 'int'&gt;",
+      "D. 1) &lt;class 'float'&gt;<br>2) &lt;class 'float'&gt;"
+    ],
+    "answer": "B. 1) &lt;class 'int'&gt;<br>2) &lt;class 'float'&gt;",
+    "explanation": "eval() evaluates the entered text as a Python expression, so the literal 10 becomes an int and the literal 10.0 becomes a float. Without eval() both results would stay str, and eval() does not force every value to a single numeric type."
+  },
+  {
+    "id": 155,
+    "domain": "Input & output operations",
+    "type": "true_false",
+    "question": "For each of the following statements, select True if the statement is valid, or False if it is not.",
+    "options": {
+      "statement1": "The assignment s = \"Durga Sir's Python Classes are Good\" causes an error because double quotes and single quotes cannot be used at the same time.",
+      "statement2": "After result = 456 + 456.0, the type of result is int.",
+      "statement3": "The expression False + 5 - True + 35 // 4 evaluates to 12.",
+      "statement4": "The statement print('result:', (7/2) + (False or True) + (9%3)) prints result: 4.5 to the console."
+    },
+    "answer": {
+      "statement1": "False: The assignment s = \"Durga Sir's Python Classes are Good\" causes an error because double quotes and single quotes cannot be used at the same time.",
+      "statement2": "False: After result = 456 + 456.0, the type of result is int.",
+      "statement3": "True: The expression False + 5 - True + 35 // 4 evaluates to 12.",
+      "statement4": "True: The statement print('result:', (7/2) + (False or True) + (9%3)) prints result: 4.5 to the console."
+    },
+    "explanation": "A single quote inside a double-quoted literal is perfectly legal, so statement 1 is wrong, and adding an int to a float produces a float, so statement 2 is wrong. In statement 3, bool acts as 0 and 1, giving 0 + 5 - 1 + 8 = 12. In statement 4, 7/2 is 3.5, False or True is True which counts as 1, and 9%3 is 0, so print outputs result: 4.5."
+  },
+  {
+    "id": 156,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "Consider the file abc.txt:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>Durga:10<br>Ravi:20<br>Shiva:30<br>Pavan:40</div>Consider the Python file test.py, stored in the same folder as abc.txt:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>values = 0<br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;f = open('abc.txt', 'r')<br>&nbsp;&nbsp;&nbsp;&nbsp;content = f.readlines()<br>&nbsp;&nbsp;&nbsp;&nbsp;for line in content:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;values += float(line.split(':')[1])<br>&nbsp;&nbsp;&nbsp;&nbsp;f.close()<br>except Exception:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Unable to open the file')<br>print(values)</div>What is the result?",
+    "options": [
+      "A. Unable to open the file",
+      "B. 100",
+      "C. 100.0",
+      "D. 10.0"
+    ],
+    "answer": "C. 100.0",
+    "explanation": "The file opens successfully, so no exception is raised, and each line contributes float(line.split(':')[1]), that is 10.0 + 20.0 + 30.0 + 40.0. Adding floats to the int 0 promotes the total to float, so print shows 100.0 rather than the int 100."
+  },
+  {
+    "id": 157,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "To write the text Python Certificaton to the file abc.txt, which of the following is valid code?",
+    "options": [
+      "A. f=open('abc.txt','b')<br>f.write('Python Certificaton')<br>f.close()",
+      "B. f=open('abc.txt','r')<br>f.write('Python Certificaton')<br>f.close()",
+      "C. f=open('abc.txt')<br>f.write('Python Certificaton')<br>f.close()",
+      "D. f=open('abc.txt','w')<br>f.write('Python Certificaton')<br>f.close()"
+    ],
+    "answer": "D. f=open('abc.txt','w')<br>f.write('Python Certificaton')<br>f.close()",
+    "explanation": "Mode w opens the file for writing, creating or truncating it, so write() succeeds. Mode b on its own is not a valid mode string and raises ValueError, while r and the default mode open the file read-only, so write() raises io.UnsupportedOperation: not writable."
+  },
+  {
+    "id": 158,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "Consider the data present in the file abc.txt:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>DURGASOFT,50,60,70,80,90<br>MICROSOFT,10,20,30,40,50</div>Which of the following is valid code to read the total data from the file?",
+    "options": [
+      "A. with open('abc.txt','r') f:<br>&nbsp;&nbsp;&nbsp;&nbsp;data=f.read()",
+      "B. with open('abc.txt') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;data=f.read()",
+      "C. with open('abc.txt','w') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;data=f.read()",
+      "D. with open('abc.txt') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;data=f.readline()"
+    ],
+    "answer": "B. with open('abc.txt') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;data=f.read()",
+    "explanation": "The default mode of open() is r, and read() returns the whole file as one string, so option B collects all the data. Option A omits the as keyword and is a SyntaxError, option C opens in w mode which truncates the file and makes read() raise io.UnsupportedOperation, and option D reads only the first line."
+  },
+  {
+    "id": 159,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "Assume that you are writing Python code for a voting application. You need to open the file voters_list.txt, add new voter information, and print the total data to the console.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>with open('voters_list.txt', 'a+') as f:<br>&nbsp;&nbsp;&nbsp;&nbsp;f.write('New voters info')<br>&nbsp;&nbsp;&nbsp;&nbsp;#Line-1<br>&nbsp;&nbsp;&nbsp;&nbsp;data = f.read()<br>&nbsp;&nbsp;&nbsp;&nbsp;print(data)</div>Which line should be inserted at Line-1?",
+    "options": [
+      "A. f.seek(0)",
+      "B. f.flush()",
+      "C. f.begin()",
+      "D. f.close()"
+    ],
+    "answer": "A. f.seek(0)",
+    "explanation": "After the write in a+ mode the file pointer sits at the end of the file, so read() returns an empty string until the pointer is moved back with seek(0). flush() only pushes buffered bytes to disk without moving the pointer, close() would make the following read() fail on a closed file, and file objects have no begin() method."
+  },
+  {
+    "id": 160,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "You write the following code.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import datetime<br>d = datetime.datetime(2017, 4, 7)<br>print('{:%B-%d-%y}'.format(d))<br><br>num = 1234567.890<br>print('{:,.4f}'.format(num))</div>You run the program. What is the output?",
+    "options": [
+      "A. 2017-April-07<br>1,234,567.890",
+      "B. Apr-07-2017<br>1,234,567,8900",
+      "C. April-07-17<br>1,234,567.8900",
+      "D. April-07-17<br>1234567.89"
+    ],
+    "answer": "C. April-07-17<br>1,234,567.8900",
+    "explanation": "In the date format, %B is the full month name, %d is the zero-padded day and %y is the two-digit year, so the first line prints April-07-17. In the number format the comma turns on thousands separators and .4f forces four digits after the decimal point, producing 1,234,567.8900."
+  },
+  {
+    "id": 161,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "Northwind Traders has hired you as an intern on the coding team that creates e-commerce applications. You must write a script that asks the user for a value. The value must be used as a whole number in a calculation, even if the user enters a decimal value.<br>Which code segment should you use?",
+    "options": [
+      "A. totalItems = int(input(\"How many items would you like?\"))",
+      "B. totalItems = str(input(\"How many items would you like?\"))",
+      "C. totalItems = float(input(\"How many items would you like?\"))",
+      "D. totalItems = input(\"How many items would you like?\")"
+    ],
+    "answer": "A. totalItems = int(input(\"How many items would you like?\"))",
+    "explanation": "Only int() converts the entered text into a whole number that can be used directly in arithmetic. float() keeps a decimal part, while str() and a bare input() leave the value as text, so any calculation would raise a TypeError or concatenate strings instead of adding numbers."
+  },
+  {
+    "id": 162,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "You develop a Python application for your company. You need to accept input from the user and print that information to the user screen. You have started with the following code. Line numbers are included for reference only.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 print(\"What is your name?\")<br>02<br>03 print(name)</div>Which code should you write at line 02?",
+    "options": [
+      "A. name = input",
+      "B. input(name)",
+      "C. name = input()",
+      "D. input(\"name\")"
+    ],
+    "answer": "C. name = input()",
+    "explanation": "input() must be called with parentheses and its return value assigned so that line 03 has a variable to print. Option A binds the built-in function object itself rather than the typed text, while options B and D never assign anything and would additionally raise NameError for the undefined name in option B."
+  },
+  {
+    "id": 163,
+    "domain": "Input & output operations",
+    "type": "multiple_select",
+    "question": "If the user enters 12345 as input, which of the following code segments will print 12346 to the console? (Choose 3.)",
+    "options": [
+      "A. count=input('Enter count value:')<br>print(count+1)",
+      "B. count=input('Enter count value:')<br>print(int(count)+1)",
+      "C. count=eval(input('Enter count value:'))<br>print(count+1)",
+      "D. count=int(input('Enter count value:'))<br>print(count+1)"
+    ],
+    "answer": [
+      "B. count=input('Enter count value:')<br>print(int(count)+1)",
+      "C. count=eval(input('Enter count value:'))<br>print(count+1)",
+      "D. count=int(input('Enter count value:'))<br>print(count+1)"
+    ],
+    "explanation": "input() returns the text '12345', so it must be turned into a number before 1 can be added: int() does that in options B and D, and eval() evaluates the typed digits as the int literal 12345 in option C. Option A adds 1 to a str and raises TypeError: can only concatenate str (not \"int\") to str."
+  },
+  {
+    "id": 164,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "You are creating a program that shows a congratulation message to employees on their service anniversary. You need to calculate the number of years of service and print a congratulatory message. You have written the following code. Line numbers are included for reference only.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 start = input(\"How old were you on your start date?\")<br>02 end = input(\"How old are you today?\")<br>03</div>Which code should you use at line 03?",
+    "options": [
+      "A. print(\"congratulations on \" + int(end - start) + \" years of service!\")",
+      "B. print(\"congratulations on \" + (int(end) - int(start)) + \" years of service!\")",
+      "C. print(\"congratulations on \" + str(end - start) + \" years of service!\")",
+      "D. print(\"congratulations on \" + str(int(end) - int(start)) + \" years of service!\")"
+    ],
+    "answer": "D. print(\"congratulations on \" + str(int(end) - int(start)) + \" years of service!\")",
+    "explanation": "start and end are strings, so each must be converted with int() before subtracting, and the numeric result must be converted back with str() before it can be joined to the surrounding text. Options A and C subtract two strings and raise TypeError: unsupported operand type(s) for -, and option B tries to concatenate an int to a str, which also raises TypeError."
+  },
+  {
+    "id": 165,
+    "domain": "Input & output operations",
+    "type": "fill_in_blank",
+    "question": "You are an intern for Northwind Electric Cars. You must create a function that calculates the average velocity of their vehicles on a 1320 foot (1/4 mile) track. The output must be as precise as possible.<br>How should you complete the code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>#Speed calculator<br>distance = ____(input(\"Enter the distance traveled in feet\"))<br>distance_miles = distance / 5280&nbsp;&nbsp;&nbsp;&nbsp;#convert to miles<br>time = ____(input(\"Enter the time elapsed in seconds\"))<br>time_hours = time / 3600&nbsp;&nbsp;&nbsp;&nbsp;#convert to hours<br>velocity = distance_miles / time_hours<br>print(\"The average velocity is : \", velocity, \" miles/hour\")</div>",
+    "options": {
+      "distance_conversion": [
+        "int",
+        "float",
+        "str"
+      ],
+      "time_conversion": [
+        "int",
+        "float",
+        "str"
+      ]
+    },
+    "answer": {
+      "distance_conversion": "float",
+      "time_conversion": "float"
+    },
+    "explanation": "float() keeps the fractional part of whatever the user types, which is what makes the calculated velocity as precise as possible. int() would discard any decimals entered for the distance or the elapsed time and lose accuracy, and str() would leave the values as text so the divisions would raise TypeError."
+  },
+  {
+    "id": 166,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "You are an intern for XYZ Cars Company. You have to create a function that calculates the average velocity of a vehicle on a 2640 foot (1/2 mile) track. Consider the following Python code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>distance = xxx(input('Enter the distance travelled in feet:'))&nbsp;&nbsp;&nbsp;&nbsp;#Line-1<br>distance_miles = distance / 5280<br>time = yyy(input('Enter the time elapsed in seconds:'))&nbsp;&nbsp;&nbsp;&nbsp;#Line-2<br>time_hours = time / 3600<br>velocity = distance_miles / time_hours<br>print('The average Velocity:', velocity, 'miles/hour')</div>To generate the most precise output, which modifications should be done at Line-1 and at Line-2?",
+    "options": [
+      "A. xxx should be replaced with float and yyy should be replaced with float",
+      "B. xxx should be replaced with float and yyy should be replaced with int",
+      "C. xxx should be replaced with int and yyy should be replaced with float",
+      "D. xxx should be replaced with int and yyy should be replaced with int"
+    ],
+    "answer": "A. xxx should be replaced with float and yyy should be replaced with float",
+    "explanation": "Both the distance and the elapsed time can be entered with decimals, so converting each with float() preserves the full precision of the input. Any option that uses int() truncates the fractional part of that value before the division, which makes the resulting velocity less accurate."
+  },
+  {
+    "id": 167,
+    "domain": "Input & output operations",
+    "type": "multiple_select",
+    "question": "You are creating an ecommerce script that accepts input from the user and outputs the data in a comma delimited format. You write the following lines of code to accept input:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>item = input('Enter the item name: ')<br>sales = input('Enter the quantity: ')</div>The output must meet the following requirements:<br>- Strings must be enclosed inside of double-quotes<br>- Numbers must not be enclosed in quotes or other characters<br>- Each item must be separated with a comma<br>You need to complete the code to meet the requirements. Which three code segments should you use? Each correct answer presents a complete solution. (Choose 3.)",
+    "options": [
+      "A. print('\"{0}\",{1}'.format(item, sales))",
+      "B. print(item + ',' + sales)",
+      "C. print('\"' + item + '\",' + sales)",
+      "D. print(\"{0},{1}\".format(item, sales))",
+      "E. print('\"%s\", %s' % (item, sales))"
+    ],
+    "answer": [
+      "A. print('\"{0}\",{1}'.format(item, sales))",
+      "C. print('\"' + item + '\",' + sales)",
+      "E. print('\"%s\", %s' % (item, sales))"
+    ],
+    "explanation": "Options A, C and E each wrap the item name in literal double quotes, leave the quantity bare, and separate the two values with a comma, producing output such as \"widget\",5. Options B and D print the item name without any surrounding double quotes, so they fail the first requirement."
+  },
+  {
+    "id": 168,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "You are developing an app in which students provide a college name and a city as input. If the student provides the college name DURGASOFT and the city Hyderabad, the application must display the greeting message: Welcome to DURGASOFT in Hyderabad<br>Which of the following code segments can be used for this requirement?",
+    "options": [
+      "A. college_name=input('Enter Your College Name:')<br>city=input('Enter Your City:')<br>print('Welcome to {} in {}'.format(college_name,city))",
+      "B. college_name=read('Enter Your College Name:')<br>city=read('Enter Your City:')<br>print('Welcome to {} in {}'.format(college_name,city))",
+      "C. college_name=eval('Enter Your College Name:')<br>city=eval('Enter Your City:')<br>print('Welcome to {} in {}'.format(college_name,city))",
+      "D. college_name=str('Enter Your College Name:')<br>city=str('Enter Your City:')<br>print('Welcome to {} in {}'.format(college_name,city))"
+    ],
+    "answer": "A. college_name=input('Enter Your College Name:')<br>city=input('Enter Your City:')<br>print('Welcome to {} in {}'.format(college_name,city))",
+    "explanation": "input() is the only built-in that displays the prompt and returns what the user types, which the format() call then substitutes into the greeting. read() is not a built-in function and raises NameError, eval() on the prompt text tries to evaluate it as Python source and raises SyntaxError, and str() simply returns the prompt itself so the message would repeat the prompt instead of the user's answer."
+  },
+  {
+    "id": 169,
+    "domain": "Input & output operations",
+    "type": "ordering",
+    "question": "You are writing a function to read a data file and print the results as a formatted table. The data file contains information about fruit. Each record contains the name of the fruit, the weight and the price.<br>You need to print the data so that it looks like the following sample:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>Oranges&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.6&nbsp;&nbsp;&nbsp;&nbsp;1.33<br>Apples&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.0&nbsp;&nbsp;&nbsp;&nbsp;0.54<br>Grapes&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10.2&nbsp;&nbsp;&nbsp;10.96</div>The print out must meet the following requirements:<br>&bull; The fruit name must print left-aligned in a column 10 spaces wide.<br>&bull; The weight must print right-aligned in a column 5 spaces wide with up to one digit after the decimal point.<br>&bull; The price must print right-aligned in a column 7 spaces wide with up to two digits after the decimal point.<br>You write the following code. Line numbers are included for reference only.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 def print_table(file):<br>02&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data = open(file, 'r')<br>03&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for record in data:<br>04&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fields = record.split(',')<br>05&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;slot 1&gt;&lt;slot 2&gt; &lt;slot 3&gt; &lt;slot 4&gt;\".format(fields[0], eval(fields[1]), eval(fields[2])))</div>Drag the appropriate code segments into the four slots of line 05.<br>Slot 1 &rarr; ____<br>Slot 2 &rarr; ____<br>Slot 3 &rarr; ____<br>Slot 4 &rarr; ____",
+    "options": [
+      "print(\"",
+      "{:<10}",
+      "{:>5.1f}",
+      "{:>7.2f}",
+      "{:>10}",
+      "{:<5.1f}",
+      "{:<7.2f}"
+    ],
+    "answer": [
+      "print(\"",
+      "{:<10}",
+      "{:>5.1f}",
+      "{:>7.2f}"
+    ],
+    "explanation": "In a format specification the alignment character comes right after the colon: '<' forces left alignment and '>' forces right alignment, the number after it is the field width, and '.1f'/'.2f' fix the number of decimals. So {:<10} pads the name on the right to 10 columns, {:>5.1f} right-aligns the weight in 5 columns with one decimal and {:>7.2f} right-aligns the price in 7 columns with two decimals. The distractors carry the opposite alignment character, so the name would be pushed right and the numbers left, and the columns would not line up."
+  },
+  {
+    "id": 170,
+    "domain": "Input & output operations",
+    "type": "fill_in_blank",
+    "question": "You are writing a Python program to validate employee numbers. The employee number must have the format ddd-dd-dddd and consist only of numbers and dashes. The program must print True if the format is correct and print False if the format is incorrect. The program keeps asking for numbers until the user types the sentinel value.<br>How should you complete the code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____<br>parts = \"\"<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;employee_number = input('Enter employee number (ddd-dd-dddd): ')<br>&nbsp;&nbsp;&nbsp;&nbsp;parts = employee_number.split('-')<br>&nbsp;&nbsp;&nbsp;&nbsp;if len(parts) == 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if len(parts[0]) == 3 and len(parts[1]) == 2 and len(parts[2]) == 4:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if parts[0].isdigit() and parts[1].isdigit() and parts[2].isdigit():<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;print(valid)</div>",
+    "options": {
+      "initial_value": [
+        "employee_number = \"\"",
+        "employee_number = \"sentinel\""
+      ],
+      "loop_statement": [
+        "while employee_number != \"\":",
+        "while employee_number != \"sentinel\":"
+      ],
+      "reset_flag": [
+        "valid = False",
+        "valid = True"
+      ],
+      "set_flag": [
+        "valid = False",
+        "valid = True"
+      ]
+    },
+    "answer": {
+      "initial_value": "employee_number = \"\"",
+      "loop_statement": "while employee_number != \"sentinel\":",
+      "reset_flag": "valid = False",
+      "set_flag": "valid = True"
+    },
+    "explanation": "A sentinel-controlled loop must start with the control variable holding a value that is NOT the sentinel, otherwise the loop body never runs, so employee_number is primed with the empty string and the loop keeps going until the user types 'sentinel'. valid must be reset to False at the top of every iteration and only set to True once all three format tests pass. Setting valid = True first and False inside the nested ifs would print True for every invalid number."
+  },
+  {
+    "id": 171,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "You are writing a Python program to validate employee numbers. The employee number must have the format dd-ddd-dddd and consist only of numbers and dashes. The program must print True if the format is correct, otherwise print False.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) employee_number = input('Enter Your Employee Number(dd-ddd-dddd):')<br>2) parts = employee_number.split('-')<br>3) valid = False<br>4) if len(parts) == 3:<br>5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if len(parts[0]) == 2 and len(parts[1]) == 3 and len(parts[2]) == 4:<br>6)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if parts[0].isdigit() and parts[1].isdigit() and parts[2].isdigit():<br>7)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;valid = True<br>8) print(valid)</div>Which of the following is true about this code?",
+    "options": [
+      "A. It will throw an error because of misuse of the split() method",
+      "B. It will throw an error because of misuse of the isDigit() method",
+      "C. There is no error but it will not fulfill our requirement.",
+      "D. No changes are required for this code and it can fulfill the requirement."
+    ],
+    "answer": "D. No changes are required for this code and it can fulfill the requirement.",
+    "explanation": "split('-') correctly breaks the string into three parts and the method is named isdigit(), which is exactly what the code calls, so neither A nor B applies. The three length tests 2, 3 and 4 match the dd-ddd-dddd pattern and isdigit() rejects anything that is not made of digits, so the code prints True only for a correctly formatted number. Note that Python has no isDigit() method, so option B describes a method the code never uses."
+  },
+  {
+    "id": 172,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following program?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 x = \"ITVEDANT\"<br>02 print(\"%20s\", x)</div>",
+    "options": [
+      "A. 20 blank spaces after \"ITVEDANT\"",
+      "B. 20 blank spaces before \"ITVEDANT\"",
+      "C. None of these.",
+      "D. ITVEDANT padded to a width of 20 characters"
+    ],
+    "answer": "C. None of these.",
+    "explanation": "The % formatting operator is never applied here: the comma makes '%20s' and x two separate arguments to print(), so Python simply prints them side by side separated by a space, giving %20s ITVEDANT. Padding would only happen with print('%20s' % x), which uses the % operator instead of a comma."
+  },
+  {
+    "id": 173,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python program?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 d = '{a}{b}{a}'.format(a='hello', b='world')<br>02 print(d)</div>",
+    "options": [
+      "A. hello world",
+      "B. hello world hello",
+      "C. helloworldhello",
+      "D. hello hello world"
+    ],
+    "answer": "C. helloworldhello",
+    "explanation": "Named replacement fields are substituted wherever they appear, and {a} appears twice, so the template becomes hello + world + hello. There are no spaces or separators between the fields in the template string, so nothing is inserted between the words and the result is one run-on string."
+  },
+  {
+    "id": 174,
+    "domain": "Input & output operations",
+    "type": "multiple_choice",
+    "question": "Consider the following statements:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1. print('V:{:.2f}'.format(123.45678)) will print to the console V:123.46<br>2. print('V:{:.2f}'.format(123.4)) will print to the console V:123.40<br>3. print('V:{:8.2f}'.format(1.45678)) will print to the console V:1.46<br>4. print('V:{:08.2f}'.format(1.45678)) will print to the console V:00001.46</div>Which of the above statements are true?",
+    "options": [
+      "A. only 1 and 2",
+      "B. only 1, 2 and 4",
+      "C. only 2 and 4",
+      "D. 1, 2, 3 and 4"
+    ],
+    "answer": "B. only 1, 2 and 4",
+    "explanation": "'.2f' rounds to two decimals and pads with a trailing zero, so statements 1 and 2 hold, and '08.2f' zero-fills the value to a total width of 8 characters, producing 00001.46, so statement 4 holds. Statement 3 is wrong because '8.2f' pads with spaces, not nothing, so the output is V: followed by four spaces and 1.46, not V:1.46."
+  },
+  {
+    "id": 175,
+    "domain": "Code documentation",
+    "type": "multiple_choice",
+    "question": "You develop an application for your company. You want to add notes to your code so other team members will understand it. What should you do?",
+    "options": [
+      "A. Place the notes after the last line of code separated by a blank line.",
+      "B. Place the notes inside of parentheses on any line.",
+      "C. Place the notes after the # sign on any line.",
+      "D. Place the notes before the first line of code separated by a blank line."
+    ],
+    "answer": "C. Place the notes after the # sign on any line.",
+    "explanation": "In Python the hash character starts a comment, and everything after it on that line is ignored by the interpreter, so notes can be placed after a # anywhere in the file. Text placed on its own line without a # (options A and D) would be parsed as code and raise a syntax error, and parentheses group expressions rather than mark comments."
+  },
+  {
+    "id": 176,
+    "domain": "Code documentation",
+    "type": "multiple_choice",
+    "question": "You are writing an application that uses the sqrt function. The program must reference the function using the name squareRoot. You need to import the function. Which code segment should you use?",
+    "options": [
+      "A. from math import sqrt as squareRoot",
+      "B. from math.sqrt as squareRoot",
+      "C. import math.sqrt as squareRoot",
+      "D. import sqrt from math as squareRoot"
+    ],
+    "answer": "A. from math import sqrt as squareRoot",
+    "explanation": "The form 'from module import name as alias' pulls a single object out of a module and binds it to a new name, which is exactly what is required here. 'from math.sqrt as squareRoot' is not valid syntax because from must be followed by import, 'import math.sqrt' fails because sqrt is a function and not a submodule, and 'import sqrt from math' reverses the required keyword order."
+  },
+  {
+    "id": 177,
+    "domain": "Code documentation",
+    "type": "multiple_choice",
+    "question": "Woodgrove Bank is migrating their legacy bank transaction code to Python. You have been hired to document the migrated code. Which documentation syntax is correct?",
+    "options": [
+      "A. Returns the current balance of the bank account<br>def get_balance():<br>&nbsp;&nbsp;&nbsp;&nbsp;return balance",
+      "B. def get_balance():<br>&nbsp;&nbsp;&nbsp;&nbsp;/*Returns the current balance of the bank account*/<br>&nbsp;&nbsp;&nbsp;&nbsp;return balance",
+      "C. //Returns the current balance of the bank account<br>def get_balance():<br>&nbsp;&nbsp;&nbsp;&nbsp;return balance",
+      "D. def get_balance():<br>&nbsp;&nbsp;&nbsp;&nbsp;#Returns the current balance of the bank account<br>&nbsp;&nbsp;&nbsp;&nbsp;return balance"
+    ],
+    "answer": "D. def get_balance():<br>&nbsp;&nbsp;&nbsp;&nbsp;#Returns the current balance of the bank account<br>&nbsp;&nbsp;&nbsp;&nbsp;return balance",
+    "explanation": "Python marks a comment with the hash character, so only the option that puts # in front of the descriptive text is valid. /* */ is the C-style block comment and // is the C-style line comment; both are syntax errors in Python, and bare text with no marker at all is parsed as code."
+  },
+  {
     "id": 178,
+    "domain": "Code documentation",
+    "type": "true_false",
+    "question": "You create a function to calculate the power of a number. You need to ensure that the function is documented with comments. You create the following code. Line numbers are included for reference only.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 # The calc_power function calculates exponents<br>02 # x is the base<br>03 # y is the exponent<br>04 # The value of x raised to the y power is returned<br>05 def calc_power(x, y):<br>06&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;comment = \"#Return the value\"<br>07&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return x**y # raise x to the y power</div>For each of the following statements, select True if the statement is correct. Otherwise, select False.",
+    "options": {
+      "statement1": "Lines 01 through 04 will be ignored for syntax checking.",
+      "statement2": "The pound sign (#) is optional for lines 02 and 03.",
+      "statement3": "The string in line 06 will be interpreted as a comment.",
+      "statement4": "Line 07 contains an inline comment."
+    },
+    "answer": {
+      "statement1": "True: Lines 01 through 04 will be ignored for syntax checking.",
+      "statement2": "False: The pound sign (#) is optional for lines 02 and 03.",
+      "statement3": "False: The string in line 06 will be interpreted as a comment.",
+      "statement4": "True: Line 07 contains an inline comment."
+    },
+    "explanation": "Every line that begins with # is stripped by the tokenizer, so lines 01 to 04 are never parsed as code, and the text after # on line 07 is an inline comment. Each comment line needs its own # character, so removing it from lines 02 and 03 would turn them into invalid statements. Line 06 assigns a string literal to a variable; the # is inside quotes, so it is ordinary string data and not a comment."
+  },
+  {
+    "id": 179,
+    "domain": "Function definitions",
+    "type": "multiple_select",
+    "question": "Adventure Works Cycles is creating a program that allows customers to log the number of miles biked. The program will send messages based on how many miles the customer logs. You create the following code. Line numbers are included for reference only.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01<br>02&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;name = input(\"What is your name? \")<br>03&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return name<br>04<br>05&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;calories = miles * calories_per_mile<br>06&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return calories<br>07 distance = int(input(\"How many miles did you bike this week? \"))<br>08 burn_rate = 50<br>09 biker = get_name()<br>10 calories_burned = calc_calories(distance, burn_rate)<br>11 print(biker, \", you burned about\", calories_burned, \"calories.\")</div>You need to define the two required functions. Which code segments should you use for line 01 and line 04? Each correct answer presents part of the solution. (Choose 2.)",
+    "options": [
+      "A. 01 def get_name():",
+      "B. 01 def get_name(biker):",
+      "C. 01 def get_name(name):",
+      "D. 04 def calc_calories():",
+      "E. 04 def calc_calories(miles, burn_rate):",
+      "F. 04 def calc_calories(miles, calories_per_mile):"
+    ],
+    "answer": [
+      "A. 01 def get_name():",
+      "F. 04 def calc_calories(miles, calories_per_mile):"
+    ],
+    "explanation": "Line 09 calls get_name() with no arguments, so its definition must declare no parameters, and the body on line 05 uses the names miles and calories_per_mile, so the second header must declare exactly those two parameter names. Choosing def calc_calories(miles, burn_rate) would make calories_per_mile an undefined name and raise a NameError, and def calc_calories() would fail because line 10 passes two arguments."
+  },
+  {
+    "id": 180,
+    "domain": "Function definitions",
+    "type": "true_false",
+    "question": "You are writing a function that increments the player score in a game. The function has the following requirements:<br>&bull; If no value is specified for points, then points start at one.<br>&bull; If bonus is True, then points must be doubled.<br>You write the following code. Line numbers are included for reference only.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 def increment_score(score, bonus, points):<br>02&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if bonus == True:<br>03&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;points = points * 2<br>04&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;score = score + points<br>05&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return score<br>06 points = 5<br>07 score = 10<br>08 new_score = increment_score(score, True, points)</div>For each of the following statements, select True if the statement is correct. Otherwise, select False.",
+    "options": {
+      "statement1": "To meet the requirements, line 01 must be changed to def increment_score(score, bonus, points = 1):",
+      "statement2": "Once any parameter is defined with a default value, any parameters to the right must also be defined with default values.",
+      "statement3": "If the function is called with only two parameters, the value of the third parameter will be None.",
+      "statement4": "Line 03 will also modify the value of the variable points declared at line 06."
+    },
+    "answer": {
+      "statement1": "True: To meet the requirements, line 01 must be changed to def increment_score(score, bonus, points = 1):",
+      "statement2": "True: Once any parameter is defined with a default value, any parameters to the right must also be defined with default values.",
+      "statement3": "False: If the function is called with only two parameters, the value of the third parameter will be None.",
+      "statement4": "False: Line 03 will also modify the value of the variable points declared at line 06."
+    },
+    "explanation": "Giving points the default value 1 is the only way to satisfy the rule that points start at one when no value is supplied, and Python requires that every parameter after the first defaulted parameter also have a default. Omitting an argument for a parameter with no default raises a TypeError rather than passing None. Line 03 only rebinds the local name points to a new integer, so the module-level points from line 06 still equals 5 after the call."
+  },
+  {
+    "id": 181,
+    "domain": "Function definitions",
+    "type": "ordering",
+    "question": "You are writing a function in Python that must meet the following requirements:<br>&bull; The function accepts a list and a string as parameters.<br>&bull; The function must search for the string in the list.<br>&bull; If the string is found in the list, the function must print a message indicating that the string was found and then stop iterating through the list.<br>&bull; If the string is not found, the function must print a message indicating that the string was not found in the list.<br>In which order should you arrange the code segments to develop the solution?<br>Line 1 &rarr; ____<br>Line 2 &rarr; ____<br>Line 3 &rarr; ____<br>Line 4 &rarr; ____<br>Line 5 &rarr; ____",
+    "options": [
+      "for i in range(len(items)):",
+      "if items[i] == term: print(\"{0} was found in the list.\".format(term))",
+      "break",
+      "def search(items, term):",
+      "else: print(\"{0} was not found in the list.\".format(term))"
+    ],
+    "answer": [
+      "def search(items, term):",
+      "for i in range(len(items)):",
+      "if items[i] == term: print(\"{0} was found in the list.\".format(term))",
+      "break",
+      "else: print(\"{0} was not found in the list.\".format(term))"
+    ],
+    "explanation": "The def header has to come first, then the loop that walks the indexes, then the test that prints the success message, then break to stop iterating. The final else belongs to the for loop, not to the if: a for/else block runs its else only when the loop finished without hitting break, which is exactly the 'not found' case. Attaching the else to the if instead would print the not-found message once for every element that does not match."
+  },
+  {
+    "id": 182,
+    "domain": "Function definitions",
+    "type": "fill_in_blank",
+    "question": "You are developing a Python application for an online game. You need to create a function that meets the following criteria:<br>&bull; The function is named update_score<br>&bull; The function receives the current score and a value<br>&bull; The function adds the value to the current score<br>&bull; The function returns the new score<br>How should you complete the code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____ ____<br>&nbsp;&nbsp;&nbsp;&nbsp;current += value<br>&nbsp;&nbsp;&nbsp;&nbsp;____</div>",
+    "options": {
+      "function_header": [
+        "update_score",
+        "def update_score",
+        "return update_score"
+      ],
+      "parameter_list": [
+        "(current, value):",
+        "(current, value)",
+        "():",
+        "()"
+      ],
+      "return_statement": [
+        "pass current",
+        "return current",
+        "return",
+        "pass"
+      ]
+    },
+    "answer": {
+      "function_header": "def update_score",
+      "parameter_list": "(current, value):",
+      "return_statement": "return current"
+    },
+    "explanation": "A function is created with the def keyword followed by its name, a parenthesised parameter list and a colon that opens the body. The two parameters current and value are needed so the caller can pass the score and the amount to add. The value must be handed back with return current; pass does nothing and a bare return would give back None instead of the new score."
+  },
+  {
+    "id": 183,
+    "domain": "Function definitions",
+    "type": "multiple_choice",
+    "question": "You are developing a Python application for an online game. You need to create a function that meets the following criteria:<br>&bull; The function is named update_score<br>&bull; The function receives the current score and a value.<br>&bull; The function adds the value to the current score.<br>&bull; The function returns the new score.<br>Which of the following is a valid function to fulfill this requirement?",
+    "options": [
+      "A. update_score(score,value):<br>&nbsp;&nbsp;&nbsp;&nbsp;new_score=score+value<br>&nbsp;&nbsp;&nbsp;&nbsp;return new_score",
+      "B. def update_score(score,value):<br>&nbsp;&nbsp;&nbsp;&nbsp;new_score=score+value<br>&nbsp;&nbsp;&nbsp;&nbsp;return new_score",
+      "C. def update_score(score,value):<br>&nbsp;&nbsp;&nbsp;&nbsp;new_score=score+value<br>&nbsp;&nbsp;&nbsp;&nbsp;pass new_score",
+      "D. def update_score():<br>&nbsp;&nbsp;&nbsp;&nbsp;new_score=score+value<br>&nbsp;&nbsp;&nbsp;&nbsp;return new_score"
+    ],
+    "answer": "B. def update_score(score,value):<br>&nbsp;&nbsp;&nbsp;&nbsp;new_score=score+value<br>&nbsp;&nbsp;&nbsp;&nbsp;return new_score",
+    "explanation": "A function definition needs the def keyword, a name, the parameters it receives and a return statement that hands the result back. Option A omits def so it is a syntax error, option C writes 'pass new_score' which is not valid because pass takes no operand, and option D declares no parameters so score and value would be undefined names."
+  },
+  {
+    "id": 184,
+    "domain": "Function definitions",
+    "type": "fill_in_blank",
+    "question": "A coworker wrote a program that inputs names into a database. Unfortunately, the program reversed the letters in each name. You need to write a Python function that outputs the characters in a name in the correct order.<br>How should you complete the code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>#Function reverses characters in a string.<br>#returns new string in reversed order.<br>def reverse_name(backwards_name):<br>&nbsp;&nbsp;&nbsp;&nbsp;forward_name = ''<br>&nbsp;&nbsp;&nbsp;&nbsp;for index in ____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forward_name += ____<br>&nbsp;&nbsp;&nbsp;&nbsp;return forward_name<br>print(reverse_name(\"leinad\"))&nbsp;&nbsp;&nbsp;#test case</div>",
+    "options": {
+      "loop_sequence": [
+        "backwards_name:",
+        "len(backwards_name):",
+        "range(0, len(backwards_name),-1):",
+        "range(len(backwards_name)-1,-1,-1):"
+      ],
+      "character_expression": [
+        "backwards_name[index-1]",
+        "backwards_name[len(forward_name)-1]",
+        "backwards_name[len(backwards_name)-len(forward_name)]",
+        "backwards_name[index]"
+      ]
+    },
+    "answer": {
+      "loop_sequence": "range(len(backwards_name)-1,-1,-1):",
+      "character_expression": "backwards_name[index]"
+    },
+    "explanation": "To walk a string backwards you need a range that starts at the last index, stops just past index 0 and steps by -1, which is range(len(backwards_name)-1, -1, -1); each pass then appends the character at that index. range(0, len(backwards_name), -1) is empty because a negative step can never move from 0 up to a larger stop value, and iterating over backwards_name directly would make index a character, not a position, so backwards_name[index] would fail."
+  },
+  {
+    "id": 185,
+    "domain": "Function definitions",
+    "type": "fill_in_blank",
+    "question": "You are writing a function to perform safe division. You need to ensure that a denominator and numerator are passed to the function and that the denominator is not zero.<br>How should you complete the code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def safe_divide(numerator, denominator):<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(\"A required value is missing.\")<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(\"The denominator is zero.\")<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return numerator / denominator</div>",
+    "options": {
+      "missing_value_check": [
+        "if numerator is None or denominator is None:",
+        "if numerator is None and denominator is None:",
+        "if numerator = None or denominator = None:",
+        "if numerator = None and denominator = None:"
+      ],
+      "zero_check": [
+        "elif denominator == 0:",
+        "elif denominator = 0:",
+        "elif denominator != 0:",
+        "elif denominator in 0:"
+      ]
+    },
+    "answer": {
+      "missing_value_check": "if numerator is None or denominator is None:",
+      "zero_check": "elif denominator == 0:"
+    },
+    "explanation": "Either missing argument must trigger the warning, so the two None tests are joined with or, not and, and identity with None is tested using 'is'. A single = is assignment and is a syntax error inside a condition. The second branch must fire when the denominator equals zero, so it uses ==; 'elif denominator != 0' would print the zero warning for every valid divisor instead."
+  },
+  {
+    "id": 186,
+    "domain": "Function definitions",
+    "type": "fill_in_blank",
+    "question": "Wingtip Toys is creating an interactive Times Table Helper program intended for elementary school children. You need to complete a function that computes and displays all multiplication table combinations from 2 to 12.<br>How should you complete the code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>#Displays times tables 2 - 12<br>def times_tables():<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(row*col, end=\" \")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print()<br>#main<br>times_tables()</div>",
+    "options": {
+      "outer_loop": [
+        "for col in range(13):",
+        "for col in range(2, 12, 1):",
+        "for col in range(2, 13):",
+        "for col in range(12):"
+      ],
+      "inner_loop": [
+        "for row in range(13):",
+        "for row in range(2, 12, 1):",
+        "for row in range(2, 13):",
+        "for row in range(12):"
+      ]
+    },
+    "answer": {
+      "outer_loop": "for col in range(2, 13):",
+      "inner_loop": "for row in range(2, 13):"
+    },
+    "explanation": "range(start, stop) includes start but excludes stop, so range(2, 13) is exactly the numbers 2 through 12 that the table needs. range(2, 12, 1) stops at 11 and misses the twelve times table, while range(13) and range(12) both start at 0 and would add unwanted 0 and 1 rows and columns."
+  },
+  {
+    "id": 187,
+    "domain": "Function definitions",
+    "type": "multiple_choice",
+    "question": "Consider the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def get_score(total=0, valid=0):<br>&nbsp;&nbsp;&nbsp;&nbsp;result = int(valid)/int(total)<br>&nbsp;&nbsp;&nbsp;&nbsp;return result</div>For which of the function calls will we get an error?",
+    "options": [
+      "A. score = get_score('40', '4')",
+      "B. score = get_score(0, 10)",
+      "C. score = get_score(40, 4)",
+      "D. score = get_score(40)"
+    ],
+    "answer": "B. score = get_score(0, 10)",
+    "explanation": "The first positional argument fills total and the second fills valid, so get_score(0, 10) computes 10/0 and raises ZeroDivisionError. The other calls all divide by a non-zero total: the strings '40' and '4' are converted by int() without trouble, and get_score(40) leaves valid at its default 0, giving 0/40 which is 0.0."
+  },
+  {
+    "id": 188,
+    "domain": "Function definitions",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) def get_names():<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;names = ['Sunny','Bunny','Chinny','Vinny','Pinny']<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return names[2:]<br>4)<br>5) def update_names(elements):<br>6)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_names = []<br>7)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for name in elements:<br>8)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;new_names.append(name[:3].upper())<br>9)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return new_names<br>10)<br>11) print(update_names(get_names()))</div>What is the result?",
+    "options": [
+      "A. ['CHI', 'VIN', 'PIN']",
+      "B. ['VIN', 'PIN']",
+      "C. ['CH', 'VI', 'PI']",
+      "D. ['SU', 'BU']"
+    ],
+    "answer": "A. ['CHI', 'VIN', 'PIN']",
+    "explanation": "names[2:] slices from index 2 to the end, giving ['Chinny', 'Vinny', 'Pinny'], and name[:3] keeps the first three characters of each before upper() converts them. That produces three items of three letters each; options with two letters use a [:2] slice and the two-item option starts the slice at index 3."
+  },
+  {
+    "id": 189,
+    "domain": "Function definitions",
+    "type": "multiple_choice",
+    "question": "Consider the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) def my_list(x):<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lst.append(a)<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return lst<br>4)<br>5) my_list('chicken')<br>6) my_list('mutton')<br>7) print(my_list('fish'))</div>The code must print the following to the console:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>['chicken','mutton','fish']</div>x should be replaced with:",
+    "options": [
+      "A. a,lst=[]",
+      "B. a,lst=()",
+      "C. a,lst={}",
+      "D. a,lst=None"
+    ],
+    "answer": "A. a,lst=[]",
+    "explanation": "Replacing x with a, lst=[] gives the second parameter a mutable default list, and because a default value is created once when the def executes, the same list object is reused and grows on every call, accumulating all three items. A tuple, a dict or None have no append method, so those choices raise an AttributeError on line 2."
+  },
+  {
+    "id": 190,
+    "domain": "Function definitions",
+    "type": "multiple_select",
+    "question": "Consider the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) def f1(x=0, y=0):<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return x+y</div>Which of the following method calls are valid? (Choose 3.)",
+    "options": [
+      "A. f1()",
+      "B. f1('10','20')",
+      "C. f1(10)",
+      "D. f1('10')"
+    ],
+    "answer": [
+      "A. f1()",
+      "B. f1('10','20')",
+      "C. f1(10)"
+    ],
+    "explanation": "Both parameters have defaults, so any number of arguments from zero to two is accepted; f1() adds 0+0, f1('10','20') concatenates the two strings into '1020', and f1(10) adds 10+0. f1('10') is the only invalid call because it leaves y at the integer default 0 and Python refuses to concatenate a str with an int, raising TypeError."
+  },
+  {
+    "id": 191,
+    "domain": "Function definitions",
+    "type": "multiple_select",
+    "question": "Consider the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) def f1(x=0, y=0):<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return x*y</div>Which of the following method calls are valid? (Choose 3.)",
+    "options": [
+      "A. f1()",
+      "B. f1('10','20')",
+      "C. f1(10)",
+      "D. f1('10')"
+    ],
+    "answer": [
+      "A. f1()",
+      "C. f1(10)",
+      "D. f1('10')"
+    ],
+    "explanation": "Multiplying a string by an integer is legal repetition, so f1('10') returns the empty string because y defaults to 0, while f1() and f1(10) are plain integer multiplications returning 0. f1('10','20') fails because a sequence can only be repeated by an integer, and multiplying two strings raises TypeError."
+  },
+  {
+    "id": 192,
+    "domain": "Function definitions",
+    "type": "multiple_choice",
+    "question": "Consider the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) numbers = [100,20,10,70,50,60,40,30,90,80]<br>2) #Insert Code Here<br>3) print('The highest Number:{} and Least Number:{}'.format(high, low))</div>Which of the following code should be inserted to print the highest number as 100 and the least number as 10?",
+    "options": [
+      "A. def find_numbers():<br>&nbsp;&nbsp;&nbsp;&nbsp;numbers.sort()<br>&nbsp;&nbsp;&nbsp;&nbsp;return numbers[0],numbers[-1]<br>low,high = find_numbers()",
+      "B. def find_numbers():<br>&nbsp;&nbsp;&nbsp;&nbsp;numbers.sort()<br>&nbsp;&nbsp;&nbsp;&nbsp;return numbers[0],numbers[len(numbers)]<br>low,high = find_numbers()",
+      "C. def find_numbers():<br>&nbsp;&nbsp;&nbsp;&nbsp;numbers.sort()<br>&nbsp;&nbsp;&nbsp;&nbsp;return numbers[0],numbers[-1]<br>low = find_numbers()<br>high = find_numbers()",
+      "D. def find_numbers():<br>&nbsp;&nbsp;&nbsp;&nbsp;numbers.sort()<br>&nbsp;&nbsp;&nbsp;&nbsp;return numbers[2],numbers[0]<br>low,high = find_numbers()"
+    ],
+    "answer": "A. def find_numbers():<br>&nbsp;&nbsp;&nbsp;&nbsp;numbers.sort()<br>&nbsp;&nbsp;&nbsp;&nbsp;return numbers[0],numbers[-1]<br>low,high = find_numbers()",
+    "explanation": "After sort() the list runs from smallest to largest, so numbers[0] is 10 and numbers[-1] is 100, and returning them as a tuple lets low, high = find_numbers() unpack them into the right names. numbers[len(numbers)] is one past the end and raises IndexError, calling the function twice binds whole tuples to low and high so the tuples themselves get printed, and numbers[2] is 30, not the maximum."
+  },
+  {
+    "id": 193,
+    "domain": "Function definitions",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) numbers = [100,20,10,70,50,60,40,30,90,80]<br>2)<br>3) def find_numbers():<br>4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numbers.sort()<br>5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return numbers[0],numbers[-1]<br>6)<br>7) low = find_numbers()<br>8) high = find_numbers()<br>9) #Line-1</div>To print 10 100 to the console, which of the following code do we have to use at Line-1?",
+    "options": [
+      "A. print(low,high)",
+      "B. print(low[0],high[-1])",
+      "C. print(low[-1],high[0])",
+      "D. print(low[2],high[0])"
+    ],
+    "answer": "B. print(low[0],high[-1])",
+    "explanation": "find_numbers() returns the whole tuple (10, 100), so both low and high hold that same tuple and each has to be indexed. low[0] is 10 and high[-1] is 100. Printing the variables directly would show two tuples, low[-1] and high[0] give them in the wrong order, and low[2] is out of range for a two-item tuple."
+  },
+  {
+    "id": 194,
+    "domain": "Function definitions",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) def calculate(amount=6, factor=3):<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if amount&gt;6:<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return amount*factor<br>4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:<br>5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return amount*factor*2</div>Which of the following function calls returns 30?",
+    "options": [
+      "A. calculate()",
+      "B. calculate(10)",
+      "C. calculate(5,2)",
+      "D. calculate(1)"
+    ],
+    "answer": "B. calculate(10)",
+    "explanation": "calculate(10) sets amount to 10, which is greater than 6, so the first branch returns 10*3 = 30 using the default factor. calculate() takes the else branch and returns 6*3*2 = 36, calculate(5,2) returns 5*2*2 = 20, and calculate(1) returns 1*3*2 = 6."
+  },
+  {
+    "id": 195,
+    "domain": "Function definitions",
+    "type": "multiple_choice",
+    "question": "Consider the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>1) def fib_seq(n):<br>2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if n==0:<br>3)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0<br>4)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elif n==1:<br>5)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>6)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else:<br>7)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return fib_seq(n-1)+fib_seq(n-2)<br>8) for i in range(7):<br>9)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(fib_seq(i), end=',')</div>What is the result?",
+    "options": [
+      "A. 0,1,1,2,3,5,8,",
+      "B. 0,1,2,4,8,16,32,",
+      "C. 0,1,0,2,0,4,0,",
+      "D. None of these"
+    ],
+    "answer": "A. 0,1,1,2,3,5,8,",
+    "explanation": "The function is the classic recursive Fibonacci definition: 0 and 1 are the base cases and every later term is the sum of the two before it. Printing fib_seq(i) for i from 0 to 6 therefore gives 0, 1, 1, 2, 3, 5, 8, and end=',' appends a comma after each value including the last. Option B doubles each term, which is not what the recursion computes."
+  },
+  {
+    "id": 196,
+    "domain": "Error detection & fixing",
+    "type": "multiple_choice",
+    "question": "Tailspin Toys uses Python to control its new toy Happy Clown. The program has errors that cause the clown to run around in an infinite circle. You have been hired to help debug the following Happy Clown code. Line numbers are included for reference only.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 import math<br>02 #default motion for happy clown<br>03 power = True<br>04 move = 0<br>05 while(power):<br>06 &nbsp;&nbsp;&nbsp;&nbsp;if move == 0:<br>07 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;turnValue = math.pi/move<br>08 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move+=5<br>09 &nbsp;&nbsp;&nbsp;&nbsp;else:<br>10 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;turnValue = 0<br>11 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move = 0</div>Which statement correctly describes the error in this code?",
+    "options": [
+      "A. Line 05 has a syntax error because it should read (power == True).",
+      "B. Line 08 has a syntax error because + = is an invalid statement.",
+      "C. Line 07 causes a runtime error due to division by zero.",
+      "D. Line 05 causes a runtime error because the expression is incomplete."
+    ],
+    "answer": "C. Line 07 causes a runtime error due to division by zero.",
+    "explanation": "move starts at 0, so the very first pass through the loop evaluates math.pi/move, which raises ZeroDivisionError at line 07. Line 05 is fine because while(power) tests the truth value of power directly, and move+=5 on line 08 is the ordinary augmented assignment operator, so neither is a syntax error."
+  },
+  {
+    "id": 197,
+    "domain": "Error detection & fixing",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def area(b,w):<br>&nbsp;&nbsp;&nbsp;&nbsp;return B*w<br>print(area(10,20))</div>What is the result?",
+    "options": [
+      "A. AttributeError will be raised at runtime",
+      "B. IndentationError will be raised at runtime",
+      "C. NameError will be raised at runtime",
+      "D. 200"
+    ],
+    "answer": "C. NameError will be raised at runtime",
+    "explanation": "Python identifiers are case sensitive, so the parameter is b while the body refers to B, a name that is never defined. Looking up an undefined name raises NameError when the function runs, not AttributeError (which needs an object missing a member) and not IndentationError (the indentation is consistent), so 200 is never printed."
+  },
+  {
+    "id": 198,
+    "domain": "Error detection & fixing",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>data=[]<br>def get_data():<br>&nbsp;&nbsp;&nbsp;&nbsp;for i in range(1,5):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;marks=input('Enter Marks:')<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data.append(marks)<br><br>def get_avg():<br>&nbsp;&nbsp;&nbsp;&nbsp;sum=0<br>&nbsp;&nbsp;&nbsp;&nbsp;for mark in data:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sum += mark<br>&nbsp;&nbsp;&nbsp;&nbsp;return sum/len(data)<br><br>get_data()<br>print(get_avg())</div>For the input 10, 20, 30, 40 what is the result?",
+    "options": [
+      "A. 25",
+      "B. 25.0",
+      "C. NameError is thrown at runtime",
+      "D. TypeError is thrown at runtime"
+    ],
+    "answer": "D. TypeError is thrown at runtime",
+    "explanation": "input() always returns a string, so data holds ['10', '20', '30', '40']. Adding a string to the integer accumulator sum raises TypeError: unsupported operand type(s) for +=: 'int' and 'str'. The values are never converted with int(), so neither 25 nor 25.0 is ever produced, and every name used is defined so no NameError occurs."
+  },
+  {
+    "id": 199,
+    "domain": "Error detection & fixing",
+    "type": "multiple_select",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a=10<br>b=0<br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(a/b)</div>Which except blocks print the name of the exception class that was raised? (Choose 2.)",
+    "options": [
+      "A. except ZeroDivisionError as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Exception Type:', e.__class__.__name__)",
+      "B. except ZeroDivisionError as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Exception Type:', type(e).__name__)",
+      "C. except ZeroDivisionError as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Exception Type:', e)",
+      "D. All of these"
+    ],
+    "answer": [
+      "A. except ZeroDivisionError as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Exception Type:', e.__class__.__name__)",
+      "B. except ZeroDivisionError as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Exception Type:', type(e).__name__)"
+    ],
+    "explanation": "e.__class__ and type(e) both give the exception's class, and __name__ on that class is the string 'ZeroDivisionError'. Printing the exception object itself prints its message ('division by zero'), not the class name, so option C fails and therefore 'All of these' is wrong too."
+  },
+  {
+    "id": 200,
+    "domain": "Error detection & fixing",
+    "type": "multiple_choice",
+    "question": "Which of the following is a valid way of creating our own custom exception?",
+    "options": [
+      "A. class MyException:<br>&nbsp;&nbsp;&nbsp;&nbsp;pass",
+      "B. class MyException():<br>&nbsp;&nbsp;&nbsp;&nbsp;pass",
+      "C. class MyException(Exception):<br>&nbsp;&nbsp;&nbsp;&nbsp;pass",
+      "D. It is not possible to define custom exceptions in Python"
+    ],
+    "answer": "C. class MyException(Exception):<br>&nbsp;&nbsp;&nbsp;&nbsp;pass",
+    "explanation": "A custom exception must inherit from BaseException, and the recommended base is Exception. Options A and B both create a plain object subclass, so raising one fails with 'TypeError: exceptions must derive from BaseException', and Python clearly does allow user defined exceptions, so option D is false."
+  },
+  {
+    "id": 201,
+    "domain": "Error detection & fixing",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x=int(input('Enter First Number:'))<br>y=int(input('Enter Second Number:'))<br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(x/y)</div>Which of the following is a valid except block that handles both ZeroDivisionError and ValueError?",
+    "options": [
+      "A. except(ZeroDivisionError,ValueError) from e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(e)",
+      "B. except(ZeroDivisionError,ValueError) as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(e)",
+      "C. except(ZeroDivisionError | ValueError) as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(e)",
+      "D. except(ZeroDivisionError, ValueError as e):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(e)"
+    ],
+    "answer": "B. except(ZeroDivisionError,ValueError) as e:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(e)",
+    "explanation": "To catch several exception types with one handler you list them in a tuple and bind the instance with 'as': except (ZeroDivisionError, ValueError) as e. 'from' is only used with raise, the pipe form tries to bitwise-or two classes and fails, and putting 'as e' inside the parentheses is a syntax error."
+  },
+  {
+    "id": 202,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "You write the following code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import sys<br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;file_in = open(\"in.txt\", 'r')<br>&nbsp;&nbsp;&nbsp;&nbsp;file_out = open(\"out.txt\", 'w+')<br>except IOError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('cannot open', file_name)<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;i = 1<br>&nbsp;&nbsp;&nbsp;&nbsp;for line in file_in:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(line.rstrip())<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file_out.write(\"line \" + str(i) + \": \" + line)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i = i + 1<br>&nbsp;&nbsp;&nbsp;&nbsp;file_in.close()<br>&nbsp;&nbsp;&nbsp;&nbsp;file_out.close()</div>The in.txt file exists but the out.txt file does not exist. You run the code. Review the underlined text: <b>The code will execute without error.</b> If it makes the statement correct, select \"No change is needed.\" If the statement is incorrect, select the answer choice that makes the statement correct.",
+    "options": [
+      "A. No change is needed.",
+      "B. The code runs but generates a logic error.",
+      "C. The code will generate a runtime error.",
+      "D. The code will generate a syntax error."
+    ],
+    "answer": "C. The code will generate a runtime error.",
+    "explanation": "Opening a file in 'w+' mode creates it when it does not already exist, so no IOError is raised, the else block runs and the file is copied line by line. Because the except branch never executes, the undefined name file_name inside it is never evaluated, so there is no runtime error, and the syntax is valid throughout."
+  },
+  {
+    "id": 203,
+    "domain": "Exception handling",
+    "type": "true_false",
+    "question": "For each of the following statements about the Python try statement, select True if the statement is true. Otherwise, select False.",
+    "options": {
+      "statement1": "A try statement can have one or more except clauses.",
+      "statement2": "A try statement can have a finally clause without an except clause.",
+      "statement3": "A try statement can have a finally clause and an except clause.",
+      "statement4": "A try statement can have one or more finally clauses."
+    },
+    "answer": {
+      "statement1": "True: A try statement can have one or more except clauses.",
+      "statement2": "True: A try statement can have a finally clause without an except clause.",
+      "statement3": "True: A try statement can have a finally clause and an except clause.",
+      "statement4": "False: A try statement can have one or more finally clauses."
+    },
+    "explanation": "A try statement may list any number of except clauses, and try/finally is legal on its own as well as combined with except clauses. However the grammar allows at most one finally clause, so a second one is a SyntaxError, which makes the last statement false."
+  },
+  {
+    "id": 204,
+    "domain": "Exception handling",
+    "type": "fill_in_blank",
+    "question": "You are creating a program that accepts user input. The program must cast the input into an integer. You must properly handle the error if the code cannot cast the input to an integer. How should you complete the code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>while True:<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x = int(input('Please enter a number: '))<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;&nbsp;&nbsp;____ ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print('Not a valid number. Try again...')</div>",
+    "options": {
+      "block_opener": [
+        "try:",
+        "else:",
+        "except:",
+        "finally:"
+      ],
+      "handler_keyword": [
+        "except",
+        "else",
+        "raise",
+        "finally"
+      ]
+    },
+    "answer": {
+      "block_opener": "try:",
+      "handler_keyword": "except"
+    },
+    "explanation": "The risky conversion goes in a try: block, and the handler for a failed int() conversion is except ValueError:. else: and finally: cannot start a protected block, and raise would throw a new exception instead of catching one, so the loop would never recover and re-prompt the user."
+  },
+  {
+    "id": 205,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "When will the else part of try-except-else be executed?",
+    "options": [
+      "A. always",
+      "B. when no exception occurs",
+      "C. when an error exception occurs",
+      "D. when an exception occurs in the except block"
+    ],
+    "answer": "B. when no exception occurs",
+    "explanation": "The else clause of a try statement runs only if the try block completed without raising anything. If an exception is raised the matching except clause runs instead and else is skipped, so it is neither unconditional nor tied to an error, which rules out the other choices; the clause that always runs is finally."
+  },
+  {
+    "id": 206,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "Is the following Python code structure valid?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try :<br>&nbsp;&nbsp;&nbsp;&nbsp;# try block<br>except:<br>&nbsp;&nbsp;&nbsp;&nbsp;# except block<br>finally :<br>&nbsp;&nbsp;&nbsp;&nbsp;# finally block</div>",
+    "options": [
+      "A. no, there is no such thing as finally",
+      "B. no, finally cannot be used with except",
+      "C. no, finally must come before except",
+      "D. yes"
+    ],
+    "answer": "D. yes",
+    "explanation": "try/except/finally is a legal statement: finally exists, it may be combined with except, and it must come last, after any except and else clauses. Placing finally before except is what would be a SyntaxError, so options A, B and C all describe rules that do not exist."
+  },
+  {
+    "id": 207,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def foo():<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>&nbsp;&nbsp;&nbsp;&nbsp;finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 2<br>k = foo()<br>print(k)</div>",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 3",
+      "D. error, there is more than one return statement in a single try-finally block"
+    ],
+    "answer": "B. 2",
+    "explanation": "The finally block always runs before the function actually leaves, and a return inside finally discards the pending return value from the try block. So the value 1 is thrown away and 2 is returned and printed. Multiple return statements are perfectly legal, so no error is raised."
+  },
+  {
+    "id": 208,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def f1():<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 1<br>&nbsp;&nbsp;&nbsp;&nbsp;finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 2<br><br>x = f1()<br>print(x)</div>What is the result?",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. print both 1 and 2",
+      "D. Error, because more than one return statement is not allowed"
+    ],
+    "answer": "B. 2",
+    "explanation": "A return in a finally block overrides the value the try block was about to return, so f1() returns 2 and only that single value is printed. A function can contain as many return statements as you like, but it returns exactly once, so it can never print both values and no error is raised."
+  },
+  {
+    "id": 209,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>f = open('abc.txt')<br>print(f.read())<br>f.close()</div>You are required to add exception handling code to handle FileNotFoundError. Which of the following is appropriate code for this requirement?<br>Code A:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>f = None<br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;f = open('abc.txt')<br>except FileNotFoundError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"File does not exist\")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f.read())<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;if f is not None:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.close()</div>Code B:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>f = None<br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;f = open('abc.txt')<br>except FileNotFoundException:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"File does not exist\")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f.read())<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;if f is not None:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.close()</div>Code C:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>f = None<br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;f = open('abc.txt')<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f.read())<br>except FileNotFoundError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"File does not exist\")<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;if f is not None:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f.close()</div>",
+    "options": [
+      "A. Code A",
+      "B. Code B",
+      "C. Code C",
+      "D. None of these"
+    ],
+    "answer": "A. Code A",
+    "explanation": "Code A uses the real built-in name FileNotFoundError and puts the clauses in the only legal order: try, except, else, finally. Code B names FileNotFoundException, which does not exist in Python and raises NameError while handling the error, and Code C places else before except, which is a SyntaxError so the file never even compiles."
+  },
+  {
+    "id": 210,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import sys<br><br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;file_in = open('in.txt', 'r')<br>&nbsp;&nbsp;&nbsp;&nbsp;file_out = open('out.txt', 'w+')<br>except IOError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Cannot open file:', 'in.txt')<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;i = 1<br>&nbsp;&nbsp;&nbsp;&nbsp;for line in file_in:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(line.rstrip())<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file_out.write(str(i) + \": \" + line)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;file_in.close()<br>&nbsp;&nbsp;&nbsp;&nbsp;file_out.close()</div>Assume that the in.txt file is available but the out.txt file does not exist. Which of the following is true about this code?",
+    "options": [
+      "A. The code runs, but generates a logical error",
+      "B. This program will copy data from in.txt to out.txt",
+      "C. The code will generate a runtime error",
+      "D. The code will generate a syntax error"
+    ],
+    "answer": "B. This program will copy data from in.txt to out.txt",
+    "explanation": "Mode 'w+' opens a file for reading and writing and creates it if it is missing, so the missing out.txt is not a problem and no IOError is raised. The else block therefore runs and writes every line of in.txt, prefixed with its line number, into out.txt, so the program behaves exactly as intended with no syntax or runtime error."
+  },
+  {
+    "id": 211,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "The file abc.txt contains several paragraphs of text. You have to write Python code that reads the whole content of the file and prints it to the console.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;f=open('abc.txt','r')<br>&nbsp;&nbsp;&nbsp;&nbsp;#Line-1<br>&nbsp;&nbsp;&nbsp;&nbsp;print(data)<br>except:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('Unable to open the file')</div>Which code should be inserted at Line-1 to meet the given requirement?",
+    "options": [
+      "A. data = f.readlines()",
+      "B. data = f.readline()",
+      "C. data = f.read()",
+      "D. data = f.load()"
+    ],
+    "answer": "C. data = f.read()",
+    "explanation": "f.read() with no argument returns the entire contents of the file as a single string, which is exactly what printing the whole file needs. f.readline() returns only the first line, f.readlines() returns a list whose repr would be printed with brackets and escaped newlines instead of the text, and file objects have no load() method at all."
+  },
+  {
+    "id": 212,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "The base class for all exceptions in Python is:",
+    "options": [
+      "A. Exception",
+      "B. ExceptionBase",
+      "C. BaseException",
+      "D. ArithmeticError"
+    ],
+    "answer": "C. BaseException",
+    "explanation": "Every built-in exception inherits from BaseException, which sits at the top of the hierarchy. Exception is itself a subclass of BaseException and excludes SystemExit, KeyboardInterrupt and GeneratorExit, ArithmeticError only covers numeric errors, and ExceptionBase is not a real Python name."
+  },
+  {
+    "id": 213,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a=10<br>b=20<br>c='30'<br>result=a+b+c</div>What is the result?",
+    "options": [
+      "A. 102030",
+      "B. 3030",
+      "C. TypeError",
+      "D. ArithmeticError"
+    ],
+    "answer": "C. TypeError",
+    "explanation": "a+b evaluates to the integer 30, and adding the string '30' to an int raises TypeError: unsupported operand type(s) for +: 'int' and 'str'. Python never implicitly converts between numbers and strings, so no concatenated result such as 102030 or 3030 is produced, and ArithmeticError covers numeric failures like division by zero, not type mismatches."
+  },
+  {
+    "id": 214,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('try')<br>except:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('except')<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('else')<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('finally')</div>What is the result?",
+    "options": [
+      "A. try<br>except<br>else<br>finally",
+      "B. try<br>else<br>finally",
+      "C. try<br>except<br>finally",
+      "D. try<br>finally"
+    ],
+    "answer": "B. try<br>else<br>finally",
+    "explanation": "The try block prints 'try' and raises nothing, so the except clause is skipped and the else clause runs, printing 'else'. The finally clause always runs last, printing 'finally', giving the three lines try, else, finally."
+  },
+  {
+    "id": 215,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('try')<br>&nbsp;&nbsp;&nbsp;&nbsp;print(10/0)<br>except:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('except')<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('else')<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('finally')</div>What is the result?",
+    "options": [
+      "A. try<br>except<br>else<br>finally",
+      "B. try<br>else<br>finally",
+      "C. try<br>except<br>finally",
+      "D. try<br>finally"
+    ],
+    "answer": "C. try<br>except<br>finally",
+    "explanation": "'try' is printed, then 10/0 raises ZeroDivisionError, so control jumps to the bare except clause and prints 'except'. The else clause runs only when the try block finishes without an exception, so it is skipped, and finally still runs, giving try, except, finally."
+  },
+  {
+    "id": 216,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('try')<br>&nbsp;&nbsp;&nbsp;&nbsp;print(10/0)<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('else')<br>except:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('except')<br>finally:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('finally')</div>What is the result?",
+    "options": [
+      "A. try<br>except<br>else<br>finally",
+      "B. try<br>else<br>finally",
+      "C. try<br>except<br>finally",
+      "D. SyntaxError: invalid syntax"
+    ],
+    "answer": "D. SyntaxError: invalid syntax",
+    "explanation": "The clauses of a try statement must appear in the order try, except, else, finally. Here else comes before except, so the file fails to compile and a SyntaxError is reported before anything runs. Because no code executes, none of the printed-output options can be correct."
+  },
+  {
+    "id": 217,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>prices=[30.5,'40.5',10.5]<br>total=0<br>for price in prices:<br>&nbsp;&nbsp;&nbsp;&nbsp;total += price<br>print(total)</div>While executing this code we get the following error:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>Traceback (most recent call last):<br>&nbsp;&nbsp;&nbsp;&nbsp;File \"test.py\", line 4, in &lt;module&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total += price<br>TypeError: unsupported operand type(s) for +=: 'float' and 'str'</div>Which of the following code segments should be used to fix this error?",
+    "options": [
+      "A. total += str(price)",
+      "B. total += int(price)",
+      "C. total += float(price)",
+      "D. total = total+price"
+    ],
+    "answer": "C. total += float(price)",
+    "explanation": "The list mixes floats with the string '40.5', so each item must be converted to a number before it is added; float(price) handles both the floats and the string and gives 81.5. int('40.5') raises ValueError because the string has a decimal point, str(price) makes the problem worse by turning every item into text, and total = total+price is just another way of writing the failing addition."
+  },
+  {
+    "id": 218,
+    "domain": "Exception handling",
+    "type": "multiple_select",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>prices=[10,'20',30,'40']<br>total=0<br>for price in prices:<br>&nbsp;&nbsp;&nbsp;&nbsp;total +=price<br>print(total)</div>While executing this code we get the following error:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>Traceback (most recent call last):<br>&nbsp;&nbsp;&nbsp;&nbsp;File \"test.py\", line 4, in &lt;module&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total +=price<br>TypeError: unsupported operand type(s) for +=: 'int' and 'str'</div>By using which of the following code segments can we fix this problem? (Choose 2.)",
+    "options": [
+      "A. total += str(price)",
+      "B. total += int(price)",
+      "C. total += float(price)",
+      "D. total = total+price"
+    ],
+    "answer": [
+      "B. total += int(price)",
+      "C. total += float(price)"
+    ],
+    "explanation": "Every element of the list is a whole number, written either as an int or as a string of digits, so int(price) converts them all and totals 100, and float(price) works equally well and totals 100.0. str(price) would try to add a string to the integer accumulator and raise the same TypeError, and total = total+price simply repeats the original failing expression."
+  },
+  {
+    "id": 219,
+    "domain": "Exception handling",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>courses={1:'Java',2:'Scala',3:'Python'}<br>for i in range(1,5):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(courses[i])</div>While executing this code we get the following error:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>Traceback (most recent call last):<br>&nbsp;&nbsp;&nbsp;&nbsp;File \"test.py\", line 3, in &lt;module&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(courses[i])<br>KeyError: 4</div>By using which of the following code segments can we fix this problem?",
+    "options": [
+      "A. courses={1:'Java',2:'Scala',3:'Python'}<br>for i in range(1,5):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i in courses:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(courses[i])",
+      "B. courses={1:'Java',2:'Scala',3:'Python'}<br>for i in courses:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(courses[i])",
+      "C. courses={1:'Java',2:'Scala',3:'Python'}<br>for i in range(1,4):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(courses[i])",
+      "D. All of these"
+    ],
+    "answer": "D. All of these",
+    "explanation": "The KeyError happens because range(1,5) produces the key 4, which the dictionary does not contain. Guarding the lookup with 'if i in courses', iterating over the dictionary's own keys, and shrinking the range to range(1,4) all stop the missing key from ever being looked up, so each of the three segments prints Java, Scala and Python without error."
+  },
+  {
+    "id": 220,
+    "domain": "Unit testing",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = 30<br>y = 10<br>assert x &gt; y, 'x is smaller than y'</div>",
+    "options": [
+      "A. Assertion Error",
+      "B. 10 8",
+      "C. No output",
+      "D. 108"
+    ],
+    "answer": "C. No output",
+    "explanation": "An assert statement only raises AssertionError when its condition is false; when the condition is true it does nothing at all. Here x is 30 and y is 10, so the condition x greater than y is true and the message is never used, producing no output. AssertionError would only appear if x were less than or equal to y."
+  },
+  {
+    "id": 221,
+    "domain": "Unit testing",
+    "type": "multiple_choice",
+    "question": "Which type of exception will be raised if we try to call a method on an inappropriate object (an object that does not define that method)?",
+    "options": [
+      "A. IndexError",
+      "B. TypeError",
+      "C. AttributeError",
+      "D. None of these"
+    ],
+    "answer": "C. AttributeError",
+    "explanation": "Attribute and method lookup that fails on an object raises AttributeError, because the name simply is not an attribute of that object. IndexError is for out-of-range sequence indexes and TypeError is for using an object in an unsupported operation, such as calling something that is not callable."
+  },
+  {
+    "id": 222,
+    "domain": "Unit testing",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>f = open('abc.txt')<br>f.readall()</div>Which exception will be raised?",
+    "options": [
+      "A. AttributeError",
+      "B. EOFError",
+      "C. SystemError",
+      "D. SyntaxError"
+    ],
+    "answer": "A. AttributeError",
+    "explanation": "A text file object supports read, readline and readlines, but there is no readall method, so the attribute lookup fails and Python raises AttributeError. The code is syntactically valid, so SyntaxError is impossible, and EOFError is only raised by input() when it hits end of file."
+  },
+  {
+    "id": 223,
+    "domain": "File system & command-line modules",
+    "type": "multiple_choice",
+    "question": "You write a function that reads a data file and prints each line of the file. You write the following code. Line numbers are included for reference only.<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 def read_file(file):<br>02 &nbsp;&nbsp;&nbsp;&nbsp;line = None<br>03 &nbsp;&nbsp;&nbsp;&nbsp;if os.path.isfile(file):<br>04 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data = open(file, 'r')<br>05 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for line in data:<br>06 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(line)</div>When you run the program, you receive an error on line 03.<br>What is causing the error?",
+    "options": [
+      "A. The path method does not exist in the os object.",
+      "B. The isfile method does not exist in the path object.",
+      "C. You need to import the os library.",
+      "D. The isfile method does not accept one parameter."
+    ],
+    "answer": "C. You need to import the os library.",
+    "explanation": "The snippet never imports os, so evaluating os.path.isfile on line 03 raises NameError: name 'os' is not defined. Adding import os at the top fixes it; os.path is a real submodule and os.path.isfile does take exactly one path argument, so the other options describe things that are not actually wrong."
+  },
+  {
+    "id": 224,
+    "domain": "File system & command-line modules",
+    "type": "multiple_choice",
+    "question": "What is the type of sys.argv?",
+    "options": [
+      "A. set",
+      "B. list",
+      "C. tuple",
+      "D. string"
+    ],
+    "answer": "B. list",
+    "explanation": "sys.argv is a plain Python list of strings holding the command-line arguments, so it is ordered, indexable and mutable. It is not a tuple or a set, and although each element is a string, the container itself is a list."
+  },
+  {
+    "id": 225,
+    "domain": "File system & command-line modules",
+    "type": "multiple_choice",
+    "question": "Which of the following is NOT true about main modules?",
+    "options": [
+      "A. When a Python file is directly executed, it is considered the main module of a program",
+      "B. Main modules may import any number of modules",
+      "C. The special name given to main modules is: _main_",
+      "D. Other modules can import the main module"
+    ],
+    "answer": "C. The special name given to main modules is: _main_",
+    "explanation": "The interpreter sets __name__ to __main__, with two leading and two trailing underscores, for the file that is run directly, so the single-underscore spelling _main_ is wrong. The other statements are accurate: the directly executed file is the main module, it may import any number of modules, and it can itself be imported by other modules."
+  },
+  {
+    "id": 226,
+    "domain": "File system & command-line modules",
+    "type": "multiple_choice",
+    "question": "From the sys module, which variable do we use to access command-line arguments?",
+    "options": [
+      "A. argv",
+      "B. argsv",
+      "C. args",
+      "D. arguments"
+    ],
+    "answer": "A. argv",
+    "explanation": "The sys module exposes the command-line arguments as sys.argv, a name inherited from C's argv convention. There are no sys.args, sys.argsv or sys.arguments attributes, so referencing any of them raises AttributeError or ImportError."
+  },
+  {
+    "id": 227,
+    "domain": "File system & command-line modules",
+    "type": "multiple_choice",
+    "question": "Given the command invocation:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>python tests.py Itvedant</div>Which of the following code segments prints 'Itvedant' to the console?",
+    "options": [
+      "A. from sys import argv; print(argv[1])",
+      "B. from sys import argv; print(argv[0])",
+      "C. from sys import args; print(args[0])",
+      "D. from sys import args; print(args[1])"
+    ],
+    "answer": "A. from sys import argv; print(argv[1])",
+    "explanation": "argv[0] is the script name (tests.py) and the user-supplied arguments start at argv[1], so argv[1] is 'Itvedant'. Options C and D fail immediately with ImportError because sys has no name called args."
+  },
+  {
+    "id": 228,
+    "domain": "File system & command-line modules",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from sys import argv<br>print(argv[0])</div>and given the command invocation:<br>py test.py DURGASOFT<br>What is the result?",
+    "options": [
+      "A. DURGASOFT",
+      "B. test.py",
+      "C. IndexError will be thrown at runtime",
+      "D. ImportError will be thrown at runtime"
+    ],
+    "answer": "B. test.py",
+    "explanation": "Element 0 of sys.argv is always the name of the script being run, so argv[0] prints test.py. DURGASOFT is argv[1]; there is no IndexError because argv has two elements, and argv is a genuine attribute of sys so the import succeeds."
+  },
+  {
+    "id": 229,
+    "domain": "File system & command-line modules",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from sys import argv<br>print(argv[1] + argv[2])</div>and given the command invocation:<br>py test.py 10 20<br>What is the result?",
+    "options": [
+      "A. 30",
+      "B. 1020",
+      "C. IndexError will be thrown at runtime",
+      "D. ImportError will be thrown at runtime"
+    ],
+    "answer": "B. 1020",
+    "explanation": "Command-line arguments always arrive as strings, so argv[1] is '10' and argv[2] is '20' and the plus operator concatenates them into '1020'. Getting 30 would require converting them first, for example int(argv[1]) + int(argv[2])."
+  },
+  {
+    "id": 230,
+    "domain": "File system & command-line modules",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from sys import argv<br>total = 0<br>for i in range(2, len(argv)):<br>&nbsp;&nbsp;&nbsp;&nbsp;total += float(argv[i])<br>print(\"The Average for {0} is {1:.2f}\".format(argv[1], total / (len(argv) - 2)))</div>Which of the following command invocations will generate the output:<br>The Average for Durga is 20.00",
+    "options": [
+      "A. py test.py Durga 10 20 30",
+      "B. py test.py Durga 10 20",
+      "C. py test.py Durga 10",
+      "D. py test.py 20"
+    ],
+    "answer": "A. py test.py Durga 10 20 30",
+    "explanation": "The script averages every argument from index 2 onward and labels it with argv[1]. With Durga 10 20 30 the sum is 60 over 3 values, giving exactly 20.00; Durga 10 20 averages to 15.00, Durga 10 averages to 10.00, and py test.py 20 leaves nothing after argv[1] so it raises ZeroDivisionError."
+  },
+  {
+    "id": 231,
+    "domain": "Built-in modules",
+    "type": "multiple_choice",
+    "question": "You need to write code that generates a random float with a minimum value of 0.0 and a maximum value of 1.0.<br>Which statement should you use?",
+    "options": [
+      "A. random.randrange()",
+      "B. random.randrange(0.0, 1.0)",
+      "C. random.random()",
+      "D. random.randint(0, 1)"
+    ],
+    "answer": "C. random.random()",
+    "explanation": "random.random() is defined to return a float in the interval from 0.0 up to 1.0, which is exactly what is required. randrange needs integer arguments, so calling it with no arguments or with floats raises TypeError, and randint(0, 1) returns only the integers 0 or 1, not a float."
+  },
+  {
+    "id": 232,
+    "domain": "Built-in modules",
+    "type": "multiple_select",
+    "question": "You are writing code that generates a random integer with a minimum value of 5 and a maximum value of 11. Which two functions should you use? Each correct answer presents a complete solution. (Choose 2.)",
+    "options": [
+      "A. random.randint(5, 11)",
+      "B. random.randrange(5, 12, 1)",
+      "C. random.randint(5, 12)",
+      "D. random.randrange(5, 11, 1)"
+    ],
+    "answer": [
+      "A. random.randint(5, 11)",
+      "B. random.randrange(5, 12, 1)"
+    ],
+    "explanation": "randint includes both endpoints, so randint(5, 11) yields 5 through 11, while randrange excludes its stop value, so randrange(5, 12, 1) also yields 5 through 11. randint(5, 12) can return 12, which is too high, and randrange(5, 11, 1) stops at 10, so it can never return 11."
+  },
+  {
+    "id": 233,
+    "domain": "Built-in modules",
+    "type": "multiple_select",
+    "question": "You work on a team that is developing a game for AdventureWorks. You need to write code that generates a random number that meets the following requirements:<br>&bull; The number is a multiple of 5.<br>&bull; The lowest number is 5.<br>&bull; The highest number is 100.<br>Which two code segments will meet the requirements? Each correct answer presents a complete solution. (Choose 2.)",
+    "options": [
+      "A. from random import randrange<br>&nbsp;&nbsp;&nbsp;&nbsp;print(randrange(5, 101, 5))",
+      "B. from random import randint<br>&nbsp;&nbsp;&nbsp;&nbsp;print(randint(1, 20) * 5)",
+      "C. from random import randint<br>&nbsp;&nbsp;&nbsp;&nbsp;print(randint(0, 20) * 5)",
+      "D. from random import randrange<br>&nbsp;&nbsp;&nbsp;&nbsp;print(randrange(0, 100, 5))"
+    ],
+    "answer": [
+      "A. from random import randrange<br>&nbsp;&nbsp;&nbsp;&nbsp;print(randrange(5, 101, 5))",
+      "B. from random import randint<br>&nbsp;&nbsp;&nbsp;&nbsp;print(randint(1, 20) * 5)"
+    ],
+    "explanation": "randrange(5, 101, 5) walks 5, 10, ... up to but not including 101, so it produces every multiple of 5 from 5 to 100. randint(1, 20) * 5 gives 1 through 20 scaled by 5, which is also 5 through 100. randint(0, 20) * 5 can return 0, and randrange(0, 100, 5) can return 0 and stops at 95, so neither matches the required range."
+  },
+  {
+    "id": 234,
+    "domain": "Built-in modules",
+    "type": "multiple_select",
+    "question": "You are creating a function that manipulates a number. The function has the following requirements:<br>&bull; A float is passed into the function<br>&bull; The function must take the absolute value of the float<br>&bull; Any decimal points after the integer must be removed<br>Which two math functions should you use? Each correct answer is part of the solution. (Choose 2.)",
+    "options": [
+      "A. math.ceil(x)",
+      "B. math.fmod(x)",
+      "C. math.floor(x)",
+      "D. math.frexp(x)",
+      "E. math.fabs(x)"
+    ],
+    "answer": [
+      "C. math.floor(x)",
+      "E. math.fabs(x)"
+    ],
+    "explanation": "math.fabs returns the absolute value as a float, and math.floor then discards the fractional part and returns an int; applied to an already positive value, flooring simply drops the decimals. math.ceil would round the magnitude up instead of removing the decimals, math.fmod needs two arguments and computes a remainder, and math.frexp returns a mantissa and exponent pair."
+  },
+  {
+    "id": 235,
+    "domain": "Built-in modules",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python code?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from math import factorial<br>print(math.factorial(5))</div>",
+    "options": [
+      "A. 120",
+      "B. Nothing is printed",
+      "C. Error, method factorial doesn't exist in math module",
+      "D. Error, the statement should be: print(factorial(5))"
+    ],
+    "answer": "D. Error, the statement should be: print(factorial(5))",
+    "explanation": "from math import factorial binds only the name factorial, it does not bind the name math, so math.factorial(5) raises NameError: name 'math' is not defined. Writing print(factorial(5)) uses the imported name and correctly prints 120; factorial certainly does exist in the math module."
+  },
+  {
+    "id": 236,
+    "domain": "Built-in modules",
+    "type": "multiple_choice",
+    "question": "You are writing an application that uses the pow() function. The program must reference the function using the name power. You need to import the function.<br>Which code segment should you use?",
+    "options": [
+      "A. import math.pow as power",
+      "B. import pow from math as power",
+      "C. from math import pow as power",
+      "D. from math.pow as power"
+    ],
+    "answer": "C. from math import pow as power",
+    "explanation": "The from module import name as alias form is the only way to import a single function under a new name, so from math import pow as power lets you call power(2, 3). import math.pow as power fails because math is a module, not a package containing a pow submodule, and the other two are simply not valid Python syntax."
+  },
+  {
+    "id": 237,
+    "domain": "Built-in modules",
+    "type": "multiple_choice",
+    "question": "What is returned by math.ceil(10.4)?",
+    "options": [
+      "A. 11",
+      "B. 10",
+      "C. 11.0",
+      "D. 10.0"
+    ],
+    "answer": "A. 11",
+    "explanation": "math.ceil rounds up to the smallest integer that is not less than its argument, so 10.4 becomes 11. In Python 3 math.ceil returns an int rather than a float, so the result is 11 and not 11.0; 10 would be the result of math.floor."
+  },
+  {
+    "id": 238,
+    "domain": "Built-in modules",
+    "type": "multiple_choice",
+    "question": "What will be the output of the following Python code if the system date is 23rd September, 2020?<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import datetime<br>t = datetime.date.today()<br>print(t.month)</div>",
+    "options": [
+      "A. September",
+      "B. Sept",
+      "C. 09",
+      "D. 9"
+    ],
+    "answer": "D. 9",
+    "explanation": "date.today() returns a date object whose month attribute is a plain integer, so printing it for September gives 9 with no leading zero and no month name. Getting 'September' or '09' would require formatting, for example t.strftime('%B') or t.strftime('%m')."
+  },
+  {
+    "id": 239,
+    "domain": "Built-in modules",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import math<br>l = [str(round(math.pi)) for i in range(1, 6)]<br>print(l)</div>What is the result?",
+    "options": [
+      "A. ['3', '3', '3', '3', '3']",
+      "B. ['3', '3', '3', '3', '3', '3']",
+      "C. ['1', '2', '3', '4', '5']",
+      "D. ['1', '2', '3', '4', '5', '6']"
+    ],
+    "answer": "A. ['3', '3', '3', '3', '3']",
+    "explanation": "The loop variable i is never used in the expression, so every element is the same value: round(math.pi) is 3 and str() makes it '3'. range(1, 6) yields 5 values (1 through 5), so the list has five copies of '3', not six."
+  },
+  {
+    "id": 240,
+    "domain": "Built-in modules",
+    "type": "multiple_select",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import random<br>fruits = ['Apple', 'Mango', 'Orange', 'Lemon']</div>Which of the following will print some random value from the list? (Choose 2.)",
+    "options": [
+      "A. print(random.sample(fruits))",
+      "B. print(random.sample(fruits, 3)[0])",
+      "C. print(random.choice(fruits))",
+      "D. print(random.choice(fruits)[0])"
+    ],
+    "answer": [
+      "B. print(random.sample(fruits, 3)[0])",
+      "C. print(random.choice(fruits))"
+    ],
+    "explanation": "random.choice(fruits) returns one randomly selected element, and random.sample(fruits, 3)[0] builds a random 3-element sample and prints its first element, which is also an element of the list. random.sample requires the sample size k, so calling it with one argument raises TypeError, and random.choice(fruits)[0] prints only the first character of the chosen fruit rather than the value itself."
+  },
+  {
+    "id": 241,
+    "domain": "Built-in modules",
+    "type": "multiple_choice",
+    "question": "We are developing an application for a client requirement. As part of that we have to create a list of 7 random integers between 1 and 7 inclusive.<br>Which of the following code segments should be used?",
+    "options": [
+      "A. import random<br>randints = [random.randint(1, 7) for i in range(1, 8)]",
+      "B. import random<br>randints = [random.randint(1, 8) for i in range(1, 8)]",
+      "C. import random<br>randints = random.randrange(1, 7)",
+      "D. import random<br>randints = random.randint(1, 7)"
+    ],
+    "answer": "A. import random<br>randints = [random.randint(1, 7) for i in range(1, 8)]",
+    "explanation": "randint(1, 7) includes both endpoints so it produces values 1 through 7, and range(1, 8) repeats the comprehension seven times, giving a list of exactly 7 values. Option B allows 8, which is out of range, and options C and D assign a single integer rather than a list."
+  },
+  {
+    "id": 242,
+    "domain": "Built-in modules",
+    "type": "multiple_select",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import random<br>fruits = ['Apple', 'Mango', 'Orange', 'Lemon']<br>random_list = [random.choice(fruits)[:2] for i in range(3)]<br>print(''.join(random_list))</div>Which of the following are possible outputs? (Choose 3.)",
+    "options": [
+      "A. ApApAp",
+      "B. ApMaOr",
+      "C. LeMaOr",
+      "D. OrOraM"
+    ],
+    "answer": [
+      "A. ApApAp",
+      "B. ApMaOr",
+      "C. LeMaOr"
+    ],
+    "explanation": "Each iteration picks a fruit and keeps its first two characters, so the only possible pieces are Ap, Ma, Or and Le, and three of them are joined into a six-character string with repeats allowed. ApApAp, ApMaOr and LeMaOr are all built from those pieces, but OrOraM would need the piece aM, which no fruit can produce."
+  },
+  {
+    "id": 243,
+    "domain": "Built-in modules",
+    "type": "multiple_choice",
+    "question": "We are developing a mathematical function to find the area of a given circle. If r is the radius then the area is pi*r**2.<br>Which of the following is a valid function for this requirement?",
+    "options": [
+      "A. import math<br>def find_area(r):<br>&nbsp;&nbsp;&nbsp;&nbsp;return math.pi * math.fmod(r, 2)",
+      "B. import math<br>def find_area(r):<br>&nbsp;&nbsp;&nbsp;&nbsp;return math.pi * math.fabs(r)",
+      "C. import math<br>def find_area(r):<br>&nbsp;&nbsp;&nbsp;&nbsp;return math.pi * math.pow(r, 2)",
+      "D. None of these"
+    ],
+    "answer": "C. import math<br>def find_area(r):<br>&nbsp;&nbsp;&nbsp;&nbsp;return math.pi * math.pow(r, 2)",
+    "explanation": "math.pow(r, 2) raises the radius to the power 2, so math.pi * math.pow(r, 2) is exactly pi*r**2; for r = 3 it returns about 28.27. math.fmod(r, 2) computes the remainder of r divided by 2 and math.fabs(r) just takes the absolute value, so neither squares the radius."
+  },
+  {
+    "id": 244,
+    "domain": "Built-in modules",
+    "type": "multiple_choice",
+    "question": "Consider the Python code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import random<br>print(int(random.random() * 5))</div>Which of the following is true?",
+    "options": [
+      "A. It will print a random int value from 0 to 5",
+      "B. It will print a random int value from 1 to 5",
+      "C. It will print a random float value from 0.0 to 5.0",
+      "D. It will print a random int value from 0 to 4",
+      "E. It will print 5"
+    ],
+    "answer": "D. It will print a random int value from 0 to 4",
+    "explanation": "random.random() returns a float in the range 0.0 up to but not including 1.0, so multiplying by 5 gives a value below 5.0. int() truncates toward zero, so the printed integer is always 0, 1, 2, 3 or 4 and can never reach 5."
+  },
+  {
+    "id": 245,
+    "domain": "Built-in modules",
+    "type": "multiple_choice",
+    "question": "Consider the code:<div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import random<br>print(random.sample(range(10), 7))</div>Which of the following is valid?",
+    "options": [
+      "A. It will print a list of 10 unique random numbers from 0 to 6",
+      "B. It will print a list of 7 unique random numbers from 0 to 9",
+      "C. It will print a list of 7 unique random numbers from 0 to 10",
+      "D. It will print a list of 7 unique random numbers from 1 to 10"
+    ],
+    "answer": "B. It will print a list of 7 unique random numbers from 0 to 9",
+    "explanation": "random.sample(population, k) returns k distinct items drawn from the population, so k = 7 fixes the list length at 7. range(10) is the integers 0 through 9, so 10 is never a candidate and 0 always is."
+  },
+  {
+    "id": 246,
     "domain": "Unit testing & type checking",
     "type": "fill_in_blank",
     "question": "You need to test whether an object is an instance of a specific class.<br><br>How should you set up the unit test?<br><br>Complete the code by selecting the correct option from each dropdown list.<br><br>Note: You will receive partial credit for each correct selection.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____ unittest<br>class TestIsInstance(____.______):<br>&nbsp;&nbsp;&nbsp;&nbsp;def ____(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;obj = MyClass()<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.____(obj, MyClass)<br>if __name__ == \"__main__\":<br>&nbsp;&nbsp;&nbsp;&nbsp;unittest.main()</div>",
     "options": {
-      "import_keyword": ["import", "from", "use", "include"],
-      "first_part": ["unittest", "test", "TestCase", "unit"],
-      "second_part": ["TestCase", "Test", "UnitTest", "Case"],
-      "test_method": ["test_isinstance", "isinstance_test", "check_IsInstance", "verify_type"],
-      "assert_method": ["assertIsInstance", "assertEqual", "assertTrue", "assertIs"]
+      "import_keyword": [
+        "import",
+        "from",
+        "use",
+        "include"
+      ],
+      "first_part": [
+        "unittest",
+        "test",
+        "TestCase",
+        "unit"
+      ],
+      "second_part": [
+        "TestCase",
+        "Test",
+        "UnitTest",
+        "Case"
+      ],
+      "test_method": [
+        "test_isinstance",
+        "isinstance_test",
+        "check_IsInstance",
+        "verify_type"
+      ],
+      "assert_method": [
+        "assertIsInstance",
+        "assertEqual",
+        "assertTrue",
+        "assertIs"
+      ]
     },
     "answer": {
       "import_keyword": "import",
@@ -23,37 +4243,7 @@ export const quizQuestions: Question[] = [
     "explanation": "Use `import` to bring in the unittest module. Test classes inherit from `unittest.TestCase` (two separate parts). Test methods must start with 'test_' to be automatically discovered and run by the unittest runner — options like `isinstance_test`, `check_IsInstance`, and `verify_type` do not start with 'test_' and would never be executed as tests. Use `assertIsInstance(obj, class)` to check if an object is an instance of a specific class."
   },
   {
-    "id": 177,
-    "domain": "Functions & conditional logic",
-    "type": "fill_in_blank",
-    "question": "You are creating a function to calculate admission fees (admission_fee) based on the following rules:<br><br>• Anyone under age 5 = free admission<br>• Anyone age 5 or older who is in school = $10<br>• Anyone age 5 to 17 who is not in school = $20<br>• Anyone older than age 17 who is not in school = $50<br><br>rate represents the price in dollars.<br><br>Complete the code by selecting the correct code segment from each dropdown list.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def admission_fee(age, school):<br>&nbsp;&nbsp;&nbsp;&nbsp;rate = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rate = 10<br>&nbsp;&nbsp;&nbsp;&nbsp;____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rate = 20<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rate = 50<br>&nbsp;&nbsp;&nbsp;&nbsp;return rate</div>",
-    "options": {
-      "first_condition": ["if age >= 5 and school == True", "if age < 5", "if school == True", "if age >= 5"],
-      "second_condition": ["elif age >= 5 and age < 18 and school == False", "elif age < 18 and school == False", "elif not school == False", "elif age >= 5 and not school == False"]
-    },
-    "answer": {
-      "first_condition": "if age >= 5 and school == True",
-      "second_condition": "elif age >= 5 and age < 18 and school == False"
-    },
-    "explanation": "The first condition checks if someone is 5 or older AND in school ($10). The elif condition must check for ages 5 to 17 who are NOT in school ($20) — it must include 'age >= 5' to avoid catching under-5 children who are not in school. The else handles everyone over 17 not in school ($50). Ages under 5 get free admission since rate starts at 0 and no conditions match."
-  },
-  {
-    "id": 176,
-    "domain": "Exception handling & input validation",
-    "type": "fill_in_blank",
-    "question": "You are creating a program that accepts user input. The program must cast the input into an integer, and properly handle the error if it cannot do so.<br><br>Complete the code by selecting the correct code segment from each dropdown list.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>while True:<br>&nbsp;&nbsp;&nbsp;&nbsp;____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x = int(input(\"Please enter a number: \"))<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;&nbsp;&nbsp;____ ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(\"Not a valid number. Try again...\")</div>",
-    "options": {
-      "try_block": ["try", "attempt", "check", "test"],
-      "except_clause": ["except", "catch", "handle", "error"]
-    },
-    "answer": {
-      "try_block": "try",
-      "except_clause": "except"
-    },
-    "explanation": "The `try` block contains code that might raise an exception. The `except ValueError` clause catches the specific exception that `int()` raises when it cannot convert the input string to an integer. This creates a robust input validation loop that continues until valid input is provided."
-  },
-  {
-    "id": 179,
+    "id": 247,
     "domain": "Functions & logic analysis",
     "type": "true_false",
     "question": "Analyze the following function and determine which statements are true or false:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def grosspay(hours=40, rate=25, pieces=0, piecerate=0, salary=0):<br>&nbsp;&nbsp;&nbsp;&nbsp;overtime = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;if pieces > 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return pieces * piecerate<br>&nbsp;&nbsp;&nbsp;&nbsp;if salary > 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pass<br>&nbsp;&nbsp;&nbsp;&nbsp;if hours > 40:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;overtime = (hours-40) * (1.5 * rate)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return overtime + (40 * rate)<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return hours * rate</div><br><br>For each statement, select True or False:",
@@ -70,7 +4260,7 @@ export const quizQuestions: Question[] = [
     "explanation": "Statement 1 is False: grosspay() will not cause a syntax error because all parameters have default values — it runs fine. Statement 2 is False: grosspay(salary=50000) does NOT return nothing. The salary condition executes `pass` and falls through to the `if hours > 40` check. Since hours defaults to 40, `hours > 40` is False, so the else branch executes `return hours * rate` = 40 * 25 = 1000. Statement 3 is True: grosspay(pieces=500, piecerate=4) returns 500 * 4 = 2000."
   },
   {
-    "id": 180,
+    "id": 248,
     "domain": "Functions & error analysis",
     "type": "true_false",
     "question": "The following function calculates the value of an expression that uses an exponent.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def calc_power(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;return a**b<br>base = input(\"Enter the number for the base: \")<br>exponent = input(\"Enter the number for the exponent: \")<br>result = calc_power(base, exponent)<br>print(\"The result is \" + result)</div><br><br>For each statement, select True or False:",
@@ -87,25 +4277,7 @@ export const quizQuestions: Question[] = [
     "explanation": "Statement 1 is False: Lines 03 and 04 (the two input() calls) are syntactically correct and return strings without error. Statement 2 is True: Line 02 (inside calc_power) will cause a TypeError because the ** operator cannot be applied to strings, and line 05 (the print concatenation) would also fail since result would be a non-string type. Statement 3 is False: The code will not output correctly due to the type errors."
   },
   {
-    "id": 181,
-    "domain": "String slicing & indexing",
-    "type": "ordering",
-    "question": "You need to identify the results of performing various slicing operations on the following sequence structure:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>alph = \"abcdefghijklmnopqrstuvwxyz\"</div><br><br>Move the appropriate results from the list on the left to the correct slicing operations on the right. You may use each result once, more than once, or not at all.<br><br>Note: You will receive partial credit for each correct match.<br><br>alph[3:6] → ____<br>alph[:6] → ____",
-    "options": [
-      "abcdef",
-      "def",
-      "cdef",
-      "abcde",
-      "defg"
-    ],
-    "answer": [
-      "def",
-      "abcdef"
-    ],
-    "explanation": "String slicing uses start:end indices where start is inclusive and end is exclusive. alph[3:6] gets characters at indices 3, 4, 5 which are 'd', 'e', 'f' = 'def'. alph[:6] gets from the start up to but not including index 6, giving characters at indices 0-5 = 'abcdef'."
-  },
-  {
-    "id": 182,
+    "id": 249,
     "domain": "System modules & command line",
     "type": "multiple_choice",
     "question": "The Script.py file contains the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import sys<br>print(sys.argv[2])</div><br><br>You run the following command:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>python Script.py Cheese Bacon Bread</div><br><br>What is the output of the command?",
@@ -119,7 +4291,7 @@ export const quizQuestions: Question[] = [
     "explanation": "The sys.argv list contains all command line arguments. Index 0 is the script name 'Script.py', index 1 is 'Cheese', index 2 is 'Bacon', and index 3 is 'Bread'. Therefore, sys.argv[2] returns 'Bacon'."
   },
   {
-    "id": 183,
+    "id": 250,
     "domain": "Operators & precedence",
     "type": "multiple_choice",
     "question": "A friend asks you to refactor and document the following Python code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>value1 = 9<br>value2 = 4<br><br>answer = (value1 % value2 * 10) // 2.0 ** 3.0 + value2</div><br><br>You run the code.<br><br>What is the result?",
@@ -133,24 +4305,7 @@ export const quizQuestions: Question[] = [
     "explanation": "Following operator precedence: First, value1 % value2 = 9 % 4 = 1. Then 1 * 10 = 10. Next, 2.0 ** 3.0 = 8.0. Then 10 // 8.0 = 1.0 (floor division). Finally, 1.0 + value2 = 1.0 + 4 = 5.0."
   },
   {
-    "id": 184,
-    "domain": "Loops & algorithm implementation",
-    "type": "fill_in_blank",
-    "question": "You are building a Python program that displays all prime numbers from 2 to 100. (A prime number is any number that is divisible only by itself and 1.)<br><br>Complete the code by moving the appropriate code segments from the list on the left to the correct locations on the right.<br><br>Note: You will receive partial credit for each correct code placement.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____<br>&nbsp;&nbsp;&nbsp;&nbsp;for i in range(2, p):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if p % i == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;is_prime = False<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if is_prime == True:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(p)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____</div>",
-    "options": {
-      "first_line": ["p = 2", "for p in range(2, 101):", "while p <= 100:", "p = 2\nis_prime = True\nwhile p <= 100:"],
-      "break_statement": ["break", "continue", "p = p + 1", "pass"],
-      "increment": ["p = p + 1", "break", "continue", "pass"]
-    },
-    "answer": {
-      "first_line": "p = 2\nis_prime = True\nwhile p <= 100:",
-      "break_statement": "break",
-      "increment": "p = p + 1"
-    },
-    "explanation": "The algorithm initializes p=2 and uses a while loop to check each number up to 100. For each p, is_prime is reset to True, then an inner loop checks divisibility. If a divisor is found, is_prime becomes False and break exits the inner loop. If is_prime remains True, p is printed as prime. Finally, p is incremented to check the next number."
-  },
-  {
-    "id": 185,
+    "id": 251,
     "domain": "String formatting & methods",
     "type": "multiple_choice",
     "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = \"oranges\"<br>y = \"apples\"<br>z = \"bananas\"<br>data = \"{1} and {0} and {2}\"<br>print(data.format(z, y, x))</div><br><br>What is the output of the print statement?",
@@ -164,22 +4319,7 @@ export const quizQuestions: Question[] = [
     "explanation": "The format method uses positional arguments. In data.format(z, y, x), z='bananas' is position 0, y='apples' is position 1, and x='oranges' is position 2. The string \"{1} and {0} and {2}\" means: position 1 (y='apples') and position 0 (z='bananas') and position 2 (x='oranges'), resulting in 'apples and bananas and oranges'."
   },
   {
-    "id": 186,
-    "domain": "Loops & debugging",
-    "type": "fill_in_blank",
-    "question": "You find errors while evaluating the following code. Line numbers are included for reference only.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]<br>02 index = 0<br>03 while (index < 10) # change to : ____<br>04 &nbsp;&nbsp;&nbsp;&nbsp;print(numbers[index])<br>06 &nbsp;&nbsp;&nbsp;&nbsp;if numbers[index] = 6 # change to ____<br>07 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>08 &nbsp;&nbsp;&nbsp;&nbsp;else:<br>09 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index += 1</div><br><br>You need to correct the code at line 03 and line 06.",
-    "options": {
-      "line_03": ["while (index < 10):", "while (index < 10)", "while (index < 10);", "for (index < 10):"],
-      "line_06": ["if numbers[index] == 6:", "if numbers[index] = 6:", "if (numbers[index] == 6)", "if numbers[index] === 6:"]
-    },
-    "answer": {
-      "line_03": "while (index < 10):",
-      "line_06": "if numbers[index] == 6:"
-    },
-    "explanation": "Line 03 needs a colon (:) at the end to properly start the while loop block. Line 06 needs double equals (==) for comparison instead of single equals (=) which is for assignment. The corrected statements are 'while (index < 10):' and 'if numbers[index] == 6:'."
-  },
-  {
-    "id": 187,
+    "id": 252,
     "domain": "Operators & precedence",
     "type": "ordering",
     "question": "You are writing a Python application that includes multiple operations on the same line of code. You need to determine the correct order of operations.<br><br>Move the type of operation from the list on the left to the correct locations on the right, with the type of operation that will be performed first at the top and the type of operation that will be performed last at the bottom.<br><br>Note: You will receive partial credit for each correct response.",
@@ -202,13 +4342,23 @@ export const quizQuestions: Question[] = [
     "explanation": "Python operator precedence follows this order: 1) Parentheses (highest precedence), 2) Exponents (**), 3) Unary operators (+, -, not), 4) Multiplication and Division (*, /, //, %), 5) Addition and Subtraction (+, -), 6) Logical AND (lowest precedence in this list)."
   },
   {
-    "id": 188,
+    "id": 253,
     "domain": "Random module & list operations",
     "type": "fill_in_blank",
     "question": "You are writing a program to randomly assign rooms (room_number) and team-building groups (group) for a company retreat.<br><br>Complete the code by selecting the correct code segment from each dropdown list.<br><br>Note: You will receive partial credit for each correct selection.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import random<br>roomsAssigned=[1]<br>room_number=1<br>groupList=[\"Ropes\",\"Rafting\",\"Obstacle\",\"Wellness\"]<br>count=0<br>print(\"Welcome to CompanyPro's Team-Building Weekend!\")<br>name=input(\"Please enter your name (q to quit)? \")<br>while name.lower() != 'q' and count < 50:<br>&nbsp;&nbsp;&nbsp;&nbsp;while room_number in roomsAssigned:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f\"{name}, your room number is {room_number}\")<br>&nbsp;&nbsp;&nbsp;&nbsp;roomsAssigned.append(room_number)<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;print(f\"You will meet with the {group} Group this afternoon.\")<br>&nbsp;&nbsp;&nbsp;&nbsp;count+=1<br>&nbsp;&nbsp;&nbsp;&nbsp;name=input(\"Please enter your name (q to quit)? \")</div>",
     "options": {
-      "room_generation": ["room_number = random.randint(1, 100)", "room_number = random.choice([1,2,3,4,5])", "room_number = random.random()", "room_number = random.randrange(1, 100)"],
-      "group_selection": ["group = random.choice(groupList)", "group = random.randint(0, 3)", "group = random.sample(groupList, 1)", "group = groupList[random.randint(0, 3)]"]
+      "room_generation": [
+        "room_number = random.randint(1, 100)",
+        "room_number = random.choice([1,2,3,4,5])",
+        "room_number = random.random()",
+        "room_number = random.randrange(1, 100)"
+      ],
+      "group_selection": [
+        "group = random.choice(groupList)",
+        "group = random.randint(0, 3)",
+        "group = random.sample(groupList, 1)",
+        "group = groupList[random.randint(0, 3)]"
+      ]
     },
     "answer": {
       "room_generation": "room_number = random.randint(1, 100)",
@@ -217,14 +4367,29 @@ export const quizQuestions: Question[] = [
     "explanation": "For room assignment, `random.randint(1, 100)` generates a random integer between 1 and 100 inclusive. For group selection, `random.choice(groupList)` randomly selects one item from the groupList, which is the most straightforward way to pick a team-building group."
   },
   {
-    "id": 189,
+    "id": 254,
     "domain": "Loops & string operations",
     "type": "fill_in_blank",
     "question": "You are writing code to meet the following requirements:<br><br>• Allow users to repeatedly enter words.<br>• Output the number of characters in each word.<br><br>Complete the code by selecting the correct option from each dropdown list.<br><br>Note: You will receive partial credit for each correct selection.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>x = \"Hello\"<br>____ x != \"QUIT\":<br>&nbsp;&nbsp;&nbsp;&nbsp;num = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;____ char ____ x:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;print(num)<br>&nbsp;&nbsp;&nbsp;&nbsp;x = input(\"Enter a new word or QUIT to exit: \")</div>",
     "options": {
-      "loop_type": ["while", "for", "if", "repeat"],
-      "iteration_keyword": ["for", "while", "if", "each"],
-      "membership_operator": ["in", "of", "within", "inside"]
+      "loop_type": [
+        "while",
+        "for",
+        "if",
+        "repeat"
+      ],
+      "iteration_keyword": [
+        "for",
+        "while",
+        "if",
+        "each"
+      ],
+      "membership_operator": [
+        "in",
+        "of",
+        "within",
+        "inside"
+      ]
     },
     "answer": {
       "loop_type": "while",
@@ -234,56 +4399,7 @@ export const quizQuestions: Question[] = [
     "explanation": "Use `while` to create a loop that continues until the user enters 'QUIT'. Use `for char in x:` to iterate through each character in the string x. The `in` operator is used for membership testing and iteration over sequences like strings."
   },
   {
-    "id": 190,
-    "domain": "Data types & operators",
-    "type": "fill_in_blank",
-    "question": "You need to identify the data types of various type operations.<br><br>Move the appropriate data types from the list on the left to the correct type operations on the right. You may use each data type once, more than once, or not at all.<br><br>Note: You will receive partial credit for each correct match.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>type(+1E10) → ____<br>type(5.0) → ____<br>type(\"True\") → ____<br>type(False) → ____</div>",
-    "options": {
-      "first_type": ["int", "float", "str", "bool"],
-      "second_type": ["int", "float", "str", "bool"],
-      "third_type": ["int", "float", "str", "bool"],
-      "fourth_type": ["int", "float", "str", "bool"]
-    },
-    "answer": {
-      "first_type": "float",
-      "second_type": "float",
-      "third_type": "str",
-      "fourth_type": "bool"
-    },
-    "explanation": "type(+1E10) returns float because scientific notation (1E10) creates a float value. type(5.0) returns float because the decimal point makes it a floating-point number. type(\"True\") returns str because it's a string enclosed in quotes. type(False) returns bool because False is a boolean literal."
-  },
-  {
-    "id": 191,
-    "domain": "File operations & I/O",
-    "type": "fill_in_blank",
-    "question": "A company needs help updating their file system. You must create a simple file-manipulation program that performs the following actions:<br><br>• Creates a file using the specified name.<br>• Appends the phrase \"End of listing\" to the file.<br><br>You need to complete the code to meet the requirements.<br><br>Complete the code by selecting the correct code segment from each dropdown list.<br><br>Note: You will receive partial credit for each correct selection.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import os<br>file = ____<br>____(\"End of listing\")</div>",
-    "options": {
-      "file_creation": ["open(\"listing.txt\", \"w\")", "open(\"listing.txt\", \"r\")", "open(\"listing.txt\", \"a\")", "create(\"listing.txt\")"],
-      "append_operation": ["file.write", "file.append", "file.add", "file.insert"]
-    },
-    "answer": {
-      "file_creation": "open(\"listing.txt\", \"a\")",
-      "append_operation": "file.write"
-    },
-    "explanation": "Use `open(\"listing.txt\", \"a\")` to open the file in append mode, which creates the file if it doesn't exist and allows adding content to the end. Use `file.write(\"End of listing\")` to write the specified phrase to the file. The 'a' mode is appropriate for appending content without overwriting existing data."
-  },
-  {
-    "id": 192,
-    "domain": "Functions & string operations",
-    "type": "fill_in_blank",
-    "question": "A game development company needs a way to find the number of words in a list that contain a specific letter.<br><br>Complete the code by selecting the correct code segment from each dropdown list.<br><br>Note: You will receive partial credit for each correct selection.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'># Function accepts list of words and letter to search for.<br># Returns count of the number of words that contain that letter.<br>def count_letter(letter, word_list):<br>&nbsp;&nbsp;&nbsp;&nbsp;count = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;for ____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;return count<br><br># word_list is populated by the readWords() function. Code not shown.<br>word_list = readWords()<br><br>letter = input(\"Which letter would you like to count\")<br>letter_count = count_letter(letter, word_list)<br>print(\"There are:\", letter_count, \" words that contain \", letter)</div>",
-    "options": {
-      "loop_variable": ["word_list in word", "word in word_list", "word == word_list", "word is word_list"],
-      "condition": ["word is letter", "letter is word", "word in letter", "letter in word"]
-    },
-    "answer": {
-      "loop_variable": "word in word_list",
-      "condition": "letter in word"
-    },
-    "explanation": "Use `word in word_list` to iterate through each word in the list. Use `letter in word` to check if the specified letter exists anywhere within the current word. The `in` operator checks for substring membership, returning True if the letter is found in the word."
-  },
-  {
-    "id": 193,
+    "id": 255,
     "domain": "Loops & control flow",
     "type": "multiple_choice",
     "question": "Review the following code segment:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>product = 2<br>n = 5<br>while (n != 0):<br>&nbsp;&nbsp;&nbsp;&nbsp;product *= n<br>&nbsp;&nbsp;&nbsp;&nbsp;print(product)<br>&nbsp;&nbsp;&nbsp;&nbsp;n -= 1<br>&nbsp;&nbsp;&nbsp;&nbsp;if n == 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</div><br><br>How many lines of output does the code print?<br><br>Enter the number as an integer:",
@@ -297,24 +4413,7 @@ export const quizQuestions: Question[] = [
     "explanation": "Step through: Initially product=2, n=5. First iteration: product=2*5=10, print 10, n=4 (not 3, continue). Second iteration: product=10*4=40, print 40, n=3 → break. Total = 2 lines of output."
   },
   {
-    "id": 194,
-    "domain": "Loops & control flow",
-    "type": "multiple_select",
-    "question": "You need to write code that generates a random number that meets the following requirements:<br><br>- The number is a multiple of 5.<br>- The lowest number is 5.<br>- The highest number is 100.<br><br>Which two code segments will meet the requirements? (Choose 2)",
-    "options": [
-      "A.<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from random import randint<br>print(randint(1, 20) * 5)</div>",
-      "B.<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from random import randint<br>print(randint(0, 20) * 5)</div>",
-      "C.<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from random import randrange<br>print(randrange(0, 100, 5))</div>",
-      "D.<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from random import randrange<br>print(randrange(5, 105, 5))</div>"
-    ],
-    "answer": [
-      "A.<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from random import randint<br>print(randint(1, 20) * 5)</div>",
-      "D.<br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from random import randrange<br>print(randrange(5, 105, 5))</div>"
-    ],
-    "explanation": "Option A works because randint(1,20)*5 generates numbers between 5 and 100 inclusive, all multiples of 5. Option D works because randrange(5,105,5) directly generates multiples of 5 from 5 to 100 inclusive. Option B includes 0*5=0 (invalid lowest), and Option C starts at 0 (invalid)."
-  },
-  {
-    "id": 195,
+    "id": 256,
     "domain": "Input & Output",
     "type": "multiple_choice",
     "question": "What does the following statement do?<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>data = input()</div>",
@@ -328,146 +4427,7 @@ export const quizQuestions: Question[] = [
     "explanation": "The input() function in Python pauses program execution and waits for the user to type text in the console. The typed text is returned as a string and stored in the variable."
   },
   {
-    "id": 196,
-    "domain": "Comparison operators & logic errors",
-    "type": "true_false",
-    "question": "You are creating a Python program that compares numbers. You write the following code. Line numbers are included for reference only.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 nuni = eval(input (\"Please enter the first number: \"))<br>02 num2 = eval(input (\"Please enter the second number: \"))<br>03 if nuni == num2:<br>04 &nbsp;&nbsp;&nbsp;&nbsp;print(\"The two numbers are equal.\")<br>05 if nuni <= num2:<br>06 &nbsp;&nbsp;&nbsp;&nbsp;print(\"Number 1 is less than number 2.\")<br>07 if nuni > num2:<br>08 &nbsp;&nbsp;&nbsp;&nbsp;print(\"Number 1 is greater than number 2.\")<br>09 if num2 = num1:<br>10 &nbsp;&nbsp;&nbsp;&nbsp;print(\"The two numbers are the same.\")</div><br><br>You need to ensure that the comparisons are accurate. For each statement, select True or False:",
-    "options": {
-      "statement1": "The print statement at line 04 will print only if the two numbers are equal in value.",
-      "statement2": "The print statement at line 06 will print only if num1 is less than num2.",
-      "statement3": "The print statement at line 08 will print only if num1 is greater than num2.",
-      "statement4": "The statement at line 09 is an invalid comparison."
-    },
-    "answer": {
-      "statement1": "True: The print statement at line 04 will print only if the two numbers are equal in value.",
-      "statement2": "False: The print statement at line 06 will print only if num1 is less than num2.",
-      "statement3": "True: The print statement at line 08 will print only if num1 is greater than num2.",
-      "statement4": "True: The statement at line 09 is an invalid comparison."
-    },
-    "explanation": "Line 04: True — == operator properly checks for equality. Line 06: False — the <= operator also triggers when the numbers are equal, not only when less than. Line 08: True — > operator correctly checks greater than. Line 09: True — = is assignment not comparison (should be ==), and there is also a typo (num1 vs nuni)."
-  },
-  {
-    "id": 197,
-    "domain": "Exception handling & try statements",
-    "type": "true_false",
-    "question": "For each statement about try statements, select True or False:",
-    "options": {
-      "statement1": "A try statement can have one or more except clauses.",
-      "statement2": "A try statement can have a finally clause without an except clause.",
-      "statement3": "A try statement can have a finally clause and an except clause.",
-      "statement4": "A try statement can have one or more finally clauses."
-    },
-    "answer": {
-      "statement1": "True: A try statement can have one or more except clauses.",
-      "statement2": "True: A try statement can have a finally clause without an except clause.",
-      "statement3": "True: A try statement can have a finally clause and an except clause.",
-      "statement4": "False: A try statement can have one or more finally clauses."
-    },
-    "explanation": "Python try statement rules: 1) Can have multiple except clauses for different exception types. 2) Can have a finally clause without except (try-finally structure). 3) Can have both except and finally clauses (try-except-finally). 4) Cannot have multiple finally clauses — only one finally is allowed per try block."
-  },
-  {
-    "id": 198,
-    "domain": "Conditional logic & number operations",
-    "type": "fill_in_blank",
-    "question": "You are writing a Python program to determine if a number (num) the user inputs is one, two, or more than two digits (digits).<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>num = int(input(\"Enter a number with 1 or 2 digits: \"))<br><br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;digits = \"1\"<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;digits = \"2\"<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;digits = \">2\"<br><br>print(digits + \" digits.\")</div><br><br>Complete the code by selecting the correct code segment from each drop-down list.",
-    "options": {
-      "first_condition": ["if num < 10:", "if num <= 10:", "if len(str(num)) == 1:", "if num < 0:"],
-      "second_condition": ["elif num < 100:", "elif num <= 100:", "elif num > 9 and num < 100:", "elif len(str(num)) == 2:"],
-      "third_condition": ["else:", "elif num >= 100:", "elif num > 99:", "elif len(str(num)) > 2:"]
-    },
-    "answer": {
-      "first_condition": "if num < 10:",
-      "second_condition": "elif num < 100:",
-      "third_condition": "else:"
-    },
-    "explanation": "Use `if num < 10:` for single-digit numbers (0-9). Use `elif num < 100:` for two-digit numbers (10-99). Use `else:` for all numbers 100 and above (three or more digits)."
-  },
-  {
-    "id": 199,
-    "domain": "List operations & comparisons",
-    "type": "fill_in_blank",
-    "question": "You develop a Python application for your company. You need to complete the code so that the print statements are accurate.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numList = [1, 2, 3, 4, 5]<br>alphalist = [\"a\", \"b\", \"c\", \"d\", \"e\"]<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"The values in numList are equal to alphalist\")<br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"The values in numList are not equal to alphalist\")</div><br><br>Complete the code by selecting the correct code segment from each drop-down list.",
-    "options": {
-      "condition": ["if numList == alphalist:", "if numList is alphalist:", "if numList.equals(alphalist):"],
-      "else_clause": ["else:", "elif numList != alphalist:", "otherwise:"]
-    },
-    "answer": {
-      "condition": "if numList == alphalist:",
-      "else_clause": "else:"
-    },
-    "explanation": "Use `if numList == alphalist:` to compare if the two lists have the same values. Since they contain different data types (numbers vs strings), the condition will be False, so the else clause will execute. The `==` operator checks for value equality, while `is` would check object identity."
-  },
-  {
-    "id": 200,
-    "domain": "Code documentation & comments",
-    "type": "multiple_choice",
-    "question": "You develop a Python application for your company. You want to add notes to your code so other team members will understand it.<br><br>What should you do?",
-    "options": [
-      "A. Place the notes within /* and */ in any code segment.",
-      "B. Place the notes within <!-- and --> in any code segment.",
-      "C. Place the notes after // on any line.",
-      "D. Place the notes after # on any line."
-    ],
-    "answer": "D. Place the notes after # on any line.",
-    "explanation": "In Python, comments are created using the # symbol. Everything after # on a line is treated as a comment and ignored by the Python interpreter. Options A (/* */) is for C/Java, Option B (<!-- -->) is for HTML, and Option C (//) is for C/Java/JavaScript."
-  },
-  {
-    "id": 201,
-    "domain": "Function parameters & variable scope",
-    "type": "true_false",
-    "question": "You are writing a function that increments the player score in a game. The function has the following requirements:<br><br>- If no value is specified for points, then points start at one.<br>- If bonus is True, then points must be doubled.<br><br>You write the following code. Line numbers are included for reference only.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 def increment_score(score, bonus, points):<br>02 &nbsp;&nbsp;&nbsp;&nbsp;if bonus == True:<br>03 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;points = points * 2<br>04 &nbsp;&nbsp;&nbsp;&nbsp;score = score + points<br>05 &nbsp;&nbsp;&nbsp;&nbsp;return score<br>06 points = 5<br>07 score = 10<br>08 new_score = increment_score(score, True, points)</div><br><br>For each statement, select True or False:",
-    "options": {
-      "statement1": "To meet the requirements, you must change line 01 to: def increment_score(score, bonus, points = 1):",
-      "statement2": "If you do not change line 01 and the function is called with only two parameters, an error occurs.",
-      "statement3": "Line 03 will also modify the value of the variable points declared at line 06."
-    },
-    "answer": {
-      "statement1": "True: To meet the requirements, you must change line 01 to: def increment_score(score, bonus, points = 1):",
-      "statement2": "True: If you do not change line 01 and the function is called with only two parameters, an error occurs.",
-      "statement3": "False: Line 03 will also modify the value of the variable points declared at line 06."
-    },
-    "explanation": "1) True — Default parameter (points=1) is needed to meet the 'if no value specified' requirement. 2) True — Without a default parameter, calling with only 2 arguments causes a TypeError. 3) False — Line 03 modifies the local points parameter only; the global variable at line 06 is unaffected (Python reassignment creates a new local binding)."
-  },
-  {
-    "id": 202,
-    "domain": "Function definition & parameter passing",
-    "type": "multiple_select",
-    "question": "A bicycle company is creating a program that allows customers to log the number of miles biked. The program will send messages based on how many miles the customer logs.<br><br>You write the following Python code. Line numbers are included for reference only.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'><br>\tname = input(\"what is your name? \")<br>\treturn name<br><br>\tcalories = miles * calories_per_mile<br>\treturn calories<br>distance = int(input(\"How many miles did you bike this week? \")<br>burn_rate = 50<br>biker = get_name()<br>calories_burned = calc_calories(distance, burn_rate)<br>print(biker, \" , you burned about \", calories_burned, \" calories.\")</div><br><br>You need to define the two required functions.<br><br>Which two code segments should you use for line 01 and line 04? Each correct answer presents part of the solution. (Choose 2.)",
-    "options": [
-      "A. @1 def get_name():",
-      "B. @1 def get_name(biker):",
-      "C. @1 def get_name(name):",
-      "D. @4 def calc_calories():",
-      "E. @4 def calc_calories(miles, burn_rate):",
-      "F. @4 def calc_calories(miles, calories_per_mile):"
-    ],
-    "answer": [
-      "A. @1 def get_name():",
-      "F. @4 def calc_calories(miles, calories_per_mile):"
-    ],
-    "explanation": "For get_name(): The function is called without arguments (biker = get_name()) and gets input internally, so it needs no parameters. For calc_calories(): The function body uses 'miles * calories_per_mile', so the parameter names must match — calories_per_mile is the correct second parameter name."
-  },
-  {
-    "id": 203,
-    "domain": "Comments & syntax parsing",
-    "type": "true_false",
-    "question": "You create the following Python function to calculate the power of a number.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'> # The calc_power function calculates exponents<br># x is the base<br>03 # y is the exponent<br># The value of x raised to the y power is returned<br>def calc_power(x, y):<br>\tcomment = \"# Return the value\"<br>\treturn x ** y # raise x to the y power</div><br><br>For each statement, select True or False:",
-    "options": {
-      "statement1": "Python will not check the syntax of lines 01 through 04.",
-      "statement2": "The pound sign (#) is optional for lines 02 and 03.",
-      "statement3": "The string in line 06 will be interpreted as a comment.",
-      "statement4": "Line 07 contains an inline comment."
-    },
-    "answer": {
-      "statement1": "True: Python will not check the syntax of lines 01 through 04.",
-      "statement2": "False: The pound sign (#) is optional for lines 02 and 03.",
-      "statement3": "False: The string in line 06 will be interpreted as a comment.",
-      "statement4": "True: Line 07 contains an inline comment."
-    },
-    "explanation": "1) True — Python ignores everything after # on a line entirely; the content of comment lines is never parsed as code. 2) False — The # is REQUIRED to make a line a comment; without it, lines 02-03 would be invalid Python syntax (NameError or SyntaxError). 3) False — Line 06 is a string assignment stored in the variable 'comment'; the # inside the quotes is treated as a literal character, not a comment marker. 4) True — Line 07 has a valid inline comment after the # symbol following the return statement."
-  },
-  {
-    "id": 204,
+    "id": 257,
     "domain": "File operations & I/O",
     "type": "true_false",
     "question": "Review the following code segment:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>f = open(\"python.txt\", \"a\")<br>f.write(\"This is a line of text.\")<br>f.close()</div><br><br>For each statement about the code segment, select True or False:",
@@ -484,85 +4444,7 @@ export const quizQuestions: Question[] = [
     "explanation": "1) True — The 'a' (append) mode creates the file if it doesn't exist. 2) False — 'a' mode appends to the end of the file without overwriting ('w' mode would overwrite). 3) True — The file is properly closed with f.close(), so other processes can access it."
   },
   {
-    "id": 205,
-    "domain": "String manipulation & loops",
-    "type": "fill_in_blank",
-    "question": "A coworker wrote a program that inputs names into a database. Unfortunately, the program reversed the letters in each name.<br><br>You need to write a Python function that outputs the characters in a name in the correct order.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>#Function reverses characters in a string.<br>#returns new string in reversed order.<br><br>def reverse_name(backward_name):<br>&nbsp;&nbsp;&nbsp;&nbsp;forward_name = \"\"<br>&nbsp;&nbsp;&nbsp;&nbsp;length = ____<br>&nbsp;&nbsp;&nbsp;&nbsp;while length >= 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;forward_name += ____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;length = length - 1<br>&nbsp;&nbsp;&nbsp;&nbsp;return forward_name<br><br>print(reverse_name(\"nohtyp\"))</div><br><br>Complete the code by selecting the correct code segment from each drop-down list.<br><br>Note: You will receive partial credit for each correct selection.",
-    "options": {
-      "length_assignment": ["len(backward_name) - 1", "len(backward_name)", "backward_name.length() - 1", "strlen(backward_name) - 1"],
-      "character_access": ["backward_name[length]", "backward_name.charAt(length)", "backward_name(length)", "backward_name.substr(length, 1)"]
-    },
-    "answer": {
-      "length_assignment": "len(backward_name) - 1",
-      "character_access": "backward_name[length]"
-    },
-    "explanation": "Use `len(backward_name) - 1` to get the starting index (last character position, since indexing is zero-based). Use `backward_name[length]` to access each character from the end to the beginning. The while loop decrements length from the last index down to 0, building the reversed string character by character."
-  },
-  {
-    "id": 206,
-    "domain": "String formatting & output",
-    "type": "multiple_select",
-    "question": "You are creating an eCommerce script that accepts input from the user and outputs the data in a comma-delimited format.<br><br>You write the following code to accept input:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>item = input(\"Enter the item name: \")<br>sales = int(input(\"Enter the quantity: \"))</div><br><br>The output must meet the following requirements:<br><br>- Enclose strings in double quotes.<br>- Do not enclose numbers in quotes or other characters.<br>- Separate items by commas.<br><br>You need to complete the code to meet the requirements.<br><br>Which two code segments could you use? Each correct answer presents a complete solution. (Choose 2.)<br><br>Note: You will receive partial credit for each correct answer.",
-    "options": [
-      "A. print('\"' + item + '\",', sales)",
-      "B. print(item + ', ' + sales)",
-      "C. print('{0},{1}'.format(item, sales))",
-      "D. print('\"{0}\",{1}'.format(item, sales))"
-    ],
-    "answer": [
-      "A. print('\"' + item + '\",', sales)",
-      "D. print('\"{0}\",{1}'.format(item, sales))"
-    ],
-    "explanation": "Option A: Correct — Uses string concatenation to wrap item in double quotes followed by a comma, then prints the unquoted sales number. Option D: Correct — Uses format() with quotes around the {0} string placeholder and no quotes around the {1} number placeholder. Option B: Incorrect — Doesn't wrap string in quotes and fails (can't concatenate str + int). Option C: Incorrect — Doesn't wrap string in quotes."
-  },
-  {
-    "id": 207,
-    "domain": "Loops & control flow",
-    "type": "fill_in_blank",
-    "question": "You are creating a Python program that will let a user guess a number from 1 to 10. The user is allowed up to three guesses. If the user guesses the correct number, the program must stop asking for guesses.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>from random import randint<br>target = randint(1,10)<br>chance = 1<br>print (\"Guess an integer from 1 to 10. You will have 3 chances.\")<br><br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;guess = int(input(\"Guess an integer: \"))<br>&nbsp;&nbsp;&nbsp;&nbsp;if guess > target:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print (\"Guess is too high\")<br>&nbsp;&nbsp;&nbsp;&nbsp;elif guess < target:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print (\"Guess is too low\")<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print (\"Guess is just right!\")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br></div><br><br>Complete the code by selecting the correct code segments from the list.",
-    "options": {
-      "loop_statement": ["while chance <= 3:", "while chance < 3:", "for chance in range(1, 4):"],
-      "break_statement": ["break", "pass", "continue"],
-      "increment_statement": ["chance += 1", "chance = chance - 1", "chance = 2"]
-    },
-    "answer": {
-      "loop_statement": "while chance <= 3:",
-      "break_statement": "break",
-      "increment_statement": "chance += 1"
-    },
-    "explanation": "Use `while chance <= 3:` to allow exactly 3 guesses (chance starts at 1 and goes up to 3). Use `break` in the else clause to exit immediately when the correct guess is made. Use `chance += 1` after the if-elif-else block to increment the counter after each incorrect guess."
-  },
-  {
-    "id": 208,
-    "domain": "Module imports & file operations",
-    "type": "multiple_choice",
-    "question": "You write the following function to read a data file and print each line of the file. Line numbers are included for reference only.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>81 def read_file(file):<br>82 &nbsp;&nbsp;&nbsp;&nbsp;line = None<br>83 &nbsp;&nbsp;&nbsp;&nbsp;if os.path.isfile(file):<br>84 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data = open(file,'r')<br>85 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for line in data:<br>86 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(line)</div><br><br>When you run the program, you receive an error on line 83.<br><br>What is causing the error?",
-    "options": [
-      "A. The `isfile` method does not exist in the path object.",
-      "B. The path method does not exist in the os object.",
-      "C. You need to import the os library.",
-      "D. The `isfile` method does not accept one parameter."
-    ],
-    "answer": "C. You need to import the os library.",
-    "explanation": "The error occurs because the `os` module has not been imported. Python cannot recognize `os.path.isfile()` without first importing the os module with `import os`. The isfile method does exist in os.path, path is a valid submodule of os, and isfile does accept one parameter (the file path)."
-  },
-  {
-    "id": 209,
-    "domain": "File operations & existence checking",
-    "type": "fill_in_blank",
-    "question": "A company needs help updating their file system. You must create a simple file-manipulation program that performs the following actions:<br><br>- Checks to see whether a file exists.<br>- If the file exists, displays its contents.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import os<br><br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;file = open('myfile.txt')<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;file.close()</div><br><br>Complete the code by selecting the correct code segment from each drop-down list.<br><br>Note: You will receive partial credit for each correct selection.",
-    "options": {
-      "condition": ["if os.path.isfile('myfile.txt'):", "if os.exists('myfile.txt'):", "if file.exists('myfile.txt'):", "if path.isfile('myfile.txt'):"],
-      "display_content": ["print(file.read())", "display(file.contents)", "show(file.data)", "output(file.text)"]
-    },
-    "answer": {
-      "condition": "if os.path.isfile('myfile.txt'):",
-      "display_content": "print(file.read())"
-    },
-    "explanation": "Use `os.path.isfile('myfile.txt')` to check if the file exists and is a regular file. Use `print(file.read())` to display the entire contents of the file. The file is opened in the default read mode and properly closed after reading."
-  },
-  {
-    "id": 210,
+    "id": 258,
     "domain": "Conditional logic & operators",
     "type": "multiple_choice",
     "question": "You write the following code to determine a student's final grade based on their current grade (grade) and rank (rank):<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>grade = 76<br>rank = 3<br><br>if grade > 80 and rank >= 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade += 10<br>elif grade >= 70 and rank > 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade += 5<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade -= 5<br><br>print(grade)</div><br><br>What value will print?",
@@ -576,568 +4458,7 @@ export const quizQuestions: Question[] = [
     "explanation": "Step through the conditions: 1) grade > 80: 76 > 80 = False — first condition fails. 2) grade >= 70 AND rank > 3: 76 >= 70 = True BUT 3 > 3 = False — second condition fails. 3) Execute else clause: grade -= 5 → 76 - 5 = 71. Therefore, 71 is printed."
   },
   {
-    "id": 211,
-    "domain": "String validation & conditional logic",
-    "type": "fill_in_blank",
-    "question": "You are writing a Python program to validate employee numbers.<br><br>The employee number must have the format ddd-dd-dddd and consist only of numbers and dashes. The program must print True if the format is correct and print False if the format is incorrect.<br><br>How should you complete the code? To answer, select the appropriate code segments in the answer area.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____<br><br>parts = \"\"<br><br>____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;employee_number = input(\"Enter employee number (ddd-dd-dddd): \")<br>&nbsp;&nbsp;&nbsp;&nbsp;parts = employee_number.split('-')<br><br>&nbsp;&nbsp;&nbsp;&nbsp;if len(parts) == 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if len(parts[0]) == 3 and len(parts[1]) == 2 and len(parts[2]) == 4:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if parts[0].isdigit() and parts[1].isdigit() and parts[2].isdigit():<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br><br>&nbsp;&nbsp;&nbsp;&nbsp;print(valid)</div>",
-    "options": {
-      "first_dropdown": ["employee_number = \"sentinel\"", "employee_number = \"\""],
-      "second_dropdown": ["while employee_number != \"sentinel\":", "while employee_number != \"\":"],
-      "third_dropdown": ["valid = False", "valid = True"],
-      "fourth_dropdown": ["valid = True", "valid = False"]
-    },
-    "answer": {
-      "first_dropdown": "employee_number = \"sentinel\"",
-      "second_dropdown": "while employee_number != \"sentinel\":",
-      "third_dropdown": "valid = False",
-      "fourth_dropdown": "valid = True"
-    },
-    "explanation": "Initialize employee_number to 'sentinel' so the while condition `!= 'sentinel'` is True and the loop is entered on the first pass. Inside the loop, set valid = False at the start of each iteration as the default. Set valid = True only when all three validation conditions pass. Using an empty string '' as the sentinel AND as the loop condition would make the loop never execute since '' != '' is immediately False."
-  },
-  {
-    "id": 212,
-    "domain": "Functions & conditional logic",
-    "type": "fill_in_blank",
-    "question": "You are coding a math utility by using Python.<br><br>You are writing a function to compute roots.<br><br>The function must meet the following requirements:<br>• If a is non-negative, return a**(1/b)<br>• If a is negative and even, return \"Result is an imaginary number\"<br>• If a is negative and odd, return -(a)**(1/b)<br><br>How should you complete the code? To answer, select the appropriate code segments in the answer area.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def safe_root(a, b):<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;answer = a**(1/b)<br><br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;answer = \"Result is an imaginary number\"<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;answer = -(a)**(1/b)<br>&nbsp;&nbsp;&nbsp;&nbsp;return answer</div>",
-    "options": {
-      "first_dropdown": ["if a >= 0:", "if a % 2 == 0:", "else:", "elif:"],
-      "second_dropdown": ["if a >= 0:", "if a % 2 == 0:", "else:", "elif:"],
-      "third_dropdown": ["if a >= 0:", "if a % 2 == 0:", "else:", "elif:"],
-      "fourth_dropdown": ["if a >= 0:", "if a % 2 == 0:", "else:", "elif:"]
-    },
-    "answer": {
-      "first_dropdown": "if a >= 0:",
-      "second_dropdown": "else:",
-      "third_dropdown": "if a % 2 == 0:",
-      "fourth_dropdown": "else:"
-    },
-    "explanation": "The structure: `if a >= 0` handles non-negative numbers (compute root directly). `else` handles the negative case. Within the else, `if a % 2 == 0` checks if the negative number's value is even (imaginary result). The inner `else` handles odd negative numbers (negative root result)."
-  },
-  {
-    "id": 213,
-    "domain": "Functions & conditional logic",
-    "type": "fill_in_blank",
-    "question": "You work for a company that distributes media for all ages.<br>You are writing a function that assigns a rating based on a user's age. The function must meet the following requirements:<br>• Anyone 18 years old or older receives a rating of \"A\"<br>• Anyone 13 or older, but younger than 18, receives a rating of \"T\"<br>• Anyone 12 years old or younger receives a rating of \"C\"<br>• If the age is unknown, the rating is set to \"C\"<br><br>Complete the code by selecting the correct line for each dropdown.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def get_rating(age):<br>&nbsp;&nbsp;&nbsp;&nbsp;rating = \"\"<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;return rating</div>",
-    "options": {
-      "if_clause": [
-        "if age is None: rating = \"C\"",
-        "if age >= 18: rating = \"A\"",
-        "if age >= 13: rating = \"T\"",
-        "if age < 13: rating = \"C\""
-      ],
-      "elif1_clause": [
-        "elif age >= 18: rating = \"A\"",
-        "elif age >= 13: rating = \"T\"",
-        "elif age < 13: rating = \"C\"",
-        "elif age is None: rating = \"C\""
-      ],
-      "elif2_clause": [
-        "elif age >= 13: rating = \"T\"",
-        "elif age >= 18: rating = \"A\"",
-        "elif age < 13: rating = \"C\"",
-        "elif age is None: rating = \"C\""
-      ],
-      "else_clause": [
-        "else: rating = \"C\"",
-        "else: rating = \"T\"",
-        "else: rating = \"A\""
-      ]
-    },
-    "answer": {
-      "if_clause": "if age is None: rating = \"C\"",
-      "elif1_clause": "elif age >= 18: rating = \"A\"",
-      "elif2_clause": "elif age >= 13: rating = \"T\"",
-      "else_clause": "else: rating = \"C\""
-    },
-    "explanation": "Check `age is None` first to avoid a TypeError when comparing None to integers in subsequent conditions. Then check `age >= 18` for rating 'A'. Then check `age >= 13` for rating 'T' (covers 13-17 since 18+ was already handled). The `else` catches everyone remaining (age 12 and under), giving rating 'C'."
-  },
-  {
-    "id": 214,
-    "domain": "String methods & conditional logic",
-    "type": "ordering",
-    "question": "You are creating a Python script to evaluate input and check for upper and lower case.<br><br>Which four code segments should you use to develop the solution? To answer, move the appropriate code segment from the list of code segments to the answer area and arrange them in the correct order.<br><br>Note: You will receive partial credit for each correct placement.",
-    "options": [
-      "else:\n    print(name, \"is mixed case.\")",
-      "else:\n    print(name, \"is lower case.\")",
-      "name = input(\"Enter your name: \")",
-      "else:\n    print(name, \"is upper case.\")",
-      "elif name.upper() == name:\n    print(name, \"is all upper case.\")",
-      "if name.lower() == name:\n    print(name, \"is all lower case.\")"
-    ],
-    "answer": [
-      "name = input(\"Enter your name: \")",
-      "if name.lower() == name:\n    print(name, \"is all lower case.\")",
-      "elif name.upper() == name:\n    print(name, \"is all upper case.\")",
-      "else:\n    print(name, \"is mixed case.\")"
-    ],
-    "explanation": "The correct order: 1) Get input from user, 2) Check if input is all lowercase using name.lower() == name, 3) Use elif to check if input is all uppercase using name.upper() == name, 4) Use else for mixed case. This creates a logical if-elif-else chain covering all three possibilities."
-  },
-  {
-    "id": 215,
-    "domain": "Operators & precedence",
-    "type": "fill_in_blank",
-    "question": "You develop a Python application for your company.<br><br>You have the following code. Line numbers are included for reference only.<br><br>01 def main(a,b,c,d):<br>02 &nbsp;&nbsp;&nbsp;&nbsp;value = a+b*c-d<br>03 &nbsp;&nbsp;&nbsp;&nbsp;return value<br><br>Use the drop-down menus to select the answer choice that answers each question based on the information presented in the code segment.<br><br>Hot Area:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>Which part of the expression will be evaluated first? ____<br><br>Which operation will be evaluated second? ____<br><br>Which expression is equivalent to the expression in the function? ____</div>",
-    "options": {
-      "first_evaluated": ["a-b", "b*c", "c-d"],
-      "second_operation": ["addition", "subtraction"],
-      "equivalent_expression": ["(a+b) * (c-d)", "(a + (b*c)) - d", "a + ((b * c) - d)"]
-    },
-    "answer": {
-      "first_evaluated": "b*c",
-      "second_operation": "addition",
-      "equivalent_expression": "(a + (b*c)) - d"
-    },
-    "explanation": "Following operator precedence: 1) Multiplication (b*c) is evaluated first. 2) Addition (a + result_of_b*c) is evaluated second, left to right. 3) Subtraction is evaluated last. The equivalent expression with explicit parentheses is (a + (b*c)) - d."
-  },
-  {
-    "id": 216,
-    "domain": "Data types & dictionary operations",
-    "type": "fill_in_blank",
-    "question": "You create the following program to locate a conference room and display the room name. Line numbers are included for reference only.<br><br>01 rooms = {1: 'foyer', 2: 'Conference Room'}<br>02 room = input('Enter the room number: ')<br>03 if not room in rooms:<br>04 &nbsp;&nbsp;&nbsp;&nbsp;print('Room does not exist.')<br>05 else:<br>06 &nbsp;&nbsp;&nbsp;&nbsp;print(\"The room name is \" + rooms[room])<br><br>Colleagues report that the program sometimes produces incorrect results.<br>You need to troubleshoot the program. Use the drop-down menus to select the answer choice that answers each question based on the information presented in the code segment.<br><br>Hot Area:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>Which two data types are stored in the rooms list at line 01? ____<br><br>What is the data type of room at line 02? ____<br><br>Why does line 03 fail to find the rooms? ____</div>",
-    "options": {
-      "data_types_in_rooms": ["bool and string", "float and bool", "int and string", "float and int"],
-      "room_data_type": ["bool", "float", "int", "string"],
-      "line03_failure_reason": ["Invalid syntax", "Mismatched data type(s)", "Misnamed variable(s)"]
-    },
-    "answer": {
-      "data_types_in_rooms": "int and string",
-      "room_data_type": "string",
-      "line03_failure_reason": "Mismatched data type(s)"
-    },
-    "explanation": "The rooms dictionary has integer keys (1, 2) and string values ('foyer', 'Conference Room') — so it stores int and string types. The input() function always returns a string, so room is of string type. Line 03 fails to find the rooms because of a mismatched data type: room is the string '1' but the dictionary key is the integer 1. In Python '1' != 1, so the lookup always fails. The fix is to cast the input: room = int(input(...)). Note: 'if not room in rooms:' is valid Python syntax — it is parsed as 'if not (room in rooms):'."
-  },
-  {
-    "id": 1,
-    "domain": "Loops & control flow",
-    "type": "fill_in_blank",
-    "question": "You are developing a Python application for an online product distribution company.<br><br>You need the program to iterate through a list of products and escape when a target product ID is found.<br><br>How should you complete the code? To answer, select the appropriate code segments in the answer area.<br><br>NOTE: Each correct selection is worth one point.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>productIdList = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]<br>index = 0<br><br>____ (index < 10):<br>&nbsp;&nbsp;&nbsp;&nbsp;print(productIdList[index])<br><br>&nbsp;&nbsp;&nbsp;&nbsp;if productIdList[index] == 6:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br><br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;index += 1</div>",
-    "options": {
-      "loop_type": ["while", "for", "if", "break"],
-      "exit_statement": ["while", "for", "if", "break"]
-    },
-    "answer": {
-      "loop_type": "while",
-      "exit_statement": "break"
-    },
-    "explanation": "Use 'while' to create a loop that continues as long as index < 10. Use 'break' to exit the loop immediately when the target product ID (6) is found. The else clause increments the index only when the target is not found."
-  },
-  {
-    "id": 2,
-    "domain": "Input & type casting",
-    "type": "multiple_choice",
-    "question": "The ABC company has hired you as an intern on the coding team that creates e-commerce applications.<br><br>You must write a script that asks the user for a value. The value must be used as a whole number in a calculation, even if the user enters a decimal value.<br><br>Which code segment should you use?",
-    "options": [
-      "A. totalItems = input(\"How many items would you like?\")",
-      "B. totalItems = float(input(\"How many items would you like?\"))",
-      "C. totalItems = str(input(\"How many items would you like?\"))",
-      "D. totalItems = int(input(\"How many items would you like?\"))"
-    ],
-    "answer": "D. totalItems = int(input(\"How many items would you like?\"))",
-    "explanation": "Use int(input()) to convert user input directly to a whole number (integer). Option A returns a raw string. Option B returns a float which is not a whole number type. Option C redundantly wraps the already-string input() in str(). Only int() guarantees a whole number as required."
-  },
-  {
-    "id": 4,
-    "domain": "Data types & type conversion",
-    "type": "true_false",
-    "question": "During school holidays, you volunteer to explain some basic programming concepts to younger siblings.<br><br>You want to introduce the concept of data types in Python. You create the following three code segments:<br><br># Code segment 1<br>x1 = \"20\"<br>y1 = 3<br>a = x1 * y1<br><br># Code segment 2<br>x2 = 6<br>y2 = 4<br>b = x2 / y2<br><br># Code segment 3<br>x3 = 2.5<br>y3 = 1<br>c = x3 / y3<br><br>You need to evaluate the code segments.<br><br>For each of the following statements, select Yes if the statement is true. Otherwise, select No.<br><br>NOTE: Each correct selection is worth one point.",
-    "options": {
-      "statement1": "After executing code segment 1, the data type of variable a is str.",
-      "statement2": "After executing code segment 2, the data type of variable b is float.",
-      "statement3": "After executing code segment 3, the data type of variable c is int."
-    },
-    "answer": {
-      "statement1": "True: After executing code segment 1, the data type of variable a is str.",
-      "statement2": "True: After executing code segment 2, the data type of variable b is float.",
-      "statement3": "False: After executing code segment 3, the data type of variable c is int."
-    },
-    "explanation": "Statement 1: True — String * integer repeats the string: '20' * 3 = '202020' (str). Statement 2: True — Division in Python 3 always returns a float: 6 / 4 = 1.5 (float). Statement 3: False — Division always returns float in Python 3: 2.5 / 1 = 2.5 (float), not int."
-  },
-  {
-    "id": 6,
-    "domain": "Data types & variables",
-    "type": "fill_in_blank",
-    "question": "Match the data type to each variable.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>age = 2 → ____<br>minor = False → ____<br>name = \"Contoso\" → ____<br>weight = 123.5 → ____<br>zip = \"81000\" → ____</div>",
-    "options": {
-      "age_type": ["int", "float", "str", "bool"],
-      "minor_type": ["int", "float", "str", "bool"],
-      "name_type": ["int", "float", "str", "bool"],
-      "weight_type": ["int", "float", "str", "bool"],
-      "zip_type": ["int", "float", "str", "bool"]
-    },
-    "answer": {
-      "age_type": "int",
-      "minor_type": "bool",
-      "name_type": "str",
-      "weight_type": "float",
-      "zip_type": "str"
-    },
-    "explanation": "2 → int (whole number). False → bool (boolean literal). \"Contoso\" → str (text in quotes). 123.5 → float (decimal number). \"81000\" → str (number in quotes is still a string)."
-  },
-  {
-    "id": 218,
-    "domain": "Conditional logic & string operations",
-    "type": "fill_in_blank",
-    "question": "The ABC Video company needs a way to determine the cost that a customer will pay for renting a DVD. The cost is dependent on the time of day the DVD is returned. However, there are also special rates on Thursdays and Sundays. The fee structure is shown in the following list:<br>• The cost is $1.59 per night.<br>• If the DVD is returned after 8 PM, the customer will be charged an extra day.<br>• If the video is rented on a Sunday, the customer gets 30% off for as long as they keep the video.<br>• If the video is rented on a Thursday, the customer gets 50% off for as long as they keep the video.<br><br>You need to write code to meet the requirements.<br><br>How should you complete the code? To answer, select the appropriate code segments in the answer area.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>ontime = input(\"Was video returned before 8 pm? y or n\").lower()<br><br>days_rented = int(input(\"How many days was video rented?\"))<br><br>day_rented = input(\"What day was the video rented?\").capitalize()<br><br>cost_per_day = 1.59<br><br>if ontime ____:<br>&nbsp;&nbsp;&nbsp;&nbsp;days_rented += 1<br><br>if day_rented ____:<br>&nbsp;&nbsp;&nbsp;&nbsp;total = (days_rented * cost_per_day) * .7<br><br>elif day_rented ____:<br>&nbsp;&nbsp;&nbsp;&nbsp;total = (days_rented * cost_per_day) * .5</div>",
-    "options": {
-      "ontime_condition": ["!= \"n\":", "== \"n\":", "== \"y\":"],
-      "sunday_condition": ["== \"Sunday\":", ">= \"Sunday\":", "is \"Sunday\":"],
-      "thursday_condition": ["== \"Thursday\":", "<= \"Thursday\":", "is \"Thursday\":"]
-    },
-    "answer": {
-      "ontime_condition": "== \"n\":",
-      "sunday_condition": "== \"Sunday\":",
-      "thursday_condition": "== \"Thursday\":"
-    },
-    "explanation": "Use '== \"n\"' because if the answer is 'n' (not returned before 8pm), an extra day is charged. Use '== \"Sunday\"' to exactly match Sunday for the 30% discount (pay 70%). Use '== \"Thursday\"' to exactly match Thursday for the 50% discount. The capitalize() call ensures the day name has a capital first letter for consistent comparison."
-  },
-  {
-    "id": 219,
-    "domain": "String operations & type conversion",
-    "type": "multiple_choice",
-    "question": "You are creating a Python program that shows a congratulation message to employees on their service anniversary.<br><br>You need to calculate the number of years of service and print a congratulatory message.<br><br>You have written the following code. Line numbers are included for reference only.<br><br>01 start = input(\"How old were you on your start date?\")<br>02 end = input(\"How old are you today?\")<br>03<br><br>You need to complete the program.<br><br>Which code should you use at line 03?",
-    "options": [
-      "A. print(\"Congratulations on\" + (int(end)-int(start)) + \"years of service!\")",
-      "B. print(\"Congratulations on\" + str(int(end)-int(start)) + \"years of service!\")",
-      "C. print(\"Congratulations on\" + int(end - start) + \"years of service!\")",
-      "D. print(\"Congratulations on\" + str(end - start) + \"years of service!\")"
-    ],
-    "answer": "B. print(\"Congratulations on\" + str(int(end)-int(start)) + \"years of service!\")",
-    "explanation": "Option B is correct: input() returns strings, so int() converts them to integers for arithmetic subtraction. str() then converts the integer result back to a string for concatenation. Option A fails because you cannot concatenate a string with an integer directly. Options C and D fail because end and start are strings, so end - start without int() conversion raises a TypeError."
-  },
-  {
-    "id": 220,
-    "domain": "Object identity & equality operators",
-    "type": "fill_in_blank",
-    "question": "You write the following code:<br><br>numList = [1,2,3,4,5]<br>alphaList = [\"a\",\"b\",\"c\",\"d\",\"e\"]<br>print(numList is alphaList)<br>print(numList == alphaList)<br>numList = alphaList<br>print(numList is alphaList)<br>print(numList == alphaList)<br><br>Use the drop-down menus to select the answer choice that answers each question based on the information presented in the code segment.<br><br>Hot Area:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>What is displayed after the first print? ____<br><br>What is displayed after the second print? ____<br><br>What is displayed after the third print? ____<br><br>What is displayed after the fourth print? ____</div>",
-    "options": {
-      "first_print": ["True", "False"],
-      "second_print": ["True", "False"],
-      "third_print": ["True", "False"],
-      "fourth_print": ["True", "False"]
-    },
-    "answer": {
-      "first_print": "False",
-      "second_print": "False",
-      "third_print": "True",
-      "fourth_print": "True"
-    },
-    "explanation": "First print (numList is alphaList): False — different objects in memory. Second print (numList == alphaList): False — different contents ([1,2,3,4,5] vs ['a','b','c','d','e']). After `numList = alphaList`, both variables point to the same object. Third print (numList is alphaList): True — same object identity. Fourth print (numList == alphaList): True — same contents since they reference the same list."
-  },
-  {
-    "id": 221,
-    "domain": "Arithmetic operators & division types",
-    "type": "ordering",
-    "question": "You are writing a Python program to perform arithmetic operations.<br><br>You create the following code:<br>a = 11<br>b = 4<br><br>What is the result of each arithmetic expression? To answer, drag the appropriate expression from the column on the left to its result on the right. Each expression may be used once, more than once, or not at all.<br><br>Note: You will receive partial credit for each correct match.<br><br>Results → Answer Area<br>2 → ____<br>3 → ____<br>2.75 → ____",
-    "options": [
-      "print(a / b)",
-      "print(a // b)",
-      "print(a % b)"
-    ],
-    "answer": [
-      "print(a // b)",
-      "print(a % b)",
-      "print(a / b)"
-    ],
-    "explanation": "With a=11 and b=4: print(a // b) = 11 // 4 = 2 (floor division). print(a % b) = 11 % 4 = 3 (modulo/remainder). print(a / b) = 11 / 4 = 2.75 (regular division)."
-  },
-  {
-    "id": 222,
-    "domain": "Arithmetic operators & operator precedence",
-    "type": "ordering",
-    "question": "You are writing a Python program that evaluates an arithmetic formula.<br><br>The formula is described as b equals a multiplied by negative one, then raised to the second power, where a is the value that will be input and b is the result.<br><br>You create the following code segment. Line numbers are included for reference only.<br><br>01 a = eval(input(\"Enter a number for the question: \"))<br>02 b =<br><br>You need to ensure that the result is correct.<br><br>How should you complete the code on line 02? To answer, drag the appropriate code segment to the correct location. Each code segment may be used once, more than once, or not at all.<br><br>Note: You will receive partial credit for each correct placement ONLY 5 TO USE!.<br><br>b = ____",
-    "options": [
-      "-",
-      "(",
-      ")",
-      "**",
-      "**2",
-      "2",
-      "a"
-    ],
-    "answer": [
-      "(",
-      "-",
-      "a",
-      ")",
-      "**2"
-    ],
-    "explanation": "The formula 'a multiplied by negative one, then raised to the second power' translates to (-a)**2. The parentheses ensure that the negation (-a) is applied first, then the entire result is raised to the power of 2. Without parentheses, -a**2 would be -(a**2) due to Python's operator precedence, giving a wrong result."
-  },
-  {
-    "id": 223,
-    "domain": "List slicing & indexing",
-    "type": "multiple_select",
-    "question": "You develop a Python application for your company.<br><br>A list named employees contains 200 employee names, the last five being company management. You need to slice the list to display all employees excluding management.<br><br>Which two code segments should you use? Each correct answer presents a complete solution. (Choose two.)",
-    "options": [
-      "A. employees[1:-4]",
-      "B. employees[:-5]",
-      "C. employees[1:-5]",
-      "D. employees[0:-4]",
-      "E. employees[0:-5]"
-    ],
-    "answer": [
-      "B. employees[:-5]",
-      "E. employees[0:-5]"
-    ],
-    "explanation": "To exclude the last 5 employees (management), slice up to but not including the last 5 elements. employees[:-5] starts from index 0 (default) and goes up to index -5. employees[0:-5] explicitly starts from index 0 and goes up to index -5. Both give indices 0 through 194 (195 employees). Options A and C start from index 1 (missing first employee), and Option D ends at -4 (includes one management employee)."
-  },
-  {
-    "id": 7,
-    "domain": "Operators & precedence",
-    "type": "multiple_choice",
-    "question": "Evaluate the following Python arithmetic expression:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>((3*(1+2)**2 - (2**2)) * 3)</div><br>What is the result?",
-    "options": [
-      "A. 2",
-      "B. 42",
-      "C. 51",
-      "D. 69"
-    ],
-    "answer": "D. 69",
-    "explanation": "Compute step by step: (1+2)=3 → 3**2=9 → 3*9=27. Then 2**2=4. Inside the outer parentheses: 27-4=23. Finally 23*3=69."
-  },
-  {
-    "id": 224,
-    "domain": "Type conversion & precision",
-    "type": "fill_in_blank",
-    "question": "You are an intern for ABC electric cars company. You must create a function that calculates the average velocity of their vehicles on a 1320 foot (1/4 mile) track. The output must be as precise as possible.<br><br>How should you complete the code? To answer, select the appropriate code segments in the answer area.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>distance = ____(input(\"Enter the distance traveled in feet\"))<br><br>distance_miles = distance/5280 &nbsp;&nbsp;#convert to miles<br><br>time = ____(input(\"Enter the time elapsed in seconds\"))<br><br>time_hours = time/3600 &nbsp;&nbsp;#convert to hours<br><br>velocity = distance_miles/time_hours<br><br>print(\"The average velocity is : \", velocity, \" miles/hour\")</div>",
-    "options": {
-      "distance_conversion": ["int", "str", "float"],
-      "time_conversion": ["int", "float", "str"]
-    },
-    "answer": {
-      "distance_conversion": "float",
-      "time_conversion": "float"
-    },
-    "explanation": "Both distance and time should use float() for maximum precision as required by the problem. Distance in feet may be entered as a decimal (e.g., 1320.5), and time in seconds almost certainly includes decimals (e.g., 5.25 seconds). Using int() for either would discard decimal precision and give a less accurate velocity calculation."
-  },
-  {
-    "id": 8,
-    "domain": "Math functions",
-    "type": "multiple_select",
-    "question": "You are creating a function that manipulates a number. The function has the following requirements:<br><br>- A float is passed into the function<br>- The function must take the absolute value of the float<br>- Any decimal points after the integer must be removed<br><br>Which two math functions should you use? (Choose two.)",
-    "options": [
-      "A. math.fmod(x)",
-      "B. math.frexp(x)",
-      "C. math.floor(x)",
-      "D. math.ceil(x)",
-      "E. math.fabs(x)"
-    ],
-    "answer": [
-      "C. math.floor(x)",
-      "E. math.fabs(x)"
-    ],
-    "explanation": "Use math.fabs(x) to get the absolute value as a float. Then use math.floor(x) to remove the decimal portion (since after taking fabs the value is non-negative, floor truncates to the integer part). For example: fabs(-3.7) = 3.7, then floor(3.7) = 3."
-  },
-  {
-    "id": 9,
-    "domain": "Modules & imports",
-    "type": "multiple_choice",
-    "question": "You are writing an application that uses the sqrt function. The program must reference the function using the name squareRoot. You need to import the function. Which code segment should you use?",
-    "options": [
-      "A. import math.sqrt as squareRoot",
-      "B. import sqrt from math as squareRoot",
-      "C. from math import sqrt as squareRoot",
-      "D. from math.sqrt as squareRoot"
-    ],
-    "answer": "C. from math import sqrt as squareRoot",
-    "explanation": "The correct syntax to import a specific function from a module and give it an alias is: from math import sqrt as squareRoot. This allows you to call squareRoot(16) instead of math.sqrt(16). The other options use invalid Python import syntax."
-  },
-  {
-    "id": 10,
-    "domain": "Random module & ranges",
-    "type": "multiple_select",
-    "question": "You are writing code that generates a random integer with a minimum value of 5 and a maximum value of 11. Which two functions should you use? (Choose two.)",
-    "options": [
-      "A. random.randint(5, 12)",
-      "B. random.randint(5, 11)",
-      "C. random.randrange(5, 12, 1)",
-      "D. random.randrange(5, 11, 1)"
-    ],
-    "answer": [
-      "B. random.randint(5, 11)",
-      "C. random.randrange(5, 12, 1)"
-    ],
-    "explanation": "randint(a, b) is inclusive of both endpoints, so randint(5, 11) generates 5 through 11. randrange(start, stop, step) excludes the stop value, so randrange(5, 12, 1) generates 5 through 11. Option A would include 12 (too high). Option D would only generate 5 through 10 (missing 11)."
-  },
-  {
-    "id": 225,
-    "domain": "File operations & conditional logic",
-    "type": "ordering",
-    "question": "You are writing a function that works with files.<br><br>You need to ensure that the function returns None if the file does not exist. If the file does exist, the function must return the first line.<br><br>You write the following code:<br><br>import os<br>def get_first_line(filename, mode):<br><br>Which code segments should you use to develop the solution? To answer, move the appropriate code segments from the list of code segments to the answer area and arrange them in the correct order.<br><br>Note: You will receive partial credit for each correct placement.",
-    "options": [
-      "if os.path.isfile(filename):",
-      "return file.readline()",
-      "with open(filename, 'r') as file:",
-      "return None",
-      "else:"
-    ],
-    "answer": [
-      "if os.path.isfile(filename):",
-      "with open(filename, 'r') as file:",
-      "return file.readline()",
-      "else:",
-      "return None"
-    ],
-    "explanation": "The correct order: 1) Check if file exists using os.path.isfile(). 2) If it exists, open it safely with a context manager. 3) Return the first line using readline(). 4) Use else for when the file doesn't exist. 5) Return None for non-existent files."
-  },
-  {
-    "id": 226,
-    "domain": "File operations & string validation",
-    "type": "multiple_choice",
-    "question": "You are writing a Python program to automate inventory. Your first task is to read a file of inventory transactions. The file contains sales from the previous day, including the item id, price, and quantity.<br><br>The following shows a sample of data from the file:<br><br>10, 200, 5<br>20, 100, 1<br><br>The code must meet the following requirements:<br>• Each line of the file must be read and printed<br>• If a blank line is encountered, it must be ignored<br>• When all lines have been read, the file must be closed<br><br>You create the following code. Line numbers are included for reference only.<br><br>01 inventory = open(\"inventory.txt\", \"r\")<br>02 eof = False<br>03 while eof == False:<br>04 &nbsp;&nbsp;&nbsp;&nbsp;line = inventory.readline()<br>05<br>06<br>07 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(line)<br>08 &nbsp;&nbsp;&nbsp;&nbsp;else:<br>09 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(\"End of file\")<br>10 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;eof = True<br>11 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inventory.close()<br><br>Which code should you write for line 05 and line 06?",
-    "options": [
-      "A.<br>05 if line != '':<br>06 &nbsp;&nbsp;&nbsp;&nbsp;if line != '\\n':",
-      "B.<br>05 if line != '':<br>06 &nbsp;&nbsp;&nbsp;&nbsp;if line != None:",
-      "C.<br>05 if line != \"\":<br>06 &nbsp;&nbsp;&nbsp;&nbsp;if line != \"\":",
-      "D.<br>05 if line != \"\":<br>06 &nbsp;&nbsp;&nbsp;&nbsp;if line != \"\\n\":"
-    ],
-    "answer": "D.<br>05 if line != \"\":<br>06 &nbsp;&nbsp;&nbsp;&nbsp;if line != \"\\n\":",
-    "explanation": "Line 05 must check `if line != \"\":` to detect end of file — readline() returns an empty string '' when EOF is reached, which triggers the else block. Line 06 must check `if line != \"\\n\":` to skip blank lines (which contain only the newline character). This structure correctly handles: EOF detection (empty string '' triggers else/close), blank line filtering (\\n lines are skipped), and valid lines get printed."
-  },
-  {
-    "id": 227,
-    "domain": "Input & Output",
-    "type": "multiple_choice",
-    "question": "You develop a Python application for your company.<br><br>You need to accept input from the user and print that information to the user screen.<br><br>You have started with the following code. Line numbers are included for reference only.<br><br>01 print(\"What is your name?\")<br>02<br>03 print(name)<br><br>Which code should you write at line 02?",
-    "options": [
-      "A. name = input",
-      "B. input(\"name\")",
-      "C. input(name)",
-      "D. name = input()"
-    ],
-    "answer": "D. name = input()",
-    "explanation": "Option D is correct: input() is the proper function to get user input in Python, and its return value must be assigned to a variable (name) to store it for use in the print statement at line 03. Option A assigns the function object itself (not the result of calling it). Option B calls input but doesn't store the result. Option C passes an undefined variable as a parameter."
-  },
-  {
-    "id": 12,
-    "domain": "File operations & modes",
-    "type": "multiple_choice",
-    "question": "You develop a Python application for your school. You need to read and write data to a text file. If the file does not exist, it must be created. If the file has content, the content must be removed. Which code should you use?",
-    "options": [
-      "A. open(\"local_data\", \"r\")",
-      "B. open(\"local_data\", \"r+\")",
-      "C. open(\"local_data\", \"w+\")",
-      "D. open(\"local_data\", \"w\")"
-    ],
-    "answer": "C. open(\"local_data\", \"w+\")",
-    "explanation": "\"w+\" opens the file for both reading and writing, truncates existing content to zero length, and creates the file if it doesn't exist — satisfying all three requirements. \"w\" is write-only (no reading). \"r\" is read-only and requires the file to exist. \"r+\" allows read and write but requires the file to already exist and does not truncate it."
-  },
-  {
-    "id": 228,
-    "domain": "Input validation & string formatting",
-    "type": "fill_in_blank",
-    "question": "The ABC organics company needs a simple program that their call center will use to enter survey data for a new coffee variety.<br><br>The program must accept input and return the average rating based on a five-star scale. The output must be rounded to two decimal places.<br><br>You need to complete the code to meet the requirements.<br><br>How should you complete the code? To answer, select the appropriate code segments in the answer area.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>sum = count = done = 0<br>average = 0.0<br><br>while (done != -1):<br><br>&nbsp;&nbsp;&nbsp;&nbsp;rating = ____<br><br>&nbsp;&nbsp;&nbsp;&nbsp;if rating == -1:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;&nbsp;&nbsp;sum+=rating<br>&nbsp;&nbsp;&nbsp;&nbsp;count+=1<br><br>average = float(sum/count)<br><br>____ + ____</div>",
-    "options": {
-      "input_method": ["print(\"Enter next rating (1-5), -1 for done\")", "float(input(\"Enter next rating (1-5), -1 for done\"))", "input(\"Enter next rating (1-5), -1 for done\")", "int(input(\"Enter next rating (1-5), -1 for done\"))"],
-      "output_method": ["output(\"The average star rating for NetVerZleep coffee is: \")", "console.input(\"The average star rating for the new coffee is: \")", "println(\"The average star rating for the new coffee is: \")", "print(\"The average star rating for the new coffee is: \")"],
-      "format_method": ["format(average, '.2f')", "format(average, '.2d')", "{average, '.2f'}", "format.average.{2d}"]
-    },
-    "answer": {
-      "input_method": "float(input(\"Enter next rating (1-5), -1 for done\"))",
-      "output_method": "print(\"The average star rating for the new coffee is: \")",
-      "format_method": "format(average, '.2f')"
-    },
-    "explanation": "Use float(input()) to convert user input to a floating-point number so arithmetic works correctly, including the -1 sentinel check. Use print(\"The average star rating for the new coffee is: \") — note the closing parenthesis is required for valid Python syntax. Use format(average, '.2f') to round the average to exactly 2 decimal places as required."
-  },
-  {
-    "id": 229,
-    "domain": "String formatting & output alignment",
-    "type": "fill_in_blank",
-    "question": "The ABC company is building a basketball court for its employees to improve company morale.<br><br>You are creating a Python program that employees can use to keep track of their average score.<br><br>The program must allow users to enter their name and current scores. The program will output the user name and the user's average score. The output must meet the following requirements:<br>• The user name must be left-aligned.<br>• If the user name has fewer than 20 characters, additional space must be added to the right.<br>• The average score must have three places to the left of the decimal point and one place to the right of the decimal (XXX.X).<br><br>How should you complete the code? To answer, select the appropriate code segments in the answer area.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>name = input(\"what is your name?\")<br><br>score = 0<br><br>count = 0<br><br>while(score != -1):<br>&nbsp;&nbsp;&nbsp;&nbsp;score = int(input(\"Enter your scores: (-1 to end)\"))<br><br>&nbsp;&nbsp;&nbsp;&nbsp;if score == -1:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br><br>&nbsp;&nbsp;&nbsp;&nbsp;sum += score<br><br>&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br><br>average_score = sum / count<br><br>print(\"____, your average score is: ____\"%(name, average_score))</div>",
-    "options": {
-      "name_format": ["%-20i", "%-20d", "%-20f", "%-20s"],
-      "score_format": ["%1.4s", "%4.1f", "%4.1s", "%1.4f"]
-    },
-    "answer": {
-      "name_format": "%-20s",
-      "score_format": "%4.1f"
-    },
-    "explanation": "Use %-20s for the name: 's' is the string type specifier, '20' sets the field width to 20 characters, and '-' makes it left-aligned with right padding. Use %4.1f for the score: 'f' is the float type specifier, '4' sets the total field width (accommodates XXX.X format), and '.1' specifies exactly one decimal place."
-  },
-  {
-    "id": 230,
-    "domain": "Python syntax & indentation",
-    "type": "multiple_select",
-    "question": "You are creating a function that reads a data file and prints each line of the file.<br><br>You write the following code. Line numbers are included for reference only.<br><br>01 import os<br>02 def read_file(file):<br>03 &nbsp;&nbsp;&nbsp;&nbsp;line = None<br>04 &nbsp;&nbsp;&nbsp;&nbsp;if os.path.isfile(file):<br>05 &nbsp;&nbsp;&nbsp;&nbsp;data = open(file,'r')<br>06 &nbsp;&nbsp;&nbsp;&nbsp;while line != '':<br>07 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;line = data.readline()<br>08 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(line)<br><br>The code attempts to read the file even if the file does not exist.<br><br>You need to correct the code.<br><br>Which three lines have indentation problems? Each correct answer presents part of the solution. (Choose three.)",
-    "options": [
-      "A. Line 01",
-      "B. Line 02",
-      "C. Line 03",
-      "D. Line 04",
-      "E. Line 05",
-      "F. Line 06",
-      "G. Line 07",
-      "H. Line 08"
-    ],
-    "answer": [
-      "E. Line 05",
-      "F. Line 06",
-      "G. Line 07",
-      "H. Line 08"
-    ],
-    "explanation": "Line 05 (data = open...) must be indented inside the if block — it currently sits at the same level as the if statement, meaning the file is opened regardless of whether it exists. Line 06 (while line != '') must also be indented inside the if block for the same reason. Line 07 (line = data.readline()) must be indented inside the while block. Line 08 (print(line)) is already correctly indented inside the while block. The corrected structure should be: if block contains lines 05 and 06, while block inside if contains lines 07 and 08."
-  },
-  {
-    "id": 231,
-    "domain": "Exception handling & file operations",
-    "type": "multiple_choice",
-    "question": "You write the following code:<br><br>import sys<br>try:<br>&nbsp;&nbsp;&nbsp;&nbsp;file_in = open(\"in.txt\", 'r')<br>&nbsp;&nbsp;&nbsp;&nbsp;file_out = open(\"out.txt\", 'w+')<br>except IOError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print('cannot open', file_name)<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;i = 1<br>&nbsp;&nbsp;&nbsp;&nbsp;for line in file_in:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(line.rstrip())<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file_out.write(\"line \" + str(i) + \": \" + line)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i = i + 1<br>&nbsp;&nbsp;&nbsp;&nbsp;file_in.close()<br>&nbsp;&nbsp;&nbsp;&nbsp;file_out.close()<br><br>The out.txt file does not exist. You run the code. The code will execute without error.<br><br>Review the underlined text. If it makes the statement correct, select 'No change is needed'. If the statement is incorrect, select the answer choice that makes the statement correct.",
-    "options": [
-      "A. No change is needed",
-      "B. The code runs, but generates a logic error",
-      "C. The code will generate a runtime error",
-      "D. The code will generate a syntax error"
-    ],
-    "answer": "C. The code will generate a runtime error",
-    "explanation": "The code will generate a runtime error (NameError) because the except block references 'file_name', which is never defined anywhere in the code. If in.txt does not exist, the IOError is caught and the except block tries to print 'file_name', causing a NameError at runtime. Note: out.txt opened in 'w+' mode is created automatically if it doesn't exist, so that alone does not cause an error."
-  },
-  {
-    "id": 232,
-    "domain": "Function definition & parameters",
-    "type": "fill_in_blank",
-    "question": "You are developing a Python application for an online game.<br><br>You need to create a function that meets the following criteria:<br>• The function is named update_score<br>• The function receives the current score and a value<br>• The function adds the value to the current score<br>• The function returns the new score<br><br>How should you complete the code? To answer, select the appropriate code segments in the answer area.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;current += value<br>&nbsp;&nbsp;&nbsp;&nbsp;____</div>",
-    "options": {
-      "function_definition": ["update_score", "def update_score", "return update_score"],
-      "parameters": ["(current, value):", "()", "(current, value)", "(score, value)"],
-      "return_statement": ["pass current", "return current", "return", "pass"]
-    },
-    "answer": {
-      "function_definition": "def update_score",
-      "parameters": "(current, value):",
-      "return_statement": "return current"
-    },
-    "explanation": "Use 'def update_score' to define the function with the required name. Use '(current, value):' to specify the two required parameters with the colon to start the function body. Use 'return current' to return the updated score after the += operation."
-  },
-  {
-    "id": 15,
-    "domain": "Code documentation & comments",
-    "type": "multiple_choice",
-    "question": "You develop a Python application for your company. You want to add notes to your code so other team members will understand it. What should you do?",
-    "options": [
-      "A. Place the notes after the # sign on any line",
-      "B. Place the notes after the last line of code separated by a blank line",
-      "C. Place the notes before the first line of code separated by a blank line",
-      "D. Place the notes inside of parentheses on any line"
-    ],
-    "answer": "A. Place the notes after the # sign on any line",
-    "explanation": "In Python, comments start with # and continue to the end of the line. They can appear on their own line or inline after code. The # symbol tells the interpreter to ignore everything that follows on that line."
-  },
-  {
-    "id": 17,
-    "domain": "Truthiness & bool conversion",
-    "type": "multiple_choice",
-    "question": "You have the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>v = bool([False])<br>x = bool(3)<br>y = bool(\"\")<br>z = bool(' ')</div><br>Which of the variables will equal False?",
-    "options": [
-      "a) z",
-      "b) y",
-      "c) x",
-      "d) v"
-    ],
-    "answer": "b) y",
-    "explanation": "In Python: bool([False]) = True (non-empty list is truthy, regardless of its contents). bool(3) = True (non-zero number). bool(\"\") = False (empty string is falsy). bool(' ') = True (a space character makes it a non-empty string). Therefore only y equals False."
-  },
-  {
-    "id": 234,
+    "id": 259,
     "domain": "Variable scope & parameter passing",
     "type": "multiple_choice",
     "question": "You run the following code:<br><br>def calc1(rate, item):<br>&nbsp;&nbsp;&nbsp;&nbsp;item *= (1 + rate)<br>rate = 0.25<br>item = 12000<br>calc1(rate, item)<br>print('Rate:', rate, '; Value:', item)<br><br>What will be displayed on the screen?",
@@ -1149,944 +4470,5 @@ export const quizQuestions: Question[] = [
     ],
     "answer": "d) Rate: 0.25 ; Value: 12000",
     "explanation": "In Python, integers and floats are immutable. Inside calc1(), the parameters 'rate' and 'item' are local variables. The line `item *= (1 + rate)` computes 12000 * 1.25 = 15000 and rebinds the local 'item' to 15000, but this has no effect on the global 'item' variable. After the function returns, the global variables remain unchanged: rate = 0.25 and item = 12000."
-  },
-  {
-    "id": 235,
-    "domain": "String methods & loops",
-    "type": "fill_in_blank",
-    "question": "You receive a comma-separated string of product codes. You must split the string and print each code.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>raw = \"A101,B202,C303,D404\"<br>codes = raw.____(\",\")<br>for code ____ codes:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(code)</div>",
-    "options": {
-      "split_method": ["split", "partition", "separate", "divide"],
-      "iteration_keyword": ["in", "of", "within", "inside"]
-    },
-    "answer": {
-      "split_method": "split",
-      "iteration_keyword": "in"
-    },
-    "explanation": "`split(\",\")` breaks the string on commas and returns a list. The `for ... in` syntax iterates through each item in the list. `partition` returns a 3-tuple instead of a list, so it wouldn't work here."
-  },
-  {
-    "id": 236,
-    "domain": "List operations & loops",
-    "type": "multiple_choice",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>numbers = [1, 2, 3, 4, 5, 6, 7]<br>result = []<br>for x in numbers:<br>&nbsp;&nbsp;&nbsp;&nbsp;if x % 2 != 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result.append(x * 2)<br>print(result)</div><br><br>What is the output?",
-    "options": [
-      "A. [2, 4, 6, 8, 10, 12, 14]",
-      "B. [2, 6, 10, 14]",
-      "C. [2, 4, 6, 10, 14]",
-      "D. [1, 3, 5, 7]"
-    ],
-    "answer": "B. [2, 6, 10, 14]",
-    "explanation": "The condition `x % 2 != 0` keeps only odd numbers: 1, 3, 5, 7. Each is multiplied by 2 before being appended, giving [2, 6, 10, 14]. Option A ignores the filter; Option D forgets the multiplication; Option C includes an even number."
-  },
-  {
-    "id": 237,
-    "domain": "Function parameters & default values",
-    "type": "multiple_choice",
-    "question": "You write the following function:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def greet(name, greeting=\"Hello\"):<br>&nbsp;&nbsp;&nbsp;&nbsp;return greeting + \", \" + name + \"!\"<br><br>print(greet(\"Anna\"))<br>print(greet(\"Ben\", \"Hi\"))</div><br><br>What is the output?",
-    "options": [
-      "A. Hello, Anna! followed by Hi, Ben!",
-      "B. Hello, Anna! followed by Hello, Ben!",
-      "C. The code generates a syntax error.",
-      "D. Anna, Hello! followed by Ben, Hi!"
-    ],
-    "answer": "A. Hello, Anna! followed by Hi, Ben!",
-    "explanation": "The first call uses the default value \"Hello\" for `greeting`, producing \"Hello, Anna!\". The second call overrides the default with \"Hi\", producing \"Hi, Ben!\". Default parameters are used only when no value is passed for that argument."
-  },
-  {
-    "id": 238,
-    "domain": "Nested loops & control flow",
-    "type": "multiple_choice",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>count = 0<br>for i in range(4):<br>&nbsp;&nbsp;&nbsp;&nbsp;for j in range(4):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if i == j:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if j > i:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>print(count)</div><br><br>What value is printed?",
-    "options": [
-      "A. 6",
-      "B. 4",
-      "C. 10",
-      "D. 16"
-    ],
-    "answer": "A. 6",
-    "explanation": "For each i, the inner loop iterates j from 0. When j == i, `continue` skips. When j > i, `break` exits the inner loop. So count increments only when j < i. For i=0: 0 increments. For i=1: j=0 increments (count=1). For i=2: j=0, j=1 increment (count=3). For i=3: j=0, j=1, j=2 increment (count=6). Total = 6."
-  },
-  {
-    "id": 239,
-    "domain": "Dictionary operations & methods",
-    "type": "fill_in_blank",
-    "question": "You have a dictionary of inventory items. You need to safely retrieve the stock count for an item — returning 0 if the item is not in the dictionary — without raising an error.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>inventory = {\"apples\": 50, \"bread\": 12, \"cheese\": 8}<br><br>stock = inventory.____(\"milk\", 0)<br><br>print(stock)</div>",
-    "options": {
-      "safe_get": ["get", "fetch", "find", "lookup"]
-    },
-    "answer": {
-      "safe_get": "get"
-    },
-    "explanation": "`dict.get(key, default)` returns the value for the key if it exists, or the default value (here 0) if it doesn't. This avoids the `KeyError` that would occur with `inventory[\"milk\"]`. The other options are not valid dictionary methods."
-  },
-  {
-    "id": 240,
-    "domain": "Loops & accumulator pattern",
-    "type": "fill_in_blank",
-    "question": "You are writing a program that asks the user to enter numbers one at a time. When the user enters 0, the program stops asking and prints the total of all numbers entered.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>total = 0<br>number = int(input(\"Enter a number (0 to stop): \"))<br><br>____ number != 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;total ____ number<br>&nbsp;&nbsp;&nbsp;&nbsp;number = int(input(\"Enter a number (0 to stop): \"))<br><br>print(\"The total is:\", total)</div>",
-    "options": {
-      "loop_keyword": ["while", "for", "if", "repeat"],
-      "accumulator": ["+=", "==", "=+", "++"]
-    },
-    "answer": {
-      "loop_keyword": "while",
-      "accumulator": "+="
-    },
-    "explanation": "Use `while` to keep looping as long as the user doesn't enter 0. Use `+=` to add the new number to the running total. `=+` would simply assign the positive value of `number` to `total`, overwriting the previous total."
-  },
-  {
-    "id": 241,
-    "domain": "String methods & case handling",
-    "type": "multiple_choice",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>answer = \" YES \"<br>if answer.strip().lower() == \"yes\":<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Confirmed\")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Denied\")</div><br><br>What is the output?",
-    "options": [
-      "A. Confirmed",
-      "B. Denied",
-      "C. The code generates a syntax error.",
-      "D. The code generates a runtime error."
-    ],
-    "answer": "A. Confirmed",
-    "explanation": "`strip()` removes the leading and trailing spaces, turning \" YES \" into \"YES\". `lower()` converts it to \"yes\". The comparison \"yes\" == \"yes\" is True, so \"Confirmed\" is printed. Chaining string methods like this is a common pattern for sanitizing input."
-  },
-  {
-    "id": 243,
-    "domain": "Range function & loops",
-    "type": "multiple_choice",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>total = 0<br>for i in range(2, 11, 2):<br>&nbsp;&nbsp;&nbsp;&nbsp;total += i<br>print(total)</div><br><br>What is the output?",
-    "options": [
-      "A. 20",
-      "B. 30",
-      "C. 25",
-      "D. 55"
-    ],
-    "answer": "B. 30",
-    "explanation": "`range(2, 11, 2)` generates 2, 4, 6, 8, 10 (start at 2, stop before 11, step by 2). Sum: 2 + 4 + 6 + 8 + 10 = 30. A common mistake is to include 12 (would give 42) or to stop at 8 (would give 20)."
-  },
-  {
-    "id": 245,
-    "domain": "Operators & precedence",
-    "type": "multiple_choice",
-    "question": "Review the following Python code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a = 6<br>b = 2<br>c = 3<br><br>result = a + b ** c * 2 - 4 // b</div><br><br>What is the value of `result`?",
-    "options": [
-      "A. 20",
-      "B. 22",
-      "C. 90",
-      "D. 18"
-    ],
-    "answer": "A. 20",
-    "explanation": "Following operator precedence: 1) Exponent first: b ** c = 2 ** 3 = 8. 2) Multiplication and floor division (left to right): 8 * 2 = 16, and 4 // b = 4 // 2 = 2. 3) Addition and subtraction (left to right): 6 + 16 - 2 = 20."
-  },
-  {
-    "id": 246,
-    "domain": "System modules & command line",
-    "type": "true_false",
-    "question": "A file named `Tool.py` contains the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>import sys<br>print(len(sys.argv))<br>print(sys.argv[-1])</div><br><br>The user runs the following command:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>python Tool.py alpha beta gamma</div><br><br>For each statement, select True or False:",
-    "options": {
-      "statement1": "The first print statement outputs 3.",
-      "statement2": "The second print statement outputs gamma.",
-      "statement3": "The script name Tool.py is included in sys.argv."
-    },
-    "answer": {
-      "statement1": "False: The first print statement outputs 3.",
-      "statement2": "True: The second print statement outputs gamma.",
-      "statement3": "True: The script name Tool.py is included in sys.argv."
-    },
-    "explanation": "Statement 1 is False — sys.argv contains 4 items: the script name plus 3 arguments, so len(sys.argv) is 4, not 3. Statement 2 is True — sys.argv[-1] accesses the last element, which is gamma. Statement 3 is True — sys.argv[0] is always the script name."
-  },
-  {
-    "id": 247,
-    "domain": "String formatting & methods",
-    "type": "multiple_choice",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>data = \"{title} by {author}, published in {year}\"<br>result = data.format(year=1954, author=\"Tolkien\", title=\"The Fellowship\")<br>print(result)</div><br><br>What is the output?",
-    "options": [
-      "A. The Fellowship by Tolkien, published in 1954",
-      "B. 1954 by Tolkien, published in The Fellowship",
-      "C. The code generates a syntax error because positional and keyword arguments are mixed.",
-      "D. {title} by {author}, published in {year}"
-    ],
-    "answer": "A. The Fellowship by Tolkien, published in 1954",
-    "explanation": "The `format()` method supports named placeholders that match keyword arguments by name, regardless of the order they are passed in. `{title}` is replaced with \"The Fellowship\", `{author}` with \"Tolkien\", and `{year}` with 1954, producing the expected sentence."
-  },
-  {
-    "id": 248,
-    "domain": "Random module & list operations",
-    "type": "multiple_select",
-    "question": "You need to randomly select 3 different prize winners from a list of 20 names. Each name must appear at most once in the result.<br><br>Which two code segments meet the requirements? (Choose 2.)",
-    "options": [
-      "A. winners = random.sample(names, 3)",
-      "B. winners = [random.choice(names) for _ in range(3)]",
-      "C. winners = random.choices(names, k=3)",
-      "D. winners = []<br>&nbsp;&nbsp;&nbsp;&nbsp;while len(winners) < 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pick = random.choice(names)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if pick not in winners:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;winners.append(pick)"
-    ],
-    "answer": [
-      "A. winners = random.sample(names, 3)",
-      "D. winners = []<br>&nbsp;&nbsp;&nbsp;&nbsp;while len(winners) < 3:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pick = random.choice(names)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if pick not in winners:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;winners.append(pick)"
-    ],
-    "explanation": "`random.sample(names, 3)` picks 3 unique items without replacement — exactly what is required. Option D uses `random.choice` in a loop but explicitly checks `not in winners` before appending, guaranteeing uniqueness. Option B uses `random.choice` without uniqueness checking, so the same name can appear multiple times. Option C uses `random.choices`, which samples *with* replacement and can return duplicates."
-  },
-  {
-    "id": 249,
-    "domain": "Conditional logic & operators",
-    "type": "true_false",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>age = 17<br>has_license = True<br><br>if age >= 18 or has_license == True:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Can drive\")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Cannot drive\")</div><br><br>For each statement, select True or False:",
-    "options": {
-      "statement1": "The code prints Can drive.",
-      "statement2": "Changing or to and would make the code print Cannot drive.",
-      "statement3": "If has_license is set to False, the code still prints Can drive."
-    },
-    "answer": {
-      "statement1": "True: The code prints Can drive.",
-      "statement2": "True: Changing or to and would make the code print Cannot drive.",
-      "statement3": "False: If has_license is set to False, the code still prints Can drive."
-    },
-    "explanation": "Statement 1 is True — with `or`, only one side needs to be true. `has_license == True` is True, so the condition passes. Statement 2 is True — with `and`, both sides must be true. `age >= 18` is False (17 < 18), so the condition fails. Statement 3 is False — if `has_license` is False, both sides of the `or` are False, so the else branch runs and prints Cannot drive."
-  },
-  {
-    "id": 250,
-    "domain": "Exception handling & input validation",
-    "type": "fill_in_blank",
-    "question": "You are creating a program that divides two numbers entered by the user. The program must handle the case where the user enters non-numeric input, and the case where the user enters zero as the divisor.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____:<br>&nbsp;&nbsp;&nbsp;&nbsp;a = int(input(\"Enter numerator: \"))<br>&nbsp;&nbsp;&nbsp;&nbsp;b = int(input(\"Enter denominator: \"))<br>&nbsp;&nbsp;&nbsp;&nbsp;print(a / b)<br>____ ValueError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Please enter valid numbers.\")<br>____ ZeroDivisionError:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Cannot divide by zero.\")</div>",
-    "options": {
-      "try_block": ["try", "attempt", "check", "test"],
-      "first_except": ["except", "catch", "handle", "error"],
-      "second_except": ["except", "catch", "handle", "error"]
-    },
-    "answer": {
-      "try_block": "try",
-      "first_except": "except",
-      "second_except": "except"
-    },
-    "explanation": "The `try` block contains code that might raise an exception. A `try` statement can have multiple `except` clauses for different exception types. `ValueError` is raised when `int()` cannot convert the input string, and `ZeroDivisionError` is raised when division by zero is attempted."
-  },
-  {
-    "id": 251,
-    "domain": "Loops & control flow",
-    "type": "multiple_choice",
-    "question": "Review the following code segment:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>total = 1<br>n = 4<br>while (n > 0):<br>&nbsp;&nbsp;&nbsp;&nbsp;total *= n<br>&nbsp;&nbsp;&nbsp;&nbsp;print(total)<br>&nbsp;&nbsp;&nbsp;&nbsp;n -= 1<br>&nbsp;&nbsp;&nbsp;&nbsp;if total > 10:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break</div><br><br>How many lines of output does the code print?",
-    "options": [
-      "A. 1",
-      "B. 2",
-      "C. 3",
-      "D. 4"
-    ],
-    "answer": "B. 2",
-    "explanation": "Iteration 1: total = 1 * 4 = 4, print 4 (line 1), n=3, 4 > 10 is False, continue. Iteration 2: total = 4 * 3 = 12, print 12 (line 2), n=2, 12 > 10 is True → break. Total = 2 lines of output."
-  },
-  {
-    "id": 252,
-    "domain": "Functions & logic analysis",
-    "type": "true_false",
-    "question": "Analyze the following function:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def calc_shipping(weight=1, distance=10, express=False, freebie=False):<br>&nbsp;&nbsp;&nbsp;&nbsp;if freebie == True:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return 0<br>&nbsp;&nbsp;&nbsp;&nbsp;cost = weight * 2 + distance * 0.5<br>&nbsp;&nbsp;&nbsp;&nbsp;if express == True:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cost = cost * 1.5<br>&nbsp;&nbsp;&nbsp;&nbsp;return cost</div><br><br>For each statement, select True or False:",
-    "options": {
-      "statement1": "A function call of calc_shipping() will return 7.0.",
-      "statement2": "A function call of calc_shipping(freebie=True, weight=20) will return 40.",
-      "statement3": "A function call of calc_shipping(weight=5, express=True) will return 22.5."
-    },
-    "answer": {
-      "statement1": "True: A function call of calc_shipping() will return 7.0.",
-      "statement2": "False: A function call of calc_shipping(freebie=True, weight=20) will return 40.",
-      "statement3": "True: A function call of calc_shipping(weight=5, express=True) will return 22.5."
-    },
-    "explanation": "Statement 1 is True — defaults: 1*2 + 10*0.5 = 2 + 5 = 7.0, express is False so no multiplier. Statement 2 is False — freebie=True returns 0 immediately, ignoring weight. Statement 3 is True — 5*2 + 10*0.5 = 10 + 5 = 15, then express multiplies by 1.5 → 15 * 1.5 = 22.5."
-  },
-  {
-    "id": 253,
-    "domain": "String slicing & indexing",
-    "type": "ordering",
-    "question": "You need to identify the results of performing various slicing operations on the following sequence structure:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>word = \"programming\"</div><br><br>Move the appropriate results from the list on the left to the correct slicing operations on the right. You may use each result once, more than once, or not at all.<br><br>word[3:7] → ____<br>word[-4:] → ____<br>word[:5] → ____",
-    "options": [
-      "gram",
-      "ming",
-      "progr",
-      "gramm",
-      "rogra"
-    ],
-    "answer": [
-      "gram",
-      "ming",
-      "progr"
-    ],
-    "explanation": "`word[3:7]` gets characters at indices 3, 4, 5, 6 which are g, r, a, m = \"gram\". `word[-4:]` gets the last 4 characters: m, i, n, g = \"ming\". `word[:5]` gets characters at indices 0-4: p, r, o, g, r = \"progr\"."
-  },
-  {
-    "id": 254,
-    "domain": "Unit testing & assertions",
-    "type": "fill_in_blank",
-    "question": "You need to test whether a function returns the expected integer value.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____ unittest<br><br>def double(x):<br>&nbsp;&nbsp;&nbsp;&nbsp;return x * 2<br><br>class TestDouble(____.____):<br>&nbsp;&nbsp;&nbsp;&nbsp;def ____(self):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = double(5)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.____(result, 10)<br><br>if __name__ == \"__main__\":<br>&nbsp;&nbsp;&nbsp;&nbsp;unittest.main()</div>",
-    "options": {
-      "import_keyword": ["import", "from", "use", "include"],
-      "module_part": ["unittest", "test", "TestCase", "unit"],
-      "class_part": ["TestCase", "Test", "UnitTest", "Case"],
-      "test_method": ["test_double", "double_test", "check_double", "verify_double"],
-      "assert_method": ["assertEqual", "assertIsInstance", "assertTrue", "assertIs"]
-    },
-    "answer": {
-      "import_keyword": "import",
-      "module_part": "unittest",
-      "class_part": "TestCase",
-      "test_method": "test_double",
-      "assert_method": "assertEqual"
-    },
-    "explanation": "Use `import` to bring in the unittest module. Test classes inherit from `unittest.TestCase`. Test methods must start with `test_` to be automatically discovered and run — options like `double_test`, `check_double`, and `verify_double` would never execute as tests. Use `assertEqual(actual, expected)` to verify that two values are equal."
-  },
-  {
-    "id": 255,
-    "domain": "Functions & conditional logic",
-    "type": "fill_in_blank",
-    "question": "You are creating a function to calculate a movie ticket price (ticket_price) based on the following rules:<br><br>• Anyone under age 3 = free admission<br>• Anyone age 3 or older who is a student = $8<br>• Anyone age 3 to 64 who is not a student = $15<br>• Anyone age 65 or older who is not a student = $10<br><br>price represents the price in dollars.<br><br>Complete the code by selecting the correct code segment from each dropdown list.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def ticket_price(age, student):<br>&nbsp;&nbsp;&nbsp;&nbsp;price = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price = 8<br>&nbsp;&nbsp;&nbsp;&nbsp;____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price = 15<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;price = 10<br>&nbsp;&nbsp;&nbsp;&nbsp;return price</div>",
-    "options": {
-      "first_condition": ["if age >= 3 and student == True", "if age < 3", "if student == True", "if age >= 3"],
-      "second_condition": ["elif age >= 3 and age < 65 and student == False", "elif age < 65 and student == False", "elif not student == False", "elif age >= 3 and not student == False"]
-    },
-    "answer": {
-      "first_condition": "if age >= 3 and student == True",
-      "second_condition": "elif age >= 3 and age < 65 and student == False"
-    },
-    "explanation": "The first condition checks if someone is 3 or older AND a student ($8). The elif condition must check for ages 3 to 64 who are NOT students ($15) — it must include 'age >= 3' to avoid catching under-3 children who are not students. The else handles everyone 65 or older not a student ($10). Ages under 3 get free admission since price starts at 0 and no conditions match."
-  },
-  {
-    "id": 256,
-    "domain": "Loops & debugging",
-    "type": "fill_in_blank",
-    "question": "You find errors while evaluating the following code. Line numbers are included for reference only.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>01 names = [\"Ana\", \"Ben\", \"Carol\", \"Dan\"]<br>02 i = 0<br>03 for name in names # change to: ____<br>04 &nbsp;&nbsp;&nbsp;&nbsp;print(name)<br>05 &nbsp;&nbsp;&nbsp;&nbsp;if i = 2 # change to: ____<br>06 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break<br>07 &nbsp;&nbsp;&nbsp;&nbsp;i += 1</div><br><br>You need to correct the code at line 03 and line 05.",
-    "options": {
-      "line_03": ["for name in names:", "for name in names", "for name in names;", "while name in names:"],
-      "line_05": ["if i == 2:", "if i = 2:", "if (i == 2)", "if i === 2:"]
-    },
-    "answer": {
-      "line_03": "for name in names:",
-      "line_05": "if i == 2:"
-    },
-    "explanation": "Line 03 needs a colon (:) at the end to properly start the for loop block. Line 05 needs double equals (==) for comparison instead of single equals (=) which is for assignment, and it also needs a colon at the end. The corrected statements are 'for name in names:' and 'if i == 2:'."
-  },
-  {
-    "id": 257,
-    "domain": "Functions & error analysis",
-    "type": "true_false",
-    "question": "The following function is supposed to compute the average of three test scores entered by the user.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def average(a, b, c):<br>&nbsp;&nbsp;&nbsp;&nbsp;return (a + b + c) / 3<br>score1 = input(\"Enter score 1: \")<br>score2 = input(\"Enter score 2: \")<br>score3 = input(\"Enter score 3: \")<br>result = average(score1, score2, score3)<br>print(\"Average is: \" + result)</div><br><br>For each statement, select True or False:",
-    "options": {
-      "statement1": "The code will generate an error in line 1 (the function definition).",
-      "statement2": "The code will generate an error inside the function body when called.",
-      "statement3": "The code will correctly output the average to the console."
-    },
-    "answer": {
-      "statement1": "False: The code will generate an error in line 1 (the function definition).",
-      "statement2": "True: The code will generate an error inside the function body when called.",
-      "statement3": "False: The code will correctly output the average to the console."
-    },
-    "explanation": "Statement 1 is False — the function definition is syntactically valid. Statement 2 is True — input() returns strings, so a + b + c concatenates strings (e.g., \"8\" + \"9\" + \"10\" = \"8910\"), and then dividing a string by 3 raises a TypeError. Statement 3 is False — the code fails before producing correct output. Even if division worked, the final concatenation 'Average is: ' + result would also fail if result were numeric."
-  },
-  {
-    "id": 258,
-    "domain": "File operations & I/O",
-    "type": "fill_in_blank",
-    "question": "A company needs help updating their file system. You must create a simple file-manipulation program that performs the following actions:<br><br>• Opens an existing file in read-only mode.<br>• Reads the entire contents of the file into a single string.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>file = ____<br>contents = ____<br>file.close()</div>",
-    "options": {
-      "file_open": ["open(\"data.txt\", \"r\")", "open(\"data.txt\", \"w\")", "open(\"data.txt\", \"a\")", "read(\"data.txt\")"],
-      "read_operation": ["file.read()", "file.readline()", "file.write()", "file.open()"]
-    },
-    "answer": {
-      "file_open": "open(\"data.txt\", \"r\")",
-      "read_operation": "file.read()"
-    },
-    "explanation": "Use `open(\"data.txt\", \"r\")` to open the file in read-only mode. Use `file.read()` to read the entire contents of the file into a single string. `readline()` would only read one line at a time; `write()` and `open()` are not for reading content."
-  },
-  {
-    "id": 260,
-    "domain": "Conditional logic & operator precedence",
-    "type": "multiple_choice",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>a = True<br>b = False<br>c = True<br><br>if not a and b or c:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Path 1\")<br>elif a and not b and not c:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Path 2\")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Path 3\")</div><br><br>What is the output?",
-    "options": [
-      "A. Path 1",
-      "B. Path 2",
-      "C. Path 3",
-      "D. The code generates a syntax error."
-    ],
-    "answer": "A. Path 1",
-    "explanation": "Operator precedence is `not` > `and` > `or`. So `not a and b or c` is evaluated as `((not a) and b) or c` = `((False) and False) or True` = `False or True` = `True`. The first branch executes and prints Path 1. A common trap is to read this as `not (a and b or c)`."
-  },
-  {
-    "id": 261,
-    "domain": "Nested conditionals & control flow",
-    "type": "fill_in_blank",
-    "question": "You are writing a function that classifies a temperature reading (temp, in Celsius) into a weather category:<br><br>• Temperature below 0 → \"Freezing\"<br>• Temperature 0 to 14 → \"Cold\"<br>• Temperature 15 to 24 → \"Mild\"<br>• Temperature 25 or higher → \"Hot\"<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def classify(temp):<br>&nbsp;&nbsp;&nbsp;&nbsp;category = \"\"<br>&nbsp;&nbsp;&nbsp;&nbsp;____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category = \"Freezing\"<br>&nbsp;&nbsp;&nbsp;&nbsp;____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category = \"Cold\"<br>&nbsp;&nbsp;&nbsp;&nbsp;____:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category = \"Mild\"<br>&nbsp;&nbsp;&nbsp;&nbsp;else:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;category = \"Hot\"<br>&nbsp;&nbsp;&nbsp;&nbsp;return category</div>",
-    "options": {
-      "first_condition": ["if temp < 0:", "if temp >= 0:", "if temp < 25:", "if temp > 0:"],
-      "second_condition": ["elif temp < 15:", "elif temp <= 14:", "elif temp < 0:", "elif temp >= 0 and temp < 15:"],
-      "third_condition": ["elif temp < 25:", "elif temp <= 24:", "elif temp >= 15:", "elif temp > 14 and temp < 25:"]
-    },
-    "answer": {
-      "first_condition": "if temp < 0:",
-      "second_condition": "elif temp < 15:",
-      "third_condition": "elif temp < 25:"
-    },
-    "explanation": "When using if/elif chains, earlier conditions act as guards for later ones. After `temp < 0` fails, the elif `temp < 15` correctly captures the range 0–14 (since negative values were already handled). After that, `temp < 25` correctly captures 15–24. The simpler forms work because of the order — adding explicit lower bounds is unnecessary and easy to get wrong."
-  },
-  {
-    "id": 262,
-    "domain": "Conditional logic & short-circuit evaluation",
-    "type": "true_false",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>values = [10, 20, 30]<br>index = 5<br><br>if index < len(values) and values[index] > 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Found positive\")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Not found\")</div><br><br>For each statement, select True or False:",
-    "options": {
-      "statement1": "The code runs without an error.",
-      "statement2": "The code prints Not found.",
-      "statement3": "Swapping the two conditions (so values[index] > 0 is checked first) would still run without an error."
-    },
-    "answer": {
-      "statement1": "True: The code runs without an error.",
-      "statement2": "True: The code prints Not found.",
-      "statement3": "False: Swapping the two conditions (so values[index] > 0 is checked first) would still run without an error."
-    },
-    "explanation": "Statement 1 is True — Python uses short-circuit evaluation. Since `index < len(values)` is `5 < 3` which is False, the second part `values[index] > 0` is never evaluated, avoiding an IndexError. Statement 2 is True — the condition is False, so the else branch runs. Statement 3 is False — if you swap them, `values[5]` is evaluated first and raises IndexError because index 5 is out of range. Order matters with short-circuit evaluation."
-  },
-  {
-    "id": 263,
-    "domain": "Nested if statements & flow analysis",
-    "type": "multiple_choice",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>score = 75<br>bonus = True<br><br>if score >= 90:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade = \"A\"<br>if score >= 80:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade = \"B\"<br>if score >= 70:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade = \"C\"<br>&nbsp;&nbsp;&nbsp;&nbsp;if bonus == True:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;grade = \"B\"<br>if score >= 60:<br>&nbsp;&nbsp;&nbsp;&nbsp;grade = \"D\"<br><br>print(grade)</div><br><br>What is printed?",
-    "options": [
-      "A. A",
-      "B. B",
-      "C. C",
-      "D. D"
-    ],
-    "answer": "D. D",
-    "explanation": "This uses separate `if` statements (not `elif`), so all conditions are checked independently. With score=75: first if (>=90) False. Second if (>=80) False. Third if (>=70) True → grade=C, then bonus is True → grade=B. Fourth if (>=60) True → grade=D. The last assignment wins, so D is printed. This is a classic trap showing why elif matters — using if everywhere creates unintended overwrites."
-  },
-  {
-    "id": 264,
-    "domain": "Conditional logic & input handling",
-    "type": "fill_in_blank",
-    "question": "You are writing a program that asks the user a yes/no question. The program must accept any of these answers as \"yes\": \"Y\", \"y\", \"Yes\", \"YES\", \"yes\". Any other input is treated as \"no\".<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>response = input(\"Continue? \")<br>response = response.____()<br><br>if response ____ \"y\" ____ response ____ \"yes\":<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Continuing...\")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"Stopping.\")</div>",
-    "options": {
-      "normalize": ["lower", "upper", "title", "capitalize"],
-      "first_comparison": ["==", "=", "is", "in"],
-      "logical_operator": ["or", "and", "not", "if"],
-      "second_comparison": ["==", "=", "is", "in"]
-    },
-    "answer": {
-      "normalize": "lower",
-      "first_comparison": "==",
-      "logical_operator": "or",
-      "second_comparison": "=="
-    },
-    "explanation": "`lower()` converts the input to lowercase so all variations (\"Y\", \"YES\", \"Yes\", etc.) become either \"y\" or \"yes\". Use `==` for equality comparison (`=` is assignment, `is` checks object identity which can give wrong results for strings). Use `or` because the user only needs to match one of the two accepted forms. Using `and` would require the response to equal both \"y\" AND \"yes\" simultaneously — which is impossible."
-  },
-  {
-    "id": 265,
-    "domain": "Functions & conditional logic",
-    "type": "fill_in_blank",
-    "question": "You are writing a function that returns the loan interest rate offered to a customer. The function must meet the following requirements:<br><br>• If the customer's credit score is high (credit_high == True):<br>&nbsp;&nbsp;&nbsp;&nbsp;◦ If they have collateral, the rate is 3.5<br>&nbsp;&nbsp;&nbsp;&nbsp;◦ If they do not have collateral, the rate is 5.0<br>• If the customer's credit score is not high:<br>&nbsp;&nbsp;&nbsp;&nbsp;◦ If they have a co-signer, the rate is 6.5<br>&nbsp;&nbsp;&nbsp;&nbsp;◦ If they do not have a co-signer, the rate is 9.0<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def loan_rate(credit_high, collateral, cosigner):<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rate = 3.5<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rate = 5.0<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rate = 6.5<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rate = 9.0<br>&nbsp;&nbsp;&nbsp;&nbsp;return rate</div>",
-    "options": {
-      "first_dropdown": ["if credit_high == True:", "if collateral == True:", "if cosigner == True:", "else:", "elif:"],
-      "second_dropdown": ["if credit_high == True:", "if collateral == True:", "if cosigner == True:", "else:", "elif:"],
-      "third_dropdown": ["if credit_high == True:", "if collateral == True:", "if cosigner == True:", "else:", "elif:"],
-      "fourth_dropdown": ["if credit_high == True:", "if collateral == True:", "if cosigner == True:", "else:", "elif:"],
-      "fifth_dropdown": ["if credit_high == True:", "if collateral == True:", "if cosigner == True:", "else:", "elif:"],
-      "sixth_dropdown": ["if credit_high == True:", "if collateral == True:", "if cosigner == True:", "else:", "elif:"]
-    },
-    "answer": {
-      "first_dropdown": "if credit_high == True:",
-      "second_dropdown": "if collateral == True:",
-      "third_dropdown": "else:",
-      "fourth_dropdown": "else:",
-      "fifth_dropdown": "if cosigner == True:",
-      "sixth_dropdown": "else:"
-    },
-    "explanation": "The outer split is on credit_high. The first outer branch (if credit_high == True) contains a nested decision on collateral — if collateral == True gives 3.5, the inner else gives 5.0. The outer else (for non-high credit) contains a different nested decision on cosigner — if cosigner == True gives 6.5, the inner else gives 9.0. The key trick is recognizing that the two halves of the function use different secondary variables."
-  },
-  {
-    "id": 266,
-    "domain": "Functions & conditional logic",
-    "type": "fill_in_blank",
-    "question": "You are writing a function that returns a delivery label based on a package weight (weight) in kilograms. The function must meet the following requirements:<br><br>• If the weight is unknown (None), the label is \"Unknown\"<br>• Weight 20 or more → \"Heavy\"<br>• Weight 5 or more, but less than 20 → \"Medium\"<br>• Weight less than 5 → \"Light\"<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def get_label(weight):<br>&nbsp;&nbsp;&nbsp;&nbsp;label = \"\"<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;return label</div>",
-    "options": {
-      "if_clause": [
-        "if weight is None: label = \"Unknown\"",
-        "if weight >= 20: label = \"Heavy\"",
-        "if weight >= 5: label = \"Medium\"",
-        "if weight < 5: label = \"Light\""
-      ],
-      "elif1_clause": [
-        "elif weight >= 20: label = \"Heavy\"",
-        "elif weight >= 5: label = \"Medium\"",
-        "elif weight < 5: label = \"Light\"",
-        "elif weight is None: label = \"Unknown\""
-      ],
-      "elif2_clause": [
-        "elif weight >= 5: label = \"Medium\"",
-        "elif weight >= 20: label = \"Heavy\"",
-        "elif weight < 5: label = \"Light\"",
-        "elif weight is None: label = \"Unknown\""
-      ],
-      "else_clause": [
-        "else: label = \"Light\"",
-        "else: label = \"Medium\"",
-        "else: label = \"Heavy\""
-      ]
-    },
-    "answer": {
-      "if_clause": "if weight is None: label = \"Unknown\"",
-      "elif1_clause": "elif weight >= 20: label = \"Heavy\"",
-      "elif2_clause": "elif weight >= 5: label = \"Medium\"",
-      "else_clause": "else: label = \"Light\""
-    },
-    "explanation": "Check `weight is None` first to avoid a TypeError when comparing None to numbers in later conditions. Then check `weight >= 20` for Heavy (the highest bracket comes next). Then `weight >= 5` for Medium (covers 5–19 since 20+ was already handled). The else catches the remaining case (weight less than 5), giving Light."
-  },
-  {
-    "id": 267,
-    "domain": "Functions & conditional logic",
-    "type": "fill_in_blank",
-    "question": "You are writing a function that returns a shipping tier from a package weight in pounds (weight):<br><br>• Weight 2 pounds or less → \"Letter\"<br>• Weight more than 2, up to and including 10 → \"Small\"<br>• Weight more than 10, but less than 50 → \"Medium\"<br>• Weight 50 or more → \"Freight\"<br><br>Some of the dropdown options use > instead of <=, which changes the logic depending on what comes before — choose carefully.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def shipping_tier(weight):<br>&nbsp;&nbsp;&nbsp;&nbsp;tier = \"\"<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;return tier</div>",
-    "options": {
-      "if_clause": [
-        "if weight <= 2: tier = \"Letter\"",
-        "if weight > 2: tier = \"Small\"",
-        "if weight >= 50: tier = \"Freight\"",
-        "if weight < 50: tier = \"Medium\""
-      ],
-      "elif1_clause": [
-        "elif weight <= 10: tier = \"Small\"",
-        "elif weight > 10: tier = \"Medium\"",
-        "elif weight <= 2: tier = \"Letter\"",
-        "elif weight >= 50: tier = \"Freight\""
-      ],
-      "elif2_clause": [
-        "elif weight < 50: tier = \"Medium\"",
-        "elif weight > 50: tier = \"Freight\"",
-        "elif weight <= 10: tier = \"Small\"",
-        "elif weight > 2: tier = \"Small\""
-      ],
-      "else_clause": [
-        "else: tier = \"Freight\"",
-        "else: tier = \"Medium\"",
-        "else: tier = \"Small\"",
-        "else: tier = \"Letter\""
-      ]
-    },
-    "answer": {
-      "if_clause": "if weight <= 2: tier = \"Letter\"",
-      "elif1_clause": "elif weight <= 10: tier = \"Small\"",
-      "elif2_clause": "elif weight < 50: tier = \"Medium\"",
-      "else_clause": "else: tier = \"Freight\""
-    },
-    "explanation": "The chain works because each elif relies on what was already filtered out above it. After `weight <= 2` fails, `weight <= 10` correctly captures the range from just above 2 up to and including 10. After that, `weight < 50` captures 11 to 49. The else catches 50 and above for Freight. Option `elif weight > 10` looks tempting but would wrongly include weights 50 and up as Medium."
-  },
-  {
-    "id": 268,
-    "domain": "Functions & conditional logic",
-    "type": "fill_in_blank",
-    "question": "You are writing a function that decides whether a user can access a system. The function must meet the following requirements:<br><br>• If the account is locked, return \"Denied: account locked\"<br>• If the account is not locked and the password is correct, return \"Access granted\"<br>• If the account is not locked and the password is incorrect, return \"Denied: wrong password\"<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def check_access(locked, password_correct):<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = \"Denied: account locked\"<br><br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = \"Access granted\"<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result = \"Denied: wrong password\"<br>&nbsp;&nbsp;&nbsp;&nbsp;return result</div>",
-    "options": {
-      "first_dropdown": ["if locked == True:", "if password_correct == True:", "else:", "elif:"],
-      "second_dropdown": ["if locked == True:", "if password_correct == True:", "else:", "elif:"],
-      "third_dropdown": ["if locked == True:", "if password_correct == True:", "else:", "elif:"],
-      "fourth_dropdown": ["if locked == True:", "if password_correct == True:", "else:", "elif:"]
-    },
-    "answer": {
-      "first_dropdown": "if locked == True:",
-      "second_dropdown": "else:",
-      "third_dropdown": "if password_correct == True:",
-      "fourth_dropdown": "else:"
-    },
-    "explanation": "The outer if locked == True handles the locked case first since it overrides everything. The outer else covers all unlocked accounts. Within that, the nested if password_correct == True distinguishes between successful access and wrong password. The inner else covers the wrong password case."
-  },
-  {
-    "id": 269,
-    "domain": "Functions & conditional logic",
-    "type": "fill_in_blank",
-    "question": "You are writing a function that calculates the BMI category from a person's BMI value (bmi). The function must meet the following requirements:<br><br>• If bmi is negative or zero, return \"Invalid\"<br>• BMI below 18.5 → \"Underweight\"<br>• BMI 18.5 to below 25 → \"Normal\"<br>• BMI 25 or higher → \"Overweight\"<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def bmi_category(bmi):<br>&nbsp;&nbsp;&nbsp;&nbsp;category = \"\"<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;____<br>&nbsp;&nbsp;&nbsp;&nbsp;return category</div>",
-    "options": {
-      "if_clause": [
-        "if bmi <= 0: category = \"Invalid\"",
-        "if bmi < 18.5: category = \"Underweight\"",
-        "if bmi < 25: category = \"Normal\"",
-        "if bmi >= 25: category = \"Overweight\""
-      ],
-      "elif1_clause": [
-        "elif bmi < 18.5: category = \"Underweight\"",
-        "elif bmi <= 0: category = \"Invalid\"",
-        "elif bmi < 25: category = \"Normal\"",
-        "elif bmi >= 25: category = \"Overweight\""
-      ],
-      "elif2_clause": [
-        "elif bmi < 25: category = \"Normal\"",
-        "elif bmi < 18.5: category = \"Underweight\"",
-        "elif bmi <= 0: category = \"Invalid\"",
-        "elif bmi >= 25: category = \"Overweight\""
-      ],
-      "else_clause": [
-        "else: category = \"Overweight\"",
-        "else: category = \"Normal\"",
-        "else: category = \"Underweight\"",
-        "else: category = \"Invalid\""
-      ]
-    },
-    "answer": {
-      "if_clause": "if bmi <= 0: category = \"Invalid\"",
-      "elif1_clause": "elif bmi < 18.5: category = \"Underweight\"",
-      "elif2_clause": "elif bmi < 25: category = \"Normal\"",
-      "else_clause": "else: category = \"Overweight\""
-    },
-    "explanation": "Check bmi <= 0 first as a guard clause to filter out invalid values before any real classification. Then check bmi < 18.5 for Underweight (since invalid values are gone, this only catches valid low BMI). Then bmi < 25 for Normal (covers 18.5 to just under 25). The else catches everything 25 or higher → Overweight."
-  },
-  {
-    "id": 270,
-    "domain": "String formatting & f-strings",
-    "type": "multiple_choice",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>name = \"Ana\"<br>score = 87.5421<br>attempts = 3<br><br>result = f\"{name.upper()} scored {score:.2f} in {attempts} tries\"<br>print(result)</div><br><br>What is the output?",
-    "options": [
-      "A. ANA scored 87.54 in 3 tries",
-      "B. Ana scored 87.5421 in 3 tries",
-      "C. ANA scored 87.5 in 3 tries",
-      "D. The code generates a syntax error."
-    ],
-    "answer": "A. ANA scored 87.54 in 3 tries",
-    "explanation": "f-strings allow method calls and expressions inside the braces. `{name.upper()}` evaluates name.upper() → \"ANA\". The format specifier `:.2f` rounds the float to 2 decimal places → 87.54. `{attempts}` inserts the integer as-is."
-  },
-  {
-    "id": 271,
-    "domain": "String formatting & % operator",
-    "type": "multiple_choice",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>product = \"Coffee\"<br>quantity = 5<br>price = 4.99<br><br>print(\"Item: %-10s Qty: %3d Total: $%6.2f\" % (product, quantity, quantity * price))</div><br><br>What is the output?",
-    "options": [
-      "A. Item: Coffee     Qty:   5 Total: $ 24.95",
-      "B. Item: Coffee Qty: 5 Total: $24.95",
-      "C. Item: -Coffee    Qty: 5   Total: $24.950",
-      "D. The code generates a runtime error because of mixed format specifiers."
-    ],
-    "answer": "A. Item: Coffee     Qty:   5 Total: $ 24.95",
-    "explanation": "`%-10s` formats the string left-aligned in a 10-character field → \"Coffee\" + 4 spaces. `%3d` formats the integer right-aligned in a 3-character field → 2 spaces + \"5\". `%6.2f` formats the float in a 6-character field with 2 decimal places → 1 space + \"24.95\". Total expression: 5 * 4.99 = 24.95."
-  },
-  {
-    "id": 272,
-    "domain": "String formatting methods",
-    "type": "fill_in_blank",
-    "question": "You need to print the message: <code>Order #42: total = $19.99</code><br><br>The variables are defined as:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>order_id = 42<br>total = 19.99<br><br># f-string style<br>print(____)<br><br># .format() style<br>print(____)<br><br># % style<br>print(____)</div><br><br>Select the correct expression for each formatting style.",
-    "options": {
-      "f_string_style": [
-        "f\"Order #{order_id}: total = ${total}\"",
-        "f\"Order #{order_id}: total = $total\"",
-        "f\"Order #order_id: total = ${total}\"",
-        "f(\"Order #{order_id}: total = ${total}\")"
-      ],
-      "format_method_style": [
-        "\"Order #{}: total = ${}\".format(order_id, total)",
-        "\"Order #{0}: total = $%f\".format(order_id, total)",
-        "\"Order #{order_id}: total = ${total}\".format()",
-        "\"Order #{}: total = ${}\" % (order_id, total)"
-      ],
-      "percent_style": [
-        "\"Order #%d: total = $%s\" % (order_id, total)",
-        "\"Order #%d: total = $%s\".format(order_id, total)",
-        "\"Order #{d}: total = ${s}\" % (order_id, total)",
-        "\"Order #%d: total = $%s\" % order_id, total"
-      ]
-    },
-    "answer": {
-      "f_string_style": "f\"Order #{order_id}: total = ${total}\"",
-      "format_method_style": "\"Order #{}: total = ${}\".format(order_id, total)",
-      "percent_style": "\"Order #%d: total = $%s\" % (order_id, total)"
-    },
-    "explanation": "All three produce equivalent output. The f-string embeds variables directly inside {}. The .format() method uses positional {} placeholders filled in order. The % operator uses %d for integers and %s to convert any value to its string form, with the values supplied as a tuple on the right."
-  },
-  {
-    "id": 273,
-    "domain": "String formatting with .format()",
-    "type": "fill_in_blank",
-    "question": "A weather station needs to print a daily temperature report. The output must look like this:<br><br><code>Day 5: high=28.7C low=14.2C</code><br><br>The variables are:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>day = 5<br>high = 28.7<br>low = 14.2<br><br>message = \"Day ____: high=____C low=____C\".format(day, high, low)<br>print(message)</div>",
-    "options": {
-      "first_placeholder": ["{0}", "{1}", "{2}", "{d}"],
-      "second_placeholder": ["{1}", "{0}", "{2}", "{f}"],
-      "third_placeholder": ["{2}", "{0}", "{1}", "{f}"]
-    },
-    "answer": {
-      "first_placeholder": "{0}",
-      "second_placeholder": "{1}",
-      "third_placeholder": "{2}"
-    },
-    "explanation": "With `.format(day, high, low)`, position 0 is day, position 1 is high, position 2 is low. The placeholders must use positional indices that match the argument order. The format method does not support type letters like {d} or {f} as standalone identifiers — those go after a colon (e.g., {0:d})."
-  },
-  {
-    "id": 274,
-    "domain": "String formatting with %",
-    "type": "fill_in_blank",
-    "question": "You are writing a Python report that displays a student's name, ID, and average grade. The output must meet the following requirements:<br><br>• The student name must be left-aligned in a field of 15 characters.<br>• The ID must be displayed as an integer right-aligned in a field of 6 characters.<br>• The grade must show exactly 1 decimal place.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>name = \"Maria\"<br>student_id = 482<br>grade = 88.46<br><br>print(\"Name: ____ ID: ____ Grade: ____\" % (name, student_id, grade))</div>",
-    "options": {
-      "name_format": ["%-15s", "%15s", "%-15d", "%15.5s"],
-      "id_format": ["%6d", "%-6d", "%6s", "%6f"],
-      "grade_format": ["%.1f", "%1f", "%.1d", "%f.1"]
-    },
-    "answer": {
-      "name_format": "%-15s",
-      "id_format": "%6d",
-      "grade_format": "%.1f"
-    },
-    "explanation": "`%-15s` formats a string left-aligned (-) in a 15-character field. `%6d` formats an integer right-aligned (default) in a 6-character field. `%.1f` formats a float with exactly 1 digit after the decimal point. `%-15d` would treat the name as an integer (TypeError), and `%.1d` is not a valid integer format."
-  },
-  {
-    "id": 275,
-    "domain": "String formatting with .format()",
-    "type": "fill_in_blank",
-    "question": "A bookstore needs to print invoice lines that look like this:<br><br><code>Title: Python Basics&nbsp;&nbsp;&nbsp;&nbsp;Copies: &nbsp;3 Price: $&nbsp;&nbsp;&nbsp;19.99</code><br><br>The output must meet the following requirements:<br><br>• Title is left-aligned in a 20-character field.<br>• Copies is right-aligned in a 2-character field.<br>• Price is right-aligned in a 8-character field with 2 decimal places.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>title = \"Python Basics\"<br>copies = 3<br>price = 19.99<br><br>line = \"Title: ____ Copies: ____ Price: $____\".format(title, copies, price)<br>print(line)</div>",
-    "options": {
-      "title_format": ["{0:<20}", "{0:>20}", "{0:^20}", "{0:20d}"],
-      "copies_format": ["{1:>2}", "{1:<2}", "{1:2f}", "{1:.2}"],
-      "price_format": ["{2:>8.2f}", "{2:<8.2f}", "{2:.2f8}", "{2:8.2d}"]
-    },
-    "answer": {
-      "title_format": "{0:<20}",
-      "copies_format": "{1:>2}",
-      "price_format": "{2:>8.2f}"
-    },
-    "explanation": "In `.format()` mini-language, `<` means left-align, `>` means right-align, and `^` means centered. `{0:<20}` left-aligns the title in 20 characters. `{1:>2}` right-aligns the integer in 2 characters. `{2:>8.2f}` right-aligns a float in 8 characters with 2 decimal places."
-  },
-  {
-    "id": 276,
-    "domain": "String formatting with %",
-    "type": "fill_in_blank",
-    "question": "A company needs to print a sales summary that looks like this:<br><br><code>Region: NORTH&nbsp;&nbsp;&nbsp;sold 1245 units at $ 23.50 each</code><br><br>The variables are:<br><br><code>region = \"north\"; units = 1245; price = 23.5</code><br><br>The output must meet the following requirements:<br><br>• The region must be uppercase and left-aligned in a 7-character field.<br>• The units must appear as an integer (no decimal point).<br>• The price must show 2 decimal places in a 6-character field.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>print(\"Region: ____ sold ____ units at $____ each\" % (____, units, price))</div>",
-    "options": {
-      "region_format": ["%-7s", "%7s", "%-7d", "%.7s"],
-      "units_format": ["%d", "%f", "%s", "%.0d"],
-      "price_format": ["%6.2f", "%.6f", "%2.6f", "%6.2d"],
-      "region_argument": ["region.upper()", "region", "upper(region)", "region.UPPER"]
-    },
-    "answer": {
-      "region_format": "%-7s",
-      "units_format": "%d",
-      "price_format": "%6.2f",
-      "region_argument": "region.upper()"
-    },
-    "explanation": "`%-7s` left-aligns the string in 7 characters. `%d` formats an integer with no decimal. `%6.2f` formats a float in a 6-character field with 2 decimal places. The uppercase conversion must happen before % substitution, by calling region.upper() as the actual argument. % formatting does not support a built-in uppercase modifier."
-  },
-  {
-    "id": 277,
-    "domain": "String formatting — mixed styles",
-    "type": "fill_in_blank",
-    "question": "You are debugging a coworker's code. Three different lines must all produce the same output:<br><br><code>User alice has 7 messages (priority=high)</code><br><br>The variables are:<br><br><code>user = \"alice\"; count = 7; priority = \"high\"</code><br><br>Match each line to the missing piece.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'># Line 1 — f-string<br>line1 = f\"User ____ has ____ messages (priority=____)\"<br><br># Line 2 — .format()<br>line2 = \"User {} has {} messages (priority=____)\".format(user, count, priority)<br><br># Line 3 — % operator<br>line3 = \"User %s has %d messages (priority=____)\" % (user, count, priority)</div>",
-    "options": {
-      "line1_first": ["{user}", "%s", "{}", "user"],
-      "line1_second": ["{count}", "%d", "{}", "count"],
-      "line1_third": ["{priority}", "%s", "{}", "priority"],
-      "line2_third": ["{}", "{2}", "%s", "{priority}"],
-      "line3_third": ["%s", "{}", "{2}", "%priority"]
-    },
-    "answer": {
-      "line1_first": "{user}",
-      "line1_second": "{count}",
-      "line1_third": "{priority}",
-      "line2_third": "{}",
-      "line3_third": "%s"
-    },
-    "explanation": "f-strings (f\"...\") embed variable names directly inside braces — {user}, {count}, {priority}. The .format() method uses empty {} placeholders that are filled positionally from the arguments. The % operator uses type codes — %s for strings, %d for integers — and takes its arguments from the tuple on the right."
-  },
-  {
-    "id": 278,
-    "domain": "File operations & writing",
-    "type": "fill_in_blank",
-    "question": "A logistics company needs a script that creates a new log file from scratch, writes a header line, and closes the file. If the log file already exists, its contents must be erased.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>log = ____<br>log.____(\"=== Daily Log ===\\n\")<br>log.____()</div>",
-    "options": {
-      "file_open": ["open(\"log.txt\", \"w\")", "open(\"log.txt\", \"r\")", "open(\"log.txt\", \"a\")", "open(\"log.txt\", \"x\")"],
-      "write_method": ["write", "append", "print", "save"],
-      "close_method": ["close", "end", "stop", "exit"]
-    },
-    "answer": {
-      "file_open": "open(\"log.txt\", \"w\")",
-      "write_method": "write",
-      "close_method": "close"
-    },
-    "explanation": "`\"w\"` opens the file in write mode, creating it if it doesn't exist and erasing existing content if it does. `\"a\"` would append instead of erasing. `\"x\"` fails if the file already exists. The write() method adds the text, and close() releases the file handle."
-  },
-  {
-    "id": 279,
-    "domain": "File operations & line-by-line reading",
-    "type": "fill_in_blank",
-    "question": "You are writing a function that opens a text file and returns the number of non-empty lines it contains. Empty lines (lines that contain only a newline) must not be counted.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def count_lines(filename):<br>&nbsp;&nbsp;&nbsp;&nbsp;count = 0<br>&nbsp;&nbsp;&nbsp;&nbsp;file = ____<br>&nbsp;&nbsp;&nbsp;&nbsp;for line ____ file:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if line ____ \"\\n\":<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count += 1<br>&nbsp;&nbsp;&nbsp;&nbsp;file.close()<br>&nbsp;&nbsp;&nbsp;&nbsp;return count</div>",
-    "options": {
-      "open_call": ["open(filename, \"r\")", "open(filename, \"w\")", "open(filename)", "read(filename)"],
-      "iteration_keyword": ["in", "of", "within", "from"],
-      "comparison_operator": ["!=", "==", "is", "not"]
-    },
-    "answer": {
-      "open_call": "open(filename, \"r\")",
-      "iteration_keyword": "in",
-      "comparison_operator": "!="
-    },
-    "explanation": "Open the file in read mode. Iterating over a file object yields each line one at a time, including the trailing newline character. Use != to check that the line is not just a newline — if line != \"\\n\", the line has actual content and should be counted. Note: open(filename, \"w\") would erase the file."
-  },
-  {
-    "id": 280,
-    "domain": "Functions & multiple return values",
-    "type": "multiple_choice",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def stats(numbers):<br>&nbsp;&nbsp;&nbsp;&nbsp;return min(numbers), max(numbers), sum(numbers)<br><br>low, high, total = stats([3, 7, 2, 9, 5])<br>print(high - low)</div><br><br>What is the output?",
-    "options": [
-      "A. 7",
-      "B. 26",
-      "C. 9",
-      "D. The code generates a runtime error."
-    ],
-    "answer": "A. 7",
-    "explanation": "A function can return multiple values as a tuple by separating them with commas. The values (2, 9, 26) are unpacked into low, high, and total in order. high - low = 9 - 2 = 7. Option B (26) would only be correct if the print used total."
-  },
-  {
-    "id": 281,
-    "domain": "Functions & file operations combined",
-    "type": "fill_in_blank",
-    "question": "A company asks you to write a function that appends a single line of text to an existing file. The function must meet the following requirements:<br><br>• The function is named append_line.<br>• The function takes two parameters: the file name and the text to append.<br>• The text must be written followed by a newline character.<br>• The file must be properly closed before the function returns.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____ append_line(____):<br>&nbsp;&nbsp;&nbsp;&nbsp;file = open(filename, ____)<br>&nbsp;&nbsp;&nbsp;&nbsp;file.write(text + \"\\n\")<br>&nbsp;&nbsp;&nbsp;&nbsp;____</div>",
-    "options": {
-      "function_keyword": ["def", "function", "fn", "func"],
-      "parameters": ["filename, text", "text, filename", "(filename, text)", "filename + text"],
-      "file_mode": ["\"a\"", "\"w\"", "\"r\"", "\"x\""],
-      "close_call": ["file.close()", "close(file)", "file.end()", "file.stop()"]
-    },
-    "answer": {
-      "function_keyword": "def",
-      "parameters": "filename, text",
-      "file_mode": "\"a\"",
-      "close_call": "file.close()"
-    },
-    "explanation": "`def` defines a function. The parameters are listed inside parentheses as filename, text (without extra parentheses since they're already in the def line). Use \"a\" (append mode) so the file is not erased — \"w\" would overwrite existing content. Finally, file.close() properly releases the file handle."
-  },
-  {
-    "id": 282,
-    "domain": "Functions, file operations & exception handling",
-    "type": "true_false",
-    "question": "Review the following function:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def safe_open(filename):<br>&nbsp;&nbsp;&nbsp;&nbsp;try:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file = open(filename, \"r\")<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;content = file.read()<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;file.close()<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return content<br>&nbsp;&nbsp;&nbsp;&nbsp;except FileNotFoundError:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return None</div><br><br>For each statement, select True or False:",
-    "options": {
-      "statement1": "If filename refers to an existing file, the function returns the file's contents as a string.",
-      "statement2": "If filename does not exist, the function returns None instead of crashing.",
-      "statement3": "If the file exists but the user lacks permission to read it, the function returns None."
-    },
-    "answer": {
-      "statement1": "True: If filename refers to an existing file, the function returns the file's contents as a string.",
-      "statement2": "True: If filename does not exist, the function returns None instead of crashing.",
-      "statement3": "False: If the file exists but the user lacks permission to read it, the function returns None."
-    },
-    "explanation": "Statement 1 is True — read() returns the whole file content as a string. Statement 2 is True — FileNotFoundError is the specific exception raised when the file is missing, and the except clause catches it. Statement 3 is False — a permission error raises PermissionError, which is NOT caught by except FileNotFoundError. The function would crash with an unhandled exception."
-  },
-  {
-    "id": 283,
-    "domain": "File operations & file modes",
-    "type": "fill_in_blank",
-    "question": "A company asks you to update an existing inventory file. Each time the program runs, it must add a new line at the end of the file without erasing what is already there. If the file does not exist yet, it must be created automatically.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>file = open(\"inventory.txt\", ____)<br>file.write(\"item added on Friday\\n\")<br>file.close()</div>",
-    "options": {
-      "file_mode": ["\"a\"", "\"w\"", "\"r\"", "\"x\""]
-    },
-    "answer": {
-      "file_mode": "\"a\""
-    },
-    "explanation": "Mode \"a\" (append) adds new content at the end of the file without erasing existing content, and creates the file if it doesn't exist. Mode \"w\" would erase existing content. Mode \"r\" is read-only. Mode \"x\" (exclusive creation) fails if the file already exists."
-  },
-  {
-    "id": 284,
-    "domain": "Functions & default parameters",
-    "type": "fill_in_blank",
-    "question": "You are writing a function for a delivery system that calculates the total cost of a shipment. The function must meet the following requirements:<br><br>• The function is named shipment_cost.<br>• The first parameter is weight (no default).<br>• The second parameter is rate_per_kg with a default value of 1.5.<br>• The third parameter is surcharge with a default value of 0.<br>• The function returns weight * rate_per_kg + surcharge.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def ____(____, ____, ____):<br>&nbsp;&nbsp;&nbsp;&nbsp;return weight * rate_per_kg + surcharge</div>",
-    "options": {
-      "function_name": ["shipment_cost", "ShipmentCost", "shipment-cost", "shipmentCost()"],
-      "first_param": ["weight", "weight = 0", "weight = None", "weight = 1.5"],
-      "second_param": ["rate_per_kg = 1.5", "rate_per_kg", "rate_per_kg == 1.5", "1.5 = rate_per_kg"],
-      "third_param": ["surcharge = 0", "surcharge", "surcharge == 0", "0 = surcharge"]
-    },
-    "answer": {
-      "function_name": "shipment_cost",
-      "first_param": "weight",
-      "second_param": "rate_per_kg = 1.5",
-      "third_param": "surcharge = 0"
-    },
-    "explanation": "Python function names use lowercase with underscores (snake_case). Required parameters must come before parameters with default values, so weight has no default. The defaults are written with a single = (assignment), not == (comparison). The parameter name must always be on the left of the =."
-  },
-  {
-    "id": 285,
-    "domain": "Functions & variable scope",
-    "type": "true_false",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>count = 0<br><br>def increment():<br>&nbsp;&nbsp;&nbsp;&nbsp;count = count + 1<br>&nbsp;&nbsp;&nbsp;&nbsp;return count<br><br>result = increment()<br>print(count)<br>print(result)</div><br><br>For each statement, select True or False:",
-    "options": {
-      "statement1": "The code runs without an error.",
-      "statement2": "After the function runs, the global count is 1.",
-      "statement3": "To modify the global count from inside the function, the global keyword must be used."
-    },
-    "answer": {
-      "statement1": "False: The code runs without an error.",
-      "statement2": "False: After the function runs, the global count is 1.",
-      "statement3": "True: To modify the global count from inside the function, the global keyword must be used."
-    },
-    "explanation": "Statement 1 is False — assigning to count inside the function makes it a local variable, so the read count + 1 raises an UnboundLocalError (the local has no value yet). Statement 2 is False — even if the code worked, assignment inside a function does not affect the global by default. Statement 3 is True — declaring global count inside the function tells Python to use the outer variable, allowing both the read and the modification to refer to the global."
-  },
-  {
-    "id": 286,
-    "domain": "File operations & with statement",
-    "type": "fill_in_blank",
-    "question": "A company asks you to rewrite an old file-reading script to use the with statement, so the file is automatically closed even if an error occurs.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>____ open(\"data.txt\", \"r\") ____ file:<br>&nbsp;&nbsp;&nbsp;&nbsp;content = file.____()<br>&nbsp;&nbsp;&nbsp;&nbsp;print(content)</div>",
-    "options": {
-      "with_keyword": ["with", "using", "open", "for"],
-      "as_keyword": ["as", "to", "into", "="],
-      "read_method": ["read", "readline", "write", "load"]
-    },
-    "answer": {
-      "with_keyword": "with",
-      "as_keyword": "as",
-      "read_method": "read"
-    },
-    "explanation": "The `with` statement creates a context manager. The syntax is `with <expression> as <variable>:` — here the file object is assigned to file. read() returns the entire file content as a single string. The major benefit of with is that the file is automatically closed when the block ends, even if an exception is raised."
-  },
-  {
-    "id": 287,
-    "domain": "Functions & return values",
-    "type": "multiple_choice",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>def check(value):<br>&nbsp;&nbsp;&nbsp;&nbsp;if value < 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return \"negative\"<br>&nbsp;&nbsp;&nbsp;&nbsp;if value == 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return \"zero\"<br>&nbsp;&nbsp;&nbsp;&nbsp;print(\"positive\")<br><br>result = check(5)<br>print(result)</div><br><br>What is the output?",
-    "options": [
-      "A. positive then positive",
-      "B. positive then None",
-      "C. None then positive",
-      "D. The code generates a runtime error."
-    ],
-    "answer": "B. positive then None",
-    "explanation": "When check(5) is called, both if conditions are False, so the code reaches the print(\"positive\") line, which outputs positive to the console. The function then ends without a return statement, so it implicitly returns None. That None is stored in result and printed on the next line. A common mistake is to confuse printing with returning — print only displays text, it does not give a value back to the caller."
-  },
-  {
-    "id": 288,
-    "domain": "Nested loops & output counting",
-    "type": "multiple_choice",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>total = 0<br>for i in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;for j in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;total += 1<br>print(total)</div><br><br>What is the output?",
-    "options": [
-      "A. 6",
-      "B. 9",
-      "C. 12",
-      "D. 16"
-    ],
-    "answer": "B. 9",
-    "explanation": "`range(1, 4)` produces 1, 2, 3 (three values). The outer loop runs 3 times, and for each outer iteration the inner loop runs 3 times. Total iterations = 3 × 3 = 9. total is incremented once per inner iteration, so it ends at 9."
-  },
-  {
-    "id": 291,
-    "domain": "Nested loops & triangle pattern with range",
-    "type": "fill_in_blank",
-    "question": "You are writing a Python program that prints the following right triangle pattern:<br><br><pre class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>*<br>**<br>***<br>****<br>*****</pre><br><br>The number of stars in each row matches the row number (row 1 has 1 star, row 2 has 2 stars, etc.). There are 5 rows total.<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>for row in range(____):<br>&nbsp;&nbsp;&nbsp;&nbsp;for col in range(____):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(\"*\", end=\"\")<br>&nbsp;&nbsp;&nbsp;&nbsp;print()</div>",
-    "options": {
-      "outer_range": ["1, 6", "0, 5", "5", "1, 5"],
-      "inner_range": ["row", "5", "row + 1", "1, row"]
-    },
-    "answer": {
-      "outer_range": "1, 6",
-      "inner_range": "row"
-    },
-    "explanation": "Using range(1, 6) makes row take the values 1, 2, 3, 4, 5 — which directly match the number of stars in each row. The inner range(row) then runs that many times (e.g., when row=3, the inner loop runs 3 times, printing 3 stars). An alternative valid pairing would be range(5) (0–4) with range(row + 1), but the question dropdown forces matching the simpler pairing."
-  },
-  {
-    "id": 292,
-    "domain": "Nested loops & continue",
-    "type": "multiple_choice",
-    "question": "Review the following code:<br><br><div class='bg-gray-800 text-green-400 p-3 rounded font-mono mt-2'>result = 0<br>for i in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;for j in range(1, 4):<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if i == j:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;continue<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;result += i * j<br>print(result)</div><br><br>What is the output?",
-    "options": [
-      "A. 22",
-      "B. 36",
-      "C. 14",
-      "D. 18"
-    ],
-    "answer": "A. 22",
-    "explanation": "`continue` skips the rest of the current inner iteration when i == j. Trace each (i, j) where i != j: (1,2)→2, (1,3)→3, (2,1)→2, (2,3)→6, (3,1)→3, (3,2)→6. Sum = 2+3+2+6+3+6 = 22. The skipped pairs (1,1), (2,2), (3,3) would have added 1+4+9 = 14 (giving 36 total), which is the trap answer."
   }
-]
+];
