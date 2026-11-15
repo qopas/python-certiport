@@ -1,0 +1,11 @@
+.git
+.github
+.next
+.vercel
+node_modules
+deploy
+*.tsbuildinfo
+.env*
+*.md
+npm-debug.log*
+.DS_Store
