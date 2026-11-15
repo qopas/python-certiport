@@ -1,0 +1,48 @@
+# python-certiport on the ImpactERP dev server (impacterp-staging). Lives at /opt/python-certiport
+# with .env beside it; see deploy/README.md. Coolify's Traefik (container `coolify-proxy`, network
+# `coolify`) routes and terminates TLS; nothing here publishes a host port.
+#
+# deploy.sh tags the release image as python-certiport-app:current and swaps containers without
+# downtime, so a plain `docker compose up -d` here always runs the current release.
+
+name: python-certiport
+
+services:
+  app:
+    image: python-certiport-app:current
+    pull_policy: never
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      TZ: UTC
+    networks: [default, coolify]
+    stop_grace_period: 30s
+    # Small box shared with Coolify and the ImpactERP dev apps.
+    cpus: 1
+    mem_limit: 512m
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
+    labels:
+      traefik.enable: 'true'
+      traefik.docker.network: coolify
+      traefik.http.routers.python-certiport-http.rule: Host(`${APP_HOST:-python-certiport.dev.impact-academies.com}`)
+      traefik.http.routers.python-certiport-http.entrypoints: http
+      traefik.http.routers.python-certiport-http.middlewares: python-certiport-https-redirect
+      traefik.http.middlewares.python-certiport-https-redirect.redirectscheme.scheme: https
+      traefik.http.middlewares.python-certiport-https-redirect.redirectscheme.permanent: 'true'
+      traefik.http.routers.python-certiport.rule: Host(`${APP_HOST:-python-certiport.dev.impact-academies.com}`)
+      traefik.http.routers.python-certiport.entrypoints: https
+      traefik.http.routers.python-certiport.tls: 'true'
+      traefik.http.routers.python-certiport.tls.certresolver: letsencrypt
+      traefik.http.routers.python-certiport.middlewares: python-certiport-retry
+      # A request that reaches a container already draining on SIGTERM (connection refused) is
+      # re-sent to the other container instead of failing with 502 during a release.
+      traefik.http.middlewares.python-certiport-retry.retry.attempts: '2'
+      traefik.http.services.python-certiport.loadbalancer.server.port: '3000'
+
+networks:
+  coolify:
+    external: true
