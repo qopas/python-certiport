@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       sessionId: string;
       mode: QuizMode;
       answers: (string | string[] | { [key: string]: string } | null)[];
-      questions?: any[];
+      questions?: unknown[];
       score: number;
       percentage: number;
       totalTime: number;
@@ -96,10 +96,11 @@ export async function POST(request: NextRequest) {
           totalTime,
           new Date(startedAt),
           new Date(),
+          // questionDetails already carries each question, answer and explanation; the full
+          // question objects are not stored again (they doubled every row).
           JSON.stringify({
             sessionId,
             mode,
-            questions,
             answers,
             questionDetails
           })

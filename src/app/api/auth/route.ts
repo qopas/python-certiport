@@ -22,7 +22,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    console.log('Login successful for user:', result.user); // Debug log
 
     const response = NextResponse.json({ 
       success: true, 

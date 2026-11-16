@@ -1,33 +1,33 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Development
 
-First, run the development server:
+Create `.env.local` with `DATABASE_URL` (Postgres; schema in `src/scripts/setup-database.sql`),
+`JWT_SECRET` and `DEFAULT_USER_PASSWORD`, then:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev         # http://localhost:3000
+npm test            # unit tests (Vitest)
+npm run typecheck
+npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Production mode connects with SSL; for a local Postgres without SSL add `?sslmode=disable` to
+`DATABASE_URL`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Admin dashboard data
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The admin dashboard never downloads all submissions. Each tab asks the server for one page:
 
-## Learn More
+- `GET /api/admin/submissions?classId=&from=&search=&page=&pageSize=` returns a page of rows plus
+  aggregate stats, without the stored question data.
+- `GET /api/admin/submissions/:id` loads one submission's questions when "View details" is opened.
+- `GET /api/admin/question-analytics?classId=` aggregates the hardest questions in Postgres.
+- `GET /api/admin/submissions/export` returns the filtered rows as CSV.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Stored answers come from the student's browser, so the admin API only returns question-bank HTML
+or escaped text (`src/lib/admin/question-view.ts`).
 
 ## Deploy
 

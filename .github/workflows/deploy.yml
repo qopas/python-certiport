@@ -1,8 +1,8 @@
 name: Deploy
 
 # Every push to master is built into an image on GHCR and released on the ImpactERP dev server
-# (deploy/README.md). `next build` inside the image build type-checks and lints. A manual run
-# redeploys the selected branch.
+# (deploy/README.md) after typecheck, lint and unit tests pass. A manual run redeploys the selected
+# branch.
 on:
   push:
     branches: [master]
@@ -20,7 +20,21 @@ env:
   IMAGE: ghcr.io/qopas/python-certiport
 
 jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+
   deploy:
+    needs: verify
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5

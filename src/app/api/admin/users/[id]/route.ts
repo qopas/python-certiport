@@ -1,65 +1,22 @@
-// app/api/admin/users/[id]/route.ts
-import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/middleware';
-import { query } from '@/lib/db';
+import { NextResponse } from 'next/server';
+import { readJson, withAdmin } from '@/lib/api/http';
+import { optionalId, optionalPassword, parseId, requireBoolean, requireEmail, requireText } from '@/lib/api/params';
+import { deleteStudent, updateStudent } from '@/lib/admin/users';
 
-export async function DELETE(
-  request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
-) {
-  const admin = requireAdmin(request);
-  
-  if (!admin) {
-    return NextResponse.json({ error: 'Admin access required' }, { status: 403 });
-  }
+export const PUT = withAdmin<{ id: string }>(async (request, _admin, { id }) => {
+  const body = await readJson(request);
+  const user = await updateStudent(parseId(id), {
+    email: requireEmail(body.email),
+    fullName: requireText(body.fullName, 'Full name', 100),
+    classId: optionalId(body.classId, 'classId'),
+    isActive: requireBoolean(body.isActive, 'isActive'),
+    newPassword: optionalPassword(body.newPassword),
+  });
+  return NextResponse.json(user);
+});
 
-  try {
-    // Await params for Next.js 15+
-    const resolvedParams = await params;
-    const userId = parseInt(resolvedParams.id);
-    
-    if (isNaN(userId)) {
-      return NextResponse.json({ error: 'Invalid user ID' }, { status: 400 });
-    }
-
-    // Check if user exists and is not an admin
-    const userCheck = await query(
-      'SELECT id, email, role FROM users WHERE id = $1',
-      [userId]
-    );
-
-    if (userCheck.rows.length === 0) {
-      return NextResponse.json({ error: 'User not found' }, { status: 404 });
-    }
-
-    const user = userCheck.rows[0];
-
-    // Prevent deleting admin users
-    if (user.role === 'admin') {
-      return NextResponse.json({ error: 'Cannot delete admin users' }, { status: 403 });
-    }
-
-    // Prevent admin from deleting themselves
-    if (user.id === admin.id) {
-      return NextResponse.json({ error: 'Cannot delete your own account' }, { status: 403 });
-    }
-
-    // Hard delete: First delete related quiz submissions
-    await query('DELETE FROM quiz_submissions WHERE user_id = $1', [userId]);
-    
-    // Then delete the user
-    const deleteResult = await query('DELETE FROM users WHERE id = $1', [userId]);
-    
-    if (deleteResult.rowCount === 0) {
-      return NextResponse.json({ error: 'Failed to delete user' }, { status: 500 });
-    }
-
-    return NextResponse.json({ 
-      success: true, 
-      message: `User ${user.email} deleted successfully`
-    });
-  } catch (error) {
-    console.error('Delete user error:', error);
-    return NextResponse.json({ error: 'Failed to delete user' }, { status: 500 });
-  }
-}
+// Permanently deletes a student and their submissions. Admin accounts cannot be deleted.
+export const DELETE = withAdmin<{ id: string }>(async (_request, _admin, { id }) => {
+  const email = await deleteStudent(parseId(id));
+  return NextResponse.json({ message: `User ${email} deleted` });
+});
