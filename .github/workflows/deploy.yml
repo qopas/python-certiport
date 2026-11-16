@@ -1,20 +1,17 @@
 name: Deploy
 
 # Every push to master is built into an image on GHCR and released on the ImpactERP dev server
-# (deploy/README.md) after typecheck, lint and unit tests pass. A manual run redeploys the selected
-# branch.
+# (deploy/README.md) after typecheck, lint and unit tests pass. Pull requests only run the checks.
+# A manual run redeploys the selected branch.
 on:
   push:
     branches: [master]
+  pull_request:
+    branches: [master]
   workflow_dispatch:
-
-concurrency:
-  group: deploy-dev
-  cancel-in-progress: false
 
 permissions:
   contents: read
-  packages: write
 
 env:
   IMAGE: ghcr.io/qopas/python-certiport
@@ -35,7 +32,14 @@ jobs:
 
   deploy:
     needs: verify
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    concurrency:
+      group: deploy-dev
+      cancel-in-progress: false
     steps:
       - uses: actions/checkout@v5
 
