@@ -17,6 +17,15 @@ const MainQuizComponent: React.FC = () => {
   const [stage, setStage] = useState<QuizStage>('mode-selection');
   const [selectedMode, setSelectedMode] = useState<QuizMode | null>(null);
   const [questions, setQuestions] = useState<Question[]>([]);
+  // The server-side testing attempt being taken (or resumed from this browser's saved progress).
+  const [testing, setTesting] = useState<{
+    sessionId: string;
+    startedAt: string;
+    timeLimit: number;
+    answers?: (string | string[] | { [key: string]: string } | null)[];
+    currentQuestionIndex?: number;
+    flaggedQuestions?: number[];
+  } | null>(null);
   const [results, setResults] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -35,13 +44,23 @@ const MainQuizComponent: React.FC = () => {
 
     // Check if there's an existing testing session
     const testingSession = QuizStorageManager.loadSession('testing');
-    if (testingSession) {
-      console.log('Resuming existing testing session');
+    // Attempts saved before grading moved to the server carry answer keys and cannot be submitted.
+    const isServerAttempt = testingSession && !testingSession.questions.some((q) => 'answer' in q);
+    if (testingSession && isServerAttempt) {
       setSelectedMode('testing');
       setQuestions(testingSession.questions);
+      setTesting({
+        sessionId: testingSession.sessionId,
+        startedAt: testingSession.startTime.toISOString(),
+        timeLimit: testingSession.config.timeLimit ?? 50 * 60,
+        answers: testingSession.answers,
+        currentQuestionIndex: testingSession.currentQuestionIndex,
+        flaggedQuestions: testingSession.flaggedQuestions,
+      });
       setStage('quiz');
       return;
     }
+    if (testingSession) QuizStorageManager.clearSession('testing');
   }, []);
 
   const handleModeSelect = async (mode: QuizMode) => {
@@ -87,7 +106,8 @@ const MainQuizComponent: React.FC = () => {
         answers: new Array(data.questions.length).fill(null),
         flaggedQuestions: [],
         timeRemaining: data.timeLimit,
-        startTime: new Date(),
+        // Testing: the server's start time, so the countdown is the server's.
+        startTime: data.startedAt ? new Date(data.startedAt) : new Date(),
         config: data.config
       };
 
@@ -95,6 +115,7 @@ const MainQuizComponent: React.FC = () => {
 
       setSelectedMode(mode);
       setQuestions(data.questions);
+      setTesting(mode === 'testing' ? { sessionId: data.sessionId, startedAt: data.startedAt, timeLimit: data.timeLimit } : null);
       setStage('quiz');
 
     } catch (err) {
@@ -188,10 +209,16 @@ const MainQuizComponent: React.FC = () => {
             onBackToDashboard={handleBackToDashboard}
           />
         );
-      } else if (selectedMode === 'testing') {
+      } else if (selectedMode === 'testing' && testing) {
         return (
           <TestingQuiz
             questions={questions}
+            sessionId={testing.sessionId}
+            startedAt={testing.startedAt}
+            timeLimit={testing.timeLimit}
+            initialAnswers={testing.answers}
+            initialQuestionIndex={testing.currentQuestionIndex}
+            initialFlagged={testing.flaggedQuestions}
             onComplete={handleQuizComplete}
             onBackToDashboard={handleBackToDashboard}
           />

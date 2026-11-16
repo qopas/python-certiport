@@ -143,56 +143,15 @@ export default function UserDashboard() {
     }
   };
 
+  // The quiz page asks for training or testing and starts the attempt on the server.
   const startNewQuiz = async () => {
-    try {
-      const response = await fetch('/api/quiz/start', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ mode: 'testing' }) // Add this!
-    });
-      
-      if (!response.ok) {
-        console.error('Quiz start failed:', response.status, response.statusText);
-        return;
-      }
-      
-      const data = await response.json();
-      console.log('Quiz start response:', data);
-      
-      if (!data.success) {
-        console.error('API returned error:', data.error);
-        return;
-      }
-      
-      if (!data.questions || !Array.isArray(data.questions)) {
-        console.error('Invalid questions data:', data.questions);
-        return;
-      }
-      
-      // Clear any existing localStorage session and save new one
-      if (typeof window !== 'undefined') {
-        const QuizStorage = (await import('@/lib/quiz-storage')).default;
-        QuizStorage.clearSession();
-        
-        QuizStorage.saveSession({
-          userId: data.userId,
-          sessionId: data.sessionId,
-          questions: data.questions,
-          currentQuestionIndex: 0,
-          flaggedQuestions: [],
-          answers: new Array(data.questions.length).fill(null),
-          timeRemaining: data.timeLimit,
-          startTime: new Date().toISOString(),
-          lastUpdated: new Date().toISOString()
-        });
-      }
-      
-      router.push('/quiz');
-    } catch (error) {
-      console.error('Error starting quiz:', error);
+    if (typeof window !== 'undefined') {
+      const QuizStorage = (await import('@/lib/quiz-storage')).default;
+      QuizStorage.clearSession();
+      const EnhancedStorage = (await import('@/lib/quiz-storage-enchanched')).default;
+      EnhancedStorage.clearAllSessions();
     }
+    router.push('/quiz');
   };
 
   const confirmStartNewQuiz = async () => {

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/middleware';
+import { requireAdmin, requireAuth } from '@/lib/middleware';
 import type { User } from '@/lib/auth';
 import { HttpError, badRequest } from './errors';
 
@@ -27,6 +27,21 @@ export const withAdmin =
     if (!admin) return jsonError(403, 'Admin access required');
     try {
       return await handler(request, admin, await context.params);
+    } catch (error) {
+      return toErrorResponse(error);
+    }
+  };
+
+// Any signed-in user: 401 otherwise, same error handling as withAdmin.
+export const withUser =
+  <P = Record<string, never>>(
+    handler: (request: NextRequest, user: User, params: P) => Promise<Response>,
+  ) =>
+  async (request: NextRequest, context: RouteContext<P>) => {
+    const user = requireAuth(request);
+    if (!user) return jsonError(401, 'Authentication required');
+    try {
+      return await handler(request, user, await context.params);
     } catch (error) {
       return toErrorResponse(error);
     }
