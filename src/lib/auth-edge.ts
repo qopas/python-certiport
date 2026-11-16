@@ -10,13 +10,10 @@ export interface TokenPayload {
 // Edge Runtime compatible JWT verification using Web Crypto API
 export async function verifyTokenEdge(token: string): Promise<TokenPayload | null> {
   try {
-    console.log('🔍 Verifying token in edge runtime');
-    console.log('🔍 JWT_SECRET exists:', !!process.env.JWT_SECRET);
     
     // Split the JWT
     const parts = token.split('.');
     if (parts.length !== 3) {
-      console.log('❌ Invalid JWT format');
       return null;
     }
 
@@ -24,11 +21,9 @@ export async function verifyTokenEdge(token: string): Promise<TokenPayload | nul
     
     // Decode payload to check expiration
     const decodedPayload = JSON.parse(atob(payload.replace(/-/g, '+').replace(/_/g, '/')));
-    console.log('🔍 Decoded payload:', decodedPayload);
     
     // Check expiration
     if (decodedPayload.exp && Date.now() >= decodedPayload.exp * 1000) {
-      console.log('❌ Token expired');
       return null;
     }
 
@@ -50,11 +45,9 @@ export async function verifyTokenEdge(token: string): Promise<TokenPayload | nul
     const isValid = await crypto.subtle.verify('HMAC', key, signatureBytes, data);
     
     if (!isValid) {
-      console.log('❌ Invalid signature');
       return null;
     }
 
-    console.log('✅ Token verified successfully');
     return {
       userId: decodedPayload.userId,
       email: decodedPayload.email,
@@ -63,7 +56,6 @@ export async function verifyTokenEdge(token: string): Promise<TokenPayload | nul
       classId: decodedPayload.classId
     };
   } catch (error) {
-    console.log('❌ Token verification error:', error);
     return null;
   }
 }

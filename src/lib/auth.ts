@@ -58,7 +58,7 @@ export function verifyToken(token: string): any {
 // Login user
 export async function loginUser(email: string, password: string): Promise<AuthResult> {
   try {
-    const result = await query(
+    const result = await query<User & { password_hash: string }>(
       `SELECT id, email, password_hash, full_name, class_id, role, is_active
        FROM users 
        WHERE email = $1 AND is_active = true`,
@@ -95,7 +95,7 @@ export async function loginUser(email: string, password: string): Promise<AuthRe
 // Get user by ID
 export async function getUserById(userId: number): Promise<User | null> {
   try {
-    const result = await query(
+    const result = await query<User>(
       `SELECT id, email, full_name, class_id, role, is_active
        FROM users WHERE id = $1 AND is_active = true`,
       [userId]
@@ -105,42 +105,5 @@ export async function getUserById(userId: number): Promise<User | null> {
   } catch (error) {
     console.error('Get user error:', error);
     return null;
-  }
-}
-
-// Create new user (admin only)
-export async function createUser(
-  email: string,
-  fullName: string,
-  classId: number,
-  password?: string
-): Promise<AuthResult> {
-  try {
-    // Check if user already exists
-    const existingUser = await query(
-      'SELECT id FROM users WHERE email = $1',
-      [email]
-    );
-
-    if (existingUser.rows.length > 0) {
-      return { success: false, message: 'User with this email already exists' };
-    }
-
-    // Use provided password or default
-    const userPassword = password || process.env.DEFAULT_USER_PASSWORD || 'TempPass123';
-    const passwordHash = await hashPassword(userPassword);
-
-    const result = await query(
-      `INSERT INTO users (email, password_hash, full_name, class_id) 
-       VALUES ($1, $2, $3, $4) 
-       RETURNING id, email, full_name, class_id, role, is_active`,
-      [email, passwordHash, fullName, classId]
-    );
-
-    const user = result.rows[0];
-    return { success: true, user };
-  } catch (error) {
-    console.error('Create user error:', error);
-    return { success: false, message: 'Failed to create user' };
   }
 }
