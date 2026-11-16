@@ -1,65 +1,129 @@
 // src/components/TestingQuiz.tsx
 "use client";
-import React, { useState, useEffect, useCallback } from 'react';
+
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Clock, CheckCircle, XCircle, Trophy, ArrowLeft, Flag, FlagOff, GripVertical } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { Question, QuestionResult } from '@/lib/types';
+import { Clock, Trophy, ArrowLeft, Flag, FlagOff, GripVertical } from 'lucide-react';
+import type { PublicQuestion } from '@/lib/quiz/public-question';
 import QuizStorageManager from '@/lib/quiz-storage-enchanched';
 
+type Answer = string | string[] | { [key: string]: string } | null;
+
+export interface TestResults {
+  score: number;
+  totalQuestions: number;
+  percentage: number;
+  totalTime: number;
+}
+
 interface TestingQuizProps {
-  questions: Question[];
-  onComplete: (results: any) => void;
+  // Questions come without answer keys; the server grades the attempt.
+  questions: PublicQuestion[];
+  sessionId: string;
+  // Server time the attempt started and its limit: the countdown survives reloads.
+  startedAt: string;
+  timeLimit: number;
+  initialAnswers?: Answer[];
+  initialQuestionIndex?: number;
+  initialFlagged?: number[];
+  onComplete?: (results: TestResults) => void;
   onBackToDashboard: () => void;
 }
 
-const TestingQuiz: React.FC<TestingQuizProps> = ({ 
-  questions, 
-  onComplete, 
-  onBackToDashboard 
-}) => {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<(string | string[] | { [key: string]: string } | null)[]>(
-    new Array(questions.length).fill(null)
-  );
-  const [flaggedQuestions, setFlaggedQuestions] = useState<Set<number>>(new Set());
-  const [timeRemaining, setTimeRemaining] = useState(50 * 60); // 50 minutes in seconds
-  const [startTime] = useState(new Date());
-  const [stage, setStage] = useState<'quiz' | 'results'>('quiz');
-  const [results, setResults] = useState<any>(null);
-  
-  const router = useRouter();
+const secondsLeft = (deadline: number) => Math.max(0, Math.round((deadline - Date.now()) / 1000));
 
-  const updateLocalStorage = useCallback(async (updates: any) => {
+const TestingQuiz: React.FC<TestingQuizProps> = ({
+  questions,
+  sessionId,
+  startedAt,
+  timeLimit,
+  initialAnswers,
+  initialQuestionIndex = 0,
+  initialFlagged = [],
+  onBackToDashboard
+}) => {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(() =>
+    Math.min(Math.max(initialQuestionIndex, 0), questions.length - 1)
+  );
+  const [answers, setAnswers] = useState<Answer[]>(() =>
+    initialAnswers && initialAnswers.length === questions.length ? initialAnswers : new Array(questions.length).fill(null)
+  );
+  const [flaggedQuestions, setFlaggedQuestions] = useState<Set<number>>(() => new Set(initialFlagged));
+  const deadline = new Date(startedAt).getTime() + timeLimit * 1000;
+  const [timeRemaining, setTimeRemaining] = useState(() => secondsLeft(deadline));
+  const [stage, setStage] = useState<'quiz' | 'results'>('quiz');
+  const [results, setResults] = useState<TestResults | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<{ message: string; final: boolean } | null>(null);
+  const answersRef = useRef(answers);
+  answersRef.current = answers;
+  const inFlightRef = useRef(false);
+  const autoSubmittedRef = useRef(false);
+
+  const updateLocalStorage = useCallback(async (updates: {
+    currentQuestionIndex?: number;
+    answers?: Answer[];
+    flaggedQuestions?: number[];
+    timeRemaining?: number;
+  }) => {
     QuizStorageManager.saveTestingProgress(
-      `testing-${Date.now()}`,
+      sessionId,
       updates.currentQuestionIndex ?? currentQuestionIndex,
       updates.answers ?? answers,
-      Array.from(updates.flaggedQuestions ?? flaggedQuestions),
+      updates.flaggedQuestions ?? Array.from(flaggedQuestions),
       updates.timeRemaining ?? timeRemaining
     );
-  }, [currentQuestionIndex, answers, flaggedQuestions, timeRemaining]);
+  }, [sessionId, currentQuestionIndex, answers, flaggedQuestions, timeRemaining]);
 
-  // Timer effect
-  useEffect(() => {
-    if (stage === 'quiz' && timeRemaining > 0) {
-      const timer = setInterval(() => {
-        setTimeRemaining(prev => {
-          const newTime = prev - 1;
-          if (newTime <= 0) {
-            submitQuiz();
-            return 0;
-          }
-          updateLocalStorage({ timeRemaining: newTime });
-          return newTime;
-        });
-      }, 1000);
-      return () => clearInterval(timer);
+  // Sends the answers; the server grades them and records the attempt exactly once.
+  const submitQuiz = async () => {
+    if (inFlightRef.current || stage !== 'quiz') return;
+    inFlightRef.current = true;
+    setSubmitting(true);
+    setSubmitError(null);
+    try {
+      const response = await fetch('/api/quiz/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId, answers: answersRef.current })
+      });
+      const data = await response.json().catch(() => null);
+      if (!response.ok) {
+        // 409: already submitted or expired, nothing to retry.
+        const final = response.status === 409 || response.status === 401 || response.status === 403;
+        if (final) QuizStorageManager.clearSession('testing');
+        setSubmitError({ message: data?.error ?? `Submitting failed (${response.status}).`, final });
+        return;
+      }
+      QuizStorageManager.clearSession('testing');
+      setResults(data.results as TestResults);
+      setStage('results');
+    } catch {
+      setSubmitError({ message: 'Could not reach the server. Check your connection and submit again.', final: false });
+    } finally {
+      inFlightRef.current = false;
+      setSubmitting(false);
     }
-  }, [stage, timeRemaining, updateLocalStorage]);
+  };
+  const submitRef = useRef(submitQuiz);
+  submitRef.current = submitQuiz;
+
+  // Countdown from the server's start time; submits once when it reaches zero.
+  useEffect(() => {
+    if (stage !== 'quiz') return;
+    const timer = setInterval(() => {
+      const left = secondsLeft(deadline);
+      setTimeRemaining(left);
+      if (left === 0 && !autoSubmittedRef.current) {
+        autoSubmittedRef.current = true;
+        submitRef.current();
+      }
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [stage, deadline]);
 
   // Auto-save effect
   useEffect(() => {
@@ -115,142 +179,6 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
     }
   };
 
-  // Enhanced answer comparison for all question types
- const compareAnswers = (userAnswer: any, correctAnswer: any, questionType: string) => {
-  // DEBUG LOGGING - KEEP THIS TO SEE WHAT'S HAPPENING
-  console.log(`\n=== COMPARING ${questionType} ===`);
-  console.log('User Answer:', userAnswer);
-  console.log('Correct Answer:', correctAnswer);
-  
-  if (questionType === 'ordering') {
-    if (!Array.isArray(userAnswer) || !Array.isArray(correctAnswer)) return false;
-    return JSON.stringify(userAnswer) === JSON.stringify(correctAnswer);
-  }
-  
-  if (questionType === 'fill_in_blank') {
-    if (typeof userAnswer !== 'object' || typeof correctAnswer !== 'object') return false;
-    const userKeys = Object.keys(userAnswer || {});
-    const correctKeys = Object.keys(correctAnswer || {});
-    if (userKeys.length !== correctKeys.length) return false;
-    return userKeys.every(key => userAnswer[key] === correctAnswer[key]);
-  }
-  
-  // ADD THIS MISSING BLOCK FOR MULTI-STATEMENT TRUE_FALSE
-  if (questionType === 'true_false' && typeof correctAnswer === 'object' && !Array.isArray(correctAnswer)) {
-    console.log('Processing multi-statement true_false question');
-    
-    if (typeof userAnswer !== 'object' || !userAnswer) {
-      console.log('❌ User answer is not an object');
-      return false;
-    }
-    
-    const userKeys = Object.keys(userAnswer);
-    const correctKeys = Object.keys(correctAnswer);
-    
-    if (userKeys.length !== correctKeys.length) {
-      console.log('❌ Key count mismatch:', userKeys.length, 'vs', correctKeys.length);
-      return false;
-    }
-    
-    // Since you're storing full format, do direct comparison
-    const result = userKeys.every(key => {
-      const userValue = userAnswer[key];
-      const correctValue = correctAnswer[key];
-      
-      console.log(`  ${key}: 
-        User: "${userValue}"
-        Correct: "${correctValue}"
-        Match: ${userValue === correctValue ? '✅' : '❌'}`);
-      
-      return userValue === correctValue;
-    });
-    
-    console.log('Final result:', result ? '✅ CORRECT' : '❌ INCORRECT');
-    return result;
-  }
-  
-  if (questionType === 'multiple_response' || questionType === 'multiple_select') {
-    if (!Array.isArray(userAnswer) || !Array.isArray(correctAnswer)) return false;
-    return userAnswer.length === correctAnswer.length && 
-           userAnswer.every(ans => correctAnswer.includes(ans));
-  }
-  
-  // Handle simple true_false and multiple_choice
-  console.log('Using simple comparison:', userAnswer === correctAnswer);
-  return userAnswer === correctAnswer;
-};
-
-  const submitQuiz = async () => {
-    if (!startTime) return;
-
-    const endTime = new Date();
-    const totalTime = Math.round((endTime.getTime() - startTime.getTime()) / 1000);
-    
-    let score = 0;
-    const questionDetails: QuestionResult[] = questions.map((question, index) => {
-      const userAnswer = answers[index];
-      const isCorrect = compareAnswers(userAnswer, question.answer, question.type);
-      
-      if (isCorrect) score++;
-
-      return {
-        questionId: question.id,
-        domain: question.domain,
-        type: question.type,
-        question: question.question,
-        userAnswer,
-        correctAnswer: question.answer,
-        isCorrect,
-        explanation: question.explanation
-      };
-    });
-
-    const percentage = Math.round((score / questions.length) * 100);
-
-    try {
-      const response = await fetch('/api/quiz/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          sessionId: `testing-${Date.now()}`,
-          mode: 'testing',
-          answers,
-          questions,
-          score,
-          percentage,
-          totalTime,
-          questionDetails,
-          startedAt: startTime.toISOString()
-        })
-      });
-      
-      if (response.ok) {
-        QuizStorageManager.clearSession('testing');
-        console.log('Quiz submitted and localStorage cleared');
-      }
-
-      const submissionData = {
-        score,
-        percentage,
-        totalTime,
-        questionDetails,
-        totalQuestions: questions.length
-      };
-
-      setResults(submissionData);
-      setStage('results');
-    } catch (error) {
-      console.error('Error submitting quiz:', error);
-      setResults({
-        score,
-        percentage,
-        totalTime,
-        questionDetails,
-        totalQuestions: questions.length
-      });
-      setStage('results');
-    }
-  };
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -288,7 +216,7 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
   };
 
   // Fixed renderQuestionContent function for fill_in_blank questions (EXACT COPY from your original)
-  const renderQuestionContent = (question: Question) => {
+  const renderQuestionContent = (question: PublicQuestion) => {
     const currentAnswer = answers[currentQuestionIndex];
 
     switch (question.type) {
@@ -481,7 +409,6 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
 
       case 'ordering':
         const sourcePool = question.options as string[];
-        const correctAnswer = question.answer as string[];
         const userArrangement = (currentAnswer as string[]) || [];
         
         const handleDragStart = (e: React.DragEvent, item: string, fromPool: boolean) => {
@@ -694,7 +621,7 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
     }
   };
 
-  if (stage === 'results') {
+  if (stage === 'results' && results) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 p-3 sm:p-4">
         <div className="max-w-3xl mx-auto">
@@ -752,6 +679,27 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50">
       <div className="max-w-6xl mx-auto p-3 sm:p-4">
+        {(submitting || submitError) && (
+          <div
+            role={submitError ? 'alert' : 'status'}
+            className={`mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 rounded-lg border p-3 text-sm ${
+              submitError ? 'border-red-200 bg-red-50 text-red-800' : 'border-blue-200 bg-blue-50 text-blue-800'
+            }`}
+          >
+            <span>{submitError ? submitError.message : 'Submitting your answers…'}</span>
+            {submitError && (
+              <Button
+                type="button"
+                size="sm"
+                variant="outline"
+                onClick={submitError.final ? onBackToDashboard : submitQuiz}
+                disabled={submitting}
+              >
+                {submitError.final ? 'Back to dashboard' : 'Try again'}
+              </Button>
+            )}
+          </div>
+        )}
         {/* Header */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 gap-3">
           <Button 
@@ -925,10 +873,12 @@ const TestingQuiz: React.FC<TestingQuizProps> = ({
               <div className="flex space-x-2">
                 {currentQuestionIndex === questions.length - 1 ? (
                   <Button 
+                    type="button"
                     onClick={submitQuiz} 
+                    disabled={submitting || submitError?.final}
                     className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-6 py-2 shadow-lg w-full sm:w-auto"
                   >
-                    Submit Quiz
+                    {submitting ? 'Submitting…' : 'Submit Quiz'}
                   </Button>
                 ) : (
                   <Button 
