@@ -96,7 +96,7 @@ export const getQuizModeConfig = (mode: QuizMode, quizType: QuizType): ExtendedQ
         ...baseConfig,
         hasTimeLimit: true,
         timeLimit: 3000, // 50 minutes
-        questionsPerQuiz: 42,
+        questionsPerQuiz: 30,
         allowReview: false,
         showFeedback: false,
         saveResults: true
