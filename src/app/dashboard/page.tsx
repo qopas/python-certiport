@@ -420,7 +420,7 @@ export default function UserDashboard() {
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">
-                  Take a new Python quiz with 30 randomly selected questions.
+                  Take a new Python quiz with 42 randomly selected questions.
                 </p>
                 <Button onClick={startNewQuiz} className="w-full">
                   <Play className="w-4 h-4 mr-2" />
