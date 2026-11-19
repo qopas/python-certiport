@@ -9,7 +9,7 @@ import type { Question } from '@/lib/types';
 import { gradeAnswers, type Answer } from './grade';
 import { shuffle, toPublicQuestion, type PublicQuestion } from './public-question';
 
-export const QUESTIONS_PER_QUIZ = 30;
+export const QUESTIONS_PER_QUIZ = 42;
 export const TESTING_TIME_LIMIT_SECONDS = getQuizModeConfig('testing').timeLimit ?? 50 * 60;
 // Late submissions (slow network, sleeping laptop) are still accepted for this long after the limit.
 const SUBMIT_GRACE_SECONDS = 10 * 60;
