@@ -6,6 +6,7 @@ import QuizModeSelection from '@/components/QuizModeSelection';
 import TrainingQuiz from '@/components/TrainingQuiz';
 import TestingQuiz from '@/components/TestingQuiz';
 import TrainingResults from '@/components/TrainingResult';
+import QuizWatermark from '@/components/QuizWatermark';
 import QuizStorageManager from '@/lib/quiz-storage-enchanched';
 import { Question } from '@/lib/types';
 
@@ -29,6 +30,17 @@ const MainQuizComponent: React.FC = () => {
   const [results, setResults] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  // Who is taking the quiz; shown as a watermark over every question.
+  const [student, setStudent] = useState<{ name: string; detail: string } | null>(null);
+
+  useEffect(() => {
+    fetch('/api/user/profile')
+      .then((response) => (response.ok ? response.json() : null))
+      .then((user) => {
+        if (user) setStudent({ name: user.full_name, detail: `${user.email} · ID ${user.id}` });
+      })
+      .catch(() => {});
+  }, []);
 
   // Check for existing sessions on component mount
   useEffect(() => {
@@ -195,6 +207,8 @@ const MainQuizComponent: React.FC = () => {
     );
   }
 
+  const watermark = <QuizWatermark name={student?.name ?? 'Unknown student'} detail={student?.detail ?? ''} />;
+
   // Render current stage
   switch (stage) {
     case 'mode-selection':
@@ -203,25 +217,31 @@ const MainQuizComponent: React.FC = () => {
     case 'quiz':
       if (selectedMode === 'training') {
         return (
-          <TrainingQuiz
-            questions={questions}
-            onComplete={handleQuizComplete}
-            onBackToDashboard={handleBackToDashboard}
-          />
+          <>
+            {watermark}
+            <TrainingQuiz
+              questions={questions}
+              onComplete={handleQuizComplete}
+              onBackToDashboard={handleBackToDashboard}
+            />
+          </>
         );
       } else if (selectedMode === 'testing' && testing) {
         return (
-          <TestingQuiz
-            questions={questions}
-            sessionId={testing.sessionId}
-            startedAt={testing.startedAt}
-            timeLimit={testing.timeLimit}
-            initialAnswers={testing.answers}
-            initialQuestionIndex={testing.currentQuestionIndex}
-            initialFlagged={testing.flaggedQuestions}
-            onComplete={handleQuizComplete}
-            onBackToDashboard={handleBackToDashboard}
-          />
+          <>
+            {watermark}
+            <TestingQuiz
+              questions={questions}
+              sessionId={testing.sessionId}
+              startedAt={testing.startedAt}
+              timeLimit={testing.timeLimit}
+              initialAnswers={testing.answers}
+              initialQuestionIndex={testing.currentQuestionIndex}
+              initialFlagged={testing.flaggedQuestions}
+              onComplete={handleQuizComplete}
+              onBackToDashboard={handleBackToDashboard}
+            />
+          </>
         );
       } else {
         return (
