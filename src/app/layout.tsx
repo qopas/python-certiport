@@ -5,8 +5,8 @@ import { Toaster } from 'sonner'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Big Update Coming Soon - Maintenance',
-  description: 'We are working on something amazing. Big update coming soon!',
+  title: 'Python IT Specialist Quiz',
+  description: 'Test your Python knowledge with our comprehensive quiz',
 }
 
 export default function RootLayout({
